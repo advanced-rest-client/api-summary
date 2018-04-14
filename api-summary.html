@@ -12,6 +12,7 @@
     <style>
     :host {
       display: block;
+      @apply --arc-font-body1;
       @apply --api-summary;
     }
 
@@ -40,10 +41,10 @@
 
     .url-area {
       @apply --arc-font-code1;
-      font-size: var(--api-endpoint-documentation-url-font-size, 16px);
+      font-size: var(--api-summary-url-font-size, 16px);
       margin-bottom: 40px;
-      background: var(--api-endpoint-documentation-url-background-color, #424242);
-      color: var(--api-endpoint-documentation-url-font-color, #fff);
+      background: var(--api-summary-url-background-color, #424242);
+      color: var(--api-summary-url-font-color, #fff);
       padding: 8px;
       border-radius: 2px;
     }
@@ -91,7 +92,7 @@
   /**
    * `api-summary`
    *
-   * A dummary view for an API base on AMF data model
+   * A summary view for an API base on AMF data model
    *
    * ## Styling
    *
@@ -100,6 +101,9 @@
    * Custom property | Description | Default
    * ----------------|-------------|----------
    * `--api-summary` | Mixin applied to this elment | `{}`
+   * `--api-summary-url-font-size` | Font size of endpoin URL | `16px`
+   * `--api-summary-url-background-color` | Background color of the URL section | `#424242`
+   * `--api-summary-url-font-color` | Font color of the URL area | `#fff`
    *
    * @customElement
    * @polymer

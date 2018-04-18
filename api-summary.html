@@ -40,21 +40,29 @@
     }
 
     .url-area {
+      @apply --layout-horizontal;
       @apply --arc-font-code1;
       font-size: var(--api-summary-url-font-size, 16px);
       margin-bottom: 40px;
       background: var(--api-summary-url-background-color, #424242);
       color: var(--api-summary-url-font-color, #fff);
-      padding: 8px;
+      padding: 16px 8px;
       border-radius: 2px;
     }
 
     .url-value {
+      margin-left: 12px;
       word-break: break-all;
+    }
+
+    .method-value {
+      text-transform: uppercase;
+      white-space: nowrap;
     }
 
     .api-uri-label {
       @apply --arc-font-subhead;
+      @apply --api-summary-url-title;
     }
     </style>
     <template is="dom-if" if="[[aware]]">
@@ -104,6 +112,7 @@
    * `--api-summary-url-font-size` | Font size of endpoin URL | `16px`
    * `--api-summary-url-background-color` | Background color of the URL section | `#424242`
    * `--api-summary-url-font-color` | Font color of the URL area | `#fff`
+   * `--api-summary-url-title` | Mixin applied to URL title label | `--arc-font-subhead`
    *
    * @customElement
    * @polymer

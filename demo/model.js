@@ -9,18 +9,19 @@ const files = new Map();
 files.set('demo-api/demo-api.raml', 'RAML 1.0');
 files.set('array-body/array-body.raml', 'RAML 1.0');
 files.set('appian-api/appian-api.raml', 'RAML 1.0');
-// files.set('github-api/github-api.raml', 'RAML 0.8');
 files.set('nexmo-sms-api/nexmo-sms-api.raml', 'RAML 1.0');
+files.set('loan-ms/loan-microservice.json', 'OAS 2.0');
 /**
  * Generates json/ld file from parsed document.
  *
  * @param {Object} doc
  * @param {String} file
+ * @param {String} type type of source document
  * @return {Promise}
  */
-function processFile(doc, file) {
+function processFile(doc, file, type) {
   const generator = amf.Core.generator('AMF Graph', 'application/ld+json');
-  const r = amf.Core.resolver('RAML 1.0');
+  const r = amf.Core.resolver(type);
   doc = r.resolve(doc, 'editing');
   let dest = file.substr(0, file.lastIndexOf('.')) + '.json';
   if (dest.indexOf('/') !== -1) {
@@ -39,7 +40,7 @@ function processFile(doc, file) {
 function parseFile(file, type) {
   const parser = amf.Core.parser(type, 'application/yaml');
   return parser.parseFileAsync(`file://demo/${file}`)
-  .then((doc) => processFile(doc, file));
+  .then((doc) => processFile(doc, file, type));
 }
 
 amf.Core.init().then(() => {

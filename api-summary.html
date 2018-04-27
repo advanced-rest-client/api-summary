@@ -76,66 +76,75 @@
       <raml-aware raml="{{amfModel}}" scope="[[aware]]"></raml-aware>
     </template>
 
-    <h1>[[apiTitle]]</h1>
+    <div role="main">
+      <h1>[[apiTitle]]</h1>
 
-    <template is="dom-if" if="[[hasVersion]]">
-      <p>
-        <label>Version:</label>
-        <span>[[version]]</span>
-      </p>
-    </template>
-
-    <template is="dom-if" if="[[description]]">
-      <marked-element markdown="[[description]]">
-        <div slot="markdown-html" class="markdown-body"></div>
-      </marked-element>
-    </template>
-
-    <label class="section">API base URI</label>
-    <div class="url-area">
-      <div class="url-value">[[apiBaseUri]]</div>
-    </div>
-
-    <template is="dom-if" if="[[hasProtocols]]">
-      <label class="section">Supported protocols</label>
-      <ul>
-        <template is="dom-repeat" items="[[protocols]]">
-          <li>[[item]]</li>
-        </template>
-      </ul>
-    </template>
-
-    <template is="dom-if" if="[[hasProvider]]">
-      <section role="contentinfo">
-        <label class="section">Contact information</label>
+      <template is="dom-if" if="[[hasVersion]]">
         <p>
-          <span>[[providerName]]</span>
-          <template is="dom-if" if="[[providerEmail]]">
-            <span>[[providerEmail]]</span>
-          </template>
+          <label>Version:</label>
+          <span>[[version]]</span>
         </p>
-        <template is="dom-if" if="[[providerUrl]]">
-          <p><a href$="[[providerUrl]]" target="_blank">[[providerUrl]]</a></p>
-        </template>
-      </section>
-    </template>
+      </template>
 
-    <template is="dom-if" if="[[hasLicense]]">
-      <label class="section">License</label>
-      <p>
-        <span>[[licenseName]]</span>
-        <template is="dom-if" if="[[licenseUrl]]">
-          <a href$="[[licenseUrl]]" target="_blank">[[licenseUrl]]</a>
-        </template>
-      </p>
-    </template>
+      <template is="dom-if" if="[[description]]">
+        <div role="region" aria-labelledby="descriptionLabel">
+          <label class="section" id="descriptionLabel">Description</label>
+          <marked-element markdown="[[description]]">
+            <div slot="markdown-html" class="markdown-body"></div>
+          </marked-element>
+        </div>
+      </template>
 
-    <template is="dom-if" if="[[termsOfService]]">
-      <label class="section">Terms of service</label>
-      <marked-element markdown="[[termsOfService]]">
-        <div slot="markdown-html" class="markdown-body"></div>
-      </marked-element>
-    </template>
+      <label class="section">API base URI</label>
+      <div class="url-area">
+        <div class="url-value">[[apiBaseUri]]</div>
+      </div>
+
+      <template is="dom-if" if="[[hasProtocols]]">
+        <label class="section">Supported protocols</label>
+        <ul>
+          <template is="dom-repeat" items="[[protocols]]">
+            <li>[[item]]</li>
+          </template>
+        </ul>
+      </template>
+
+      <template is="dom-if" if="[[hasProvider]]">
+        <section role="contentinfo">
+          <label class="section">Contact information</label>
+          <p>
+            <span>[[providerName]]</span>
+            <template is="dom-if" if="[[providerEmail]]">
+              <span>[[providerEmail]]</span>
+            </template>
+          </p>
+          <template is="dom-if" if="[[providerUrl]]">
+            <p><a href$="[[providerUrl]]" target="_blank">[[providerUrl]]</a></p>
+          </template>
+        </section>
+      </template>
+
+      <template is="dom-if" if="[[hasLicense]]">
+        <div role="region" aria-labelledby="licenseLabel">
+          <label class="section" id="licenseLabel">License</label>
+          <p>
+            <span>[[licenseName]]</span>
+            <template is="dom-if" if="[[licenseUrl]]">
+              <a href$="[[licenseUrl]]" target="_blank">[[licenseUrl]]</a>
+            </template>
+          </p>
+        </div>
+      </template>
+
+      <template is="dom-if" if="[[termsOfService]]">
+        <div role="region" aria-labelledby="tocLabel">
+          <label class="section" id="tocLabel">Terms of service</label>
+          <marked-element markdown="[[termsOfService]]">
+            <div slot="markdown-html" class="markdown-body"></div>
+          </marked-element>
+        </div>
+      </template>
+    </div>
   </template>
   <script>
   /**

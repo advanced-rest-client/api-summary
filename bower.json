@@ -17,7 +17,8 @@
     "iron-flex-layout": "PolymerElements/iron-flex-layout#^2.0.3",
     "marked-element": "PolymerElements/marked-element#^2.4.0",
     "markdown-styles": "advanced-rest-client/markdown-styles#^2.0.2",
-    "iron-meta": "PolymerElements/iron-meta#^2.1.1"
+    "iron-meta": "PolymerElements/iron-meta#^2.1.1",
+    "amf-helper-mixin": "advanced-rest-client/amf-helper-mixin#2.0.0-preview"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",

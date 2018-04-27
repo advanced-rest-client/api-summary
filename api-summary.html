@@ -5,7 +5,7 @@
 <link rel="import" href="../markdown-styles/markdown-styles.html">
 <link rel="import" href="../marked-element/marked-element.html">
 <link rel="import" href="../iron-meta/iron-meta.html">
-
+<link rel="import" href="../amf-helper-mixin/amf-helper-mixin.html">
 <dom-module id="api-summary">
   <template>
     <style include="markdown-styles"></style>
@@ -14,10 +14,6 @@
       display: block;
       @apply --arc-font-body1;
       @apply --api-summary;
-    }
-
-    [hidden] {
-      display: none !important;
     }
 
     h1 {
@@ -118,8 +114,9 @@
    * @polymer
    * @demo demo/index.html
    * @memberof ApiElements
+   * @appliesMixin ApiElements.AmfHelperMixin
    */
-  class ApiSummary extends Polymer.Element {
+  class ApiSummary extends ApiElements.AmfHelperMixin(Polymer.Element) {
     static get is() { return 'api-summary'; }
     static get properties() {
       return {
@@ -127,17 +124,6 @@
          * `raml-aware` scope property to use.
          */
         aware: String,
-        /**
-         * Generated AMF json/ld model form the API spec.
-         * The element assumes the object of the first array item to be a
-         * type of `"http://raml.org/vocabularies/document#Document`
-         * on AMF vocabulary.
-         *
-         * It is only usefult for the element to resolve references.
-         *
-         * @type {Object|Array}
-         */
-        amfModel: Object,
         /**
          * Computed value of AMF model of a type of `http://schema.org/WebAPI`
          *
@@ -159,7 +145,7 @@
          */
         apiBaseUri: {
           type: String,
-          computed: '_computeBaseUri(server, baseUri)'
+          computed: '_computeBaseUri(server, baseUri, protocols)'
         },
         /**
          * Computed title of the API
@@ -181,7 +167,7 @@
          */
         server: {
           type: Object,
-          computed: '_computeServer(webApi)'
+          computed: '_computeServer(amfModel)'
         },
         /**
          * Computed API version label
@@ -274,79 +260,24 @@
     _computeApiTitle(shape) {
       return this._getValue(shape, 'http://schema.org/name');
     }
-    /**
-     * Computes value for `server` property that is later used with other computations.
-     *
-     * @param {Object} webApi Cusrent value of `webApi`
-     * @return {Object} The server model
-     */
-    _computeServer(webApi) {
-      const srv = webApi && webApi['http://raml.org/vocabularies/http#server'];
-      return srv ? srv[0] : undefined;
-    }
 
     _computeVersion(webApi) {
       return this._getValue(webApi, 'http://schema.org/version');
-    }
-
-    _computeHasVersion(version) {
-      return !!version;
-    }
-
-    _computeProtocols(webApi) {
-      if (!webApi) {
-        return;
-      }
-      const scheme = webApi['http://raml.org/vocabularies/http#scheme'];
-      if (!(scheme instanceof Array)) {
-        return;
-      }
-      return scheme.map((item) => item['@value']);
-    }
-
-    _computeHasProtocols(protocols) {
-      return !!(protocols && protocols.length);
     }
     /**
      * Computes API's URI based on `amfModel` and `baseUri` property.
      *
      * @param {Object} server Server model of AMF API.
      * @param {?String} baseUri Current value of `baseUri` property
+     * @param {?Array<String>} protocols List of supported protocols
      * @return {String} Endpoint's URI
      */
-    _computeBaseUri(server, baseUri) {
-      let base = this._getBaseUri(baseUri, server);
+    _computeBaseUri(server, baseUri, protocols) {
+      let base = this._getBaseUri(baseUri, server, protocols);
       if (base && base[base.length - 1] === '/') {
         base = base.substr(0, base.length - 1);
       }
       return base;
-    }
-    /**
-     * Computes base URI value from either `baseUri`, `iron-meta` with
-     * `ApiBaseUri` key or `amfModel` value (in this order).
-     *
-     * @param {String} baseUri Value of `baseUri` property
-     * @param {Object} server AMF API model for Server.
-     * @return {String} Base uri value. Can be empty string.
-     */
-    _getBaseUri(baseUri, server) {
-      if (baseUri) {
-        return baseUri;
-      }
-      let value = new Polymer.IronMeta({key: 'ApiBaseUri'}).value;
-      if (value) {
-        return value;
-      }
-      return this._getAmfBaseUri(server) || '';
-    }
-    /**
-     * Computes base URI from AMF model.
-     *
-     * @param {Object} server AMF API model for Server.
-     * @return {String|undefined} Base uri value if exists.
-     */
-    _getAmfBaseUri(server) {
-      return this._getValue(server, 'http://raml.org/vocabularies/http#url');
     }
 
     // Displays array values.

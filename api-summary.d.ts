@@ -15,6 +15,7 @@
 /// <reference path="../markdown-styles/markdown-styles.d.ts" />
 /// <reference path="../marked-element/marked-element.d.ts" />
 /// <reference path="../iron-meta/iron-meta.d.ts" />
+/// <reference path="../amf-helper-mixin/amf-helper-mixin.d.ts" />
 
 declare namespace ApiElements {
 
@@ -33,23 +34,16 @@ declare namespace ApiElements {
    * `--api-summary-url-font-size` | Font size of endpoin URL | `16px`
    * `--api-summary-url-background-color` | Background color of the URL section | `#424242`
    * `--api-summary-url-font-color` | Font color of the URL area | `#fff`
+   * `--api-summary-url-title` | Mixin applied to URL title label | `--arc-font-subhead`
    */
-  class ApiSummary extends Polymer.Element {
+  class ApiSummary extends
+    ApiElements.AmfHelperMixin(
+    Polymer.Element) {
 
     /**
      * `raml-aware` scope property to use.
      */
     aware: string|null|undefined;
-
-    /**
-     * Generated AMF json/ld model form the API spec.
-     * The element assumes the object of the first array item to be a
-     * type of `"http://raml.org/vocabularies/document#Document`
-     * on AMF vocabulary.
-     *
-     * It is only usefult for the element to resolve references.
-     */
-    amfModel: object|any[]|null;
 
     /**
      * Computed value of AMF model of a type of `http://schema.org/WebAPI`
@@ -91,39 +85,16 @@ declare namespace ApiElements {
     readonly hasVersion: boolean|null|undefined;
     readonly protocols: string|null|undefined;
     readonly hasProtocols: boolean|null|undefined;
-
-    /**
-     * Checks if property item has a type.
-     *
-     * @param model Model item.
-     * @param type A type to lookup
-     */
-    _hasType(model: object|null, type: String|null): Boolean|null;
-
-    /**
-     * Gets a signle scalar value from a model.
-     *
-     * @param model Amf model to extract the value from.
-     * @param key Model key to search for the value
-     * @returns Value for key
-     */
-    _getValue(model: object|null, key: String|null): any|null;
-
-    /**
-     * Computes AMF's `http://schema.org/WebAPI` model
-     *
-     * @param amf AMF json/ld model for an API
-     * @returns Web API declaration.
-     */
-    _computeWebApi(amf: any[]|object|null): object|null;
-
-    /**
-     * Computes value of `description` property.
-     *
-     * @param shape Shape of AMF model.
-     * @returns Description if defined.
-     */
-    _computeDescription(shape: object|null): String|null|undefined;
+    readonly provider: object|null|undefined;
+    readonly hasProvider: boolean|null|undefined;
+    readonly providerName: string|null|undefined;
+    readonly providerEmail: string|null|undefined;
+    readonly providerUrl: string|null|undefined;
+    readonly termsOfService: string|null|undefined;
+    readonly license: object|null|undefined;
+    readonly hasLicense: boolean|null|undefined;
+    readonly licenseName: string|null|undefined;
+    readonly licenseUrl: string|null|undefined;
 
     /**
      * Computes value of `apiTitle` property.
@@ -132,50 +103,34 @@ declare namespace ApiElements {
      * @returns Description if defined.
      */
     _computeApiTitle(shape: object|null): String|null|undefined;
-
-    /**
-     * Computes value for `server` property that is later used with other computations.
-     *
-     * @param webApi Cusrent value of `webApi`
-     * @returns The server model
-     */
-    _computeServer(webApi: object|null): object|null;
     _computeVersion(webApi: any): any;
-    _computeHasVersion(version: any): any;
-    _computeProtocols(webApi: any): any;
-    _computeHasProtocols(protocols: any): any;
 
     /**
      * Computes API's URI based on `amfModel` and `baseUri` property.
      *
      * @param server Server model of AMF API.
      * @param baseUri Current value of `baseUri` property
+     * @param protocols List of supported protocols
      * @returns Endpoint's URI
      */
-    _computeBaseUri(server: object|null, baseUri: String|null): String|null;
-
-    /**
-     * Computes base URI value from either `baseUri`, `iron-meta` with
-     * `ApiBaseUri` key or `amfModel` value (in this order).
-     *
-     * @param baseUri Value of `baseUri` property
-     * @param server AMF API model for Server.
-     * @returns Base uri value. Can be empty string.
-     */
-    _getBaseUri(baseUri: String|null, server: object|null): String|null;
-
-    /**
-     * Computes base URI from AMF model.
-     *
-     * @param server AMF API model for Server.
-     * @returns Base uri value if exists.
-     */
-    _getAmfBaseUri(server: object|null): String|null|undefined;
+    _computeBaseUri(server: object|null, baseUri: String|null, protocols: Array<String|null>|null): String|null;
 
     /**
      * Displays array values.
      */
     _displayArray(arr: any): any;
+
+    /**
+     * Computes information about provider of the API.
+     *
+     * @param webApi WebApi shape
+     */
+    _computeProvider(webApi: object|null): object|null|undefined;
+    _computeName(provider: any): any;
+    _computeEmail(provider: any): any;
+    _computeUrl(provider: any): any;
+    _computeToS(webApi: any): any;
+    _computeLicense(webApi: any): any;
   }
 }
 

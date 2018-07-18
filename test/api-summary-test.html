@@ -194,6 +194,92 @@
       });
     });
 
+    suite('Endpoints map', () => {
+      let amf;
+      let element;
+      suiteSetup(() => {
+        return AmfLoader.load('demo-api.json')
+        .then((data) => {
+          amf = data;
+        });
+      });
+
+      setup((done) => {
+        element = fixture('Basic');
+        element.amfModel = amf;
+        flush(() => done());
+      });
+
+      test('endpoints is computed', () => {
+        assert.typeOf(element.endpoints, 'array');
+        assert.lengthOf(element.endpoints, 11);
+      });
+
+      test('Endpoint has name', () => {
+        const result = element.endpoints[2];
+        assert.equal(result.name, 'People');
+      });
+
+      test('Endpoint has path', () => {
+        const result = element.endpoints[2];
+        assert.equal(result.path, '/people');
+      });
+
+      test('Endpoint has id', () => {
+        const result = element.endpoints[2];
+        assert.equal(result.id, 'file://demo/demo-api/demo-api.raml#/web-api/end-points/%2Fpeople');
+      });
+
+      test('Endpoint has ops - list of operations', () => {
+        const result = element.endpoints[2];
+        assert.typeOf(result.ops, 'array');
+        assert.lengthOf(result.ops, 3);
+      });
+
+      test('Operation has id', () => {
+        const result = element.endpoints[2].ops[0];
+        assert.equal(result.id, 'file://demo/demo-api/demo-api.raml#/web-api/end-points/%2Fpeople/get');
+      });
+
+      test('Operation has method name', () => {
+        const result = element.endpoints[2].ops[0];
+        assert.equal(result.method, 'get');
+      });
+
+      test('Click on an endpoint dispatches navigation event', (done) => {
+        const id = 'file://demo/demo-api/demo-api.raml#/web-api/end-points/%2Fpeople';
+        const node = element.shadowRoot.querySelector(`.endpoint-label[data-id="${id}"]`);
+        element.addEventListener('api-navigation-selection-changed', (e) => {
+          assert.equal(e.detail.selected, id);
+          assert.equal(e.detail.type, 'endpoint');
+          done();
+        });
+        node.click();
+      });
+
+      test('Click on an endpoint path dispatches navigation event', (done) => {
+        const id = 'file://demo/demo-api/demo-api.raml#/web-api/end-points/%2Fpeople';
+        const node = element.shadowRoot.querySelector(`.endpoint-path[data-id="${id}"]`);
+        element.addEventListener('api-navigation-selection-changed', (e) => {
+          assert.equal(e.detail.selected, id);
+          assert.equal(e.detail.type, 'endpoint');
+          done();
+        });
+        node.click();
+      });
+
+      test('Click on a method dispatches navigation event', (done) => {
+        const id = 'file://demo/demo-api/demo-api.raml#/web-api/end-points/%2Fpeople/get';
+        const node = element.shadowRoot.querySelector(`.method-label[data-id="${id}"]`);
+        element.addEventListener('api-navigation-selection-changed', (e) => {
+          assert.equal(e.detail.selected, id);
+          assert.equal(e.detail.type, 'method');
+          done();
+        });
+        node.click();
+      });
+    });
+
     suite('a11y', () => {
       let amf;
       let aware;

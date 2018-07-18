@@ -1,7 +1,7 @@
 {
   "name": "api-summary",
   "description": "A summary view for an API base on AMF data model",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "license": "Apache-2.0",
   "main": "api-summary.html",
   "keywords": [
@@ -18,7 +18,10 @@
     "marked-element": "PolymerElements/marked-element#^2.4.0",
     "markdown-styles": "advanced-rest-client/markdown-styles#^2.0.2",
     "iron-meta": "PolymerElements/iron-meta#^2.1.1",
-    "amf-helper-mixin": "advanced-rest-client/amf-helper-mixin#^2.0.0"
+    "amf-helper-mixin": "advanced-rest-client/amf-helper-mixin#^2.0.0",
+    "clipboard-copy": "advanced-rest-client/clipboard-copy#^2.0.1",
+    "paper-icon-button": "PolymerElements/paper-icon-button#^2.0.0",
+    "arc-icons": "advanced-rest-client/arc-icons#^2.0.0"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",

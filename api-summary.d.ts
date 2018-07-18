@@ -16,6 +16,9 @@
 /// <reference path="../marked-element/marked-element.d.ts" />
 /// <reference path="../iron-meta/iron-meta.d.ts" />
 /// <reference path="../amf-helper-mixin/amf-helper-mixin.d.ts" />
+/// <reference path="../clipboard-copy/clipboard-copy.d.ts" />
+/// <reference path="../paper-icon-button/paper-icon-button.d.ts" />
+/// <reference path="../arc-icons/arc-icons.d.ts" />
 
 declare namespace ApiElements {
 
@@ -95,6 +98,7 @@ declare namespace ApiElements {
     readonly hasLicense: boolean|null|undefined;
     readonly licenseName: string|null|undefined;
     readonly licenseUrl: string|null|undefined;
+    readonly endpoints: any[]|null|undefined;
 
     /**
      * Computes value of `apiTitle` property.
@@ -131,6 +135,22 @@ declare namespace ApiElements {
     _computeUrl(provider: any): any;
     _computeToS(webApi: any): any;
     _computeLicense(webApi: any): any;
+    _copyPathClipboard(e: any): void;
+
+    /**
+     * Computes view model for endpoints list.
+     *
+     * @param webApi Web API model
+     */
+    _computeEndpoints(webApi: object|null): Array<object|null>|null|undefined;
+
+    /**
+     * Computes a view model for supported operations for an endpoint.
+     *
+     * @param endpoint Endpoint model.
+     */
+    _endpointOperations(endpoint: object|null): Array<object|null>|unbdefined|null;
+    _navigateItem(e: any): void;
   }
 }
 

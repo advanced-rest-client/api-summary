@@ -292,7 +292,7 @@
    * @appliesMixin ApiElements.AmfHelperMixin
    */
   class ApiSummary extends ApiElements.AmfHelperMixin(Polymer.Element) {
-    static get is() { return 'api-summary'; }
+    static get is() {return 'api-summary';}
     static get properties() {
       return {
         /**
@@ -430,11 +430,11 @@
      * @return {String|undefined} Description if defined.
      */
     _computeApiTitle(shape) {
-      return this._getValue(shape, 'http://schema.org/name');
+      return this._getValue(shape, this.ns.schema.schemaName);
     }
 
     _computeVersion(webApi) {
-      return this._getValue(webApi, 'http://schema.org/version');
+      return this._getValue(webApi, this.ns.schema.name + 'version');
     }
     /**
      * Computes API's URI based on `amfModel` and `baseUri` property.
@@ -472,36 +472,45 @@
      * @return {Object|undefined}
      */
     _computeProvider(webApi) {
-      const data = webApi && webApi['http://schema.org/provider'];
-      return data ? data[0] : undefined;
+      const key = this._getAmfKey(this.ns.schema.name + 'provider');
+      const data = webApi && webApi[key];
+      if (!data) {
+        return;
+      }
+      return data instanceof Array ? data[0] : data;
     }
 
     _computeName(provider) {
-      return this._getValue(provider, 'http://schema.org/name');
+      return this._getValue(provider, this.ns.schema.schemaName);
     }
 
     _computeEmail(provider) {
-      return this._getValue(provider, 'http://schema.org/email');
+      return this._getValue(provider, this.ns.schema.name + 'email');
     }
 
     _computeUrl(provider) {
-      let value = this._getValue(provider, 'http://schema.org/url');
+      let value = this._getValue(provider, this.ns.schema.name + 'url');
       if (!value && provider) {
-        let data = provider['http://schema.org/url'];
+        const key = this._getAmfKey(this.ns.schema.name + 'url');
+        let data = provider[key];
         if (data) {
-          value = data[0]['@id'];
+          value = data instanceof Array ? data[0]['@id'] : data['@id'];
         }
       }
       return value;
     }
 
     _computeToS(webApi) {
-      return this._getValue(webApi, 'http://schema.org/termsOfService');
+      return this._getValue(webApi, this.ns.schema.name + 'termsOfService');
     }
 
     _computeLicense(webApi) {
-      const data = webApi && webApi['http://schema.org/license'];
-      return data ? data[0] : undefined;
+      const key = this._getAmfKey(this.ns.schema.name + 'license');
+      const data = webApi && webApi[key];
+      if (!data) {
+        return;
+      }
+      return data instanceof Array ? data[0] : data;
     }
 
     _copyPathClipboard(e) {
@@ -524,7 +533,8 @@
       if (!webApi) {
         return;
       }
-      const endpoints = webApi[this.ns.raml.vocabularies.http + 'endpoint'];
+      const key = this._getAmfKey(this.ns.raml.vocabularies.http + 'endpoint');
+      const endpoints = this._ensureArray(webApi[key]);
       if (!endpoints || !endpoints.length) {
         return;
       }
@@ -546,7 +556,8 @@
      * @return {Array<Object>|unbdefined}
      */
     _endpointOperations(endpoint) {
-      const so = endpoint[this.ns.w3.hydra.core + 'supportedOperation'];
+      const key = this._getAmfKey(this.ns.w3.hydra.core + 'supportedOperation');
+      const so = this._ensureArray(endpoint[key]);
       if (!so || !so.length) {
         return;
       }

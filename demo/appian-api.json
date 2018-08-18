@@ -31,6 +31,51 @@
               {
                 "@value": "https://appian4mulesoft.appiancloud.com/suite/webapi/appian_api/{version}"
               }
+            ],
+            "http://a.ml/vocabularies/http#variable": [
+              {
+                "@id": "file://demo/appian-api/appian-api.raml#/web-api/https%3A%2F%2Fappian4mulesoft.appiancloud.com%2Fsuite%2Fwebapi%2Fappian_api%2F%7Bversion%7D/parameter/version",
+                "@type": [
+                  "http://a.ml/vocabularies/http#Parameter",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "version"
+                  }
+                ],
+                "http://www.w3.org/ns/hydra/core#required": [
+                  {
+                    "@value": true
+                  }
+                ],
+                "http://a.ml/vocabularies/http#binding": [
+                  {
+                    "@value": "path"
+                  }
+                ],
+                "http://a.ml/vocabularies/http#schema": [
+                  {
+                    "@id": "file://demo/appian-api/appian-api.raml#/web-api/https%3A%2F%2Fappian4mulesoft.appiancloud.com%2Fsuite%2Fwebapi%2Fappian_api%2F%7Bversion%7D/parameter/version/scalar/version",
+                    "@type": [
+                      "http://a.ml/vocabularies/shapes#ScalarShape",
+                      "http://www.w3.org/ns/shacl#Shape",
+                      "http://a.ml/vocabularies/shapes#Shape",
+                      "http://a.ml/vocabularies/document#DomainElement"
+                    ],
+                    "http://www.w3.org/ns/shacl#datatype": [
+                      {
+                        "@id": "http://www.w3.org/2001/XMLSchema#string"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "version"
+                      }
+                    ]
+                  }
+                ]
+              }
             ]
           }
         ],
@@ -342,9 +387,9 @@
                 ],
                 "http://a.ml/vocabularies/security#security": [
                   {
-                    "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2FprocessModels/get/basic",
+                    "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2Ftask%2F%7BtaskId%7D/get/basic",
                     "@type": [
-                      "http://a.ml/vocabularies/security#SecurityScheme",
+                      "http://a.ml/vocabularies/security#ParametrizedSecurityScheme",
                       "http://a.ml/vocabularies/document#DomainElement"
                     ],
                     "http://a.ml/vocabularies/security#name": [
@@ -352,53 +397,67 @@
                         "@value": "basic"
                       }
                     ],
-                    "http://a.ml/vocabularies/security#type": [
+                    "http://a.ml/vocabularies/security#scheme": [
                       {
-                        "@value": "Basic Authentication"
-                      }
-                    ],
-                    "http://www.w3.org/ns/hydra/core#response": [
-                      {
-                        "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2FprocessModels/get/basic/401",
+                        "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic",
                         "@type": [
-                          "http://a.ml/vocabularies/http#Response",
+                          "http://a.ml/vocabularies/security#SecurityScheme",
                           "http://a.ml/vocabularies/document#DomainElement"
                         ],
-                        "http://schema.org/name": [
+                        "http://a.ml/vocabularies/security#name": [
                           {
-                            "@value": "401"
+                            "@value": "basic"
                           }
                         ],
-                        "http://schema.org/description": [
+                        "http://a.ml/vocabularies/security#type": [
                           {
-                            "@value": "Incorrect user name or password"
+                            "@value": "Basic Authentication"
                           }
                         ],
-                        "http://www.w3.org/ns/hydra/core#statusCode": [
+                        "http://www.w3.org/ns/hydra/core#response": [
                           {
-                            "@value": "401"
-                          }
-                        ]
-                      },
-                      {
-                        "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2FprocessModels/get/basic/404",
-                        "@type": [
-                          "http://a.ml/vocabularies/http#Response",
-                          "http://a.ml/vocabularies/document#DomainElement"
-                        ],
-                        "http://schema.org/name": [
+                            "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic/401",
+                            "@type": [
+                              "http://a.ml/vocabularies/http#Response",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://schema.org/name": [
+                              {
+                                "@value": "401"
+                              }
+                            ],
+                            "http://schema.org/description": [
+                              {
+                                "@value": "Incorrect user name or password"
+                              }
+                            ],
+                            "http://www.w3.org/ns/hydra/core#statusCode": [
+                              {
+                                "@value": "401"
+                              }
+                            ]
+                          },
                           {
-                            "@value": "404"
-                          }
-                        ],
-                        "http://schema.org/description": [
-                          {
-                            "@value": "Resource not found or forbidden"
-                          }
-                        ],
-                        "http://www.w3.org/ns/hydra/core#statusCode": [
-                          {
-                            "@value": "404"
+                            "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic/404",
+                            "@type": [
+                              "http://a.ml/vocabularies/http#Response",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://schema.org/name": [
+                              {
+                                "@value": "404"
+                              }
+                            ],
+                            "http://schema.org/description": [
+                              {
+                                "@value": "Resource not found or forbidden"
+                              }
+                            ],
+                            "http://www.w3.org/ns/hydra/core#statusCode": [
+                              {
+                                "@value": "404"
+                              }
+                            ]
                           }
                         ]
                       }
@@ -807,9 +866,9 @@
                 ],
                 "http://a.ml/vocabularies/security#security": [
                   {
-                    "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2FprocessModel%2F%7BprocessModelUuid%7D/get/basic",
+                    "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2Ftask%2F%7BtaskId%7D/get/basic",
                     "@type": [
-                      "http://a.ml/vocabularies/security#SecurityScheme",
+                      "http://a.ml/vocabularies/security#ParametrizedSecurityScheme",
                       "http://a.ml/vocabularies/document#DomainElement"
                     ],
                     "http://a.ml/vocabularies/security#name": [
@@ -817,53 +876,67 @@
                         "@value": "basic"
                       }
                     ],
-                    "http://a.ml/vocabularies/security#type": [
+                    "http://a.ml/vocabularies/security#scheme": [
                       {
-                        "@value": "Basic Authentication"
-                      }
-                    ],
-                    "http://www.w3.org/ns/hydra/core#response": [
-                      {
-                        "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2FprocessModel%2F%7BprocessModelUuid%7D/get/basic/401",
+                        "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic",
                         "@type": [
-                          "http://a.ml/vocabularies/http#Response",
+                          "http://a.ml/vocabularies/security#SecurityScheme",
                           "http://a.ml/vocabularies/document#DomainElement"
                         ],
-                        "http://schema.org/name": [
+                        "http://a.ml/vocabularies/security#name": [
                           {
-                            "@value": "401"
+                            "@value": "basic"
                           }
                         ],
-                        "http://schema.org/description": [
+                        "http://a.ml/vocabularies/security#type": [
                           {
-                            "@value": "Incorrect user name or password"
+                            "@value": "Basic Authentication"
                           }
                         ],
-                        "http://www.w3.org/ns/hydra/core#statusCode": [
+                        "http://www.w3.org/ns/hydra/core#response": [
                           {
-                            "@value": "401"
-                          }
-                        ]
-                      },
-                      {
-                        "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2FprocessModel%2F%7BprocessModelUuid%7D/get/basic/404",
-                        "@type": [
-                          "http://a.ml/vocabularies/http#Response",
-                          "http://a.ml/vocabularies/document#DomainElement"
-                        ],
-                        "http://schema.org/name": [
+                            "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic/401",
+                            "@type": [
+                              "http://a.ml/vocabularies/http#Response",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://schema.org/name": [
+                              {
+                                "@value": "401"
+                              }
+                            ],
+                            "http://schema.org/description": [
+                              {
+                                "@value": "Incorrect user name or password"
+                              }
+                            ],
+                            "http://www.w3.org/ns/hydra/core#statusCode": [
+                              {
+                                "@value": "401"
+                              }
+                            ]
+                          },
                           {
-                            "@value": "404"
-                          }
-                        ],
-                        "http://schema.org/description": [
-                          {
-                            "@value": "Resource not found or forbidden"
-                          }
-                        ],
-                        "http://www.w3.org/ns/hydra/core#statusCode": [
-                          {
-                            "@value": "404"
+                            "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic/404",
+                            "@type": [
+                              "http://a.ml/vocabularies/http#Response",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://schema.org/name": [
+                              {
+                                "@value": "404"
+                              }
+                            ],
+                            "http://schema.org/description": [
+                              {
+                                "@value": "Resource not found or forbidden"
+                              }
+                            ],
+                            "http://www.w3.org/ns/hydra/core#statusCode": [
+                              {
+                                "@value": "404"
+                              }
+                            ]
                           }
                         ]
                       }
@@ -1245,9 +1318,9 @@
                 ],
                 "http://a.ml/vocabularies/security#security": [
                   {
-                    "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2FprocessModel%2F%7BprocessModelUuid%7D%2Fstart/post/basic",
+                    "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2Ftask%2F%7BtaskId%7D/get/basic",
                     "@type": [
-                      "http://a.ml/vocabularies/security#SecurityScheme",
+                      "http://a.ml/vocabularies/security#ParametrizedSecurityScheme",
                       "http://a.ml/vocabularies/document#DomainElement"
                     ],
                     "http://a.ml/vocabularies/security#name": [
@@ -1255,53 +1328,67 @@
                         "@value": "basic"
                       }
                     ],
-                    "http://a.ml/vocabularies/security#type": [
+                    "http://a.ml/vocabularies/security#scheme": [
                       {
-                        "@value": "Basic Authentication"
-                      }
-                    ],
-                    "http://www.w3.org/ns/hydra/core#response": [
-                      {
-                        "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2FprocessModel%2F%7BprocessModelUuid%7D%2Fstart/post/basic/401",
+                        "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic",
                         "@type": [
-                          "http://a.ml/vocabularies/http#Response",
+                          "http://a.ml/vocabularies/security#SecurityScheme",
                           "http://a.ml/vocabularies/document#DomainElement"
                         ],
-                        "http://schema.org/name": [
+                        "http://a.ml/vocabularies/security#name": [
                           {
-                            "@value": "401"
+                            "@value": "basic"
                           }
                         ],
-                        "http://schema.org/description": [
+                        "http://a.ml/vocabularies/security#type": [
                           {
-                            "@value": "Incorrect user name or password"
+                            "@value": "Basic Authentication"
                           }
                         ],
-                        "http://www.w3.org/ns/hydra/core#statusCode": [
+                        "http://www.w3.org/ns/hydra/core#response": [
                           {
-                            "@value": "401"
-                          }
-                        ]
-                      },
-                      {
-                        "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2FprocessModel%2F%7BprocessModelUuid%7D%2Fstart/post/basic/404",
-                        "@type": [
-                          "http://a.ml/vocabularies/http#Response",
-                          "http://a.ml/vocabularies/document#DomainElement"
-                        ],
-                        "http://schema.org/name": [
+                            "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic/401",
+                            "@type": [
+                              "http://a.ml/vocabularies/http#Response",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://schema.org/name": [
+                              {
+                                "@value": "401"
+                              }
+                            ],
+                            "http://schema.org/description": [
+                              {
+                                "@value": "Incorrect user name or password"
+                              }
+                            ],
+                            "http://www.w3.org/ns/hydra/core#statusCode": [
+                              {
+                                "@value": "401"
+                              }
+                            ]
+                          },
                           {
-                            "@value": "404"
-                          }
-                        ],
-                        "http://schema.org/description": [
-                          {
-                            "@value": "Resource not found or forbidden"
-                          }
-                        ],
-                        "http://www.w3.org/ns/hydra/core#statusCode": [
-                          {
-                            "@value": "404"
+                            "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic/404",
+                            "@type": [
+                              "http://a.ml/vocabularies/http#Response",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://schema.org/name": [
+                              {
+                                "@value": "404"
+                              }
+                            ],
+                            "http://schema.org/description": [
+                              {
+                                "@value": "Resource not found or forbidden"
+                              }
+                            ],
+                            "http://www.w3.org/ns/hydra/core#statusCode": [
+                              {
+                                "@value": "404"
+                              }
+                            ]
                           }
                         ]
                       }
@@ -1497,9 +1584,9 @@
                 ],
                 "http://a.ml/vocabularies/security#security": [
                   {
-                    "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2FprocessModel%2F%7BprocessModelUuid%7D%2Fprocesses/get/basic",
+                    "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2Ftask%2F%7BtaskId%7D/get/basic",
                     "@type": [
-                      "http://a.ml/vocabularies/security#SecurityScheme",
+                      "http://a.ml/vocabularies/security#ParametrizedSecurityScheme",
                       "http://a.ml/vocabularies/document#DomainElement"
                     ],
                     "http://a.ml/vocabularies/security#name": [
@@ -1507,53 +1594,67 @@
                         "@value": "basic"
                       }
                     ],
-                    "http://a.ml/vocabularies/security#type": [
+                    "http://a.ml/vocabularies/security#scheme": [
                       {
-                        "@value": "Basic Authentication"
-                      }
-                    ],
-                    "http://www.w3.org/ns/hydra/core#response": [
-                      {
-                        "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2FprocessModel%2F%7BprocessModelUuid%7D%2Fprocesses/get/basic/401",
+                        "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic",
                         "@type": [
-                          "http://a.ml/vocabularies/http#Response",
+                          "http://a.ml/vocabularies/security#SecurityScheme",
                           "http://a.ml/vocabularies/document#DomainElement"
                         ],
-                        "http://schema.org/name": [
+                        "http://a.ml/vocabularies/security#name": [
                           {
-                            "@value": "401"
+                            "@value": "basic"
                           }
                         ],
-                        "http://schema.org/description": [
+                        "http://a.ml/vocabularies/security#type": [
                           {
-                            "@value": "Incorrect user name or password"
+                            "@value": "Basic Authentication"
                           }
                         ],
-                        "http://www.w3.org/ns/hydra/core#statusCode": [
+                        "http://www.w3.org/ns/hydra/core#response": [
                           {
-                            "@value": "401"
-                          }
-                        ]
-                      },
-                      {
-                        "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2FprocessModel%2F%7BprocessModelUuid%7D%2Fprocesses/get/basic/404",
-                        "@type": [
-                          "http://a.ml/vocabularies/http#Response",
-                          "http://a.ml/vocabularies/document#DomainElement"
-                        ],
-                        "http://schema.org/name": [
+                            "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic/401",
+                            "@type": [
+                              "http://a.ml/vocabularies/http#Response",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://schema.org/name": [
+                              {
+                                "@value": "401"
+                              }
+                            ],
+                            "http://schema.org/description": [
+                              {
+                                "@value": "Incorrect user name or password"
+                              }
+                            ],
+                            "http://www.w3.org/ns/hydra/core#statusCode": [
+                              {
+                                "@value": "401"
+                              }
+                            ]
+                          },
                           {
-                            "@value": "404"
-                          }
-                        ],
-                        "http://schema.org/description": [
-                          {
-                            "@value": "Resource not found or forbidden"
-                          }
-                        ],
-                        "http://www.w3.org/ns/hydra/core#statusCode": [
-                          {
-                            "@value": "404"
+                            "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic/404",
+                            "@type": [
+                              "http://a.ml/vocabularies/http#Response",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://schema.org/name": [
+                              {
+                                "@value": "404"
+                              }
+                            ],
+                            "http://schema.org/description": [
+                              {
+                                "@value": "Resource not found or forbidden"
+                              }
+                            ],
+                            "http://www.w3.org/ns/hydra/core#statusCode": [
+                              {
+                                "@value": "404"
+                              }
+                            ]
                           }
                         ]
                       }
@@ -1915,9 +2016,9 @@
                 ],
                 "http://a.ml/vocabularies/security#security": [
                   {
-                    "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2Fprocesses/get/basic",
+                    "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2Ftask%2F%7BtaskId%7D/get/basic",
                     "@type": [
-                      "http://a.ml/vocabularies/security#SecurityScheme",
+                      "http://a.ml/vocabularies/security#ParametrizedSecurityScheme",
                       "http://a.ml/vocabularies/document#DomainElement"
                     ],
                     "http://a.ml/vocabularies/security#name": [
@@ -1925,53 +2026,67 @@
                         "@value": "basic"
                       }
                     ],
-                    "http://a.ml/vocabularies/security#type": [
+                    "http://a.ml/vocabularies/security#scheme": [
                       {
-                        "@value": "Basic Authentication"
-                      }
-                    ],
-                    "http://www.w3.org/ns/hydra/core#response": [
-                      {
-                        "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2Fprocesses/get/basic/401",
+                        "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic",
                         "@type": [
-                          "http://a.ml/vocabularies/http#Response",
+                          "http://a.ml/vocabularies/security#SecurityScheme",
                           "http://a.ml/vocabularies/document#DomainElement"
                         ],
-                        "http://schema.org/name": [
+                        "http://a.ml/vocabularies/security#name": [
                           {
-                            "@value": "401"
+                            "@value": "basic"
                           }
                         ],
-                        "http://schema.org/description": [
+                        "http://a.ml/vocabularies/security#type": [
                           {
-                            "@value": "Incorrect user name or password"
+                            "@value": "Basic Authentication"
                           }
                         ],
-                        "http://www.w3.org/ns/hydra/core#statusCode": [
+                        "http://www.w3.org/ns/hydra/core#response": [
                           {
-                            "@value": "401"
-                          }
-                        ]
-                      },
-                      {
-                        "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2Fprocesses/get/basic/404",
-                        "@type": [
-                          "http://a.ml/vocabularies/http#Response",
-                          "http://a.ml/vocabularies/document#DomainElement"
-                        ],
-                        "http://schema.org/name": [
+                            "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic/401",
+                            "@type": [
+                              "http://a.ml/vocabularies/http#Response",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://schema.org/name": [
+                              {
+                                "@value": "401"
+                              }
+                            ],
+                            "http://schema.org/description": [
+                              {
+                                "@value": "Incorrect user name or password"
+                              }
+                            ],
+                            "http://www.w3.org/ns/hydra/core#statusCode": [
+                              {
+                                "@value": "401"
+                              }
+                            ]
+                          },
                           {
-                            "@value": "404"
-                          }
-                        ],
-                        "http://schema.org/description": [
-                          {
-                            "@value": "Resource not found or forbidden"
-                          }
-                        ],
-                        "http://www.w3.org/ns/hydra/core#statusCode": [
-                          {
-                            "@value": "404"
+                            "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic/404",
+                            "@type": [
+                              "http://a.ml/vocabularies/http#Response",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://schema.org/name": [
+                              {
+                                "@value": "404"
+                              }
+                            ],
+                            "http://schema.org/description": [
+                              {
+                                "@value": "Resource not found or forbidden"
+                              }
+                            ],
+                            "http://www.w3.org/ns/hydra/core#statusCode": [
+                              {
+                                "@value": "404"
+                              }
+                            ]
                           }
                         ]
                       }
@@ -2380,9 +2495,9 @@
                 ],
                 "http://a.ml/vocabularies/security#security": [
                   {
-                    "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2Fprocess%2F%7BprocessId%7D/get/basic",
+                    "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2Ftask%2F%7BtaskId%7D/get/basic",
                     "@type": [
-                      "http://a.ml/vocabularies/security#SecurityScheme",
+                      "http://a.ml/vocabularies/security#ParametrizedSecurityScheme",
                       "http://a.ml/vocabularies/document#DomainElement"
                     ],
                     "http://a.ml/vocabularies/security#name": [
@@ -2390,53 +2505,67 @@
                         "@value": "basic"
                       }
                     ],
-                    "http://a.ml/vocabularies/security#type": [
+                    "http://a.ml/vocabularies/security#scheme": [
                       {
-                        "@value": "Basic Authentication"
-                      }
-                    ],
-                    "http://www.w3.org/ns/hydra/core#response": [
-                      {
-                        "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2Fprocess%2F%7BprocessId%7D/get/basic/401",
+                        "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic",
                         "@type": [
-                          "http://a.ml/vocabularies/http#Response",
+                          "http://a.ml/vocabularies/security#SecurityScheme",
                           "http://a.ml/vocabularies/document#DomainElement"
                         ],
-                        "http://schema.org/name": [
+                        "http://a.ml/vocabularies/security#name": [
                           {
-                            "@value": "401"
+                            "@value": "basic"
                           }
                         ],
-                        "http://schema.org/description": [
+                        "http://a.ml/vocabularies/security#type": [
                           {
-                            "@value": "Incorrect user name or password"
+                            "@value": "Basic Authentication"
                           }
                         ],
-                        "http://www.w3.org/ns/hydra/core#statusCode": [
+                        "http://www.w3.org/ns/hydra/core#response": [
                           {
-                            "@value": "401"
-                          }
-                        ]
-                      },
-                      {
-                        "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2Fprocess%2F%7BprocessId%7D/get/basic/404",
-                        "@type": [
-                          "http://a.ml/vocabularies/http#Response",
-                          "http://a.ml/vocabularies/document#DomainElement"
-                        ],
-                        "http://schema.org/name": [
+                            "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic/401",
+                            "@type": [
+                              "http://a.ml/vocabularies/http#Response",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://schema.org/name": [
+                              {
+                                "@value": "401"
+                              }
+                            ],
+                            "http://schema.org/description": [
+                              {
+                                "@value": "Incorrect user name or password"
+                              }
+                            ],
+                            "http://www.w3.org/ns/hydra/core#statusCode": [
+                              {
+                                "@value": "401"
+                              }
+                            ]
+                          },
                           {
-                            "@value": "404"
-                          }
-                        ],
-                        "http://schema.org/description": [
-                          {
-                            "@value": "Resource not found or forbidden"
-                          }
-                        ],
-                        "http://www.w3.org/ns/hydra/core#statusCode": [
-                          {
-                            "@value": "404"
+                            "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic/404",
+                            "@type": [
+                              "http://a.ml/vocabularies/http#Response",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://schema.org/name": [
+                              {
+                                "@value": "404"
+                              }
+                            ],
+                            "http://schema.org/description": [
+                              {
+                                "@value": "Resource not found or forbidden"
+                              }
+                            ],
+                            "http://www.w3.org/ns/hydra/core#statusCode": [
+                              {
+                                "@value": "404"
+                              }
+                            ]
                           }
                         ]
                       }
@@ -2798,9 +2927,9 @@
                 ],
                 "http://a.ml/vocabularies/security#security": [
                   {
-                    "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2Fprocess%2F%7BprocessId%7D%2Ftasks/get/basic",
+                    "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2Ftask%2F%7BtaskId%7D/get/basic",
                     "@type": [
-                      "http://a.ml/vocabularies/security#SecurityScheme",
+                      "http://a.ml/vocabularies/security#ParametrizedSecurityScheme",
                       "http://a.ml/vocabularies/document#DomainElement"
                     ],
                     "http://a.ml/vocabularies/security#name": [
@@ -2808,53 +2937,67 @@
                         "@value": "basic"
                       }
                     ],
-                    "http://a.ml/vocabularies/security#type": [
+                    "http://a.ml/vocabularies/security#scheme": [
                       {
-                        "@value": "Basic Authentication"
-                      }
-                    ],
-                    "http://www.w3.org/ns/hydra/core#response": [
-                      {
-                        "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2Fprocess%2F%7BprocessId%7D%2Ftasks/get/basic/401",
+                        "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic",
                         "@type": [
-                          "http://a.ml/vocabularies/http#Response",
+                          "http://a.ml/vocabularies/security#SecurityScheme",
                           "http://a.ml/vocabularies/document#DomainElement"
                         ],
-                        "http://schema.org/name": [
+                        "http://a.ml/vocabularies/security#name": [
                           {
-                            "@value": "401"
+                            "@value": "basic"
                           }
                         ],
-                        "http://schema.org/description": [
+                        "http://a.ml/vocabularies/security#type": [
                           {
-                            "@value": "Incorrect user name or password"
+                            "@value": "Basic Authentication"
                           }
                         ],
-                        "http://www.w3.org/ns/hydra/core#statusCode": [
+                        "http://www.w3.org/ns/hydra/core#response": [
                           {
-                            "@value": "401"
-                          }
-                        ]
-                      },
-                      {
-                        "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2Fprocess%2F%7BprocessId%7D%2Ftasks/get/basic/404",
-                        "@type": [
-                          "http://a.ml/vocabularies/http#Response",
-                          "http://a.ml/vocabularies/document#DomainElement"
-                        ],
-                        "http://schema.org/name": [
+                            "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic/401",
+                            "@type": [
+                              "http://a.ml/vocabularies/http#Response",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://schema.org/name": [
+                              {
+                                "@value": "401"
+                              }
+                            ],
+                            "http://schema.org/description": [
+                              {
+                                "@value": "Incorrect user name or password"
+                              }
+                            ],
+                            "http://www.w3.org/ns/hydra/core#statusCode": [
+                              {
+                                "@value": "401"
+                              }
+                            ]
+                          },
                           {
-                            "@value": "404"
-                          }
-                        ],
-                        "http://schema.org/description": [
-                          {
-                            "@value": "Resource not found or forbidden"
-                          }
-                        ],
-                        "http://www.w3.org/ns/hydra/core#statusCode": [
-                          {
-                            "@value": "404"
+                            "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic/404",
+                            "@type": [
+                              "http://a.ml/vocabularies/http#Response",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://schema.org/name": [
+                              {
+                                "@value": "404"
+                              }
+                            ],
+                            "http://schema.org/description": [
+                              {
+                                "@value": "Resource not found or forbidden"
+                              }
+                            ],
+                            "http://www.w3.org/ns/hydra/core#statusCode": [
+                              {
+                                "@value": "404"
+                              }
+                            ]
                           }
                         ]
                       }
@@ -3478,9 +3621,9 @@
                 ],
                 "http://a.ml/vocabularies/security#security": [
                   {
-                    "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2Ftasks/get/basic",
+                    "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2Ftask%2F%7BtaskId%7D/get/basic",
                     "@type": [
-                      "http://a.ml/vocabularies/security#SecurityScheme",
+                      "http://a.ml/vocabularies/security#ParametrizedSecurityScheme",
                       "http://a.ml/vocabularies/document#DomainElement"
                     ],
                     "http://a.ml/vocabularies/security#name": [
@@ -3488,53 +3631,67 @@
                         "@value": "basic"
                       }
                     ],
-                    "http://a.ml/vocabularies/security#type": [
+                    "http://a.ml/vocabularies/security#scheme": [
                       {
-                        "@value": "Basic Authentication"
-                      }
-                    ],
-                    "http://www.w3.org/ns/hydra/core#response": [
-                      {
-                        "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2Ftasks/get/basic/401",
+                        "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic",
                         "@type": [
-                          "http://a.ml/vocabularies/http#Response",
+                          "http://a.ml/vocabularies/security#SecurityScheme",
                           "http://a.ml/vocabularies/document#DomainElement"
                         ],
-                        "http://schema.org/name": [
+                        "http://a.ml/vocabularies/security#name": [
                           {
-                            "@value": "401"
+                            "@value": "basic"
                           }
                         ],
-                        "http://schema.org/description": [
+                        "http://a.ml/vocabularies/security#type": [
                           {
-                            "@value": "Incorrect user name or password"
+                            "@value": "Basic Authentication"
                           }
                         ],
-                        "http://www.w3.org/ns/hydra/core#statusCode": [
+                        "http://www.w3.org/ns/hydra/core#response": [
                           {
-                            "@value": "401"
-                          }
-                        ]
-                      },
-                      {
-                        "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2Ftasks/get/basic/404",
-                        "@type": [
-                          "http://a.ml/vocabularies/http#Response",
-                          "http://a.ml/vocabularies/document#DomainElement"
-                        ],
-                        "http://schema.org/name": [
+                            "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic/401",
+                            "@type": [
+                              "http://a.ml/vocabularies/http#Response",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://schema.org/name": [
+                              {
+                                "@value": "401"
+                              }
+                            ],
+                            "http://schema.org/description": [
+                              {
+                                "@value": "Incorrect user name or password"
+                              }
+                            ],
+                            "http://www.w3.org/ns/hydra/core#statusCode": [
+                              {
+                                "@value": "401"
+                              }
+                            ]
+                          },
                           {
-                            "@value": "404"
-                          }
-                        ],
-                        "http://schema.org/description": [
-                          {
-                            "@value": "Resource not found or forbidden"
-                          }
-                        ],
-                        "http://www.w3.org/ns/hydra/core#statusCode": [
-                          {
-                            "@value": "404"
+                            "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic/404",
+                            "@type": [
+                              "http://a.ml/vocabularies/http#Response",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://schema.org/name": [
+                              {
+                                "@value": "404"
+                              }
+                            ],
+                            "http://schema.org/description": [
+                              {
+                                "@value": "Resource not found or forbidden"
+                              }
+                            ],
+                            "http://www.w3.org/ns/hydra/core#statusCode": [
+                              {
+                                "@value": "404"
+                              }
+                            ]
                           }
                         ]
                       }
@@ -3945,7 +4102,7 @@
                   {
                     "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2Ftask%2F%7BtaskId%7D/get/basic",
                     "@type": [
-                      "http://a.ml/vocabularies/security#SecurityScheme",
+                      "http://a.ml/vocabularies/security#ParametrizedSecurityScheme",
                       "http://a.ml/vocabularies/document#DomainElement"
                     ],
                     "http://a.ml/vocabularies/security#name": [
@@ -3953,53 +4110,67 @@
                         "@value": "basic"
                       }
                     ],
-                    "http://a.ml/vocabularies/security#type": [
+                    "http://a.ml/vocabularies/security#scheme": [
                       {
-                        "@value": "Basic Authentication"
-                      }
-                    ],
-                    "http://www.w3.org/ns/hydra/core#response": [
-                      {
-                        "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2Ftask%2F%7BtaskId%7D/get/basic/401",
+                        "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic",
                         "@type": [
-                          "http://a.ml/vocabularies/http#Response",
+                          "http://a.ml/vocabularies/security#SecurityScheme",
                           "http://a.ml/vocabularies/document#DomainElement"
                         ],
-                        "http://schema.org/name": [
+                        "http://a.ml/vocabularies/security#name": [
                           {
-                            "@value": "401"
+                            "@value": "basic"
                           }
                         ],
-                        "http://schema.org/description": [
+                        "http://a.ml/vocabularies/security#type": [
                           {
-                            "@value": "Incorrect user name or password"
+                            "@value": "Basic Authentication"
                           }
                         ],
-                        "http://www.w3.org/ns/hydra/core#statusCode": [
+                        "http://www.w3.org/ns/hydra/core#response": [
                           {
-                            "@value": "401"
-                          }
-                        ]
-                      },
-                      {
-                        "@id": "file://demo/appian-api/appian-api.raml#/web-api/end-points/%2Ftask%2F%7BtaskId%7D/get/basic/404",
-                        "@type": [
-                          "http://a.ml/vocabularies/http#Response",
-                          "http://a.ml/vocabularies/document#DomainElement"
-                        ],
-                        "http://schema.org/name": [
+                            "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic/401",
+                            "@type": [
+                              "http://a.ml/vocabularies/http#Response",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://schema.org/name": [
+                              {
+                                "@value": "401"
+                              }
+                            ],
+                            "http://schema.org/description": [
+                              {
+                                "@value": "Incorrect user name or password"
+                              }
+                            ],
+                            "http://www.w3.org/ns/hydra/core#statusCode": [
+                              {
+                                "@value": "401"
+                              }
+                            ]
+                          },
                           {
-                            "@value": "404"
-                          }
-                        ],
-                        "http://schema.org/description": [
-                          {
-                            "@value": "Resource not found or forbidden"
-                          }
-                        ],
-                        "http://www.w3.org/ns/hydra/core#statusCode": [
-                          {
-                            "@value": "404"
+                            "@id": "file://demo/appian-api/appian-api.raml#/declarations/securitySchemes/basic/404",
+                            "@type": [
+                              "http://a.ml/vocabularies/http#Response",
+                              "http://a.ml/vocabularies/document#DomainElement"
+                            ],
+                            "http://schema.org/name": [
+                              {
+                                "@value": "404"
+                              }
+                            ],
+                            "http://schema.org/description": [
+                              {
+                                "@value": "Resource not found or forbidden"
+                              }
+                            ],
+                            "http://www.w3.org/ns/hydra/core#statusCode": [
+                              {
+                                "@value": "404"
+                              }
+                            ]
                           }
                         ]
                       }

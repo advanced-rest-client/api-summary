@@ -197,6 +197,8 @@
     suite('Endpoints map', () => {
       let amf;
       let element;
+      const ENDPOINT_ID = 'amf://id#477';
+      const METHOD_ID = 'amf://id#478';
       suiteSetup(() => {
         return AmfLoader.load('demo-api.json')
         .then((data) => {
@@ -227,7 +229,7 @@
 
       test('Endpoint has id', () => {
         const result = element.endpoints[2];
-        assert.equal(result.id, 'file://demo/demo-api/demo-api.raml#/web-api/end-points/%2Fpeople');
+        assert.equal(result.id, ENDPOINT_ID);
       });
 
       test('Endpoint has ops - list of operations', () => {
@@ -238,7 +240,7 @@
 
       test('Operation has id', () => {
         const result = element.endpoints[2].ops[0];
-        assert.equal(result.id, 'file://demo/demo-api/demo-api.raml#/web-api/end-points/%2Fpeople/get');
+        assert.equal(result.id, METHOD_ID);
       });
 
       test('Operation has method name', () => {
@@ -247,7 +249,7 @@
       });
 
       test('Click on an endpoint dispatches navigation event', (done) => {
-        const id = 'file://demo/demo-api/demo-api.raml#/web-api/end-points/%2Fpeople';
+        const id = ENDPOINT_ID;
         const node = element.shadowRoot.querySelector(`.endpoint-label[data-id="${id}"]`);
         element.addEventListener('api-navigation-selection-changed', (e) => {
           assert.equal(e.detail.selected, id);
@@ -258,7 +260,7 @@
       });
 
       test('Click on an endpoint path dispatches navigation event', (done) => {
-        const id = 'file://demo/demo-api/demo-api.raml#/web-api/end-points/%2Fpeople';
+        const id = ENDPOINT_ID;
         const node = element.shadowRoot.querySelector(`.endpoint-path[data-id="${id}"]`);
         element.addEventListener('api-navigation-selection-changed', (e) => {
           assert.equal(e.detail.selected, id);
@@ -269,10 +271,10 @@
       });
 
       test('Click on a method dispatches navigation event', (done) => {
-        const id = 'file://demo/demo-api/demo-api.raml#/web-api/end-points/%2Fpeople/get';
+        const id = METHOD_ID;
         const node = element.shadowRoot.querySelector(`.method-label[data-id="${id}"]`);
         element.addEventListener('api-navigation-selection-changed', (e) => {
-          assert.equal(e.detail.selected, id);
+          assert.equal(e.detail.selected, METHOD_ID);
           assert.equal(e.detail.type, 'method');
           done();
         });

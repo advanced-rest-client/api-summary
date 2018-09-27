@@ -33,7 +33,9 @@
     "paper-listbox": "PolymerElements/paper-listbox#^2.0.0",
     "paper-item": "PolymerElements/paper-item#^2.1.0",
     "web-animations-js": "web-animations/web-animations-js#^2.3",
-    "arc-polyfills": "advanced-rest-client/arc-polyfills#^0.1.11"
+    "arc-polyfills": "advanced-rest-client/arc-polyfills#^0.1.11",
+    "anypoint-styles": "mulesoft-labs/anypoint-styles#master",
+    "api-console-default-theme": "advanced-rest-client/api-console-default-theme#5.0.0-preview"
   },
   "repository": {
     "type": "git",

@@ -285,21 +285,11 @@
                             ],
                             "raml-shapes:items": [
                               {
-                                "@id": "#1/linked_1/linked_2",
+                                "@id": "#1",
                                 "@type": [
                                   "raml-shapes:AnyShape",
                                   "shacl:Shape",
                                   "raml-shapes:Shape"
-                                ],
-                                "doc:link-target": [
-                                  {
-                                    "@id": "#1/linked_1/linked_2"
-                                  }
-                                ],
-                                "doc:link-label": [
-                                  {
-                                    "@value": "AppPerson"
-                                  }
                                 ],
                                 "shacl:name": [
                                   {
@@ -308,7 +298,7 @@
                                 ],
                                 "sourcemaps:sources": [
                                   {
-                                    "@id": "#1/linked_1/linked_2/source-map",
+                                    "@id": "#1/source-map",
                                     "@type": [
                                       "sourcemaps:SourceMap"
                                     ],
@@ -316,7 +306,7 @@
                                       {
                                         "sourcemaps:element": [
                                           {
-                                            "@value": "amf://id#1/linked_1/linked_2"
+                                            "@value": "amf://id#1"
                                           }
                                         ],
                                         "sourcemaps:value": [
@@ -330,7 +320,7 @@
                                       {
                                         "sourcemaps:element": [
                                           {
-                                            "@value": "amf://id#1/linked_1/linked_2"
+                                            "@value": "amf://id#1"
                                           }
                                         ],
                                         "sourcemaps:value": [
@@ -344,7 +334,7 @@
                                       {
                                         "sourcemaps:element": [
                                           {
-                                            "@value": "amf://id#1/linked_1/linked_2"
+                                            "@value": "amf://id#1"
                                           }
                                         ],
                                         "sourcemaps:value": [
@@ -621,21 +611,11 @@
     ],
     "doc:declares": [
       {
-        "@id": "#1/linked_1/linked_2",
+        "@id": "#1",
         "@type": [
           "raml-shapes:AnyShape",
           "shacl:Shape",
           "raml-shapes:Shape"
-        ],
-        "doc:link-target": [
-          {
-            "@id": "#1/linked_1/linked_2"
-          }
-        ],
-        "doc:link-label": [
-          {
-            "@value": "AppPerson"
-          }
         ],
         "shacl:name": [
           {
@@ -644,7 +624,7 @@
         ],
         "sourcemaps:sources": [
           {
-            "@id": "#1/linked_1/linked_2/source-map",
+            "@id": "#1/source-map",
             "@type": [
               "sourcemaps:SourceMap"
             ],
@@ -652,7 +632,7 @@
               {
                 "sourcemaps:element": [
                   {
-                    "@value": "amf://id#1/linked_1/linked_2"
+                    "@value": "amf://id#1"
                   }
                 ],
                 "sourcemaps:value": [
@@ -666,7 +646,7 @@
               {
                 "sourcemaps:element": [
                   {
-                    "@value": "amf://id#1/linked_1/linked_2"
+                    "@value": "amf://id#1"
                   }
                 ],
                 "sourcemaps:value": [
@@ -680,7 +660,7 @@
               {
                 "sourcemaps:element": [
                   {
-                    "@value": "amf://id#1/linked_1/linked_2"
+                    "@value": "amf://id#1"
                   }
                 ],
                 "sourcemaps:value": [
@@ -703,21 +683,11 @@
         ],
         "raml-shapes:items": [
           {
-            "@id": "#1/linked_1/linked_2",
+            "@id": "#1",
             "@type": [
               "raml-shapes:AnyShape",
               "shacl:Shape",
               "raml-shapes:Shape"
-            ],
-            "doc:link-target": [
-              {
-                "@id": "#1/linked_1/linked_2"
-              }
-            ],
-            "doc:link-label": [
-              {
-                "@value": "AppPerson"
-              }
             ],
             "shacl:name": [
               {
@@ -726,7 +696,7 @@
             ],
             "sourcemaps:sources": [
               {
-                "@id": "#1/linked_1/linked_2/source-map",
+                "@id": "#1/source-map",
                 "@type": [
                   "sourcemaps:SourceMap"
                 ],
@@ -734,7 +704,7 @@
                   {
                     "sourcemaps:element": [
                       {
-                        "@value": "amf://id#1/linked_1/linked_2"
+                        "@value": "amf://id#1"
                       }
                     ],
                     "sourcemaps:value": [
@@ -748,7 +718,7 @@
                   {
                     "sourcemaps:element": [
                       {
-                        "@value": "amf://id#1/linked_1/linked_2"
+                        "@value": "amf://id#1"
                       }
                     ],
                     "sourcemaps:value": [
@@ -762,7 +732,7 @@
                   {
                     "sourcemaps:element": [
                       {
-                        "@value": "amf://id#1/linked_1/linked_2"
+                        "@value": "amf://id#1"
                       }
                     ],
                     "sourcemaps:value": [

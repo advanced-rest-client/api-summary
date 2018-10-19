@@ -197,8 +197,8 @@
     suite('Endpoints map', () => {
       let amf;
       let element;
-      const ENDPOINT_ID = 'amf://id#477';
-      const METHOD_ID = 'amf://id#478';
+      const ENDPOINT_ID = 'amf://id#476';
+      const METHOD_ID = 'amf://id#477';
       suiteSetup(() => {
         return AmfLoader.load('demo-api.json')
         .then((data) => {
@@ -283,13 +283,11 @@
     });
 
     suite('a11y', () => {
-      let amf;
       let aware;
       suiteSetup(() => {
         return AmfLoader.load('loan-microservice.json')
         .then((data) => {
           aware = fixture('Aware');
-          amf = data;
           aware.raml = data;
         });
       });

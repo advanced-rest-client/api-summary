@@ -159,21 +159,11 @@
                             ],
                             "http://a.ml/vocabularies/shapes#items": [
                               {
-                                "@id": "amf://id#1/linked_1",
+                                "@id": "amf://id#1",
                                 "@type": [
                                   "http://a.ml/vocabularies/shapes#AnyShape",
                                   "http://www.w3.org/ns/shacl#Shape",
                                   "http://a.ml/vocabularies/shapes#Shape"
-                                ],
-                                "http://a.ml/vocabularies/document#link-target": [
-                                  {
-                                    "@id": "amf://id#1/linked_1"
-                                  }
-                                ],
-                                "http://a.ml/vocabularies/document#link-label": [
-                                  {
-                                    "@value": "AppPerson"
-                                  }
                                 ],
                                 "http://www.w3.org/ns/shacl#name": [
                                   {
@@ -211,21 +201,11 @@
     ],
     "http://a.ml/vocabularies/document#declares": [
       {
-        "@id": "amf://id#1/linked_1",
+        "@id": "amf://id#1",
         "@type": [
           "http://a.ml/vocabularies/shapes#AnyShape",
           "http://www.w3.org/ns/shacl#Shape",
           "http://a.ml/vocabularies/shapes#Shape"
-        ],
-        "http://a.ml/vocabularies/document#link-target": [
-          {
-            "@id": "amf://id#1/linked_1"
-          }
-        ],
-        "http://a.ml/vocabularies/document#link-label": [
-          {
-            "@value": "AppPerson"
-          }
         ],
         "http://www.w3.org/ns/shacl#name": [
           {
@@ -243,21 +223,11 @@
         ],
         "http://a.ml/vocabularies/shapes#items": [
           {
-            "@id": "amf://id#1/linked_1",
+            "@id": "amf://id#1",
             "@type": [
               "http://a.ml/vocabularies/shapes#AnyShape",
               "http://www.w3.org/ns/shacl#Shape",
               "http://a.ml/vocabularies/shapes#Shape"
-            ],
-            "http://a.ml/vocabularies/document#link-target": [
-              {
-                "@id": "amf://id#1/linked_1"
-              }
-            ],
-            "http://a.ml/vocabularies/document#link-label": [
-              {
-                "@value": "AppPerson"
-              }
             ],
             "http://www.w3.org/ns/shacl#name": [
               {

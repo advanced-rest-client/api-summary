@@ -197,8 +197,8 @@
     suite('Endpoints map', () => {
       let amf;
       let element;
-      const ENDPOINT_ID = 'amf://id#476';
-      const METHOD_ID = 'amf://id#477';
+      const ENDPOINT_ID = 'amf://id#488';
+      const METHOD_ID = 'amf://id#489';
       suiteSetup(() => {
         return AmfLoader.load('demo-api.json')
         .then((data) => {
@@ -215,6 +215,10 @@
       test('endpoints is computed', () => {
         assert.typeOf(element.endpoints, 'array');
         assert.lengthOf(element.endpoints, 11);
+      });
+
+      test('hasEndpoints is computed', () => {
+        assert.isTrue(element.hasEndpoints);
       });
 
       test('Endpoint has name', () => {

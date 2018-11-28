@@ -216,24 +216,25 @@
       </template>
     </div>
 
-    <div class="separator"></div>
-
-    <div class="toc">
-      <label class="section">API endpoints</label>
-      <template is="dom-repeat" items="[[endpoints]]">
-        <div class="endpoint-item" on-click="_navigateItem">
-          <div class="endpoint-header">
-            <template is="dom-if" if="[[item.hasName]]">
-              <span class="endpoint-label" data-id$="[[item.id]]" data-shape-type="endpoint" title="Open endpoint documentation">[[item.name]]</span>
-            </template>
-            <template is="dom-repeat" items="[[item.ops]]">
-              <span class="method-label" data-method$="[[item.method]]" data-id$="[[item.id]]" data-shape-type="method" title="Open method documentation">[[item.method]]</span>
-            </template>
+    <template is="dom-if" if="[[hasEndpoints]]">
+      <div class="separator"></div>
+      <div class="toc">
+        <label class="section">API endpoints</label>
+        <template is="dom-repeat" items="[[endpoints]]">
+          <div class="endpoint-item" on-click="_navigateItem">
+            <div class="endpoint-path" data-id$="[[item.id]]" data-shape-type="endpoint" title="Open endpoint documentation">[[item.path]]</div>
+            <div class="endpoint-header">
+              <template is="dom-if" if="[[item.hasName]]">
+                <span class="endpoint-label" data-id$="[[item.id]]" data-shape-type="endpoint" title="Open endpoint documentation">[[item.name]]</span>
+              </template>
+              <template is="dom-repeat" items="[[item.ops]]">
+                <span class="method-label" data-method$="[[item.method]]" data-id$="[[item.id]]" data-shape-type="method" title="Open method documentation">[[item.method]]</span>
+              </template>
+            </div>
           </div>
-          <div class="endpoint-path" data-id$="[[item.id]]" data-shape-type="endpoint" title="Open endpoint documentation">[[item.path]]</div>
-        </div>
-      </template>
-    </div>
+        </template>
+      </div>
+    </template>
   </template>
   <script>
   /**
@@ -319,75 +320,111 @@
           type: String,
           computed: '_computeVersion(webApi)'
         },
-
+        /**
+         * Computed value, true when `version` property is set.
+         */
         hasVersion: {
           type: Boolean,
           computed: '_computeHasStringValue(version)'
         },
-
+        /**
+         * Computed list of protocols.
+         */
         protocols: {
           type: String,
           computed: '_computeProtocols(amfModel)'
         },
-
+        /**
+         * Computed value if `protocols` property is set
+         */
         hasProtocols: {
           type: Boolean,
           computed: '_computeHasArrayValue(protocols)'
         },
-
+        /**
+         * Computed value of OAS provider information.
+         */
         provider: {
           type: Object,
           computed: '_computeProvider(webApi)'
         },
-
+        /**
+         * Computed value if `provider` property is set
+         */
         hasProvider: {
           type: Boolean,
           computed: '_computeHasStringValue(provider)'
         },
-
+        /**
+         * Computed value of OAS provider name
+         */
         providerName: {
           type: String,
           computed: '_computeName(provider)'
         },
-
+        /**
+         * Computed value of OAS provider email
+         */
         providerEmail: {
           type: String,
           computed: '_computeEmail(provider)'
         },
-
+        /**
+         * Computed value of OAS provider url
+         */
         providerUrl: {
           type: String,
           computed: '_computeUrl(provider)'
         },
-
+        /**
+         * Computed value of OAS terms of service
+         */
         termsOfService: {
           type: String,
           computed: '_computeToS(webApi)'
         },
-
+        /**
+         * Computed value of OAS license
+         */
         license: {
           type: Object,
           computed: '_computeLicense(webApi)'
         },
-
+        /**
+         * Computed value if `license` property is set
+         */
         hasLicense: {
           type: Boolean,
           computed: '_computeHasStringValue(license)'
         },
-
+        /**
+         * Computed value of OAS license name
+         */
         licenseName: {
           type: String,
           computed: '_computeName(license)'
         },
-
+        /**
+         * Computed value of OAS license url
+         */
         licenseUrl: {
           type: String,
           computed: '_computeUrl(license)'
         },
-
+        /**
+         * Computed list of endpoints to render.
+         */
         endpoints: {
           type: Array,
           computed: '_computeEndpoints(webApi)'
+        },
+        /**
+         * Computed value, true if `endpoints` property is set and has a value.
+         * @type {Object}
+         */
+        hasEndpoints: {
+          type: Boolean,
+          computed: '_computeHasArrayValue(endpoints)'
         }
       };
     }
@@ -400,7 +437,11 @@
     _computeApiTitle(shape) {
       return this._getValue(shape, this.ns.schema.schemaName);
     }
-
+    /**
+     * Computes value for `version` property
+     * @param {Object} webApi AMF's WebApi shape
+     * @return {String|undefined}
+     */
     _computeVersion(webApi) {
       return this._getValue(webApi, this.ns.schema.name + 'version');
     }

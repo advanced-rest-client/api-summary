@@ -17,6 +17,7 @@
     <style>
     :host {
       display: block;
+      color: var(--api-summary-color);
       @apply --arc-font-body1;
       @apply --api-summary;
     }
@@ -31,8 +32,6 @@
 
     .markdown-body {
       margin-bottom: 28px;
-      color: rgba(0, 0, 0, 0.74);
-      @apply --arc-font-body1;
     }
 
     :host([narrow]) h1 {
@@ -103,7 +102,7 @@
     }
 
     .separator {
-      background-color: rgba(0, 0, 0, 0.12);
+      background-color: var(--api-summary-separator-color, rgba(0, 0, 0, 0.12));
       height: 1px;
       margin: 40px 0;
     }
@@ -126,7 +125,6 @@
       display: inline-block;
       margin-right: 8px;
       cursor: pointer;
-      @apply --arc-font-body1;
       font-weight: bold;
       text-decoration: underline;
       font-size: 15px;
@@ -134,12 +132,10 @@
     }
 
     .endpoint-path {
-      @apply --arc-font-body1;
       text-decoration: underline;
       font-size: 14px;
       cursor: pointer;
-      color: rgba(0, 0, 0, 0.87);
-      margin-top: 4px;
+      margin-bottom: 4px;
       display: inline-block;
     }
 
@@ -220,24 +216,25 @@
       </template>
     </div>
 
-    <div class="separator"></div>
-
-    <div class="toc">
-      <label class="section">API endpoints</label>
-      <template is="dom-repeat" items="[[endpoints]]">
-        <div class="endpoint-item" on-click="_navigateItem">
-          <div class="endpoint-header">
-            <template is="dom-if" if="[[item.hasName]]">
-              <span class="endpoint-label" data-id$="[[item.id]]" data-shape-type="endpoint" title="Open endpoint documentation">[[item.name]]</span>
-            </template>
-            <template is="dom-repeat" items="[[item.ops]]">
-              <span class="method-label" data-method$="[[item.method]]" data-id$="[[item.id]]" data-shape-type="method" title="Open method documentation">[[item.method]]</span>
-            </template>
+    <template is="dom-if" if="[[hasEndpoints]]">
+      <div class="separator"></div>
+      <div class="toc">
+        <label class="section">API endpoints</label>
+        <template is="dom-repeat" items="[[endpoints]]">
+          <div class="endpoint-item" on-click="_navigateItem">
+            <div class="endpoint-path" data-id$="[[item.id]]" data-shape-type="endpoint" title="Open endpoint documentation">[[item.path]]</div>
+            <div class="endpoint-header">
+              <template is="dom-if" if="[[item.hasName]]">
+                <span class="endpoint-label" data-id$="[[item.id]]" data-shape-type="endpoint" title="Open endpoint documentation">[[item.name]]</span>
+              </template>
+              <template is="dom-repeat" items="[[item.ops]]">
+                <span class="method-label" data-method$="[[item.method]]" data-id$="[[item.id]]" data-shape-type="method" title="Open method documentation">[[item.method]]</span>
+              </template>
+            </div>
           </div>
-          <div class="endpoint-path" data-id$="[[item.id]]" data-shape-type="endpoint" title="Open endpoint documentation">[[item.path]]</div>
-        </div>
-      </template>
-    </div>
+        </template>
+      </div>
+    </template>
   </template>
   <script>
   /**
@@ -252,10 +249,11 @@
    * Custom property | Description | Default
    * ----------------|-------------|----------
    * `--api-summary` | Mixin applied to this elment | `{}`
+   * `--api-summary-color` | Color of text labels | ``
    * `--api-summary-url-font-size` | Font size of endpoin URL | `16px`
    * `--api-summary-url-background-color` | Background color of the URL section | `#424242`
    * `--api-summary-url-font-color` | Font color of the URL area | `#fff`
-   * `--api-summary-url-title` | Mixin applied to URL title label | `--arc-font-subhead`
+   * `--api-summary-separator-color` | Color of section separator | `rgba(0, 0, 0, 0.12)`
    *
    * @customElement
    * @polymer
@@ -322,75 +320,111 @@
           type: String,
           computed: '_computeVersion(webApi)'
         },
-
+        /**
+         * Computed value, true when `version` property is set.
+         */
         hasVersion: {
           type: Boolean,
           computed: '_computeHasStringValue(version)'
         },
-
+        /**
+         * Computed list of protocols.
+         */
         protocols: {
           type: String,
           computed: '_computeProtocols(amfModel)'
         },
-
+        /**
+         * Computed value if `protocols` property is set
+         */
         hasProtocols: {
           type: Boolean,
           computed: '_computeHasArrayValue(protocols)'
         },
-
+        /**
+         * Computed value of OAS provider information.
+         */
         provider: {
           type: Object,
           computed: '_computeProvider(webApi)'
         },
-
+        /**
+         * Computed value if `provider` property is set
+         */
         hasProvider: {
           type: Boolean,
           computed: '_computeHasStringValue(provider)'
         },
-
+        /**
+         * Computed value of OAS provider name
+         */
         providerName: {
           type: String,
           computed: '_computeName(provider)'
         },
-
+        /**
+         * Computed value of OAS provider email
+         */
         providerEmail: {
           type: String,
           computed: '_computeEmail(provider)'
         },
-
+        /**
+         * Computed value of OAS provider url
+         */
         providerUrl: {
           type: String,
           computed: '_computeUrl(provider)'
         },
-
+        /**
+         * Computed value of OAS terms of service
+         */
         termsOfService: {
           type: String,
           computed: '_computeToS(webApi)'
         },
-
+        /**
+         * Computed value of OAS license
+         */
         license: {
           type: Object,
           computed: '_computeLicense(webApi)'
         },
-
+        /**
+         * Computed value if `license` property is set
+         */
         hasLicense: {
           type: Boolean,
           computed: '_computeHasStringValue(license)'
         },
-
+        /**
+         * Computed value of OAS license name
+         */
         licenseName: {
           type: String,
           computed: '_computeName(license)'
         },
-
+        /**
+         * Computed value of OAS license url
+         */
         licenseUrl: {
           type: String,
           computed: '_computeUrl(license)'
         },
-
+        /**
+         * Computed list of endpoints to render.
+         */
         endpoints: {
           type: Array,
           computed: '_computeEndpoints(webApi)'
+        },
+        /**
+         * Computed value, true if `endpoints` property is set and has a value.
+         * @type {Object}
+         */
+        hasEndpoints: {
+          type: Boolean,
+          computed: '_computeHasArrayValue(endpoints)'
         }
       };
     }
@@ -403,7 +437,11 @@
     _computeApiTitle(shape) {
       return this._getValue(shape, this.ns.schema.schemaName);
     }
-
+    /**
+     * Computes value for `version` property
+     * @param {Object} webApi AMF's WebApi shape
+     * @return {String|undefined}
+     */
     _computeVersion(webApi) {
       return this._getValue(webApi, this.ns.schema.name + 'version');
     }

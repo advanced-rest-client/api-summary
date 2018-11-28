@@ -1,3 +1,27 @@
+<a name="2.0.6"></a>
+## 2.0.6 (2018-11-28)
+
+
+### Docs
+
+* Updateding docs ([3fc5a3048b55a7d28093515275726b418375fc0e](https://github.com/advanced-rest-client/api-summary/commit/3fc5a3048b55a7d28093515275726b418375fc0e))
+* Updating documentation ([0d838636e37540d40283202f0e5177d5f492aebb](https://github.com/advanced-rest-client/api-summary/commit/0d838636e37540d40283202f0e5177d5f492aebb))
+* Updating polymer docs ([6b54f946c334f5cdddda46e285aa90ed066d4bb8](https://github.com/advanced-rest-client/api-summary/commit/6b54f946c334f5cdddda46e285aa90ed066d4bb8))
+
+### Fix
+
+* Fixing initialization without server information ([e600ae3cdbb8b7e874b616dfca73b71d5c318e2e](https://github.com/advanced-rest-client/api-summary/commit/e600ae3cdbb8b7e874b616dfca73b71d5c318e2e))
+* Fixing tests configuration ([73747fa4d33a4312f0e38b3517563c84f39ca3f8](https://github.com/advanced-rest-client/api-summary/commit/73747fa4d33a4312f0e38b3517563c84f39ca3f8))
+
+### Update
+
+* Adding API structure listing to the summary page. ([fb05401fc16da7e75bf32c99d48a0c1bccc5d31b](https://github.com/advanced-rest-client/api-summary/commit/fb05401fc16da7e75bf32c99d48a0c1bccc5d31b))
+* Adding support for compact AMF model ([1520b1b798d875f55af73790914c6ce8cb36a3b4](https://github.com/advanced-rest-client/api-summary/commit/1520b1b798d875f55af73790914c6ce8cb36a3b4))
+* Hidding endpoints header if there's no endpoints ([f4585ab5bbb737108a5260c7b2789bc0824ab89d](https://github.com/advanced-rest-client/api-summary/commit/f4585ab5bbb737108a5260c7b2789bc0824ab89d))
+* Updated Travis configuration to connect to Sauce Labs. ([ebc0c230eaed2f230ec580a3ffa2c5e9b90f8e55](https://github.com/advanced-rest-client/api-summary/commit/ebc0c230eaed2f230ec580a3ffa2c5e9b90f8e55))
+
+
+
 <a name="2.0.5"></a>
 ## 2.0.5 (2018-10-19)
 

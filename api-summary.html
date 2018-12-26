@@ -92,6 +92,10 @@
       @apply --arc-link;
     }
 
+    .link-padding {
+      margin-left: 8px;
+    }
+
     .inline-description {
       padding: 0;
       margin: 0;
@@ -167,7 +171,7 @@
 
       <div class="url-area">
         <div class="url-value">[[apiBaseUri]]</div>
-        <paper-icon-button class="action-icon copy-icon" icon="arc:content-copy" on-tap="_copyPathClipboard" title="Copy path to clipboard"></paper-icon-button>
+        <paper-icon-button class="action-icon copy-icon" icon="arc:content-copy" on-click="_copyPathClipboard" title="Copy path to clipboard"></paper-icon-button>
       </div>
       <clipboard-copy id="pathCopy" content="[[apiBaseUri]]"></clipboard-copy>
 
@@ -186,7 +190,7 @@
           <p class="inline-description">
             <span>[[providerName]]</span>
             <template is="dom-if" if="[[providerEmail]]">
-              <a class="app-link" href$="mailto:[[providerEmail]]">[[providerEmail]]</a>
+              <a class="app-link link-padding" href$="mailto:[[providerEmail]]">[[providerEmail]]</a>
             </template>
           </p>
           <template is="dom-if" if="[[providerUrl]]">
@@ -482,11 +486,15 @@
      */
     _computeProvider(webApi) {
       const key = this._getAmfKey(this.ns.schema.name + 'provider');
-      const data = webApi && webApi[key];
+      let data = this._ensureArray(webApi[key]);
       if (!data) {
         return;
       }
-      return data instanceof Array ? data[0] : data;
+      data = data[0];
+      if (data instanceof Array) {
+        data = data[0];
+      }
+      return data;
     }
 
     _computeName(provider) {
@@ -522,8 +530,8 @@
       return data instanceof Array ? data[0] : data;
     }
 
-    _copyPathClipboard(e) {
-      const button = e.localTarget || e.target;
+    _copyPathClipboard() {
+      const button = this.shadowRoot.querySelector('.copy-icon');
       if (this.$.pathCopy.copy()) {
         button.icon = 'arc:done';
       } else {

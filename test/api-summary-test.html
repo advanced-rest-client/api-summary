@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
@@ -11,6 +12,7 @@
   <link rel="import" href="../api-summary.html">
   <link rel="import" href="../../raml-aware/raml-aware.html">
 </head>
+
 <body>
   <test-fixture id="Basic">
     <template>
@@ -22,13 +24,11 @@
       <api-summary base-uri="https://domain.com"></api-summary>
     </template>
   </test-fixture>
-
   <test-fixture id="Aware">
     <template>
       <raml-aware scope="test"></raml-aware>
     </template>
   </test-fixture>
-
   <script>
   /* global AmfLoader */
   suite('api-summary', () => {
@@ -37,9 +37,9 @@
       let amf;
       suiteSetup(() => {
         return AmfLoader.load()
-        .then((data) => {
-          amf = data;
-        });
+          .then((data) => {
+            amf = data;
+          });
       });
 
       setup((done) => {
@@ -88,15 +88,17 @@
       let amf;
       suiteSetup(() => {
         return AmfLoader.load()
-        .then((data) => {
-          amf = data[0];
-        });
+          .then((data) => {
+            amf = data[0];
+          });
       });
+
       function setupBaseUri(done) {
         element = fixture('BaseUri');
         element.amfModel = amf;
         flush(() => done());
       }
+
       function setupBasic(done) {
         element = fixture('Basic');
         element.amfModel = amf;
@@ -104,7 +106,9 @@
       }
 
       teardown(() => {
-        new Polymer.IronMeta({key: 'ApiBaseUri'}).value = undefined;
+        new Polymer.IronMeta({
+          key: 'ApiBaseUri'
+        }).value = undefined;
       });
 
       test('Sets URL from base uri', (done) => {
@@ -115,7 +119,9 @@
       });
 
       test('Sets URL from iron-meta', (done) => {
-        new Polymer.IronMeta({key: 'ApiBaseUri'}).value = 'https://meta.com/base';
+        new Polymer.IronMeta({
+          key: 'ApiBaseUri'
+        }).value = 'https://meta.com/base';
         setupBasic(() => {
           assert.equal(element.apiBaseUri, 'https://meta.com/base');
           done();
@@ -123,7 +129,9 @@
       });
 
       test('In case of conflict base uri wins', (done) => {
-        new Polymer.IronMeta({key: 'ApiBaseUri'}).value = 'https://meta.com/base';
+        new Polymer.IronMeta({
+          key: 'ApiBaseUri'
+        }).value = 'https://meta.com/base';
         setupBaseUri(() => {
           assert.equal(element.apiBaseUri, 'https://domain.com');
           done();
@@ -136,9 +144,9 @@
       let element;
       suiteSetup(() => {
         return AmfLoader.load('loan-microservice.json')
-        .then((data) => {
-          amf = data;
-        });
+          .then((data) => {
+            amf = data;
+          });
       });
       setup((done) => {
         element = fixture('Basic');
@@ -201,9 +209,9 @@
       const METHOD_ID = 'amf://id#489';
       suiteSetup(() => {
         return AmfLoader.load('demo-api.json')
-        .then((data) => {
-          amf = data;
-        });
+          .then((data) => {
+            amf = data;
+          });
       });
 
       setup((done) => {
@@ -286,14 +294,137 @@
       });
     });
 
+    suite('_computeBaseUri()', () => {
+      let element;
+      setup(() => {
+        element = fixture('Basic');
+      });
+
+      test('Calls helper method _getBaseUri()', () => {
+        const spy = sinon.spy(element, '_getBaseUri');
+        element._computeBaseUri({}, 'https://api.com');
+        assert.isTrue(spy.called);
+      });
+
+      test('Returns a string', () => {
+        const result = element._computeBaseUri({}, 'https://api.com/api');
+        assert.equal(result, 'https://api.com/api');
+      });
+
+      test('Removes trailing slash', () => {
+        const result = element._computeBaseUri({}, 'https://api.com/');
+        assert.equal(result, 'https://api.com');
+      });
+
+      test('Returns default string when no base URI', () => {
+        const result = element._computeBaseUri({});
+        assert.equal(result, 'Base URI not defined in the API file.');
+      });
+    });
+
+    suite('_displayArray()', () => {
+      let element;
+      setup(() => {
+        element = fixture('Basic');
+      });
+
+      test('Returns undefined when no arguments', () => {
+        const result = element._displayArray();
+        assert.isUndefined(result);
+      });
+
+      test('Returns undefined when empty array', () => {
+        const result = element._displayArray([]);
+        assert.isUndefined(result);
+      });
+
+      test('Returns original value if not array', () => {
+        const result = element._displayArray('test');
+        assert.equal(result, 'test');
+      });
+
+      test('Returns processed array', () => {
+        const result = element._displayArray(['a', 'b']);
+        assert.equal(result, 'a, b');
+      });
+    });
+
+    suite('_computeProvider()', () => {
+      let model;
+      let element;
+      setup(() => {
+        element = fixture('Basic');
+        model = {
+          'http://schema.org/provider': [{
+            '@id': 'amf://id#369',
+            '@type': [
+              'http://schema.org/Organization',
+              'http://a.ml/vocabularies/document#DomainElement'
+            ],
+            'http://schema.org/url': [{
+              '@id': 'http://domain.com'
+            }],
+            'http://schema.org/name': [{
+              '@value': 'John Doe'
+            }],
+            'http://schema.org/email': [{
+              '@value': 'test@mail.com'
+            }]
+          }]
+        };
+      });
+
+      test('Computes provider model', () => {
+        const result = element._computeProvider(model);
+        assert.typeOf(result, 'object');
+      });
+
+      test('Removes nested array', () => {
+        const p = [Object.assign({}, model['http://schema.org/provider'][0])];
+        model['http://schema.org/provider'][0] = p;
+        const result = element._computeProvider(model);
+        assert.typeOf(result, 'object');
+      });
+    });
+
+    suite('_copyPathClipboard()', () => {
+      let element;
+      setup((done) => {
+        element = fixture('Basic');
+        flush(() => done());
+      });
+
+      test('Calls copy() in the `clipboard-copy` element', () => {
+        const copy = element.shadowRoot.querySelector('#pathCopy');
+        const spy = sinon.spy(copy, 'copy');
+        element._copyPathClipboard();
+        assert.isTrue(spy.called);
+      });
+
+      test('Changes the icon', () => {
+        element._copyPathClipboard();
+        const button = element.shadowRoot.querySelector('.copy-icon');
+        assert.notEqual(button.icon, 'arc:content-copy');
+      });
+
+      test('Changes the icon back', (done) => {
+        element._copyPathClipboard();
+        setTimeout(() => {
+          const button = element.shadowRoot.querySelector('.copy-icon');
+          assert.equal(button.icon, 'arc:content-copy');
+          done();
+        }, 1001);
+      });
+    });
+
     suite('a11y', () => {
       let aware;
       suiteSetup(() => {
         return AmfLoader.load('loan-microservice.json')
-        .then((data) => {
-          aware = fixture('Aware');
-          aware.raml = data;
-        });
+          .then((data) => {
+            aware = fixture('Aware');
+            aware.raml = data;
+          });
       });
 
       a11ySuite('Basic');
@@ -301,4 +432,5 @@
   });
   </script>
 </body>
+
 </html>

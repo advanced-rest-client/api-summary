@@ -8,6 +8,10 @@
  *   api-summary.html
  */
 
+
+// tslint:disable:variable-name Describing an API that's defined elsewhere.
+// tslint:disable:no-any describes the API as best we are able today
+
 /// <reference path="../polymer/types/polymer-element.d.ts" />
 /// <reference path="../polymer/types/lib/elements/dom-if.d.ts" />
 /// <reference path="../raml-aware/raml-aware.d.ts" />
@@ -211,7 +215,7 @@ declare namespace ApiElements {
     _computeUrl(provider: any): any;
     _computeToS(webApi: any): any;
     _computeLicense(webApi: any): any;
-    _copyPathClipboard(e: any): void;
+    _copyPathClipboard(): void;
 
     /**
      * Computes a view model for supported operations for an endpoint.

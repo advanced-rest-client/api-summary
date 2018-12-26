@@ -92,6 +92,10 @@
       @apply --arc-link;
     }
 
+    .link-padding {
+      margin-left: 8px;
+    }
+
     .inline-description {
       padding: 0;
       margin: 0;
@@ -186,7 +190,7 @@
           <p class="inline-description">
             <span>[[providerName]]</span>
             <template is="dom-if" if="[[providerEmail]]">
-              <a class="app-link" href$="mailto:[[providerEmail]]">[[providerEmail]]</a>
+              <a class="app-link link-padding" href$="mailto:[[providerEmail]]">[[providerEmail]]</a>
             </template>
           </p>
           <template is="dom-if" if="[[providerUrl]]">

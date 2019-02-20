@@ -5,25 +5,18 @@
  *   https://github.com/Polymer/tools/tree/master/packages/gen-typescript-declarations
  *
  * To modify these typings, edit the source file(s):
- *   api-summary.html
+ *   api-summary.js
  */
 
 
 // tslint:disable:variable-name Describing an API that's defined elsewhere.
 // tslint:disable:no-any describes the API as best we are able today
 
-/// <reference path="../polymer/types/polymer-element.d.ts" />
-/// <reference path="../polymer/types/lib/elements/dom-if.d.ts" />
-/// <reference path="../raml-aware/raml-aware.d.ts" />
-/// <reference path="../iron-flex-layout/iron-flex-layout.d.ts" />
-/// <reference path="../markdown-styles/markdown-styles.d.ts" />
-/// <reference path="../marked-element/marked-element.d.ts" />
-/// <reference path="../iron-meta/iron-meta.d.ts" />
-/// <reference path="../amf-helper-mixin/amf-helper-mixin.d.ts" />
-/// <reference path="../clipboard-copy/clipboard-copy.d.ts" />
-/// <reference path="../paper-icon-button/paper-icon-button.d.ts" />
-/// <reference path="../arc-icons/arc-icons.d.ts" />
-/// <reference path="../http-method-label/http-method-label-common-styles.d.ts" />
+import {PolymerElement} from '@polymer/polymer/polymer-element.js';
+
+import {html} from '@polymer/polymer/lib/utils/html-tag.js';
+
+import {AmfHelperMixin} from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
 
 declare namespace ApiElements {
 
@@ -46,7 +39,7 @@ declare namespace ApiElements {
    * `--api-summary-separator-color` | Color of section separator | `rgba(0, 0, 0, 0.12)`
    */
   class ApiSummary extends
-    ApiElements.AmfHelperMixin(
+    AmfHelperMixin(
     Object) {
 
     /**
@@ -227,6 +220,9 @@ declare namespace ApiElements {
   }
 }
 
-interface HTMLElementTagNameMap {
-  "api-summary": ApiElements.ApiSummary;
+declare global {
+
+  interface HTMLElementTagNameMap {
+    "api-summary": ApiElements.ApiSummary;
+  }
 }

@@ -1,16 +1,16 @@
-import {PolymerElement} from '@polymer/polymer/polymer-element.js';
-import {html} from '@polymer/polymer/lib/utils/html-tag.js';
-import {AmfHelperMixin} from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
-import '@polymer/polymer/lib/elements/dom-if.js';
-import '@api-components/raml-aware/raml-aware.js';
-import '@polymer/iron-flex-layout/iron-flex-layout.js';
-import '@advanced-rest-client/markdown-styles/markdown-styles.js';
-import '@polymer/marked-element/marked-element.js';
-import '@polymer/iron-meta/iron-meta.js';
-import '@advanced-rest-client/clipboard-copy/clipboard-copy.js';
-import '@polymer/paper-icon-button/paper-icon-button.js';
-import '@advanced-rest-client/arc-icons/arc-icons.js';
-import '@api-components/http-method-label/http-method-label-common-styles.js';
+import {PolymerElement} from '../../@polymer/polymer/polymer-element.js';
+import {html} from '../../@polymer/polymer/lib/utils/html-tag.js';
+import {AmfHelperMixin} from '../../@api-components/amf-helper-mixin/amf-helper-mixin.js';
+import '../../@polymer/polymer/lib/elements/dom-if.js';
+import '../../@api-components/raml-aware/raml-aware.js';
+import '../../@polymer/iron-flex-layout/iron-flex-layout.js';
+import '../../@advanced-rest-client/markdown-styles/markdown-styles.js';
+import '../../@polymer/marked-element/marked-element.js';
+import '../../@polymer/iron-meta/iron-meta.js';
+import '../../@advanced-rest-client/clipboard-copy/clipboard-copy.js';
+import '../../@polymer/paper-icon-button/paper-icon-button.js';
+import '../../@advanced-rest-client/arc-icons/arc-icons.js';
+import '../../@api-components/http-method-label/http-method-label-common-styles.js';
 /**
  * `api-summary`
  *

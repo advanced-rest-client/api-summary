@@ -7,7 +7,7 @@ import '@polymer/iron-flex-layout/iron-flex-layout.js';
 import '@advanced-rest-client/markdown-styles/markdown-styles.js';
 import '@polymer/marked-element/marked-element.js';
 import '@polymer/iron-meta/iron-meta.js';
-import '@api-components/clipboard-copy/clipboard-copy.js';
+import '@advanced-rest-client/clipboard-copy/clipboard-copy.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 import '@advanced-rest-client/arc-icons/arc-icons.js';
 import '@api-components/http-method-label/http-method-label-common-styles.js';

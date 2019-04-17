@@ -491,6 +491,9 @@ class ApiSummary extends AmfHelperMixin(PolymerElement) {
    * @return {Object|undefined}
    */
   _computeProvider(webApi) {
+    if (!webApi) {
+      return;
+    }
     const key = this._getAmfKey(this.ns.schema.name + 'provider');
     let data = this._ensureArray(webApi[key]);
     if (!data) {

@@ -12,9 +12,7 @@
 // tslint:disable:variable-name Describing an API that's defined elsewhere.
 // tslint:disable:no-any describes the API as best we are able today
 
-import {PolymerElement} from '@polymer/polymer/polymer-element.js';
-
-import {html} from '@polymer/polymer/lib/utils/html-tag.js';
+import {LitElement, html, css} from 'lit-element';
 
 import {AmfHelperMixin} from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
 
@@ -48,117 +46,10 @@ declare namespace ApiElements {
     aware: string|null|undefined;
 
     /**
-     * Computed value of AMF model of a type of `http://schema.org/WebAPI`
-     */
-    readonly webApi: object|null;
-
-    /**
      * A property to set to override AMF's model base URI information.
      * When this property is set, the `endpointUri` property is recalculated.
      */
     baseUri: string|null|undefined;
-
-    /**
-     * API base URI to display in main URL field.
-     * This value is computed when `amfModel` or `baseUri` change.
-     */
-    readonly apiBaseUri: string|null|undefined;
-
-    /**
-     * Computed title of the API
-     */
-    readonly apiTitle: string|null|undefined;
-
-    /**
-     * Computed value of method description from `method` property.
-     */
-    readonly description: string|null|undefined;
-
-    /**
-     * Computed value of the `http://raml.org/vocabularies/http#server`
-     * from `amfModel`
-     */
-    readonly server: object|null|undefined;
-
-    /**
-     * Computed API version label
-     */
-    readonly version: string|null|undefined;
-
-    /**
-     * Computed value, true when `version` property is set.
-     */
-    readonly hasVersion: boolean|null|undefined;
-
-    /**
-     * Computed list of protocols.
-     */
-    readonly protocols: string|null|undefined;
-
-    /**
-     * Computed value if `protocols` property is set
-     */
-    readonly hasProtocols: boolean|null|undefined;
-
-    /**
-     * Computed value of OAS provider information.
-     */
-    readonly provider: object|null|undefined;
-
-    /**
-     * Computed value if `provider` property is set
-     */
-    readonly hasProvider: boolean|null|undefined;
-
-    /**
-     * Computed value of OAS provider name
-     */
-    readonly providerName: string|null|undefined;
-
-    /**
-     * Computed value of OAS provider email
-     */
-    readonly providerEmail: string|null|undefined;
-
-    /**
-     * Computed value of OAS provider url
-     */
-    readonly providerUrl: string|null|undefined;
-
-    /**
-     * Computed value of OAS terms of service
-     */
-    readonly termsOfService: string|null|undefined;
-
-    /**
-     * Computed value of OAS license
-     */
-    readonly license: object|null|undefined;
-
-    /**
-     * Computed value if `license` property is set
-     */
-    readonly hasLicense: boolean|null|undefined;
-
-    /**
-     * Computed value of OAS license name
-     */
-    readonly licenseName: string|null|undefined;
-
-    /**
-     * Computed value of OAS license url
-     */
-    readonly licenseUrl: string|null|undefined;
-
-    /**
-     * Computed list of endpoints to render.
-     */
-    readonly endpoints: any[]|null|undefined;
-
-    /**
-     * Computed value, true if `endpoints` property is set and has a value.
-     */
-    readonly hasEndpoints: object|null;
 
     /**
      * Computes view model for endpoints list.
@@ -166,6 +57,7 @@ declare namespace ApiElements {
      * @param webApi Web API model
      */
     _computeEndpoints(webApi: object|null): Array<object|null>|null|undefined;
+    render(): any;
 
     /**
      * Computes value of `apiTitle` property.
@@ -183,7 +75,7 @@ declare namespace ApiElements {
     _computeVersion(webApi: object|null): String|null|undefined;
 
     /**
-     * Computes API's URI based on `amfModel` and `baseUri` property.
+     * Computes API's URI based on `amf` and `baseUri` property.
      *
      * @param server Server model of AMF API.
      * @param baseUri Current value of `baseUri` property
@@ -191,11 +83,6 @@ declare namespace ApiElements {
      * @returns Endpoint's URI
      */
     _computeBaseUri(server: object|null, baseUri: String|null, protocols: Array<String|null>|null): String|null;
-
-    /**
-     * Displays array values.
-     */
-    _displayArray(arr: any): any;
 
     /**
      * Computes information about provider of the API.
@@ -217,6 +104,7 @@ declare namespace ApiElements {
      */
     _endpointOperations(endpoint: object|null): Array<object|null>|unbdefined|null;
     _navigateItem(e: any): void;
+    _apiHandler(e: any): void;
   }
 }
 

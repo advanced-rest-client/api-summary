@@ -5,7 +5,6 @@ import labelStyles from '@api-components/http-method-label/http-method-label-com
 import '@api-components/raml-aware/raml-aware.js';
 import '@advanced-rest-client/arc-marked/arc-marked.js';
 import '@polymer/iron-meta/iron-meta.js';
-import '@advanced-rest-client/clipboard-copy/clipboard-copy.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 import '@advanced-rest-client/arc-icons/arc-icons.js';
 /**
@@ -40,17 +39,18 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
       css`
         :host {
           display: block;
+          font-size: 1rem;
           color: var(--api-summary-color, inherit);
-          font-size: var(--arc-font-body1-font-size, initial);
           font-weight: var(--arc-font-body1-font-weight, initial);
           line-height: var(--arc-font-body1-line-height, initial);
         }
 
-        h1 {
-          font-size: var(--arc-font-headline-font-size);
-          font-weight: var(--arc-font-headline-font-weight);
-          letter-spacing: var(--arc-font-headline-letter-spacing);
-          line-height: var(--arc-font-headline-line-height);
+        .api-title {
+          font-size: var(--api-summary-title-font-size, 1.5rem);
+          font-weight: var(--api-summary-title-font-weight, 200);
+          letter-spacing: var(--api-summary-title-letter-spacing);
+          line-height: var(--api-summary-title-line-height);
+          margin: 12px 0;
         }
 
         arc-marked {
@@ -66,7 +66,7 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
         }
 
         :host([narrow]) h1 {
-          font-size: 20px;
+          font-size: var(--api-summary-title-narrow-font-size, 1.2rem);
           margin: 0;
         }
 
@@ -74,13 +74,15 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
           display: flex;
           flex-direction: row;
           align-items: center;
+          height: 40px;
           font-family: var(--arc-font-code-family);
-          font-size: var(--api-summary-url-font-size, 16px);
-          margin: 40px 0;
-          background-color: var(--api-summary-url-background-color, #424242);
-          color: var(--api-summary-url-font-color, #fff);
+          font-size: var(--api-endpoint-documentation-url-font-size, 16px);
+          margin-bottom: 40px;
+          margin-top: 20px;
+          background-color: var(--code-background-color);
+          color: var(--code-color);
           padding: 8px;
-          border-radius: 2px;
+          border-radius: var(--api-endpoint-documentation-url-border-radius, 4px);
         }
 
         .url-value {
@@ -96,7 +98,6 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
         }
 
         label.section {
-          font-size: var(--arc-font-subhead-font-size);
           font-weight: var(--arc-font-subhead-font-weight);
           line-height: var(--arc-font-subhead-line-height);
           font-size: 18px;
@@ -152,211 +153,239 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
         .method-label {
           margin-right: 8px;
           margin-bottom: 8px;
-          cursor: pointer;
+          text-decoration: none;
+          font-size: var(--api-summary-method-font-size, 1.1rem);
+          padding: var(--api-summary-method-padding, 4px 6px);
         }
 
-        .method-label:hover {
+        .method-label:hover,
+        .method-label:focus {
           text-decoration: underline;
-        }
-
-        .endpoint-label {
-          display: inline-block;
-          margin-right: 8px;
-          cursor: pointer;
-          font-weight: bold;
-          text-decoration: underline;
-          font-size: 15px;
-          color: var(--link-color);
         }
 
         .endpoint-path {
-          text-decoration: underline;
-          font-size: 14px;
+          display: block;
+          text-decoration: none;
           cursor: pointer;
           margin-bottom: 4px;
           display: inline-block;
+          font-weight: 500;
+          font-size: var(--api-summary-endpoint-path-font-size, 1.5rem);
+          color: var(--link-color, #0277BD);
+          margin: 12px 0;
+          word-break: break-all;
+        }
+
+        .endpoint-path:hover,
+        .endpoint-path:focus {
+          text-decoration: underline;
+          color: var(--link-color, #0277BD);
         }
 
         .toc .section {
           margin-bottom: 24px;
         }
+
+        .section.endpoints-title {
+          font-size: var(--api-summary-endpoints-font-size, 1.5rem);
+          font-weight: 500;
+        }
+
+        .endpoint-path-name {
+          word-break: break-all;
+        }
       `
     ];
   }
 
-  render() {
-    const { aware, amf, baseUri } = this;
-    const webApi = this._computeWebApi(amf);
-    const server = this._computeServer(amf);
-    const protocols = this._computeProtocols(amf);
-    const apiBaseUri = this._computeBaseUri(server, baseUri, protocols);
-    const apiTitle = this._computeApiTitle(webApi);
-    const description = this._computeDescription(webApi);
-    const version = this._computeVersion(webApi);
-    const provider = this._computeProvider(webApi);
-    const providerName = this._computeName(provider);
-    const providerEmail = this._computeEmail(provider);
-    const providerUrl = this._computeUrl(provider);
-    const termsOfService = this._computeToS(webApi);
-    const license = this._computeLicense(webApi);
-    const licenseName = this._computeName(license);
-    const licenseUrl = this._computeUrl(license);
-    const endpoints = this._computeEndpoints(webApi);
-    return html`
-      ${aware
-        ? html`
-            <raml-aware @api-changed="${this._apiHandler}" .scope="${aware}"></raml-aware>
-          `
-        : undefined}
-      <div>
-        <h1>${apiTitle}</h1>
+  _titleTemplate() {
+    const { _apiTitle, titleLevel } = this;
+    if (!_apiTitle) {
+      return '';
+    }
+    return html`<div class="api-title" role="heading" aria-level="${titleLevel}">${_apiTitle}</div>`;
+  }
 
-        ${version
-          ? html`
-              <p class="inline-description version">
-                <label>Version:</label>
-                <span>${version}</span>
-              </p>
-            `
-          : undefined}
-        ${description
-          ? html`
-              <div role="region" class="marked-description">
-                <arc-marked .markdown="${description}">
-                  <div slot="markdown-html" class="markdown-body"></div>
-                </arc-marked>
-              </div>
-            `
-          : undefined}
-        ${apiBaseUri
-          ? html`
-              <div class="url-area">
-                <div class="url-value">${apiBaseUri}</div>
-                <paper-icon-button
-                  class="action-icon copy-icon"
-                  icon="arc:content-copy"
-                  @click="${this._copyPathClipboard}"
-                  title="Copy path to clipboard"
-                ></paper-icon-button>
-              </div>
-              <clipboard-copy .content="${apiBaseUri}"></clipboard-copy>
-            `
-          : undefined}
-        ${protocols && protocols.length
-          ? html`
-              <label class="section">Supported protocols</label>
-              <div class="protocol-chips">
-                ${protocols.map(
-                  (item) =>
-                    html`
-                      <span class="chip">${item}</span>
-                    `
-                )}
-              </div>
-            `
-          : undefined}
-        ${provider
-          ? html`
-              <section role="contentinfo" class="docs-section">
-                <label class="section">Contact information</label>
-                <p class="inline-description">
-                  <span class="provider-name">${providerName}</span>
-                  ${providerEmail
-                    ? html`
-                        <a class="app-link link-padding provider-email" href="mailto:${providerEmail}"
-                          >${providerEmail}</a
-                        >
-                      `
-                    : undefined}
-                </p>
-                ${providerUrl
-                  ? html`
-                      <p class="inline-description">
-                        <a href="${providerUrl}" target="_blank" class="app-link provider-url">${providerUrl}</a>
-                      </p>
-                    `
-                  : undefined}
-              </section>
-            `
-          : undefined}
-        ${licenseUrl && licenseName
-          ? html`
-              <section role="region" aria-labelledby="licenseLabel" class="docs-section">
-                <label class="section" id="licenseLabel">License</label>
-                <p class="inline-description">
-                  <a href="${licenseUrl}" target="_blank" class="app-link">${licenseName}</a>
-                </p>
-              </section>
-            `
-          : undefined}
-        ${termsOfService
-          ? html`
-              <section role="region" aria-labelledby="tocLabel" class="docs-section">
-                <label class="section" id="tocLabel">Terms of service</label>
-                <arc-marked .markdown="${termsOfService}">
-                  <div slot="markdown-html" class="markdown-body"></div>
-                </arc-marked>
-              </section>
-            `
-          : undefined}
+  _versionTemplate() {
+    const { _version } = this;
+    if (!_version) {
+      return '';
+    }
+    return html`
+    <p class="inline-description version">
+      <label>Version:</label>
+      <span>${_version}</span>
+    </p>`;
+  }
+
+  _descriptionTemplate() {
+    const { _description } = this;
+    if (!_description) {
+      return '';
+    }
+    return html`
+    <div role="region" class="marked-description">
+      <arc-marked .markdown="${_description}">
+        <div slot="markdown-html" class="markdown-body"></div>
+      </arc-marked>
+    </div>`;
+  }
+
+  _baseUriTemplate() {
+    const { _apiBaseUri } = this;
+    if (!_apiBaseUri) {
+      return '';
+    }
+    return html`
+    <div class="url-area">
+      <div class="url-value">${_apiBaseUri}</div>
+    </div>`;
+  }
+
+  _protocolsTemplate() {
+    const { _protocols } = this;
+    if (!_protocols || !_protocols.length) {
+      return '';
+    }
+    const result = _protocols.map((item) => html`<span class="chip">${item}</span>`);
+
+    return html`
+    <label class="section">Supported protocols</label>
+    <div class="protocol-chips">${result}</div>`;
+  }
+
+  _contactInfoTemplate() {
+    const { _providerName, _providerEmail, _providerUrl } = this;
+    if (!_providerName) {
+      return '';
+    }
+    return html`
+    <section role="contentinfo" class="docs-section">
+      <label class="section">Contact information</label>
+      <p class="inline-description">
+        <span class="provider-name">${_providerName}</span>
+        ${_providerEmail ? html`<a
+            class="app-link link-padding provider-email"
+            href="mailto:${_providerEmail}">${_providerEmail}</a>` : ''}
+      </p>
+      ${_providerUrl ? html`
+        <p class="inline-description">
+          <a href="${_providerUrl}" target="_blank" class="app-link provider-url">${_providerUrl}</a>
+        </p>` : ''}
+    </section>`;
+  }
+
+  _licenseTemplate() {
+    const { _licenseUrl, _licenseName } = this;
+    if (!_licenseUrl || !_licenseName) {
+      return '';
+    }
+    return html`
+    <section role="region" aria-labelledby="licenseLabel" class="docs-section">
+      <label class="section" id="licenseLabel">License</label>
+      <p class="inline-description">
+        <a href="${_licenseUrl}" target="_blank" class="app-link">${_licenseName}</a>
+      </p>
+    </section>`;
+  }
+
+  _termsOfServiceTemplate() {
+    const { _termsOfService } = this;
+    if (!_termsOfService || !_termsOfService.length) {
+      return '';
+    }
+    return html`
+    <section role="region" aria-labelledby="tocLabel" class="docs-section">
+      <label class="section" id="tocLabel">Terms of service</label>
+      <arc-marked .markdown="${_termsOfService}">
+        <div slot="markdown-html" class="markdown-body"></div>
+      </arc-marked>
+    </section>`;
+  }
+
+  _endpointsTemplate() {
+    const { _endpoints } = this;
+    if (!_endpoints || !_endpoints.length) {
+      return;
+    }
+    const result = _endpoints.map((item) => this._endpointTemplate(item));
+    return html`
+    <div class="separator"></div>
+    <div class="toc">
+      <label class="section endpoints-title">API endpoints</label>
+      ${result}
+    </div>
+    `;
+  }
+
+  _endpointTemplate(item) {
+    const ops = item.ops && item.ops.length ? item.ops.map((op) => this._methodTemplate(op, item)) : '';
+    return html`
+    <div class="endpoint-item" @click="${this._navigateItem}">
+      ${item.name ? this._endpointNameTemplate(item) : this._endpointPathTemplate(item)}
+      <div class="endpoint-header">
+        ${ops}
+      </div>
+    </div>`;
+  }
+
+  _endpointPathTemplate(item) {
+    return html`
+    <a
+      class="endpoint-path"
+      href="#${item.path}"
+      data-id="${item.id}"
+      data-shape-type="endpoint"
+      title="Open endpoint documentation">${item.path}</a>
+    `;
+  }
+
+  _endpointNameTemplate(item) {
+    if (!item.name) {
+      return '';
+    }
+    return html`
+    <a
+      class="endpoint-path"
+      href="#${item.path}"
+      data-id="${item.id}"
+      data-shape-type="endpoint"
+      title="Open endpoint documentation">${item.name}</a>
+    <p class="endpoint-path-name">${item.path}</p>
+    `;
+  }
+
+  _methodTemplate(item, endpoint) {
+    return html`
+      <a
+        href="#${endpoint.path + '/' + item.method}"
+        class="method-label"
+        data-method="${item.method}"
+        data-id="${item.id}"
+        data-shape-type="method"
+        title="Open method documentation">${item.method}</a>
+    `;
+  }
+
+  render() {
+    const { aware } = this;
+    return html`
+      ${aware ?
+        html`<raml-aware @api-changed="${this._apiHandler}" .scope="${aware}"></raml-aware>` :
+        ''}
+
+      <div>
+        ${this._titleTemplate()}
+        ${this._versionTemplate()}
+        ${this._descriptionTemplate()}
+        ${this._baseUriTemplate()}
+        ${this._protocolsTemplate()}
+        ${this._contactInfoTemplate()}
+        ${this._licenseTemplate()}
+        ${this._termsOfServiceTemplate()}
       </div>
 
-      ${endpoints && endpoints.length
-        ? html`
-            <div class="separator"></div>
-            <div class="toc">
-              <label class="section">API endpoints</label>
-              ${endpoints.map(
-                (item) => html`
-                  <div class="endpoint-item" @click="${this._navigateItem}">
-                    <div
-                      class="endpoint-path"
-                      data-id="${item.id}"
-                      data-shape-type="endpoint"
-                      title="Open endpoint documentation"
-                      role="button"
-                      tabindex="0"
-                    >
-                      ${item.path}
-                    </div>
-                    <div class="endpoint-header">
-                      ${item.name
-                        ? html`
-                            <span
-                              class="endpoint-label"
-                              data-id="${item.id}"
-                              data-shape-type="endpoint"
-                              title="Open endpoint documentation"
-                              role="button"
-                              tabindex="0"
-                              >${item.name}</span
-                            >
-                          `
-                        : undefined}
-                      ${item.ops && item.ops.length
-                        ? item.ops.map(
-                            (item) =>
-                              html`
-                                <span
-                                  class="method-label"
-                                  data-method="${item.method}"
-                                  data-id="${item.id}"
-                                  data-shape-type="method"
-                                  title="Open method documentation"
-                                  role="button"
-                                  tabindex="0"
-                                  >${item.method}</span
-                                >
-                              `
-                          )
-                        : undefined}
-                    </div>
-                  </div>
-                `
-              )}
-            </div>
-          `
-        : undefined}
+      ${this._endpointsTemplate()}
     `;
   }
 
@@ -370,9 +399,111 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
        * A property to set to override AMF's model base URI information.
        * When this property is set, the `endpointUri` property is recalculated.
        */
-      baseUri: { type: String, value: '' }
+      baseUri: { type: String, value: '' },
+      /**
+       * API title header level in value range from 1 to 6.
+       * This is made for accessibility. It the component is used in a context
+       * where headers order matters then this property is to be set to
+       * arrange headers in the right order.
+       *
+       * @default 2
+       */
+      titleLevel: { type: String },
+
+      _providerName: { type: String },
+      _providerEmail: { type: String },
+      _providerUrl: { type: String },
+      _licenseName: { type: String },
+      _licenseUrl: { type: String },
+      _endpoints: { type: Array },
+      _termsOfService: { type: String },
+      _version: { type: String },
+      _apiTitle: { type: String },
+      _description: { type: String },
+      _apiBaseUri: { type: String },
+      _protocols: { type: Array }
     };
   }
+
+  get baseUri() {
+    return this._baseUri;
+  }
+
+  set baseUri(value) {
+    const old = this._baseUri;
+    /* istanbul ignore if */
+    if (old === value) {
+      return;
+    }
+    this._baseUri = value;
+    this._apiBaseUri = this._computeBaseUri(this.server, value, this.protocols);
+    this.requestUpdate('baseUri', old);
+  }
+
+  get _protocols() {
+    return this.__protocols;
+  }
+
+  set _protocols(value) {
+    const old = this.__protocols;
+    /* istanbul ignore if */
+    if (old === value) {
+      return;
+    }
+    this.__protocols = value;
+    this._apiBaseUri = this._computeBaseUri(this.server, this.baseUri, value);
+    this.requestUpdate('_protocols', old);
+  }
+
+  constructor() {
+    super();
+    this.titleLevel = 2;
+  }
+
+  __amfChanged() {
+    if (this.__amfProcessingDebouncer) {
+      return;
+    }
+    this.__amfProcessingDebouncer = true;
+    setTimeout(() => this._processModelChange());
+  }
+
+  _processModelChange() {
+    this.__amfProcessingDebouncer = false;
+    const { amf } = this;
+    if (!amf) {
+      return;
+    }
+
+    const webApi = this.webApi = this._computeWebApi(amf);
+    const server = this.server = this._computeServer(amf);
+    const protocols = this._protocols = this._computeProtocols(amf);
+    this._apiBaseUri = this._computeBaseUri(server, this.baseUri, protocols);
+
+    this._webApiChanged(webApi);
+  }
+
+  _webApiChanged(webApi) {
+    if (!webApi) {
+      return;
+    }
+
+    this._apiTitle = this._computeApiTitle(webApi);
+    this._description = this._computeDescription(webApi);
+    this._version = this._computeVersion(webApi);
+    this._termsOfService = this._computeToS(webApi);
+    this._endpoints = this._computeEndpoints(webApi);
+
+    const provider = this._computeProvider(webApi);
+    this._providerName = this._computeName(provider);
+    this._providerEmail = this._computeEmail(provider);
+    this._providerUrl = this._computeUrl(provider);
+
+    const license = this._computeLicense(webApi);
+    this._licenseName = this._computeName(license);
+    this._licenseUrl = this._computeUrl(license);
+  }
+
   /**
    * Computes value of `apiTitle` property.
    *
@@ -516,6 +647,7 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
   }
 
   _navigateItem(e) {
+    e.preventDefault();
     const data = e.composedPath()[0].dataset;
     if (!data.id || !data.shapeType) {
       return;

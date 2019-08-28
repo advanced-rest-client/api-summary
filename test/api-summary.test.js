@@ -1,12 +1,12 @@
 import { fixture, assert, aTimeout } from '@open-wc/testing';
-import sinon from 'sinon/pkg/sinon-esm.js';
+import * as sinon from 'sinon/pkg/sinon-esm.js';
 import '../api-summary.js';
 import { AmfLoader } from './amf-loader.js';
 import { IronMeta } from '@polymer/iron-meta/iron-meta.js';
-import { chai } from '@bundled-es-modules/chai';
-import { chaiDomDiff } from '@open-wc/semantic-dom-diff';
-
-chai.use(chaiDomDiff);
+// import { chai } from '@bundled-es-modules/chai';
+// import { chaiDomDiff } from '@open-wc/semantic-dom-diff';
+//
+// chai.use(chaiDomDiff);
 
 describe('<api-summary>', function() {
   async function basicFixture() {
@@ -45,8 +45,8 @@ describe('<api-summary>', function() {
     });
 
     it('renders api title', () => {
-      const node = element.shadowRoot.querySelector('h1');
-      assert.dom.equal(node, '<h1>API body demo</h1>');
+      const node = element.shadowRoot.querySelector('[role="heading"]');
+      assert.dom.equal(node, '<div aria-level="2" class="api-title" role="heading">API body demo</div>');
     });
 
     it('renders version', () => {
@@ -233,12 +233,17 @@ describe('<api-summary>', function() {
     });
 
     it('renders endpoint name', () => {
-      const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.endpoint-label');
+      const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.endpoint-path');
       assert.dom.equal(
         node,
-        `<span class="endpoint-label" data-shape-type="endpoint" title="Open endpoint documentation" role="button" tabindex="0">
-        People
-      </span>`,
+        `<a
+          class="endpoint-path"
+          data-shape-type="endpoint"
+          href="#/people"
+          title="Open endpoint documentation"
+          >
+          People
+        </a>`,
         {
           ignoreAttributes: ['data-id']
         }
@@ -250,15 +255,11 @@ describe('<api-summary>', function() {
       assert.notEmpty(node.getAttribute('data-id'));
     });
 
-    it('renders endpoint path', () => {
-      const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.endpoint-path');
-      assert.dom.equal(
-        node,
-        `<div class="endpoint-path" data-shape-type="endpoint" title="Open endpoint documentation" role="button" tabindex="0">/people</div>`,
-        {
-          ignoreAttributes: ['data-id']
-        }
-      );
+    it('renders endpoint path with name', () => {
+      const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.endpoint-path-name');
+      assert.dom.equal(node, `<p class="endpoint-path-name">/people</p>`, {
+        ignoreAttributes: ['data-id']
+      });
     });
 
     it('sets data-id on path', () => {
@@ -275,7 +276,13 @@ describe('<api-summary>', function() {
       const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.method-label');
       assert.dom.equal(
         node,
-        `<span class="method-label" data-method="get" data-shape-type="method" title="Open method documentation" role="button" tabindex="0">get</span>`,
+        `<a
+          class="method-label"
+          data-method="get"
+          data-shape-type="method"
+          href="#/people/get"
+          title="Open method documentation"
+          >get</a>`,
         {
           ignoreAttributes: ['data-id']
         }
@@ -283,7 +290,7 @@ describe('<api-summary>', function() {
     });
 
     it('Click on an endpoint dispatches navigation event', (done) => {
-      const node = element.shadowRoot.querySelector(`.endpoint-label[data-id]`);
+      const node = element.shadowRoot.querySelector(`.endpoint-path[data-id]`);
       element.addEventListener('api-navigation-selection-changed', (e) => {
         assert.typeOf(e.detail.selected, 'string');
         assert.equal(e.detail.type, 'endpoint');
@@ -382,42 +389,6 @@ describe('<api-summary>', function() {
       model['http://schema.org/provider'][0] = p;
       const result = element._computeProvider(model);
       assert.typeOf(result, 'object');
-    });
-  });
-
-  describe('_copyPathClipboard()', () => {
-    let element;
-    let amf;
-    before(async () => {
-      amf = await AmfLoader.load();
-    });
-
-    beforeEach(async () => {
-      element = await basicFixture();
-      element.amf = amf;
-      await aTimeout();
-    });
-
-    it('Calls copy() in the `clipboard-copy` element', () => {
-      const copy = element.shadowRoot.querySelector('clipboard-copy');
-      const spy = sinon.spy(copy, 'copy');
-      element._copyPathClipboard();
-      assert.isTrue(spy.called);
-    });
-
-    it('Changes the icon', () => {
-      element._copyPathClipboard();
-      const button = element.shadowRoot.querySelector('.copy-icon');
-      assert.notEqual(button.icon, 'arc:content-copy');
-    });
-
-    it('Changes the icon back', (done) => {
-      element._copyPathClipboard();
-      setTimeout(() => {
-        const button = element.shadowRoot.querySelector('.copy-icon');
-        assert.equal(button.icon, 'arc:content-copy');
-        done();
-      }, 1001);
     });
   });
 

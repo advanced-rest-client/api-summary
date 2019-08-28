@@ -11,32 +11,37 @@
     body.styled {
       margin: 0;
       padding: 0;
+      font-size: 15px;
+
+      --http-method-label-get-background-color: rgb(0, 128, 0);
+      --http-method-label-get-color: #fff;
+      --http-method-label-post-background-color: #006ec5;
+      --http-method-label-post-color: #fff;
+      --http-method-label-put-background-color: #ffa500;
+      --http-method-label-put-color: #1D0029;
+      --http-method-label-delete-background-color: #e93628;
+      --http-method-label-delete-color: #fff;
+      --http-method-label-patch-background-color: #811f92;
+      --http-method-label-patch-color: #F2F1EF;
     }
 
     api-summary {
       margin-left: 40px;
       margin-right: 40px;
+      width: 700px;
     }
 
     body.dark {
       --api-summary-url-background-color: #616161;
       --api-summary-separator-color: rgba(255, 255, 255, 0.12);
 
-      --http-method-label-get-background-color: rgb(0, 128, 0);
-      --http-method-label-get-color: #fff;
-      --http-method-label-post-background-color: rgb(33, 150, 243);
-      --http-method-label-post-color: #fff;
-      --http-method-label-put-background-color: rgb(255, 165, 0);
-      --http-method-label-put-color: fff;
-      --http-method-label-delete-background-color: rgb(244, 67, 54);
-      --http-method-label-delete-color: fff;
+
     }
     </style>
 
   </head>
   <body>
     <div id="demo"></div>
-
     <script type="module" src="index.js"></script>
   </body>
 </html>

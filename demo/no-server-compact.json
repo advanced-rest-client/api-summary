@@ -20,6 +20,16 @@
 "@value": "Amazon S3 REST API"
 }
 ],
+"raml-http:accepts": [
+{
+"@value": "application/json"
+}
+],
+"raml-http:contentType": [
+{
+"@value": "application/json"
+}
+],
 "schema-org:version": [
 {
 "@value": "1"
@@ -83,6 +93,7 @@
 "@id": "#6/linked_2",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -213,16 +224,28 @@
 "@type": [
 "sourcemaps:SourceMap"
 ],
-"sourcemaps:source-vendor": [
+"sourcemaps:single-value-array": [
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#11"
+"@value": "raml-http:contentType"
 }
 ],
 "sourcemaps:value": [
 {
-"@value": "RAML 1.0"
+"@value": ""
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "raml-http:accepts"
+}
+],
+"sourcemaps:value": [
+{
+"@value": ""
 }
 ]
 }
@@ -237,6 +260,18 @@
 "sourcemaps:value": [
 {
 "@value": "[(3,0)-(4,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "raml-http:accepts"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(4,0)-(6,0)]"
 }
 ]
 },
@@ -263,6 +298,32 @@
 "@value": "[(2,0)-(3,0)]"
 }
 ]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "raml-http:contentType"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(4,0)-(6,0)]"
+}
+]
+}
+],
+"sourcemaps:source-vendor": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#11"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "RAML 1.0"
+}
+]
 }
 ]
 }
@@ -274,6 +335,7 @@
 "@id": "#1",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -289,7 +351,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -301,6 +364,7 @@
 "@id": "#3",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -377,7 +441,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -389,6 +454,7 @@
 "@id": "#5",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -533,6 +599,7 @@
 "@id": "#6",
 "@type": [
 "shacl:NodeShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -548,7 +615,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -560,6 +628,7 @@
 "@id": "#3",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -636,7 +705,8 @@
 "@type": [
 "shacl:PropertyShape",
 "shacl:Shape",
-"raml-shapes:Shape"
+"raml-shapes:Shape",
+"doc:DomainElement"
 ],
 "shacl:path": [
 {
@@ -648,6 +718,7 @@
 "@id": "#5",
 "@type": [
 "raml-shapes:ScalarShape",
+"raml-shapes:AnyShape",
 "shacl:Shape",
 "raml-shapes:Shape",
 "doc:DomainElement"
@@ -741,18 +812,31 @@
 {
 "@id": "#7",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
-"data:age": [
+"data:name": [
 {
 "@id": "#8",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
-"@value": "45",
-"@type": "xsd:integer"
+"@value": "Martin"
+}
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#string"
+}
+],
+"schema-org:name": [
+{
+"@value": "scalar_2"
 }
 ],
 "sourcemaps:sources": [
@@ -770,7 +854,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(26,21)-(26,23)]"
+"@value": "[(25,22)-(25,30)]"
 }
 ]
 }
@@ -779,16 +863,27 @@
 ]
 }
 ],
-"data:name": [
+"data:age": [
 {
 "@id": "#9",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
-"@value": "Martin",
-"@type": "xsd:string"
+"@value": "45"
+}
+],
+"shacl:datatype": [
+{
+"@id": "http://www.w3.org/2001/XMLSchema#integer"
+}
+],
+"schema-org:name": [
+{
+"@value": "scalar_3"
 }
 ],
 "sourcemaps:sources": [
@@ -806,13 +901,18 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(25,22)-(25,30)]"
+"@value": "[(26,21)-(26,23)]"
 }
 ]
 }
 ]
 }
 ]
+}
+],
+"schema-org:name": [
+{
+"@value": "object_1"
 }
 ],
 "sourcemaps:sources": [
@@ -825,17 +925,15 @@
 {
 "sourcemaps:element": [
 {
-"@value": "amf://id#7"
+"@value": "data:age"
 }
 ],
 "sourcemaps:value": [
 {
-"@value": "[(24,14)-(27,15)]"
+"@value": "[(26,16)-(26,23)]"
 }
 ]
-}
-],
-"sourcemaps:data-node-properties": [
+},
 {
 "sourcemaps:element": [
 {
@@ -844,7 +942,19 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "name->[(25,16)-(25,30)]#age->[(26,16)-(26,23)]"
+"@value": "[(24,14)-(27,15)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "data:name"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(25,16)-(25,30)]"
 }
 ]
 }
@@ -900,6 +1010,18 @@
 "sourcemaps:value": [
 {
 "@value": "[(23,12)-(28,0)]"
+}
+]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "doc:structuredValue"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(24,14)-(27,15)]"
 }
 ]
 }
@@ -1009,7 +1131,6 @@
 "doc": "http://a.ml/vocabularies/document#",
 "sourcemaps": "http://a.ml/vocabularies/document-source-maps#",
 "schema-org": "http://schema.org/",
-"xsd": "http://www.w3.org/2001/XMLSchema#",
 "hydra": "http://www.w3.org/ns/hydra/core#"
 }
 }

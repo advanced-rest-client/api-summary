@@ -6,5 +6,7 @@
   "loan-ms/loan-microservice.json": "OAS 2.0",
   "mocking-service/mocking-service.raml": "RAML 1.0",
   "no-server/no-server.raml": "RAML 1.0",
-  "no-endpoints/no-endpoints.raml": "RAML 1.0"
+  "no-endpoints/no-endpoints.raml": "RAML 1.0",
+  "google-drive-api/google-drive-api.raml": "RAML 1.0",
+  "exchange-experience-api/exchange-experience-api.raml": "RAML 0.8"
 }

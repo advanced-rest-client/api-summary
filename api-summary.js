@@ -70,11 +70,9 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
 
         .url-area {
           display: flex;
-          flex-direction: row;
-          align-items: center;
-          height: 40px;
+          flex-direction: column;
           font-family: var(--arc-font-code-family);
-          font-size: var(--api-endpoint-documentation-url-font-size, 16px);
+
           margin-bottom: 40px;
           margin-top: 20px;
           background-color: var(--code-background-color);
@@ -83,11 +81,14 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
           border-radius: var(--api-endpoint-documentation-url-border-radius, 4px);
         }
 
+        .url-label {
+          font-size: 0.75rem;
+          font-weight: 700;
+        }
+
         .url-value {
-          margin-left: 12px;
+          font-size: var(--api-endpoint-documentation-url-font-size, 16px);
           word-break: break-all;
-          flex: 1;
-          flex-basis: 0.000000001px;
         }
 
         .method-value {
@@ -236,6 +237,7 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
     }
     return html`
     <div class="url-area">
+      <span class="url-label">API base URI</span>
       <div class="url-value">${_apiBaseUri}</div>
     </div>`;
   }

@@ -5,8 +5,6 @@ import labelStyles from '@api-components/http-method-label/http-method-label-com
 import '@api-components/raml-aware/raml-aware.js';
 import '@advanced-rest-client/arc-marked/arc-marked.js';
 import '@polymer/iron-meta/iron-meta.js';
-import '@polymer/paper-icon-button/paper-icon-button.js';
-import '@advanced-rest-client/arc-icons/arc-icons.js';
 /**
  * `api-summary`
  *
@@ -589,19 +587,6 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
       return;
     }
     return data instanceof Array ? data[0] : data;
-  }
-
-  _copyPathClipboard() {
-    const button = this.shadowRoot.querySelector('.copy-icon');
-    const node = this.shadowRoot.querySelector('clipboard-copy');
-    if (node.copy()) {
-      button.icon = 'arc:done';
-    } else {
-      button.icon = 'arc:error';
-    }
-    setTimeout(() => {
-      button.icon = 'arc:content-copy';
-    }, 1000);
   }
   /**
    * Computes view model for endpoints list.

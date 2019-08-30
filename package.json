@@ -25,15 +25,12 @@
     "email": "arc@mulesoft.com"
   },
   "dependencies": {
-    "@advanced-rest-client/arc-icons": "^3.0.0",
     "@advanced-rest-client/arc-marked": "^1.0.2",
     "@advanced-rest-client/markdown-styles": "^3.1.0",
     "@api-components/amf-helper-mixin": "^3.1.4",
     "@api-components/http-method-label": "^3.0.0",
     "@api-components/raml-aware": "^3.0.0",
-    "@open-wc/semantic-dom-diff": "^0.13.21",
     "@polymer/iron-meta": "^3.0.0",
-    "@polymer/paper-icon-button": "^3.0.0",
     "lit-element": "^2.0.1"
   },
   "devDependencies": {

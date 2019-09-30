@@ -71,21 +71,10 @@ describe('<api-summary>', function() {
 
     it('renders description', () => {
       const node = element.shadowRoot.querySelector('arc-marked .markdown-body');
-      assert.dom.equal(
-        node,
-        `<div class="markdown-body" slot="markdown-html">
-        <p>
-          This is a description of demo API.
-        </p>
-        <p>
-          This is
-          <strong>
-            markdown
-          </strong>
-          .
-        </p>
-      </div>`
-      );
+      const content = node.innerHTML.trim();
+      assert.include(content, '<p>This is a description of demo API.</p>', 'has description');
+      assert.include(content, '<p>This is <strong>markdown</strong>.</p>', 'description is a markdown');
+      assert.include(content, '&lt;img src=\'<a href="', 'has sanitized content');
     });
 
     it('renders base uri', () => {
@@ -229,7 +218,7 @@ describe('<api-summary>', function() {
 
     it('renders all endpoints', () => {
       const nodes = element.shadowRoot.querySelectorAll('.endpoint-item');
-      assert.lengthOf(nodes, 11);
+      assert.lengthOf(nodes, 12);
     });
 
     it('renders endpoint name', () => {

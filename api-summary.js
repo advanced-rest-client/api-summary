@@ -24,7 +24,6 @@ import '@polymer/iron-meta/iron-meta.js';
  * `--api-summary-separator-color` | Color of section separator | `rgba(0, 0, 0, 0.12)`
  *
  * @customElement
- * @polymer
  * @demo demo/index.html
  * @memberof ApiElements
  * @appliesMixin AmfHelperMixin
@@ -224,7 +223,7 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
     }
     return html`
     <div role="region" class="marked-description">
-      <arc-marked .markdown="${_description}">
+      <arc-marked .markdown="${_description}" sanitize>
         <div slot="markdown-html" class="markdown-body"></div>
       </arc-marked>
     </div>`;
@@ -297,7 +296,7 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
     return html`
     <section role="region" aria-labelledby="tocLabel" class="docs-section">
       <label class="section" id="tocLabel">Terms of service</label>
-      <arc-marked .markdown="${_termsOfService}">
+      <arc-marked .markdown="${_termsOfService}" sanitize>
         <div slot="markdown-html" class="markdown-body"></div>
       </arc-marked>
     </section>`;

@@ -50,7 +50,7 @@
     "karma": "^4.3.0",
     "lint-staged": "^8.0.0",
     "sinon": "^7.4.1",
-    "web-animations-js": "^2.3.1"
+    "web-animations-js": "^2.3.2"
   },
   "scripts": {
     "test": "karma start --coverage",

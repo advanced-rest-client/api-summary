@@ -36,17 +36,10 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
       css`
         :host {
           display: block;
-          font-size: 1rem;
           color: var(--api-summary-color, inherit);
-          font-weight: var(--arc-font-body1-font-weight, initial);
-          line-height: var(--arc-font-body1-line-height, initial);
         }
 
         .api-title {
-          font-size: var(--api-summary-title-font-size, 1.5rem);
-          font-weight: var(--api-summary-title-font-weight, 200);
-          letter-spacing: var(--api-summary-title-letter-spacing);
-          line-height: var(--api-summary-title-line-height);
           margin: 12px 0;
         }
 
@@ -86,7 +79,7 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
         }
 
         .url-value {
-          font-size: var(--api-endpoint-documentation-url-font-size, 16px);
+          font-size: var(--api-endpoint-documentation-url-font-size, 1.07rem);
           word-break: break-all;
         }
 
@@ -98,7 +91,7 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
         label.section {
           font-weight: var(--arc-font-subhead-font-weight);
           line-height: var(--arc-font-subhead-line-height);
-          font-size: 18px;
+          /* font-size: 18px; */
           margin-top: 20px;
           display: block;
         }
@@ -152,8 +145,7 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
           margin-right: 8px;
           margin-bottom: 8px;
           text-decoration: none;
-          font-size: var(--api-summary-method-font-size, 1.1rem);
-          padding: var(--api-summary-method-padding, 4px 6px);
+          /* padding: var(--api-summary-method-padding, 4px 6px); */
         }
 
         .method-label:hover,
@@ -168,9 +160,8 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
           margin-bottom: 4px;
           display: inline-block;
           font-weight: 500;
-          font-size: var(--api-summary-endpoint-path-font-size, 1.5rem);
           color: var(--link-color, #0277BD);
-          margin: 12px 0;
+          margin: 4px 0;
           word-break: break-all;
         }
 
@@ -185,12 +176,12 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
         }
 
         .section.endpoints-title {
-          font-size: var(--api-summary-endpoints-font-size, 1.5rem);
           font-weight: 500;
         }
 
         .endpoint-path-name {
           word-break: break-all;
+          margin: 8px 0;
         }
       `
     ];
@@ -201,7 +192,11 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
     if (!_apiTitle) {
       return '';
     }
-    return html`<div class="api-title" role="heading" aria-level="${titleLevel}">${_apiTitle}</div>`;
+    return html`
+    <div class="api-title" role="heading" aria-level="${titleLevel}">
+    <label>API title:</label>
+    <span>${_apiTitle}</span>
+    </div>`;
   }
 
   _versionTemplate() {

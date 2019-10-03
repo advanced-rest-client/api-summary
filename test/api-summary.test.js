@@ -46,7 +46,14 @@ describe('<api-summary>', function() {
 
     it('renders api title', () => {
       const node = element.shadowRoot.querySelector('[role="heading"]');
-      assert.dom.equal(node, '<div aria-level="2" class="api-title" role="heading">API body demo</div>');
+      assert.dom.equal(node, `<div aria-level="2" class="api-title" role="heading">
+        <label>
+          API title:
+        </label>
+        <span>
+          API body demo
+        </span>
+      </div>`);
     });
 
     it('renders version', () => {

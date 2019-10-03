@@ -25,7 +25,7 @@
     "email": "arc@mulesoft.com"
   },
   "dependencies": {
-    "@advanced-rest-client/arc-marked": "^1.0.3",
+    "@advanced-rest-client/arc-marked": "^1.0.4",
     "@advanced-rest-client/markdown-styles": "^3.1.0",
     "@api-components/amf-helper-mixin": "^3.1.4",
     "@api-components/http-method-label": "^3.0.0",

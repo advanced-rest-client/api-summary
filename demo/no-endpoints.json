@@ -11,26 +11,26 @@
 {
 "@id": "amf://id#7",
 "@type": [
-"http://schema.org/WebAPI",
+"http://a.ml/vocabularies/apiContract#WebAPI",
 "http://a.ml/vocabularies/document#RootDomainElement",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "Amazon S3 REST API"
 }
 ],
-"http://a.ml/vocabularies/http#accepts": [
+"http://a.ml/vocabularies/apiContract#accepts": [
 {
 "@value": "application/json"
 }
 ],
-"http://a.ml/vocabularies/http#contentType": [
+"http://a.ml/vocabularies/apiContract#contentType": [
 {
 "@value": "application/json"
 }
 ],
-"http://schema.org/version": [
+"http://a.ml/vocabularies/core#version": [
 {
 "@value": "1"
 }
@@ -45,7 +45,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#contentType"
+"@value": "http://a.ml/vocabularies/apiContract#contentType"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -57,7 +57,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#accepts"
+"@value": "http://a.ml/vocabularies/apiContract#accepts"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -71,7 +71,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/version"
+"@value": "http://a.ml/vocabularies/core#version"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -83,7 +83,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#accepts"
+"@value": "http://a.ml/vocabularies/apiContract#accepts"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -107,7 +107,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/name"
+"@value": "http://a.ml/vocabularies/core#name"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -119,7 +119,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#contentType"
+"@value": "http://a.ml/vocabularies/apiContract#contentType"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -145,6 +145,11 @@
 ]
 }
 ]
+}
+],
+"http://a.ml/vocabularies/document#version": [
+{
+"@value": "2.0.0"
 }
 ],
 "http://a.ml/vocabularies/document#declares": [

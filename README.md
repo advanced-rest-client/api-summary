@@ -9,6 +9,10 @@
 A component that renders basic information about an API.
 It uses AMF model to render the view.
 
+## Version compatibility
+
+This version only works with AMF model version 2 (AMF parser >= 4.0.0).
+For compatibility with previous model version use `3.x.x` version of the component.
 
 ## Usage
 

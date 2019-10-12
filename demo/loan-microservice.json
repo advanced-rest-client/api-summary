@@ -11,28 +11,28 @@
 {
 "@id": "amf://id#368",
 "@type": [
-"http://schema.org/WebAPI",
+"http://a.ml/vocabularies/apiContract#WebAPI",
 "http://a.ml/vocabularies/document#RootDomainElement",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "Loan Microservice"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "Loan microservice contains set of fine grained services to handle with all the loan related informations like, update the User information, generate uinque application id, fetch the nearest branch details, vehicle make and other related information."
 }
 ],
-"http://a.ml/vocabularies/http#server": [
+"http://a.ml/vocabularies/apiContract#server": [
 {
 "@id": "amf://id#371",
 "@type": [
-"http://a.ml/vocabularies/http#Server",
+"http://a.ml/vocabularies/apiContract#Server",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://a.ml/vocabularies/http#url": [
+"http://a.ml/vocabularies/core#urlTemplate": [
 {
 "@value": "localhost:8081/api"
 }
@@ -47,7 +47,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#url"
+"@value": "http://a.ml/vocabularies/core#urlTemplate"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -75,7 +75,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#url"
+"@value": "http://a.ml/vocabularies/core#urlTemplate"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -89,7 +89,7 @@
 ]
 }
 ],
-"http://a.ml/vocabularies/http#scheme": [
+"http://a.ml/vocabularies/apiContract#scheme": [
 {
 "@value": "http"
 },
@@ -97,34 +97,34 @@
 "@value": "https"
 }
 ],
-"http://schema.org/version": [
+"http://a.ml/vocabularies/core#version": [
 {
 "@value": "version-1.0.3"
 }
 ],
-"http://schema.org/termsOfService": [
+"http://a.ml/vocabularies/core#termsOfService": [
 {
 "@value": "Terms of service"
 }
 ],
-"http://schema.org/provider": [
+"http://a.ml/vocabularies/core#provider": [
 {
 "@id": "amf://id#369",
 "@type": [
-"http://schema.org/Organization",
+"http://a.ml/vocabularies/core#Organization",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/url": [
+"http://a.ml/vocabularies/core#url": [
 {
 "@id": "http://domain.com"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "John Becker"
 }
 ],
-"http://schema.org/email": [
+"http://a.ml/vocabularies/core#email": [
 {
 "@value": "JohnBecker@cognizant.com"
 }
@@ -139,7 +139,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/email"
+"@value": "http://a.ml/vocabularies/core#email"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -151,7 +151,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/url"
+"@value": "http://a.ml/vocabularies/core#url"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -175,7 +175,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/name"
+"@value": "http://a.ml/vocabularies/core#name"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -189,19 +189,19 @@
 ]
 }
 ],
-"http://schema.org/license": [
+"http://a.ml/vocabularies/core#license": [
 {
 "@id": "amf://id#370",
 "@type": [
-"http://a.ml/vocabularies/http#License",
+"http://a.ml/vocabularies/core#License",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/url": [
+"http://a.ml/vocabularies/core#url": [
 {
 "@id": "https://www.apache.org/licenses/LICENSE-2.0.html"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "Apache 2.0"
 }
@@ -216,7 +216,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/name"
+"@value": "http://a.ml/vocabularies/core#name"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -240,7 +240,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/url"
+"@value": "http://a.ml/vocabularies/core#url"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -254,95 +254,95 @@
 ]
 }
 ],
-"http://a.ml/vocabularies/http#endpoint": [
+"http://a.ml/vocabularies/apiContract#endpoint": [
 {
 "@id": "amf://id#373",
 "@type": [
-"http://a.ml/vocabularies/http#EndPoint",
+"http://a.ml/vocabularies/apiContract#EndPoint",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://a.ml/vocabularies/http#path": [
+"http://a.ml/vocabularies/apiContract#path": [
 {
 "@value": "/branchdetail"
 }
 ],
-"http://www.w3.org/ns/hydra/core#supportedOperation": [
+"http://a.ml/vocabularies/apiContract#supportedOperation": [
 {
 "@id": "amf://id#374",
 "@type": [
-"http://www.w3.org/ns/hydra/core#Operation",
+"http://a.ml/vocabularies/apiContract#Operation",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://www.w3.org/ns/hydra/core#method": [
+"http://a.ml/vocabularies/apiContract#method": [
 {
 "@value": "get"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "fetchBranchDetailsUsingGET"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "Service to fetch the Branch Details based on the Given Zip code"
 }
 ],
-"http://a.ml/vocabularies/http#guiSummary": [
+"http://a.ml/vocabularies/apiContract#guiSummary": [
 {
 "@value": "Fetch Branch Details"
 }
 ],
-"http://a.ml/vocabularies/http#accepts": [
+"http://a.ml/vocabularies/apiContract#accepts": [
 {
 "@value": "application/json"
 }
 ],
-"http://a.ml/vocabularies/http#contentType": [
+"http://a.ml/vocabularies/core#mediaType": [
 {
 "@value": "application/json"
 }
 ],
-"http://www.w3.org/ns/hydra/core#expects": [
+"http://a.ml/vocabularies/apiContract#expects": [
 {
 "@id": "amf://id#375",
 "@type": [
-"http://a.ml/vocabularies/http#Request",
+"http://a.ml/vocabularies/apiContract#Request",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://a.ml/vocabularies/http#parameter": [
+"http://a.ml/vocabularies/apiContract#parameter": [
 {
 "@id": "amf://id#376",
 "@type": [
-"http://a.ml/vocabularies/http#Parameter",
+"http://a.ml/vocabularies/apiContract#Parameter",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "zipCode"
 }
 ],
-"http://a.ml/vocabularies/http#paramName": [
+"http://a.ml/vocabularies/apiContract#paramName": [
 {
 "@value": "zipCode"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "Input the zipcode value to get the branches available in the location"
 }
 ],
-"http://www.w3.org/ns/hydra/core#required": [
+"http://a.ml/vocabularies/apiContract#required": [
 {
 "@value": true
 }
 ],
-"http://a.ml/vocabularies/http#binding": [
+"http://a.ml/vocabularies/apiContract#binding": [
 {
 "@value": "query"
 }
 ],
-"http://a.ml/vocabularies/http#schema": [
+"http://a.ml/vocabularies/shapes#schema": [
 {
 "@id": "amf://id#377",
 "@type": [
@@ -362,7 +362,7 @@
 "@value": "schema"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "Input the zipcode value to get the branches available in the location"
 }
@@ -391,7 +391,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -439,7 +439,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#schema"
+"@value": "http://a.ml/vocabularies/shapes#schema"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -451,7 +451,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/hydra/core#required"
+"@value": "http://a.ml/vocabularies/apiContract#required"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -463,7 +463,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#paramName"
+"@value": "http://a.ml/vocabularies/apiContract#paramName"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -487,7 +487,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/name"
+"@value": "http://a.ml/vocabularies/core#name"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -499,7 +499,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -511,7 +511,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#binding"
+"@value": "http://a.ml/vocabularies/apiContract#binding"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -525,7 +525,7 @@
 ]
 }
 ],
-"http://a.ml/vocabularies/http#payload": [],
+"http://a.ml/vocabularies/apiContract#payload": [],
 "http://a.ml/vocabularies/document-source-maps#sources": [
 {
 "@id": "amf://id#375/source-map",
@@ -536,7 +536,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#parameter"
+"@value": "http://a.ml/vocabularies/apiContract#parameter"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -550,56 +550,56 @@
 ]
 }
 ],
-"http://www.w3.org/ns/hydra/core#returns": [
+"http://a.ml/vocabularies/apiContract#returns": [
 {
 "@id": "amf://id#378",
 "@type": [
-"http://a.ml/vocabularies/http#Response",
+"http://a.ml/vocabularies/apiContract#Response",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "200"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "Successfully retrieved branch details"
 }
 ],
-"http://www.w3.org/ns/hydra/core#statusCode": [
+"http://a.ml/vocabularies/apiContract#statusCode": [
 {
 "@value": "200"
 }
 ],
-"http://a.ml/vocabularies/http#header": [
+"http://a.ml/vocabularies/apiContract#header": [
 {
 "@id": "amf://id#379",
 "@type": [
-"http://a.ml/vocabularies/http#Parameter",
+"http://a.ml/vocabularies/apiContract#Parameter",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "Branch"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "The fetched branch resource"
 }
 ],
-"http://www.w3.org/ns/hydra/core#required": [
+"http://a.ml/vocabularies/apiContract#required": [
 {
 "@value": true
 }
 ],
-"http://a.ml/vocabularies/http#binding": [
+"http://a.ml/vocabularies/apiContract#binding": [
 {
 "@value": "header"
 }
 ],
-"http://a.ml/vocabularies/http#schema": [
+"http://a.ml/vocabularies/shapes#schema": [
 {
 "@id": "amf://id#380",
 "@type": [
@@ -619,7 +619,7 @@
 "@value": "schema"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "The fetched branch resource"
 }
@@ -648,7 +648,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -696,7 +696,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#schema"
+"@value": "http://a.ml/vocabularies/shapes#schema"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -720,7 +720,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -734,19 +734,19 @@
 ]
 }
 ],
-"http://a.ml/vocabularies/http#payload": [
+"http://a.ml/vocabularies/apiContract#payload": [
 {
 "@id": "amf://id#381",
 "@type": [
-"http://a.ml/vocabularies/http#Payload",
+"http://a.ml/vocabularies/apiContract#Payload",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://a.ml/vocabularies/http#mediaType": [
+"http://a.ml/vocabularies/core#mediaType": [
 {
 "@value": "application/json"
 }
 ],
-"http://a.ml/vocabularies/http#schema": [
+"http://a.ml/vocabularies/shapes#schema": [
 {
 "@id": "amf://id#219/linked_3",
 "@type": [
@@ -767,6 +767,28 @@
 }
 ]
 }
+],
+"http://a.ml/vocabularies/document-source-maps#sources": [
+{
+"@id": "amf://id#381/source-map",
+"@type": [
+"http://a.ml/vocabularies/document-source-maps#SourceMap"
+],
+"http://a.ml/vocabularies/document-source-maps#lexical": [
+{
+"http://a.ml/vocabularies/document-source-maps#element": [
+{
+"@value": "amf://id#381"
+}
+],
+"http://a.ml/vocabularies/document-source-maps#value": [
+{
+"@value": "[(47,12)-(49,13)]"
+}
+]
+}
+]
+}
 ]
 }
 ],
@@ -780,7 +802,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#header"
+"@value": "http://a.ml/vocabularies/apiContract#header"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -804,7 +826,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -820,25 +842,25 @@
 {
 "@id": "amf://id#382",
 "@type": [
-"http://a.ml/vocabularies/http#Response",
+"http://a.ml/vocabularies/apiContract#Response",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "401"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "You are not authorized to view the resource"
 }
 ],
-"http://www.w3.org/ns/hydra/core#statusCode": [
+"http://a.ml/vocabularies/apiContract#statusCode": [
 {
 "@value": "401"
 }
 ],
-"http://a.ml/vocabularies/http#payload": [],
+"http://a.ml/vocabularies/apiContract#payload": [],
 "http://a.ml/vocabularies/document-source-maps#sources": [
 {
 "@id": "amf://id#382/source-map",
@@ -849,7 +871,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -877,25 +899,25 @@
 {
 "@id": "amf://id#383",
 "@type": [
-"http://a.ml/vocabularies/http#Response",
+"http://a.ml/vocabularies/apiContract#Response",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "403"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "Accessing the resource you were trying to reach is forbidden"
 }
 ],
-"http://www.w3.org/ns/hydra/core#statusCode": [
+"http://a.ml/vocabularies/apiContract#statusCode": [
 {
 "@value": "403"
 }
 ],
-"http://a.ml/vocabularies/http#payload": [],
+"http://a.ml/vocabularies/apiContract#payload": [],
 "http://a.ml/vocabularies/document-source-maps#sources": [
 {
 "@id": "amf://id#383/source-map",
@@ -906,7 +928,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -934,25 +956,25 @@
 {
 "@id": "amf://id#384",
 "@type": [
-"http://a.ml/vocabularies/http#Response",
+"http://a.ml/vocabularies/apiContract#Response",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "404"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "The resource you were trying to reach is not found"
 }
 ],
-"http://www.w3.org/ns/hydra/core#statusCode": [
+"http://a.ml/vocabularies/apiContract#statusCode": [
 {
 "@value": "404"
 }
 ],
-"http://a.ml/vocabularies/http#payload": [],
+"http://a.ml/vocabularies/apiContract#payload": [],
 "http://a.ml/vocabularies/document-source-maps#sources": [
 {
 "@id": "amf://id#384/source-map",
@@ -963,7 +985,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -989,7 +1011,7 @@
 ]
 }
 ],
-"http://a.ml/vocabularies/http#tag": [
+"http://a.ml/vocabularies/apiContract#tag": [
 {
 "@value": "loan-application-controller"
 }
@@ -1004,7 +1026,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#tag"
+"@value": "http://a.ml/vocabularies/apiContract#tag"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -1016,7 +1038,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#guiSummary"
+"@value": "http://a.ml/vocabularies/apiContract#guiSummary"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -1028,7 +1050,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/name"
+"@value": "http://a.ml/vocabularies/core#name"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -1052,7 +1074,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -1064,7 +1086,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/hydra/core#returns"
+"@value": "http://a.ml/vocabularies/apiContract#returns"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -1104,71 +1126,71 @@
 {
 "@id": "amf://id#385",
 "@type": [
-"http://a.ml/vocabularies/http#EndPoint",
+"http://a.ml/vocabularies/apiContract#EndPoint",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://a.ml/vocabularies/http#path": [
+"http://a.ml/vocabularies/apiContract#path": [
 {
 "@value": "/loanapplication"
 }
 ],
-"http://www.w3.org/ns/hydra/core#supportedOperation": [
+"http://a.ml/vocabularies/apiContract#supportedOperation": [
 {
 "@id": "amf://id#386",
 "@type": [
-"http://www.w3.org/ns/hydra/core#Operation",
+"http://a.ml/vocabularies/apiContract#Operation",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://www.w3.org/ns/hydra/core#method": [
+"http://a.ml/vocabularies/apiContract#method": [
 {
 "@value": "post"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "saveLoanApplicationDetailsUsingPOST"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "Service to Create a Loan Applicaiton Details"
 }
 ],
-"http://a.ml/vocabularies/http#guiSummary": [
+"http://a.ml/vocabularies/apiContract#guiSummary": [
 {
 "@value": "Submit Loan Application"
 }
 ],
-"http://a.ml/vocabularies/http#accepts": [
+"http://a.ml/vocabularies/apiContract#accepts": [
 {
 "@value": "application/json"
 }
 ],
-"http://a.ml/vocabularies/http#contentType": [
+"http://a.ml/vocabularies/core#mediaType": [
 {
 "@value": "application/json"
 }
 ],
-"http://www.w3.org/ns/hydra/core#expects": [
+"http://a.ml/vocabularies/apiContract#expects": [
 {
 "@id": "amf://id#387",
 "@type": [
-"http://a.ml/vocabularies/http#Request",
+"http://a.ml/vocabularies/apiContract#Request",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://a.ml/vocabularies/http#payload": [
+"http://a.ml/vocabularies/apiContract#payload": [
 {
 "@id": "amf://id#388",
 "@type": [
-"http://a.ml/vocabularies/http#Payload",
+"http://a.ml/vocabularies/apiContract#Payload",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://a.ml/vocabularies/http#mediaType": [
+"http://a.ml/vocabularies/core#mediaType": [
 {
 "@value": "application/json"
 }
 ],
-"http://a.ml/vocabularies/http#schema": [
+"http://a.ml/vocabularies/shapes#schema": [
 {
 "@id": "amf://id#51/linked_2",
 "@type": [
@@ -1230,56 +1252,56 @@
 ]
 }
 ],
-"http://www.w3.org/ns/hydra/core#returns": [
+"http://a.ml/vocabularies/apiContract#returns": [
 {
 "@id": "amf://id#389",
 "@type": [
-"http://a.ml/vocabularies/http#Response",
+"http://a.ml/vocabularies/apiContract#Response",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "200"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "Successfully retrieved loan application"
 }
 ],
-"http://www.w3.org/ns/hydra/core#statusCode": [
+"http://a.ml/vocabularies/apiContract#statusCode": [
 {
 "@value": "200"
 }
 ],
-"http://a.ml/vocabularies/http#header": [
+"http://a.ml/vocabularies/apiContract#header": [
 {
 "@id": "amf://id#390",
 "@type": [
-"http://a.ml/vocabularies/http#Parameter",
+"http://a.ml/vocabularies/apiContract#Parameter",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "Application"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "The submitted Loan resource"
 }
 ],
-"http://www.w3.org/ns/hydra/core#required": [
+"http://a.ml/vocabularies/apiContract#required": [
 {
 "@value": true
 }
 ],
-"http://a.ml/vocabularies/http#binding": [
+"http://a.ml/vocabularies/apiContract#binding": [
 {
 "@value": "header"
 }
 ],
-"http://a.ml/vocabularies/http#schema": [
+"http://a.ml/vocabularies/shapes#schema": [
 {
 "@id": "amf://id#391",
 "@type": [
@@ -1299,7 +1321,7 @@
 "@value": "schema"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "The submitted Loan resource"
 }
@@ -1328,7 +1350,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -1376,7 +1398,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#schema"
+"@value": "http://a.ml/vocabularies/shapes#schema"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -1400,7 +1422,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -1414,19 +1436,19 @@
 ]
 }
 ],
-"http://a.ml/vocabularies/http#payload": [
+"http://a.ml/vocabularies/apiContract#payload": [
 {
 "@id": "amf://id#392",
 "@type": [
-"http://a.ml/vocabularies/http#Payload",
+"http://a.ml/vocabularies/apiContract#Payload",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://a.ml/vocabularies/http#mediaType": [
+"http://a.ml/vocabularies/core#mediaType": [
 {
 "@value": "application/json"
 }
 ],
-"http://a.ml/vocabularies/http#schema": [
+"http://a.ml/vocabularies/shapes#schema": [
 {
 "@id": "amf://id#146/linked_3",
 "@type": [
@@ -1447,6 +1469,28 @@
 }
 ]
 }
+],
+"http://a.ml/vocabularies/document-source-maps#sources": [
+{
+"@id": "amf://id#392/source-map",
+"@type": [
+"http://a.ml/vocabularies/document-source-maps#SourceMap"
+],
+"http://a.ml/vocabularies/document-source-maps#lexical": [
+{
+"http://a.ml/vocabularies/document-source-maps#element": [
+{
+"@value": "amf://id#392"
+}
+],
+"http://a.ml/vocabularies/document-source-maps#value": [
+{
+"@value": "[(89,12)-(91,13)]"
+}
+]
+}
+]
+}
 ]
 }
 ],
@@ -1460,7 +1504,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#header"
+"@value": "http://a.ml/vocabularies/apiContract#header"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -1484,7 +1528,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -1500,25 +1544,25 @@
 {
 "@id": "amf://id#393",
 "@type": [
-"http://a.ml/vocabularies/http#Response",
+"http://a.ml/vocabularies/apiContract#Response",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "201"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "Created"
 }
 ],
-"http://www.w3.org/ns/hydra/core#statusCode": [
+"http://a.ml/vocabularies/apiContract#statusCode": [
 {
 "@value": "201"
 }
 ],
-"http://a.ml/vocabularies/http#payload": [],
+"http://a.ml/vocabularies/apiContract#payload": [],
 "http://a.ml/vocabularies/document-source-maps#sources": [
 {
 "@id": "amf://id#393/source-map",
@@ -1529,7 +1573,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -1557,25 +1601,25 @@
 {
 "@id": "amf://id#394",
 "@type": [
-"http://a.ml/vocabularies/http#Response",
+"http://a.ml/vocabularies/apiContract#Response",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "401"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "You are not authorized to view the resource"
 }
 ],
-"http://www.w3.org/ns/hydra/core#statusCode": [
+"http://a.ml/vocabularies/apiContract#statusCode": [
 {
 "@value": "401"
 }
 ],
-"http://a.ml/vocabularies/http#payload": [],
+"http://a.ml/vocabularies/apiContract#payload": [],
 "http://a.ml/vocabularies/document-source-maps#sources": [
 {
 "@id": "amf://id#394/source-map",
@@ -1586,7 +1630,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -1614,25 +1658,25 @@
 {
 "@id": "amf://id#395",
 "@type": [
-"http://a.ml/vocabularies/http#Response",
+"http://a.ml/vocabularies/apiContract#Response",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "403"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "Accessing the resource you were trying to reach is forbidden"
 }
 ],
-"http://www.w3.org/ns/hydra/core#statusCode": [
+"http://a.ml/vocabularies/apiContract#statusCode": [
 {
 "@value": "403"
 }
 ],
-"http://a.ml/vocabularies/http#payload": [],
+"http://a.ml/vocabularies/apiContract#payload": [],
 "http://a.ml/vocabularies/document-source-maps#sources": [
 {
 "@id": "amf://id#395/source-map",
@@ -1643,7 +1687,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -1671,25 +1715,25 @@
 {
 "@id": "amf://id#396",
 "@type": [
-"http://a.ml/vocabularies/http#Response",
+"http://a.ml/vocabularies/apiContract#Response",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "404"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "The resource you were trying to reach is not found"
 }
 ],
-"http://www.w3.org/ns/hydra/core#statusCode": [
+"http://a.ml/vocabularies/apiContract#statusCode": [
 {
 "@value": "404"
 }
 ],
-"http://a.ml/vocabularies/http#payload": [],
+"http://a.ml/vocabularies/apiContract#payload": [],
 "http://a.ml/vocabularies/document-source-maps#sources": [
 {
 "@id": "amf://id#396/source-map",
@@ -1700,7 +1744,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -1726,7 +1770,7 @@
 ]
 }
 ],
-"http://a.ml/vocabularies/http#tag": [
+"http://a.ml/vocabularies/apiContract#tag": [
 {
 "@value": "loan-application-controller"
 }
@@ -1741,7 +1785,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#tag"
+"@value": "http://a.ml/vocabularies/apiContract#tag"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -1753,7 +1797,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#guiSummary"
+"@value": "http://a.ml/vocabularies/apiContract#guiSummary"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -1765,7 +1809,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/name"
+"@value": "http://a.ml/vocabularies/core#name"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -1789,7 +1833,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -1801,7 +1845,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/hydra/core#returns"
+"@value": "http://a.ml/vocabularies/apiContract#returns"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -1841,91 +1885,91 @@
 {
 "@id": "amf://id#397",
 "@type": [
-"http://a.ml/vocabularies/http#EndPoint",
+"http://a.ml/vocabularies/apiContract#EndPoint",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://a.ml/vocabularies/http#path": [
+"http://a.ml/vocabularies/apiContract#path": [
 {
 "@value": "/username"
 }
 ],
-"http://www.w3.org/ns/hydra/core#supportedOperation": [
+"http://a.ml/vocabularies/apiContract#supportedOperation": [
 {
 "@id": "amf://id#398",
 "@type": [
-"http://www.w3.org/ns/hydra/core#Operation",
+"http://a.ml/vocabularies/apiContract#Operation",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://www.w3.org/ns/hydra/core#method": [
+"http://a.ml/vocabularies/apiContract#method": [
 {
 "@value": "get"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "findByUserNameUsingGET"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "Service to find application id based on user name"
 }
 ],
-"http://a.ml/vocabularies/http#guiSummary": [
+"http://a.ml/vocabularies/apiContract#guiSummary": [
 {
 "@value": "Find ApplicationId"
 }
 ],
-"http://a.ml/vocabularies/http#accepts": [
+"http://a.ml/vocabularies/apiContract#accepts": [
 {
 "@value": "application/json"
 }
 ],
-"http://a.ml/vocabularies/http#contentType": [
+"http://a.ml/vocabularies/core#mediaType": [
 {
 "@value": "application/json"
 }
 ],
-"http://www.w3.org/ns/hydra/core#expects": [
+"http://a.ml/vocabularies/apiContract#expects": [
 {
 "@id": "amf://id#399",
 "@type": [
-"http://a.ml/vocabularies/http#Request",
+"http://a.ml/vocabularies/apiContract#Request",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://a.ml/vocabularies/http#parameter": [
+"http://a.ml/vocabularies/apiContract#parameter": [
 {
 "@id": "amf://id#400",
 "@type": [
-"http://a.ml/vocabularies/http#Parameter",
+"http://a.ml/vocabularies/apiContract#Parameter",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "userName"
 }
 ],
-"http://a.ml/vocabularies/http#paramName": [
+"http://a.ml/vocabularies/apiContract#paramName": [
 {
 "@value": "userName"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "Input the username to fetch the application details available for the user"
 }
 ],
-"http://www.w3.org/ns/hydra/core#required": [
+"http://a.ml/vocabularies/apiContract#required": [
 {
 "@value": true
 }
 ],
-"http://a.ml/vocabularies/http#binding": [
+"http://a.ml/vocabularies/apiContract#binding": [
 {
 "@value": "query"
 }
 ],
-"http://a.ml/vocabularies/http#schema": [
+"http://a.ml/vocabularies/shapes#schema": [
 {
 "@id": "amf://id#401",
 "@type": [
@@ -1945,7 +1989,7 @@
 "@value": "schema"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "Input the username to fetch the application details available for the user"
 }
@@ -1974,7 +2018,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2022,7 +2066,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#schema"
+"@value": "http://a.ml/vocabularies/shapes#schema"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2034,7 +2078,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/hydra/core#required"
+"@value": "http://a.ml/vocabularies/apiContract#required"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2046,7 +2090,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#paramName"
+"@value": "http://a.ml/vocabularies/apiContract#paramName"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2070,7 +2114,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/name"
+"@value": "http://a.ml/vocabularies/core#name"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2082,7 +2126,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2094,7 +2138,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#binding"
+"@value": "http://a.ml/vocabularies/apiContract#binding"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2108,7 +2152,7 @@
 ]
 }
 ],
-"http://a.ml/vocabularies/http#payload": [],
+"http://a.ml/vocabularies/apiContract#payload": [],
 "http://a.ml/vocabularies/document-source-maps#sources": [
 {
 "@id": "amf://id#399/source-map",
@@ -2119,7 +2163,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#parameter"
+"@value": "http://a.ml/vocabularies/apiContract#parameter"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2133,56 +2177,56 @@
 ]
 }
 ],
-"http://www.w3.org/ns/hydra/core#returns": [
+"http://a.ml/vocabularies/apiContract#returns": [
 {
 "@id": "amf://id#402",
 "@type": [
-"http://a.ml/vocabularies/http#Response",
+"http://a.ml/vocabularies/apiContract#Response",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "200"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "Successfully retrieved account details"
 }
 ],
-"http://www.w3.org/ns/hydra/core#statusCode": [
+"http://a.ml/vocabularies/apiContract#statusCode": [
 {
 "@value": "200"
 }
 ],
-"http://a.ml/vocabularies/http#header": [
+"http://a.ml/vocabularies/apiContract#header": [
 {
 "@id": "amf://id#403",
 "@type": [
-"http://a.ml/vocabularies/http#Parameter",
+"http://a.ml/vocabularies/apiContract#Parameter",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "ApplicationId"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "The fetched ApplicationId resource"
 }
 ],
-"http://www.w3.org/ns/hydra/core#required": [
+"http://a.ml/vocabularies/apiContract#required": [
 {
 "@value": true
 }
 ],
-"http://a.ml/vocabularies/http#binding": [
+"http://a.ml/vocabularies/apiContract#binding": [
 {
 "@value": "header"
 }
 ],
-"http://a.ml/vocabularies/http#schema": [
+"http://a.ml/vocabularies/shapes#schema": [
 {
 "@id": "amf://id#404",
 "@type": [
@@ -2202,7 +2246,7 @@
 "@value": "schema"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "The fetched ApplicationId resource"
 }
@@ -2231,7 +2275,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2279,7 +2323,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#schema"
+"@value": "http://a.ml/vocabularies/shapes#schema"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2303,7 +2347,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2317,19 +2361,19 @@
 ]
 }
 ],
-"http://a.ml/vocabularies/http#payload": [
+"http://a.ml/vocabularies/apiContract#payload": [
 {
 "@id": "amf://id#405",
 "@type": [
-"http://a.ml/vocabularies/http#Payload",
+"http://a.ml/vocabularies/apiContract#Payload",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://a.ml/vocabularies/http#mediaType": [
+"http://a.ml/vocabularies/core#mediaType": [
 {
 "@value": "application/json"
 }
 ],
-"http://a.ml/vocabularies/http#schema": [
+"http://a.ml/vocabularies/shapes#schema": [
 {
 "@id": "amf://id#406",
 "@type": [
@@ -2412,6 +2456,28 @@
 }
 ]
 }
+],
+"http://a.ml/vocabularies/document-source-maps#sources": [
+{
+"@id": "amf://id#405/source-map",
+"@type": [
+"http://a.ml/vocabularies/document-source-maps#SourceMap"
+],
+"http://a.ml/vocabularies/document-source-maps#lexical": [
+{
+"http://a.ml/vocabularies/document-source-maps#element": [
+{
+"@value": "amf://id#405"
+}
+],
+"http://a.ml/vocabularies/document-source-maps#value": [
+{
+"@value": "[(132,12)-(134,13)]"
+}
+]
+}
+]
+}
 ]
 }
 ],
@@ -2425,7 +2491,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#header"
+"@value": "http://a.ml/vocabularies/apiContract#header"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2449,7 +2515,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2465,25 +2531,25 @@
 {
 "@id": "amf://id#407",
 "@type": [
-"http://a.ml/vocabularies/http#Response",
+"http://a.ml/vocabularies/apiContract#Response",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "401"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "You are not authorized to view the resource"
 }
 ],
-"http://www.w3.org/ns/hydra/core#statusCode": [
+"http://a.ml/vocabularies/apiContract#statusCode": [
 {
 "@value": "401"
 }
 ],
-"http://a.ml/vocabularies/http#payload": [],
+"http://a.ml/vocabularies/apiContract#payload": [],
 "http://a.ml/vocabularies/document-source-maps#sources": [
 {
 "@id": "amf://id#407/source-map",
@@ -2494,7 +2560,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2522,25 +2588,25 @@
 {
 "@id": "amf://id#408",
 "@type": [
-"http://a.ml/vocabularies/http#Response",
+"http://a.ml/vocabularies/apiContract#Response",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "403"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "Accessing the resource you were trying to reach is forbidden"
 }
 ],
-"http://www.w3.org/ns/hydra/core#statusCode": [
+"http://a.ml/vocabularies/apiContract#statusCode": [
 {
 "@value": "403"
 }
 ],
-"http://a.ml/vocabularies/http#payload": [],
+"http://a.ml/vocabularies/apiContract#payload": [],
 "http://a.ml/vocabularies/document-source-maps#sources": [
 {
 "@id": "amf://id#408/source-map",
@@ -2551,7 +2617,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2579,25 +2645,25 @@
 {
 "@id": "amf://id#409",
 "@type": [
-"http://a.ml/vocabularies/http#Response",
+"http://a.ml/vocabularies/apiContract#Response",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "404"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "The resource you were trying to reach is not found"
 }
 ],
-"http://www.w3.org/ns/hydra/core#statusCode": [
+"http://a.ml/vocabularies/apiContract#statusCode": [
 {
 "@value": "404"
 }
 ],
-"http://a.ml/vocabularies/http#payload": [],
+"http://a.ml/vocabularies/apiContract#payload": [],
 "http://a.ml/vocabularies/document-source-maps#sources": [
 {
 "@id": "amf://id#409/source-map",
@@ -2608,7 +2674,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2634,7 +2700,7 @@
 ]
 }
 ],
-"http://a.ml/vocabularies/http#tag": [
+"http://a.ml/vocabularies/apiContract#tag": [
 {
 "@value": "loan-application-controller"
 }
@@ -2649,7 +2715,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#tag"
+"@value": "http://a.ml/vocabularies/apiContract#tag"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2661,7 +2727,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#guiSummary"
+"@value": "http://a.ml/vocabularies/apiContract#guiSummary"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2673,7 +2739,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/name"
+"@value": "http://a.ml/vocabularies/core#name"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2697,7 +2763,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2709,7 +2775,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/hydra/core#returns"
+"@value": "http://a.ml/vocabularies/apiContract#returns"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2749,91 +2815,91 @@
 {
 "@id": "amf://id#410",
 "@type": [
-"http://a.ml/vocabularies/http#EndPoint",
+"http://a.ml/vocabularies/apiContract#EndPoint",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://a.ml/vocabularies/http#path": [
+"http://a.ml/vocabularies/apiContract#path": [
 {
 "@value": "/vehicledetail"
 }
 ],
-"http://www.w3.org/ns/hydra/core#supportedOperation": [
+"http://a.ml/vocabularies/apiContract#supportedOperation": [
 {
 "@id": "amf://id#411",
 "@type": [
-"http://www.w3.org/ns/hydra/core#Operation",
+"http://a.ml/vocabularies/apiContract#Operation",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://www.w3.org/ns/hydra/core#method": [
+"http://a.ml/vocabularies/apiContract#method": [
 {
 "@value": "get"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "findByVehicleModelUsingGET"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "Service to find the vehicle model based on vehicle make"
 }
 ],
-"http://a.ml/vocabularies/http#guiSummary": [
+"http://a.ml/vocabularies/apiContract#guiSummary": [
 {
 "@value": "Find Vehicle Details"
 }
 ],
-"http://a.ml/vocabularies/http#accepts": [
+"http://a.ml/vocabularies/apiContract#accepts": [
 {
 "@value": "application/json"
 }
 ],
-"http://a.ml/vocabularies/http#contentType": [
+"http://a.ml/vocabularies/core#mediaType": [
 {
 "@value": "application/json"
 }
 ],
-"http://www.w3.org/ns/hydra/core#expects": [
+"http://a.ml/vocabularies/apiContract#expects": [
 {
 "@id": "amf://id#412",
 "@type": [
-"http://a.ml/vocabularies/http#Request",
+"http://a.ml/vocabularies/apiContract#Request",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://a.ml/vocabularies/http#parameter": [
+"http://a.ml/vocabularies/apiContract#parameter": [
 {
 "@id": "amf://id#413",
 "@type": [
-"http://a.ml/vocabularies/http#Parameter",
+"http://a.ml/vocabularies/apiContract#Parameter",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "vehicleMake"
 }
 ],
-"http://a.ml/vocabularies/http#paramName": [
+"http://a.ml/vocabularies/apiContract#paramName": [
 {
 "@value": "vehicleMake"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "Input the vehiclemake value to retrieve the vehicle details"
 }
 ],
-"http://www.w3.org/ns/hydra/core#required": [
+"http://a.ml/vocabularies/apiContract#required": [
 {
 "@value": true
 }
 ],
-"http://a.ml/vocabularies/http#binding": [
+"http://a.ml/vocabularies/apiContract#binding": [
 {
 "@value": "query"
 }
 ],
-"http://a.ml/vocabularies/http#schema": [
+"http://a.ml/vocabularies/shapes#schema": [
 {
 "@id": "amf://id#414",
 "@type": [
@@ -2853,7 +2919,7 @@
 "@value": "schema"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "Input the vehiclemake value to retrieve the vehicle details"
 }
@@ -2882,7 +2948,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2930,7 +2996,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#schema"
+"@value": "http://a.ml/vocabularies/shapes#schema"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2942,7 +3008,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/hydra/core#required"
+"@value": "http://a.ml/vocabularies/apiContract#required"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2954,7 +3020,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#paramName"
+"@value": "http://a.ml/vocabularies/apiContract#paramName"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2978,7 +3044,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/name"
+"@value": "http://a.ml/vocabularies/core#name"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -2990,7 +3056,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3002,7 +3068,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#binding"
+"@value": "http://a.ml/vocabularies/apiContract#binding"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3016,7 +3082,7 @@
 ]
 }
 ],
-"http://a.ml/vocabularies/http#payload": [],
+"http://a.ml/vocabularies/apiContract#payload": [],
 "http://a.ml/vocabularies/document-source-maps#sources": [
 {
 "@id": "amf://id#412/source-map",
@@ -3027,7 +3093,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#parameter"
+"@value": "http://a.ml/vocabularies/apiContract#parameter"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3041,56 +3107,56 @@
 ]
 }
 ],
-"http://www.w3.org/ns/hydra/core#returns": [
+"http://a.ml/vocabularies/apiContract#returns": [
 {
 "@id": "amf://id#415",
 "@type": [
-"http://a.ml/vocabularies/http#Response",
+"http://a.ml/vocabularies/apiContract#Response",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "200"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "Successfully retrieved vechicle details"
 }
 ],
-"http://www.w3.org/ns/hydra/core#statusCode": [
+"http://a.ml/vocabularies/apiContract#statusCode": [
 {
 "@value": "200"
 }
 ],
-"http://a.ml/vocabularies/http#header": [
+"http://a.ml/vocabularies/apiContract#header": [
 {
 "@id": "amf://id#416",
 "@type": [
-"http://a.ml/vocabularies/http#Parameter",
+"http://a.ml/vocabularies/apiContract#Parameter",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "VehicleDetail"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "The fetched VehicleDetail resource"
 }
 ],
-"http://www.w3.org/ns/hydra/core#required": [
+"http://a.ml/vocabularies/apiContract#required": [
 {
 "@value": true
 }
 ],
-"http://a.ml/vocabularies/http#binding": [
+"http://a.ml/vocabularies/apiContract#binding": [
 {
 "@value": "header"
 }
 ],
-"http://a.ml/vocabularies/http#schema": [
+"http://a.ml/vocabularies/shapes#schema": [
 {
 "@id": "amf://id#417",
 "@type": [
@@ -3110,7 +3176,7 @@
 "@value": "schema"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "The fetched VehicleDetail resource"
 }
@@ -3139,7 +3205,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3187,7 +3253,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#schema"
+"@value": "http://a.ml/vocabularies/shapes#schema"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3211,7 +3277,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3225,19 +3291,19 @@
 ]
 }
 ],
-"http://a.ml/vocabularies/http#payload": [
+"http://a.ml/vocabularies/apiContract#payload": [
 {
 "@id": "amf://id#418",
 "@type": [
-"http://a.ml/vocabularies/http#Payload",
+"http://a.ml/vocabularies/apiContract#Payload",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://a.ml/vocabularies/http#mediaType": [
+"http://a.ml/vocabularies/core#mediaType": [
 {
 "@value": "application/json"
 }
 ],
-"http://a.ml/vocabularies/http#schema": [
+"http://a.ml/vocabularies/shapes#schema": [
 {
 "@id": "amf://id#419",
 "@type": [
@@ -3325,6 +3391,28 @@
 }
 ]
 }
+],
+"http://a.ml/vocabularies/document-source-maps#sources": [
+{
+"@id": "amf://id#418/source-map",
+"@type": [
+"http://a.ml/vocabularies/document-source-maps#SourceMap"
+],
+"http://a.ml/vocabularies/document-source-maps#lexical": [
+{
+"http://a.ml/vocabularies/document-source-maps#element": [
+{
+"@value": "amf://id#418"
+}
+],
+"http://a.ml/vocabularies/document-source-maps#value": [
+{
+"@value": "[(172,12)-(177,13)]"
+}
+]
+}
+]
+}
 ]
 }
 ],
@@ -3338,7 +3426,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#header"
+"@value": "http://a.ml/vocabularies/apiContract#header"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3362,7 +3450,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3378,25 +3466,25 @@
 {
 "@id": "amf://id#420",
 "@type": [
-"http://a.ml/vocabularies/http#Response",
+"http://a.ml/vocabularies/apiContract#Response",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "401"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "You are not authorized to view the resource"
 }
 ],
-"http://www.w3.org/ns/hydra/core#statusCode": [
+"http://a.ml/vocabularies/apiContract#statusCode": [
 {
 "@value": "401"
 }
 ],
-"http://a.ml/vocabularies/http#payload": [],
+"http://a.ml/vocabularies/apiContract#payload": [],
 "http://a.ml/vocabularies/document-source-maps#sources": [
 {
 "@id": "amf://id#420/source-map",
@@ -3407,7 +3495,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3435,25 +3523,25 @@
 {
 "@id": "amf://id#421",
 "@type": [
-"http://a.ml/vocabularies/http#Response",
+"http://a.ml/vocabularies/apiContract#Response",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "403"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "Accessing the resource you were trying to reach is forbidden"
 }
 ],
-"http://www.w3.org/ns/hydra/core#statusCode": [
+"http://a.ml/vocabularies/apiContract#statusCode": [
 {
 "@value": "403"
 }
 ],
-"http://a.ml/vocabularies/http#payload": [],
+"http://a.ml/vocabularies/apiContract#payload": [],
 "http://a.ml/vocabularies/document-source-maps#sources": [
 {
 "@id": "amf://id#421/source-map",
@@ -3464,7 +3552,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3492,25 +3580,25 @@
 {
 "@id": "amf://id#422",
 "@type": [
-"http://a.ml/vocabularies/http#Response",
+"http://a.ml/vocabularies/apiContract#Response",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "404"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "The resource you were trying to reach is not found"
 }
 ],
-"http://www.w3.org/ns/hydra/core#statusCode": [
+"http://a.ml/vocabularies/apiContract#statusCode": [
 {
 "@value": "404"
 }
 ],
-"http://a.ml/vocabularies/http#payload": [],
+"http://a.ml/vocabularies/apiContract#payload": [],
 "http://a.ml/vocabularies/document-source-maps#sources": [
 {
 "@id": "amf://id#422/source-map",
@@ -3521,7 +3609,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3547,7 +3635,7 @@
 ]
 }
 ],
-"http://a.ml/vocabularies/http#tag": [
+"http://a.ml/vocabularies/apiContract#tag": [
 {
 "@value": "loan-application-controller"
 }
@@ -3562,7 +3650,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#tag"
+"@value": "http://a.ml/vocabularies/apiContract#tag"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3574,7 +3662,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#guiSummary"
+"@value": "http://a.ml/vocabularies/apiContract#guiSummary"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3586,7 +3674,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/name"
+"@value": "http://a.ml/vocabularies/core#name"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3610,7 +3698,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3622,7 +3710,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/hydra/core#returns"
+"@value": "http://a.ml/vocabularies/apiContract#returns"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3660,19 +3748,19 @@
 ]
 }
 ],
-"http://a.ml/vocabularies/http#tag": [
+"http://a.ml/vocabularies/apiContract#tag": [
 {
 "@id": "amf://id#372",
 "@type": [
-"http://a.ml/vocabularies/http#Tag",
+"http://a.ml/vocabularies/apiContract#Tag",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "loan-application-controller"
 }
 ],
-"http://schema.org/description": [
+"http://a.ml/vocabularies/core#description": [
 {
 "@value": "Loan Application Controller"
 }
@@ -3687,7 +3775,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3711,7 +3799,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/name"
+"@value": "http://a.ml/vocabularies/core#name"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3749,7 +3837,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#tag"
+"@value": "http://a.ml/vocabularies/apiContract#tag"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3761,7 +3849,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/license"
+"@value": "http://a.ml/vocabularies/core#license"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3773,7 +3861,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/termsOfService"
+"@value": "http://a.ml/vocabularies/core#termsOfService"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3785,7 +3873,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#scheme"
+"@value": "http://a.ml/vocabularies/apiContract#scheme"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3797,7 +3885,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/name"
+"@value": "http://a.ml/vocabularies/core#name"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3821,7 +3909,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/description"
+"@value": "http://a.ml/vocabularies/core#description"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3833,7 +3921,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/version"
+"@value": "http://a.ml/vocabularies/core#version"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3845,7 +3933,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://schema.org/provider"
+"@value": "http://a.ml/vocabularies/core#provider"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3857,7 +3945,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://a.ml/vocabularies/http#endpoint"
+"@value": "http://a.ml/vocabularies/apiContract#endpoint"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -3869,6 +3957,11 @@
 ]
 }
 ]
+}
+],
+"http://a.ml/vocabularies/document#version": [
+{
+"@value": "2.0.0"
 }
 ],
 "http://a.ml/vocabularies/document#declares": [
@@ -5805,11 +5898,11 @@
 "@value": "Vehicle"
 }
 ],
-"http://a.ml/vocabularies/document#examples": [
+"http://a.ml/vocabularies/apiContract#examples": [
 {
 "@id": "amf://id#2",
 "@type": [
-"http://a.ml/vocabularies/document#Example",
+"http://a.ml/vocabularies/apiContract#Example",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
 "http://a.ml/vocabularies/document#strict": [
@@ -5843,7 +5936,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_2"
 }
@@ -5890,7 +5983,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_3"
 }
@@ -5937,7 +6030,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_4"
 }
@@ -5984,7 +6077,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_5"
 }
@@ -6031,7 +6124,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_6"
 }
@@ -6078,7 +6171,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_7"
 }
@@ -6125,7 +6218,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_8"
 }
@@ -6172,7 +6265,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_9"
 }
@@ -6219,7 +6312,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_10"
 }
@@ -6266,7 +6359,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_11"
 }
@@ -6313,7 +6406,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_12"
 }
@@ -6360,7 +6453,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_13"
 }
@@ -6407,7 +6500,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_14"
 }
@@ -6454,7 +6547,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_15"
 }
@@ -6501,7 +6594,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_16"
 }
@@ -6548,7 +6641,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_17"
 }
@@ -6577,7 +6670,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_1"
 }
@@ -6798,7 +6891,7 @@
 ]
 }
 ],
-"http://www.w3.org/ns/shacl#raw": [
+"http://a.ml/vocabularies/document#raw": [
 {
 "@value": "{\n        \"zipCode\" : \"zipCode\",\n        \"city\" : \"city\",\n        \"sellerName\" : \"sellerName\",\n        \"sellerAddress\" : \"sellerAddress\",\n        \"vehicleMake\" : \"vehicleMake\",\n        \"transactionType\" : \"transactionType\",\n        \"estimatedValue\" : 7,\n        \"vehicleYear\" : 1,\n        \"street\" : \"street\",\n        \"approxMileage\" : \"approxMileage\",\n        \"vehicleModel\" : \"vehicleModel\",\n        \"vehIdentNo\" : \"vehIdentNo\",\n        \"regState\" : \"regState\",\n        \"state\" : \"state\",\n        \"vehicleId\" : 1,\n        \"vehicleType\" : \"vehicleType\"\n      }"
 }
@@ -6827,7 +6920,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/shacl#raw"
+"@value": "http://a.ml/vocabularies/document#raw"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -8421,11 +8514,11 @@
 "@value": "Branch"
 }
 ],
-"http://a.ml/vocabularies/document#examples": [
+"http://a.ml/vocabularies/apiContract#examples": [
 {
 "@id": "amf://id#220",
 "@type": [
-"http://a.ml/vocabularies/document#Example",
+"http://a.ml/vocabularies/apiContract#Example",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
 "http://a.ml/vocabularies/document#strict": [
@@ -8459,7 +8552,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_2"
 }
@@ -8506,7 +8599,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_3"
 }
@@ -8553,7 +8646,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_4"
 }
@@ -8600,7 +8693,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_5"
 }
@@ -8647,7 +8740,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_6"
 }
@@ -8694,7 +8787,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_7"
 }
@@ -8741,7 +8834,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_8"
 }
@@ -8788,7 +8881,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_9"
 }
@@ -8835,7 +8928,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_10"
 }
@@ -8864,7 +8957,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_1"
 }
@@ -9001,7 +9094,7 @@
 ]
 }
 ],
-"http://www.w3.org/ns/shacl#raw": [
+"http://a.ml/vocabularies/document#raw": [
 {
 "@value": "{\n        \"apartmentNo\" : \"apartmentNo\",\n        \"branchId\" : 0,\n        \"zipCode\" : \"zipCode\",\n        \"city\" : \"city\",\n        \"street\" : \"street\",\n        \"branchName\" : \"branchName\",\n        \"contactPerson\" : \"contactPerson\",\n        \"state\" : \"state\",\n        \"phoneNo\" : \"phoneNo\"\n      }"
 }
@@ -9030,7 +9123,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/shacl#raw"
+"@value": "http://a.ml/vocabularies/document#raw"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -13087,11 +13180,11 @@
 "@value": "User"
 }
 ],
-"http://a.ml/vocabularies/document#examples": [
+"http://a.ml/vocabularies/apiContract#examples": [
 {
 "@id": "amf://id#262",
 "@type": [
-"http://a.ml/vocabularies/document#Example",
+"http://a.ml/vocabularies/apiContract#Example",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
 "http://a.ml/vocabularies/document#strict": [
@@ -13125,7 +13218,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_2"
 }
@@ -13172,7 +13265,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_3"
 }
@@ -13219,7 +13312,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_4"
 }
@@ -13266,7 +13359,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_5"
 }
@@ -13313,7 +13406,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_6"
 }
@@ -13360,7 +13453,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_7"
 }
@@ -13407,7 +13500,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#boolean"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_8"
 }
@@ -13454,7 +13547,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_9"
 }
@@ -13501,7 +13594,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_10"
 }
@@ -13548,7 +13641,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_11"
 }
@@ -13595,7 +13688,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_12"
 }
@@ -13642,7 +13735,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_13"
 }
@@ -13689,7 +13782,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_14"
 }
@@ -13736,7 +13829,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_15"
 }
@@ -13783,7 +13876,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_16"
 }
@@ -13830,7 +13923,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_17"
 }
@@ -13877,7 +13970,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_18"
 }
@@ -13924,7 +14017,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_19"
 }
@@ -13971,7 +14064,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#boolean"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_20"
 }
@@ -14018,7 +14111,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_21"
 }
@@ -14065,7 +14158,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_22"
 }
@@ -14112,7 +14205,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_23"
 }
@@ -14159,7 +14252,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_24"
 }
@@ -14206,7 +14299,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_25"
 }
@@ -14253,7 +14346,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#boolean"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_26"
 }
@@ -14300,7 +14393,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_27"
 }
@@ -14329,7 +14422,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_1"
 }
@@ -14670,7 +14763,7 @@
 ]
 }
 ],
-"http://www.w3.org/ns/shacl#raw": [
+"http://a.ml/vocabularies/document#raw": [
 {
 "@value": "{\n        \"apartmentNo\" : \"apartmentNo\",\n        \"lastName\" : \"lastName\",\n        \"zipCode\" : \"zipCode\",\n        \"annualIncome\" : 5,\n        \"housingStatus\" : \"housingStatus\",\n        \"city\" : \"city\",\n        \"permanentResidence\" : true,\n        \"suffix\" : \"suffix\",\n        \"phoneNo\" : 9,\n        \"ssn\" : 3,\n        \"uid\" : 2,\n        \"yearsAtCurrAdd\" : 4,\n        \"monthlyPayment\" : 2,\n        \"street\" : \"street\",\n        \"state\" : \"state\",\n        \"addTypePrimary\" : \"addTypePrimary\",\n        \"email\" : \"email\",\n        \"initial\" : \"initial\",\n        \"citizenOf\" : true,\n        \"dateOfBirth\" : \"2000-01-23T04:56:07.000+00:00\",\n        \"userName\" : \"userName\",\n        \"otherIncome\" : \"otherIncome\",\n        \"firstName\" : \"firstName\",\n        \"addTypePrevious\" : \"addTypePrevious\",\n        \"anyPoliticalRelationship\" : true,\n        \"monthsAtCurrAdd\" : 7\n      }"
 }
@@ -14699,7 +14792,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/shacl#raw"
+"@value": "http://a.ml/vocabularies/document#raw"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -16897,11 +16990,11 @@
 "@value": "Vehicle"
 }
 ],
-"http://a.ml/vocabularies/document#examples": [
+"http://a.ml/vocabularies/apiContract#examples": [
 {
 "@id": "amf://id#2",
 "@type": [
-"http://a.ml/vocabularies/document#Example",
+"http://a.ml/vocabularies/apiContract#Example",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
 "http://a.ml/vocabularies/document#strict": [
@@ -16935,7 +17028,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_2"
 }
@@ -16982,7 +17075,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_3"
 }
@@ -17029,7 +17122,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_4"
 }
@@ -17076,7 +17169,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_5"
 }
@@ -17123,7 +17216,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_6"
 }
@@ -17170,7 +17263,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_7"
 }
@@ -17217,7 +17310,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_8"
 }
@@ -17264,7 +17357,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_9"
 }
@@ -17311,7 +17404,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_10"
 }
@@ -17358,7 +17451,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_11"
 }
@@ -17405,7 +17498,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_12"
 }
@@ -17452,7 +17545,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_13"
 }
@@ -17499,7 +17592,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_14"
 }
@@ -17546,7 +17639,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_15"
 }
@@ -17593,7 +17686,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_16"
 }
@@ -17640,7 +17733,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_17"
 }
@@ -17669,7 +17762,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_1"
 }
@@ -17890,7 +17983,7 @@
 ]
 }
 ],
-"http://www.w3.org/ns/shacl#raw": [
+"http://a.ml/vocabularies/document#raw": [
 {
 "@value": "{\n        \"zipCode\" : \"zipCode\",\n        \"city\" : \"city\",\n        \"sellerName\" : \"sellerName\",\n        \"sellerAddress\" : \"sellerAddress\",\n        \"vehicleMake\" : \"vehicleMake\",\n        \"transactionType\" : \"transactionType\",\n        \"estimatedValue\" : 7,\n        \"vehicleYear\" : 1,\n        \"street\" : \"street\",\n        \"approxMileage\" : \"approxMileage\",\n        \"vehicleModel\" : \"vehicleModel\",\n        \"vehIdentNo\" : \"vehIdentNo\",\n        \"regState\" : \"regState\",\n        \"state\" : \"state\",\n        \"vehicleId\" : 1,\n        \"vehicleType\" : \"vehicleType\"\n      }"
 }
@@ -17919,7 +18012,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/shacl#raw"
+"@value": "http://a.ml/vocabularies/document#raw"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -18065,11 +18158,11 @@
 "@value": "Application"
 }
 ],
-"http://a.ml/vocabularies/document#examples": [
+"http://a.ml/vocabularies/apiContract#examples": [
 {
 "@id": "amf://id#147",
 "@type": [
-"http://a.ml/vocabularies/document#Example",
+"http://a.ml/vocabularies/apiContract#Example",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
 "http://a.ml/vocabularies/document#strict": [
@@ -18103,7 +18196,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_2"
 }
@@ -18150,7 +18243,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_3"
 }
@@ -18197,7 +18290,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_4"
 }
@@ -18244,7 +18337,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_5"
 }
@@ -18291,7 +18384,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_6"
 }
@@ -18346,7 +18439,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_8"
 }
@@ -18393,7 +18486,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_9"
 }
@@ -18440,7 +18533,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_10"
 }
@@ -18487,7 +18580,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_11"
 }
@@ -18534,7 +18627,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_12"
 }
@@ -18581,7 +18674,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_13"
 }
@@ -18628,7 +18721,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_14"
 }
@@ -18675,7 +18768,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_15"
 }
@@ -18722,7 +18815,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_16"
 }
@@ -18751,7 +18844,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_7"
 }
@@ -18914,7 +19007,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_18"
 }
@@ -18961,7 +19054,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_19"
 }
@@ -19008,7 +19101,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_20"
 }
@@ -19055,7 +19148,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_21"
 }
@@ -19102,7 +19195,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_22"
 }
@@ -19149,7 +19242,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_23"
 }
@@ -19196,7 +19289,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_24"
 }
@@ -19243,7 +19336,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_25"
 }
@@ -19290,7 +19383,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_26"
 }
@@ -19337,7 +19430,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_27"
 }
@@ -19384,7 +19477,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_28"
 }
@@ -19431,7 +19524,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_29"
 }
@@ -19478,7 +19571,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_30"
 }
@@ -19525,7 +19618,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_31"
 }
@@ -19572,7 +19665,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_32"
 }
@@ -19619,7 +19712,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_33"
 }
@@ -19648,7 +19741,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_17"
 }
@@ -19887,7 +19980,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_34"
 }
@@ -19934,7 +20027,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_35"
 }
@@ -19981,7 +20074,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_36"
 }
@@ -20028,7 +20121,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_37"
 }
@@ -20075,7 +20168,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_38"
 }
@@ -20130,7 +20223,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_40"
 }
@@ -20177,7 +20270,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_41"
 }
@@ -20224,7 +20317,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_42"
 }
@@ -20271,7 +20364,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_43"
 }
@@ -20318,7 +20411,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_44"
 }
@@ -20365,7 +20458,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_45"
 }
@@ -20412,7 +20505,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#boolean"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_46"
 }
@@ -20459,7 +20552,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_47"
 }
@@ -20506,7 +20599,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_48"
 }
@@ -20553,7 +20646,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_49"
 }
@@ -20600,7 +20693,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_50"
 }
@@ -20647,7 +20740,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_51"
 }
@@ -20694,7 +20787,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_52"
 }
@@ -20741,7 +20834,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_53"
 }
@@ -20788,7 +20881,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_54"
 }
@@ -20835,7 +20928,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_55"
 }
@@ -20882,7 +20975,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_56"
 }
@@ -20929,7 +21022,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_57"
 }
@@ -20976,7 +21069,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#boolean"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_58"
 }
@@ -21023,7 +21116,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_59"
 }
@@ -21070,7 +21163,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_60"
 }
@@ -21117,7 +21210,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_61"
 }
@@ -21164,7 +21257,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_62"
 }
@@ -21211,7 +21304,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_63"
 }
@@ -21258,7 +21351,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#boolean"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_64"
 }
@@ -21305,7 +21398,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_65"
 }
@@ -21334,7 +21427,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_39"
 }
@@ -21675,7 +21768,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_1"
 }
@@ -21860,7 +21953,7 @@
 ]
 }
 ],
-"http://www.w3.org/ns/shacl#raw": [
+"http://a.ml/vocabularies/document#raw": [
 {
 "@value": "{\n        \"pendingWith\" : \"pendingWith\",\n        \"requestedAmt\" : 1,\n        \"applicationState\" : \"applicationState\",\n        \"ownerShip\" : \"ownerShip\",\n        \"userName\" : \"userName\",\n        \"branch\" : {\n          \"apartmentNo\" : \"apartmentNo\",\n          \"branchId\" : 0,\n          \"zipCode\" : \"zipCode\",\n          \"city\" : \"city\",\n          \"street\" : \"street\",\n          \"branchName\" : \"branchName\",\n          \"contactPerson\" : \"contactPerson\",\n          \"state\" : \"state\",\n          \"phoneNo\" : \"phoneNo\"\n        },\n        \"vehicle\" : {\n          \"zipCode\" : \"zipCode\",\n          \"city\" : \"city\",\n          \"sellerName\" : \"sellerName\",\n          \"sellerAddress\" : \"sellerAddress\",\n          \"vehicleMake\" : \"vehicleMake\",\n          \"transactionType\" : \"transactionType\",\n          \"estimatedValue\" : 7,\n          \"vehicleYear\" : 1,\n          \"street\" : \"street\",\n          \"approxMileage\" : \"approxMileage\",\n          \"vehicleModel\" : \"vehicleModel\",\n          \"vehIdentNo\" : \"vehIdentNo\",\n          \"regState\" : \"regState\",\n          \"state\" : \"state\",\n          \"vehicleId\" : 1,\n          \"vehicleType\" : \"vehicleType\"\n        },\n        \"loanYearPeriod\" : 6,\n        \"uid\" : 5,\n        \"loanTerm\" : 0,\n        \"applicationStatus\" : \"applicationStatus\",\n        \"applicationId\" : \"applicationId\",\n        \"user\" : {\n          \"apartmentNo\" : \"apartmentNo\",\n          \"lastName\" : \"lastName\",\n          \"zipCode\" : \"zipCode\",\n          \"annualIncome\" : 5,\n          \"housingStatus\" : \"housingStatus\",\n          \"city\" : \"city\",\n          \"permanentResidence\" : true,\n          \"suffix\" : \"suffix\",\n          \"phoneNo\" : 9,\n          \"ssn\" : 3,\n          \"uid\" : 2,\n          \"yearsAtCurrAdd\" : 4,\n          \"monthlyPayment\" : 2,\n          \"street\" : \"street\",\n          \"state\" : \"state\",\n          \"addTypePrimary\" : \"addTypePrimary\",\n          \"email\" : \"email\",\n          \"initial\" : \"initial\",\n          \"citizenOf\" : true,\n          \"dateOfBirth\" : \"2000-01-23T04:56:07.000+00:00\",\n          \"userName\" : \"userName\",\n          \"otherIncome\" : \"otherIncome\",\n          \"firstName\" : \"firstName\",\n          \"addTypePrevious\" : \"addTypePrevious\",\n          \"anyPoliticalRelationship\" : true,\n          \"monthsAtCurrAdd\" : 7\n        }\n      }"
 }
@@ -21889,7 +21982,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/shacl#raw"
+"@value": "http://a.ml/vocabularies/document#raw"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -25182,11 +25275,11 @@
 "@value": "User"
 }
 ],
-"http://a.ml/vocabularies/document#examples": [
+"http://a.ml/vocabularies/apiContract#examples": [
 {
 "@id": "amf://id#262",
 "@type": [
-"http://a.ml/vocabularies/document#Example",
+"http://a.ml/vocabularies/apiContract#Example",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
 "http://a.ml/vocabularies/document#strict": [
@@ -25220,7 +25313,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_2"
 }
@@ -25267,7 +25360,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_3"
 }
@@ -25314,7 +25407,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_4"
 }
@@ -25361,7 +25454,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_5"
 }
@@ -25408,7 +25501,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_6"
 }
@@ -25455,7 +25548,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_7"
 }
@@ -25502,7 +25595,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#boolean"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_8"
 }
@@ -25549,7 +25642,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_9"
 }
@@ -25596,7 +25689,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_10"
 }
@@ -25643,7 +25736,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_11"
 }
@@ -25690,7 +25783,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_12"
 }
@@ -25737,7 +25830,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_13"
 }
@@ -25784,7 +25877,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_14"
 }
@@ -25831,7 +25924,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_15"
 }
@@ -25878,7 +25971,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_16"
 }
@@ -25925,7 +26018,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_17"
 }
@@ -25972,7 +26065,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_18"
 }
@@ -26019,7 +26112,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_19"
 }
@@ -26066,7 +26159,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#boolean"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_20"
 }
@@ -26113,7 +26206,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_21"
 }
@@ -26160,7 +26253,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_22"
 }
@@ -26207,7 +26300,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_23"
 }
@@ -26254,7 +26347,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_24"
 }
@@ -26301,7 +26394,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_25"
 }
@@ -26348,7 +26441,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#boolean"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_26"
 }
@@ -26395,7 +26488,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_27"
 }
@@ -26424,7 +26517,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_1"
 }
@@ -26765,7 +26858,7 @@
 ]
 }
 ],
-"http://www.w3.org/ns/shacl#raw": [
+"http://a.ml/vocabularies/document#raw": [
 {
 "@value": "{\n        \"apartmentNo\" : \"apartmentNo\",\n        \"lastName\" : \"lastName\",\n        \"zipCode\" : \"zipCode\",\n        \"annualIncome\" : 5,\n        \"housingStatus\" : \"housingStatus\",\n        \"city\" : \"city\",\n        \"permanentResidence\" : true,\n        \"suffix\" : \"suffix\",\n        \"phoneNo\" : 9,\n        \"ssn\" : 3,\n        \"uid\" : 2,\n        \"yearsAtCurrAdd\" : 4,\n        \"monthlyPayment\" : 2,\n        \"street\" : \"street\",\n        \"state\" : \"state\",\n        \"addTypePrimary\" : \"addTypePrimary\",\n        \"email\" : \"email\",\n        \"initial\" : \"initial\",\n        \"citizenOf\" : true,\n        \"dateOfBirth\" : \"2000-01-23T04:56:07.000+00:00\",\n        \"userName\" : \"userName\",\n        \"otherIncome\" : \"otherIncome\",\n        \"firstName\" : \"firstName\",\n        \"addTypePrevious\" : \"addTypePrevious\",\n        \"anyPoliticalRelationship\" : true,\n        \"monthsAtCurrAdd\" : 7\n      }"
 }
@@ -26794,7 +26887,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/shacl#raw"
+"@value": "http://a.ml/vocabularies/document#raw"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -26940,11 +27033,11 @@
 "@value": "LoanApplication"
 }
 ],
-"http://a.ml/vocabularies/document#examples": [
+"http://a.ml/vocabularies/apiContract#examples": [
 {
 "@id": "amf://id#52",
 "@type": [
-"http://a.ml/vocabularies/document#Example",
+"http://a.ml/vocabularies/apiContract#Example",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
 "http://a.ml/vocabularies/document#strict": [
@@ -26986,7 +27079,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_3"
 }
@@ -27033,7 +27126,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_4"
 }
@@ -27080,7 +27173,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_5"
 }
@@ -27127,7 +27220,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_6"
 }
@@ -27174,7 +27267,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_7"
 }
@@ -27229,7 +27322,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_9"
 }
@@ -27276,7 +27369,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_10"
 }
@@ -27323,7 +27416,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_11"
 }
@@ -27370,7 +27463,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_12"
 }
@@ -27417,7 +27510,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_13"
 }
@@ -27464,7 +27557,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_14"
 }
@@ -27511,7 +27604,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_15"
 }
@@ -27558,7 +27651,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_16"
 }
@@ -27605,7 +27698,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_17"
 }
@@ -27634,7 +27727,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_8"
 }
@@ -27797,7 +27890,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_19"
 }
@@ -27844,7 +27937,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_20"
 }
@@ -27891,7 +27984,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_21"
 }
@@ -27938,7 +28031,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_22"
 }
@@ -27985,7 +28078,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_23"
 }
@@ -28032,7 +28125,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_24"
 }
@@ -28079,7 +28172,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_25"
 }
@@ -28126,7 +28219,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_26"
 }
@@ -28173,7 +28266,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_27"
 }
@@ -28220,7 +28313,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_28"
 }
@@ -28267,7 +28360,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_29"
 }
@@ -28314,7 +28407,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_30"
 }
@@ -28361,7 +28454,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_31"
 }
@@ -28408,7 +28501,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_32"
 }
@@ -28455,7 +28548,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_33"
 }
@@ -28502,7 +28595,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_34"
 }
@@ -28531,7 +28624,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_18"
 }
@@ -28770,7 +28863,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_35"
 }
@@ -28817,7 +28910,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_36"
 }
@@ -28864,7 +28957,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_37"
 }
@@ -28911,7 +29004,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_38"
 }
@@ -28958,7 +29051,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_39"
 }
@@ -29013,7 +29106,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_41"
 }
@@ -29060,7 +29153,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_42"
 }
@@ -29107,7 +29200,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_43"
 }
@@ -29154,7 +29247,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_44"
 }
@@ -29201,7 +29294,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_45"
 }
@@ -29248,7 +29341,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_46"
 }
@@ -29295,7 +29388,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#boolean"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_47"
 }
@@ -29342,7 +29435,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_48"
 }
@@ -29389,7 +29482,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_49"
 }
@@ -29436,7 +29529,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_50"
 }
@@ -29483,7 +29576,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_51"
 }
@@ -29530,7 +29623,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_52"
 }
@@ -29577,7 +29670,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_53"
 }
@@ -29624,7 +29717,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_54"
 }
@@ -29671,7 +29764,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_55"
 }
@@ -29718,7 +29811,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_56"
 }
@@ -29765,7 +29858,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_57"
 }
@@ -29812,7 +29905,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_58"
 }
@@ -29859,7 +29952,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#boolean"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_59"
 }
@@ -29906,7 +29999,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_60"
 }
@@ -29953,7 +30046,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_61"
 }
@@ -30000,7 +30093,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_62"
 }
@@ -30047,7 +30140,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_63"
 }
@@ -30094,7 +30187,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_64"
 }
@@ -30141,7 +30234,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#boolean"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_65"
 }
@@ -30188,7 +30281,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_66"
 }
@@ -30217,7 +30310,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_40"
 }
@@ -30558,7 +30651,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_2"
 }
@@ -30769,7 +30862,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_68"
 }
@@ -30816,7 +30909,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_69"
 }
@@ -30863,7 +30956,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_70"
 }
@@ -30910,7 +31003,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_71"
 }
@@ -30957,7 +31050,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_72"
 }
@@ -31004,7 +31097,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_73"
 }
@@ -31051,7 +31144,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#boolean"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_74"
 }
@@ -31098,7 +31191,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_75"
 }
@@ -31145,7 +31238,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_76"
 }
@@ -31192,7 +31285,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_77"
 }
@@ -31239,7 +31332,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_78"
 }
@@ -31286,7 +31379,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_79"
 }
@@ -31333,7 +31426,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_80"
 }
@@ -31380,7 +31473,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_81"
 }
@@ -31427,7 +31520,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_82"
 }
@@ -31474,7 +31567,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_83"
 }
@@ -31521,7 +31614,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_84"
 }
@@ -31568,7 +31661,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_85"
 }
@@ -31615,7 +31708,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#boolean"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_86"
 }
@@ -31662,7 +31755,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_87"
 }
@@ -31709,7 +31802,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_88"
 }
@@ -31756,7 +31849,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_89"
 }
@@ -31803,7 +31896,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_90"
 }
@@ -31850,7 +31943,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_91"
 }
@@ -31897,7 +31990,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#boolean"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_92"
 }
@@ -31944,7 +32037,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_93"
 }
@@ -31973,7 +32066,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_67"
 }
@@ -32314,7 +32407,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_1"
 }
@@ -32367,7 +32460,7 @@
 ]
 }
 ],
-"http://www.w3.org/ns/shacl#raw": [
+"http://a.ml/vocabularies/document#raw": [
 {
 "@value": "{\n        \"application\" : {\n          \"pendingWith\" : \"pendingWith\",\n          \"requestedAmt\" : 1,\n          \"applicationState\" : \"applicationState\",\n          \"ownerShip\" : \"ownerShip\",\n          \"userName\" : \"userName\",\n          \"branch\" : {\n            \"apartmentNo\" : \"apartmentNo\",\n            \"branchId\" : 0,\n            \"zipCode\" : \"zipCode\",\n            \"city\" : \"city\",\n            \"street\" : \"street\",\n            \"branchName\" : \"branchName\",\n            \"contactPerson\" : \"contactPerson\",\n            \"state\" : \"state\",\n            \"phoneNo\" : \"phoneNo\"\n          },\n          \"vehicle\" : {\n            \"zipCode\" : \"zipCode\",\n            \"city\" : \"city\",\n            \"sellerName\" : \"sellerName\",\n            \"sellerAddress\" : \"sellerAddress\",\n            \"vehicleMake\" : \"vehicleMake\",\n            \"transactionType\" : \"transactionType\",\n            \"estimatedValue\" : 7,\n            \"vehicleYear\" : 1,\n            \"street\" : \"street\",\n            \"approxMileage\" : \"approxMileage\",\n            \"vehicleModel\" : \"vehicleModel\",\n            \"vehIdentNo\" : \"vehIdentNo\",\n            \"regState\" : \"regState\",\n            \"state\" : \"state\",\n            \"vehicleId\" : 1,\n            \"vehicleType\" : \"vehicleType\"\n          },\n          \"loanYearPeriod\" : 6,\n          \"uid\" : 5,\n          \"loanTerm\" : 0,\n          \"applicationStatus\" : \"applicationStatus\",\n          \"applicationId\" : \"applicationId\",\n          \"user\" : {\n            \"apartmentNo\" : \"apartmentNo\",\n            \"lastName\" : \"lastName\",\n            \"zipCode\" : \"zipCode\",\n            \"annualIncome\" : 5,\n            \"housingStatus\" : \"housingStatus\",\n            \"city\" : \"city\",\n            \"permanentResidence\" : true,\n            \"suffix\" : \"suffix\",\n            \"phoneNo\" : 9,\n            \"ssn\" : 3,\n            \"uid\" : 2,\n            \"yearsAtCurrAdd\" : 4,\n            \"monthlyPayment\" : 2,\n            \"street\" : \"street\",\n            \"state\" : \"state\",\n            \"addTypePrimary\" : \"addTypePrimary\",\n            \"email\" : \"email\",\n            \"initial\" : \"initial\",\n            \"citizenOf\" : true,\n            \"dateOfBirth\" : \"2000-01-23T04:56:07.000+00:00\",\n            \"userName\" : \"userName\",\n            \"otherIncome\" : \"otherIncome\",\n            \"firstName\" : \"firstName\",\n            \"addTypePrevious\" : \"addTypePrevious\",\n            \"anyPoliticalRelationship\" : true,\n            \"monthsAtCurrAdd\" : 7\n          }\n        },\n        \"user\" : {\n          \"apartmentNo\" : \"apartmentNo\",\n          \"lastName\" : \"lastName\",\n          \"zipCode\" : \"zipCode\",\n          \"annualIncome\" : 5,\n          \"housingStatus\" : \"housingStatus\",\n          \"city\" : \"city\",\n          \"permanentResidence\" : true,\n          \"suffix\" : \"suffix\",\n          \"phoneNo\" : 9,\n          \"ssn\" : 3,\n          \"uid\" : 2,\n          \"yearsAtCurrAdd\" : 4,\n          \"monthlyPayment\" : 2,\n          \"street\" : \"street\",\n          \"state\" : \"state\",\n          \"addTypePrimary\" : \"addTypePrimary\",\n          \"email\" : \"email\",\n          \"initial\" : \"initial\",\n          \"citizenOf\" : true,\n          \"dateOfBirth\" : \"2000-01-23T04:56:07.000+00:00\",\n          \"userName\" : \"userName\",\n          \"otherIncome\" : \"otherIncome\",\n          \"firstName\" : \"firstName\",\n          \"addTypePrevious\" : \"addTypePrevious\",\n          \"anyPoliticalRelationship\" : true,\n          \"monthsAtCurrAdd\" : 7\n        }\n      }"
 }
@@ -32396,7 +32489,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/shacl#raw"
+"@value": "http://a.ml/vocabularies/document#raw"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -33961,11 +34054,11 @@
 "@value": "Branch"
 }
 ],
-"http://a.ml/vocabularies/document#examples": [
+"http://a.ml/vocabularies/apiContract#examples": [
 {
 "@id": "amf://id#220",
 "@type": [
-"http://a.ml/vocabularies/document#Example",
+"http://a.ml/vocabularies/apiContract#Example",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
 "http://a.ml/vocabularies/document#strict": [
@@ -33999,7 +34092,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_2"
 }
@@ -34046,7 +34139,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_3"
 }
@@ -34093,7 +34186,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_4"
 }
@@ -34140,7 +34233,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_5"
 }
@@ -34187,7 +34280,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_6"
 }
@@ -34234,7 +34327,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_7"
 }
@@ -34281,7 +34374,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_8"
 }
@@ -34328,7 +34421,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_9"
 }
@@ -34375,7 +34468,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_10"
 }
@@ -34404,7 +34497,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_1"
 }
@@ -34541,7 +34634,7 @@
 ]
 }
 ],
-"http://www.w3.org/ns/shacl#raw": [
+"http://a.ml/vocabularies/document#raw": [
 {
 "@value": "{\n        \"apartmentNo\" : \"apartmentNo\",\n        \"branchId\" : 0,\n        \"zipCode\" : \"zipCode\",\n        \"city\" : \"city\",\n        \"street\" : \"street\",\n        \"branchName\" : \"branchName\",\n        \"contactPerson\" : \"contactPerson\",\n        \"state\" : \"state\",\n        \"phoneNo\" : \"phoneNo\"\n      }"
 }
@@ -34570,7 +34663,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/shacl#raw"
+"@value": "http://a.ml/vocabularies/document#raw"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -38627,11 +38720,11 @@
 "@value": "User"
 }
 ],
-"http://a.ml/vocabularies/document#examples": [
+"http://a.ml/vocabularies/apiContract#examples": [
 {
 "@id": "amf://id#262",
 "@type": [
-"http://a.ml/vocabularies/document#Example",
+"http://a.ml/vocabularies/apiContract#Example",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
 "http://a.ml/vocabularies/document#strict": [
@@ -38665,7 +38758,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_2"
 }
@@ -38712,7 +38805,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_3"
 }
@@ -38759,7 +38852,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_4"
 }
@@ -38806,7 +38899,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_5"
 }
@@ -38853,7 +38946,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_6"
 }
@@ -38900,7 +38993,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_7"
 }
@@ -38947,7 +39040,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#boolean"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_8"
 }
@@ -38994,7 +39087,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_9"
 }
@@ -39041,7 +39134,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_10"
 }
@@ -39088,7 +39181,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_11"
 }
@@ -39135,7 +39228,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_12"
 }
@@ -39182,7 +39275,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_13"
 }
@@ -39229,7 +39322,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_14"
 }
@@ -39276,7 +39369,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_15"
 }
@@ -39323,7 +39416,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_16"
 }
@@ -39370,7 +39463,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_17"
 }
@@ -39417,7 +39510,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_18"
 }
@@ -39464,7 +39557,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_19"
 }
@@ -39511,7 +39604,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#boolean"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_20"
 }
@@ -39558,7 +39651,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_21"
 }
@@ -39605,7 +39698,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_22"
 }
@@ -39652,7 +39745,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_23"
 }
@@ -39699,7 +39792,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_24"
 }
@@ -39746,7 +39839,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_25"
 }
@@ -39793,7 +39886,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#boolean"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_26"
 }
@@ -39840,7 +39933,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_27"
 }
@@ -39869,7 +39962,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_1"
 }
@@ -40210,7 +40303,7 @@
 ]
 }
 ],
-"http://www.w3.org/ns/shacl#raw": [
+"http://a.ml/vocabularies/document#raw": [
 {
 "@value": "{\n        \"apartmentNo\" : \"apartmentNo\",\n        \"lastName\" : \"lastName\",\n        \"zipCode\" : \"zipCode\",\n        \"annualIncome\" : 5,\n        \"housingStatus\" : \"housingStatus\",\n        \"city\" : \"city\",\n        \"permanentResidence\" : true,\n        \"suffix\" : \"suffix\",\n        \"phoneNo\" : 9,\n        \"ssn\" : 3,\n        \"uid\" : 2,\n        \"yearsAtCurrAdd\" : 4,\n        \"monthlyPayment\" : 2,\n        \"street\" : \"street\",\n        \"state\" : \"state\",\n        \"addTypePrimary\" : \"addTypePrimary\",\n        \"email\" : \"email\",\n        \"initial\" : \"initial\",\n        \"citizenOf\" : true,\n        \"dateOfBirth\" : \"2000-01-23T04:56:07.000+00:00\",\n        \"userName\" : \"userName\",\n        \"otherIncome\" : \"otherIncome\",\n        \"firstName\" : \"firstName\",\n        \"addTypePrevious\" : \"addTypePrevious\",\n        \"anyPoliticalRelationship\" : true,\n        \"monthsAtCurrAdd\" : 7\n      }"
 }
@@ -40239,7 +40332,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/shacl#raw"
+"@value": "http://a.ml/vocabularies/document#raw"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -42437,11 +42530,11 @@
 "@value": "Vehicle"
 }
 ],
-"http://a.ml/vocabularies/document#examples": [
+"http://a.ml/vocabularies/apiContract#examples": [
 {
 "@id": "amf://id#2",
 "@type": [
-"http://a.ml/vocabularies/document#Example",
+"http://a.ml/vocabularies/apiContract#Example",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
 "http://a.ml/vocabularies/document#strict": [
@@ -42475,7 +42568,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_2"
 }
@@ -42522,7 +42615,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_3"
 }
@@ -42569,7 +42662,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_4"
 }
@@ -42616,7 +42709,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_5"
 }
@@ -42663,7 +42756,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_6"
 }
@@ -42710,7 +42803,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_7"
 }
@@ -42757,7 +42850,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_8"
 }
@@ -42804,7 +42897,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_9"
 }
@@ -42851,7 +42944,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_10"
 }
@@ -42898,7 +42991,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_11"
 }
@@ -42945,7 +43038,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_12"
 }
@@ -42992,7 +43085,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_13"
 }
@@ -43039,7 +43132,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_14"
 }
@@ -43086,7 +43179,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_15"
 }
@@ -43133,7 +43226,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_16"
 }
@@ -43180,7 +43273,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_17"
 }
@@ -43209,7 +43302,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_1"
 }
@@ -43430,7 +43523,7 @@
 ]
 }
 ],
-"http://www.w3.org/ns/shacl#raw": [
+"http://a.ml/vocabularies/document#raw": [
 {
 "@value": "{\n        \"zipCode\" : \"zipCode\",\n        \"city\" : \"city\",\n        \"sellerName\" : \"sellerName\",\n        \"sellerAddress\" : \"sellerAddress\",\n        \"vehicleMake\" : \"vehicleMake\",\n        \"transactionType\" : \"transactionType\",\n        \"estimatedValue\" : 7,\n        \"vehicleYear\" : 1,\n        \"street\" : \"street\",\n        \"approxMileage\" : \"approxMileage\",\n        \"vehicleModel\" : \"vehicleModel\",\n        \"vehIdentNo\" : \"vehIdentNo\",\n        \"regState\" : \"regState\",\n        \"state\" : \"state\",\n        \"vehicleId\" : 1,\n        \"vehicleType\" : \"vehicleType\"\n      }"
 }
@@ -43459,7 +43552,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/shacl#raw"
+"@value": "http://a.ml/vocabularies/document#raw"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -43605,11 +43698,11 @@
 "@value": "Application"
 }
 ],
-"http://a.ml/vocabularies/document#examples": [
+"http://a.ml/vocabularies/apiContract#examples": [
 {
 "@id": "amf://id#147",
 "@type": [
-"http://a.ml/vocabularies/document#Example",
+"http://a.ml/vocabularies/apiContract#Example",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
 "http://a.ml/vocabularies/document#strict": [
@@ -43643,7 +43736,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_2"
 }
@@ -43690,7 +43783,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_3"
 }
@@ -43737,7 +43830,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_4"
 }
@@ -43784,7 +43877,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_5"
 }
@@ -43831,7 +43924,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_6"
 }
@@ -43886,7 +43979,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_8"
 }
@@ -43933,7 +44026,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_9"
 }
@@ -43980,7 +44073,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_10"
 }
@@ -44027,7 +44120,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_11"
 }
@@ -44074,7 +44167,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_12"
 }
@@ -44121,7 +44214,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_13"
 }
@@ -44168,7 +44261,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_14"
 }
@@ -44215,7 +44308,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_15"
 }
@@ -44262,7 +44355,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_16"
 }
@@ -44291,7 +44384,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_7"
 }
@@ -44454,7 +44547,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_18"
 }
@@ -44501,7 +44594,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_19"
 }
@@ -44548,7 +44641,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_20"
 }
@@ -44595,7 +44688,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_21"
 }
@@ -44642,7 +44735,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_22"
 }
@@ -44689,7 +44782,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_23"
 }
@@ -44736,7 +44829,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_24"
 }
@@ -44783,7 +44876,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_25"
 }
@@ -44830,7 +44923,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_26"
 }
@@ -44877,7 +44970,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_27"
 }
@@ -44924,7 +45017,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_28"
 }
@@ -44971,7 +45064,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_29"
 }
@@ -45018,7 +45111,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_30"
 }
@@ -45065,7 +45158,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_31"
 }
@@ -45112,7 +45205,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_32"
 }
@@ -45159,7 +45252,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_33"
 }
@@ -45188,7 +45281,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_17"
 }
@@ -45427,7 +45520,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_34"
 }
@@ -45474,7 +45567,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_35"
 }
@@ -45521,7 +45614,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_36"
 }
@@ -45568,7 +45661,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_37"
 }
@@ -45615,7 +45708,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_38"
 }
@@ -45670,7 +45763,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_40"
 }
@@ -45717,7 +45810,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_41"
 }
@@ -45764,7 +45857,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_42"
 }
@@ -45811,7 +45904,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_43"
 }
@@ -45858,7 +45951,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_44"
 }
@@ -45905,7 +45998,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_45"
 }
@@ -45952,7 +46045,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#boolean"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_46"
 }
@@ -45999,7 +46092,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_47"
 }
@@ -46046,7 +46139,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_48"
 }
@@ -46093,7 +46186,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_49"
 }
@@ -46140,7 +46233,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_50"
 }
@@ -46187,7 +46280,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_51"
 }
@@ -46234,7 +46327,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_52"
 }
@@ -46281,7 +46374,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_53"
 }
@@ -46328,7 +46421,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_54"
 }
@@ -46375,7 +46468,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_55"
 }
@@ -46422,7 +46515,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_56"
 }
@@ -46469,7 +46562,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_57"
 }
@@ -46516,7 +46609,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#boolean"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_58"
 }
@@ -46563,7 +46656,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_59"
 }
@@ -46610,7 +46703,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_60"
 }
@@ -46657,7 +46750,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_61"
 }
@@ -46704,7 +46797,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_62"
 }
@@ -46751,7 +46844,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_63"
 }
@@ -46798,7 +46891,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#boolean"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_64"
 }
@@ -46845,7 +46938,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_65"
 }
@@ -46874,7 +46967,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_39"
 }
@@ -47215,7 +47308,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_1"
 }
@@ -47400,7 +47493,7 @@
 ]
 }
 ],
-"http://www.w3.org/ns/shacl#raw": [
+"http://a.ml/vocabularies/document#raw": [
 {
 "@value": "{\n        \"pendingWith\" : \"pendingWith\",\n        \"requestedAmt\" : 1,\n        \"applicationState\" : \"applicationState\",\n        \"ownerShip\" : \"ownerShip\",\n        \"userName\" : \"userName\",\n        \"branch\" : {\n          \"apartmentNo\" : \"apartmentNo\",\n          \"branchId\" : 0,\n          \"zipCode\" : \"zipCode\",\n          \"city\" : \"city\",\n          \"street\" : \"street\",\n          \"branchName\" : \"branchName\",\n          \"contactPerson\" : \"contactPerson\",\n          \"state\" : \"state\",\n          \"phoneNo\" : \"phoneNo\"\n        },\n        \"vehicle\" : {\n          \"zipCode\" : \"zipCode\",\n          \"city\" : \"city\",\n          \"sellerName\" : \"sellerName\",\n          \"sellerAddress\" : \"sellerAddress\",\n          \"vehicleMake\" : \"vehicleMake\",\n          \"transactionType\" : \"transactionType\",\n          \"estimatedValue\" : 7,\n          \"vehicleYear\" : 1,\n          \"street\" : \"street\",\n          \"approxMileage\" : \"approxMileage\",\n          \"vehicleModel\" : \"vehicleModel\",\n          \"vehIdentNo\" : \"vehIdentNo\",\n          \"regState\" : \"regState\",\n          \"state\" : \"state\",\n          \"vehicleId\" : 1,\n          \"vehicleType\" : \"vehicleType\"\n        },\n        \"loanYearPeriod\" : 6,\n        \"uid\" : 5,\n        \"loanTerm\" : 0,\n        \"applicationStatus\" : \"applicationStatus\",\n        \"applicationId\" : \"applicationId\",\n        \"user\" : {\n          \"apartmentNo\" : \"apartmentNo\",\n          \"lastName\" : \"lastName\",\n          \"zipCode\" : \"zipCode\",\n          \"annualIncome\" : 5,\n          \"housingStatus\" : \"housingStatus\",\n          \"city\" : \"city\",\n          \"permanentResidence\" : true,\n          \"suffix\" : \"suffix\",\n          \"phoneNo\" : 9,\n          \"ssn\" : 3,\n          \"uid\" : 2,\n          \"yearsAtCurrAdd\" : 4,\n          \"monthlyPayment\" : 2,\n          \"street\" : \"street\",\n          \"state\" : \"state\",\n          \"addTypePrimary\" : \"addTypePrimary\",\n          \"email\" : \"email\",\n          \"initial\" : \"initial\",\n          \"citizenOf\" : true,\n          \"dateOfBirth\" : \"2000-01-23T04:56:07.000+00:00\",\n          \"userName\" : \"userName\",\n          \"otherIncome\" : \"otherIncome\",\n          \"firstName\" : \"firstName\",\n          \"addTypePrevious\" : \"addTypePrevious\",\n          \"anyPoliticalRelationship\" : true,\n          \"monthsAtCurrAdd\" : 7\n        }\n      }"
 }
@@ -47429,7 +47522,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/shacl#raw"
+"@value": "http://a.ml/vocabularies/document#raw"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -48617,11 +48710,11 @@
 "@value": "Branch"
 }
 ],
-"http://a.ml/vocabularies/document#examples": [
+"http://a.ml/vocabularies/apiContract#examples": [
 {
 "@id": "amf://id#220",
 "@type": [
-"http://a.ml/vocabularies/document#Example",
+"http://a.ml/vocabularies/apiContract#Example",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
 "http://a.ml/vocabularies/document#strict": [
@@ -48655,7 +48748,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_2"
 }
@@ -48702,7 +48795,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_3"
 }
@@ -48749,7 +48842,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_4"
 }
@@ -48796,7 +48889,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_5"
 }
@@ -48843,7 +48936,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_6"
 }
@@ -48890,7 +48983,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_7"
 }
@@ -48937,7 +49030,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_8"
 }
@@ -48984,7 +49077,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_9"
 }
@@ -49031,7 +49124,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_10"
 }
@@ -49060,7 +49153,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_1"
 }
@@ -49197,7 +49290,7 @@
 ]
 }
 ],
-"http://www.w3.org/ns/shacl#raw": [
+"http://a.ml/vocabularies/document#raw": [
 {
 "@value": "{\n        \"apartmentNo\" : \"apartmentNo\",\n        \"branchId\" : 0,\n        \"zipCode\" : \"zipCode\",\n        \"city\" : \"city\",\n        \"street\" : \"street\",\n        \"branchName\" : \"branchName\",\n        \"contactPerson\" : \"contactPerson\",\n        \"state\" : \"state\",\n        \"phoneNo\" : \"phoneNo\"\n      }"
 }
@@ -49226,7 +49319,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/shacl#raw"
+"@value": "http://a.ml/vocabularies/document#raw"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -52471,11 +52564,11 @@
 "@value": "User"
 }
 ],
-"http://a.ml/vocabularies/document#examples": [
+"http://a.ml/vocabularies/apiContract#examples": [
 {
 "@id": "amf://id#262",
 "@type": [
-"http://a.ml/vocabularies/document#Example",
+"http://a.ml/vocabularies/apiContract#Example",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
 "http://a.ml/vocabularies/document#strict": [
@@ -52509,7 +52602,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_2"
 }
@@ -52556,7 +52649,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_3"
 }
@@ -52603,7 +52696,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_4"
 }
@@ -52650,7 +52743,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_5"
 }
@@ -52697,7 +52790,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_6"
 }
@@ -52744,7 +52837,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_7"
 }
@@ -52791,7 +52884,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#boolean"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_8"
 }
@@ -52838,7 +52931,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_9"
 }
@@ -52885,7 +52978,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_10"
 }
@@ -52932,7 +53025,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_11"
 }
@@ -52979,7 +53072,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_12"
 }
@@ -53026,7 +53119,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_13"
 }
@@ -53073,7 +53166,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_14"
 }
@@ -53120,7 +53213,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_15"
 }
@@ -53167,7 +53260,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_16"
 }
@@ -53214,7 +53307,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_17"
 }
@@ -53261,7 +53354,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_18"
 }
@@ -53308,7 +53401,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_19"
 }
@@ -53355,7 +53448,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#boolean"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_20"
 }
@@ -53402,7 +53495,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_21"
 }
@@ -53449,7 +53542,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_22"
 }
@@ -53496,7 +53589,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_23"
 }
@@ -53543,7 +53636,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_24"
 }
@@ -53590,7 +53683,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_25"
 }
@@ -53637,7 +53730,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#boolean"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_26"
 }
@@ -53684,7 +53777,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_27"
 }
@@ -53713,7 +53806,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_1"
 }
@@ -54054,7 +54147,7 @@
 ]
 }
 ],
-"http://www.w3.org/ns/shacl#raw": [
+"http://a.ml/vocabularies/document#raw": [
 {
 "@value": "{\n        \"apartmentNo\" : \"apartmentNo\",\n        \"lastName\" : \"lastName\",\n        \"zipCode\" : \"zipCode\",\n        \"annualIncome\" : 5,\n        \"housingStatus\" : \"housingStatus\",\n        \"city\" : \"city\",\n        \"permanentResidence\" : true,\n        \"suffix\" : \"suffix\",\n        \"phoneNo\" : 9,\n        \"ssn\" : 3,\n        \"uid\" : 2,\n        \"yearsAtCurrAdd\" : 4,\n        \"monthlyPayment\" : 2,\n        \"street\" : \"street\",\n        \"state\" : \"state\",\n        \"addTypePrimary\" : \"addTypePrimary\",\n        \"email\" : \"email\",\n        \"initial\" : \"initial\",\n        \"citizenOf\" : true,\n        \"dateOfBirth\" : \"2000-01-23T04:56:07.000+00:00\",\n        \"userName\" : \"userName\",\n        \"otherIncome\" : \"otherIncome\",\n        \"firstName\" : \"firstName\",\n        \"addTypePrevious\" : \"addTypePrevious\",\n        \"anyPoliticalRelationship\" : true,\n        \"monthsAtCurrAdd\" : 7\n      }"
 }
@@ -54083,7 +54176,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/shacl#raw"
+"@value": "http://a.ml/vocabularies/document#raw"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
@@ -55056,11 +55149,11 @@
 "@value": "VehicleDetail"
 }
 ],
-"http://a.ml/vocabularies/document#examples": [
+"http://a.ml/vocabularies/apiContract#examples": [
 {
 "@id": "amf://id#346",
 "@type": [
-"http://a.ml/vocabularies/document#Example",
+"http://a.ml/vocabularies/apiContract#Example",
 "http://a.ml/vocabularies/document#DomainElement"
 ],
 "http://a.ml/vocabularies/document#strict": [
@@ -55094,7 +55187,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_2"
 }
@@ -55141,7 +55234,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#integer"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_3"
 }
@@ -55188,7 +55281,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_4"
 }
@@ -55235,7 +55328,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_5"
 }
@@ -55282,7 +55375,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_6"
 }
@@ -55329,7 +55422,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_7"
 }
@@ -55376,7 +55469,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "scalar_8"
 }
@@ -55405,7 +55498,7 @@
 ]
 }
 ],
-"http://schema.org/name": [
+"http://a.ml/vocabularies/core#name": [
 {
 "@value": "object_1"
 }
@@ -55518,7 +55611,7 @@
 ]
 }
 ],
-"http://www.w3.org/ns/shacl#raw": [
+"http://a.ml/vocabularies/document#raw": [
 {
 "@value": "{\n        \"vehicleYear\" : 6,\n        \"vehicleDetailsId\" : 0,\n        \"vehicleModel\" : \"vehicleModel\",\n        \"vehIdentNo\" : \"vehIdentNo\",\n        \"id\" : \"id\",\n        \"vehicleMake\" : \"vehicleMake\",\n        \"vehicleType\" : \"vehicleType\"\n      }"
 }
@@ -55547,7 +55640,7 @@
 {
 "http://a.ml/vocabularies/document-source-maps#element": [
 {
-"@value": "http://www.w3.org/ns/shacl#raw"
+"@value": "http://a.ml/vocabularies/document#raw"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [

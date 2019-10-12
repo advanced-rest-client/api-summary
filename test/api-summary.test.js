@@ -351,21 +351,21 @@ describe('<api-summary>', function() {
     beforeEach(async () => {
       element = await basicFixture();
       model = {
-        'http://schema.org/provider': [
+        'http://a.ml/vocabularies/core#provider': [
           {
             '@id': 'amf://id#369',
             '@type': ['http://schema.org/Organization', 'http://a.ml/vocabularies/document#DomainElement'],
-            'http://schema.org/url': [
+            'http://a.ml/vocabularies/core#url': [
               {
                 '@id': 'http://domain.com'
               }
             ],
-            'http://schema.org/name': [
+            'http://a.ml/vocabularies/core#name': [
               {
                 '@value': 'John Doe'
               }
             ],
-            'http://schema.org/email': [
+            'http://a.ml/vocabularies/core#email': [
               {
                 '@value': 'test@mail.com'
               }
@@ -381,8 +381,8 @@ describe('<api-summary>', function() {
     });
 
     it('Removes nested array', () => {
-      const p = [Object.assign({}, model['http://schema.org/provider'][0])];
-      model['http://schema.org/provider'][0] = p;
+      const p = [Object.assign({}, model['http://a.ml/vocabularies/core#provider'][0])];
+      model['http://a.ml/vocabularies/core#provider'][0] = p;
       const result = element._computeProvider(model);
       assert.typeOf(result, 'object');
     });

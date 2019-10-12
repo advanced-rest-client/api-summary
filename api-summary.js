@@ -505,7 +505,7 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
    * @return {String|undefined} Description if defined.
    */
   _computeApiTitle(shape) {
-    return this._getValue(shape, this.ns.schema.schemaName);
+    return this._getValue(shape, this.ns.aml.vocabularies.core.name);
   }
   /**
    * Computes value for `version` property
@@ -513,7 +513,7 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
    * @return {String|undefined}
    */
   _computeVersion(webApi) {
-    return this._getValue(webApi, this.ns.schema.name + 'version');
+    return this._getValue(webApi, this.ns.aml.vocabularies.core.version);
   }
   /**
    * Computes API's URI based on `amf` and `baseUri` property.
@@ -540,7 +540,7 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
     if (!webApi) {
       return;
     }
-    const key = this._getAmfKey(this.ns.schema.name + 'provider');
+    const key = this._getAmfKey(this.ns.aml.vocabularies.core.provider);
     let data = this._ensureArray(webApi[key]);
     if (!data) {
       return;
@@ -553,17 +553,17 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
   }
 
   _computeName(provider) {
-    return this._getValue(provider, this.ns.schema.schemaName);
+    return this._getValue(provider, this.ns.aml.vocabularies.core.name);
   }
 
   _computeEmail(provider) {
-    return this._getValue(provider, this.ns.schema.name + 'email');
+    return this._getValue(provider, this.ns.aml.vocabularies.core.email);
   }
 
   _computeUrl(provider) {
-    let value = this._getValue(provider, this.ns.schema.name + 'url');
+    let value = this._getValue(provider, this.ns.aml.vocabularies.core.url);
     if (!value && provider) {
-      const key = this._getAmfKey(this.ns.schema.name + 'url');
+      const key = this._getAmfKey(this.ns.aml.vocabularies.core.url);
       const data = provider[key];
       if (data) {
         value = data instanceof Array ? data[0]['@id'] : data['@id'];
@@ -573,11 +573,11 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
   }
 
   _computeToS(webApi) {
-    return this._getValue(webApi, this.ns.schema.name + 'termsOfService');
+    return this._getValue(webApi, this.ns.aml.vocabularies.core.termsOfService);
   }
 
   _computeLicense(webApi) {
-    const key = this._getAmfKey(this.ns.schema.name + 'license');
+    const key = this._getAmfKey(this.ns.aml.vocabularies.core.license);
     const data = webApi && webApi[key];
     if (!data) {
       return;
@@ -593,15 +593,15 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
     if (!webApi) {
       return;
     }
-    const key = this._getAmfKey(this.ns.raml.vocabularies.http + 'endpoint');
+    const key = this._getAmfKey(this.ns.aml.vocabularies.apiContract.endpoint);
     const endpoints = this._ensureArray(webApi[key]);
     if (!endpoints || !endpoints.length) {
       return;
     }
     return endpoints.map((item) => {
       const result = {
-        name: this._getValue(item, this.ns.schema.schemaName),
-        path: this._getValue(item, this.ns.raml.vocabularies.http + 'path'),
+        name: this._getValue(item, this.ns.aml.vocabularies.core.name),
+        path: this._getValue(item, this.ns.aml.vocabularies.apiContract.path),
         id: item['@id'],
         ops: this._endpointOperations(item)
       };
@@ -614,7 +614,7 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
    * @return {Array<Object>|unbdefined}
    */
   _endpointOperations(endpoint) {
-    const key = this._getAmfKey(this.ns.w3.hydra.core + 'supportedOperation');
+    const key = this._getAmfKey(this.ns.aml.vocabularies.apiContract.supportedOperation);
     const so = this._ensureArray(endpoint[key]);
     if (!so || !so.length) {
       return;
@@ -622,7 +622,7 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
     return so.map((item) => {
       return {
         id: item['@id'],
-        method: this._getValue(item, this.ns.w3.hydra.core + 'method')
+        method: this._getValue(item, this.ns.aml.vocabularies.apiContract.method)
       };
     });
   }

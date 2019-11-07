@@ -13,7 +13,7 @@ module.exports = (config) => {
     'SL_Firefox-1',
     'SL_Safari',
     // 'SL_Safari-1',
-    'SL_EDGE'
+    // 'SL_EDGE' <- gives Disconnectedreconnect failed before timeout of 2000ms (ping timeout)
   ];
   if (process.env.TRAVIS) {
     const buildLabel = 'TRAVIS #' + process.env.TRAVIS_BUILD_NUMBER + ' (' + process.env.TRAVIS_BUILD_ID + ')';

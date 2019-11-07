@@ -29,7 +29,7 @@ import '@polymer/iron-meta/iron-meta.js';
  * @appliesMixin AmfHelperMixin
  */
 class ApiSummary extends AmfHelperMixin(LitElement) {
-  static get styles() {
+  get styles() {
     return [
       markdownStyles,
       labelStyles,
@@ -363,7 +363,7 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
 
   render() {
     const { aware } = this;
-    return html`
+    return html`<style>${this.styles}</style>
       ${aware ?
         html`<raml-aware @api-changed="${this._apiHandler}" .scope="${aware}"></raml-aware>` :
         ''}

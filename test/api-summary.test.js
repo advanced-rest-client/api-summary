@@ -26,295 +26,315 @@ describe('<api-summary>', function() {
     `);
   }
 
-  describe('Basic', () => {
-    let element;
-    let amf;
-    before(async () => {
-      amf = await AmfLoader.load();
-    });
+  [
+    ['Full AMF model', false],
+    ['Compact AMF model', true]
+  ].forEach(([label, compact]) => {
+    describe(label, () => {
+      describe('Basic', () => {
+        let element;
+        let amf;
+        before(async () => {
+          amf = await AmfLoader.load(compact);
+        });
 
-    beforeEach(async () => {
-      element = await basicFixture();
-      element.amf = amf;
-      await aTimeout();
-    });
+        beforeEach(async () => {
+          element = await basicFixture();
+          element.amf = amf;
+          await aTimeout();
+        });
 
-    it('raml-aware is in the DOM', () => {
-      const node = element.shadowRoot.querySelector('raml-aware');
-      assert.ok(node);
-    });
+        it('raml-aware is in the DOM', () => {
+          const node = element.shadowRoot.querySelector('raml-aware');
+          assert.ok(node);
+        });
 
-    it('renders api title', () => {
-      const node = element.shadowRoot.querySelector('[role="heading"]');
-      assert.dom.equal(node, `<div aria-level="2" class="api-title" role="heading">
-        <label>
-          API title:
-        </label>
-        <span>
-          API body demo
-        </span>
-      </div>`);
-    });
+        it('renders api title', () => {
+          const node = element.shadowRoot.querySelector('[role="heading"]');
+          assert.dom.equal(node, `<div aria-level="2" class="api-title" role="heading">
+            <label>
+              API title:
+            </label>
+            <span>
+              API body demo
+            </span>
+          </div>`);
+        });
 
-    it('renders version', () => {
-      const node = element.shadowRoot.querySelector('.inline-description.version span');
-      assert.dom.equal(node, '<span>v1</span>');
-    });
+        it('renders version', () => {
+          const node = element.shadowRoot.querySelector('.inline-description.version span');
+          assert.dom.equal(node, '<span>v1</span>');
+        });
 
-    it('renders protocols', () => {
-      const node = element.shadowRoot.querySelector('.protocol-chips');
-      assert.dom.equal(
-        node,
-        `<div class="protocol-chips">
-        <span class="chip">
-            HTTP
-        </span>
-        <span class="chip">
-          HTTPS
-        </span>
-      </div>`
-      );
-    });
+        it('renders protocols', () => {
+          const node = element.shadowRoot.querySelector('.protocol-chips');
+          assert.dom.equal(
+            node,
+            `<div class="protocol-chips">
+            <span class="chip">
+                HTTP
+            </span>
+            <span class="chip">
+              HTTPS
+            </span>
+          </div>`
+          );
+        });
 
-    it('renders description', () => {
-      const node = element.shadowRoot.querySelector('arc-marked .markdown-body');
-      const content = node.innerHTML.trim();
-      assert.include(content, '<p>This is a description of demo API.</p>', 'has description');
-      assert.include(content, '<p>This is <strong>markdown</strong>.</p>', 'description is a markdown');
-      assert.include(content, '&lt;img src=\'<a href="', 'has sanitized content');
-    });
+        it('renders description', () => {
+          const node = element.shadowRoot.querySelector('arc-marked .markdown-body');
+          const content = node.innerHTML.trim();
+          assert.ok(content, 'has description');
+          const strong = node.querySelector('strong');
+          assert.dom.equal(
+            strong,
+            '<strong>markdown</strong>',
+            { ignoreAttributes: ['class'] },
+            'description is a markdown'
+          );
+          const anchor = node.querySelector('a');
+          assert.dom.equal(
+            anchor,
+            '<a>asd</a>',
+            { ignoreAttributes: ['class'] },
+            'has sanitized content'
+          );
+        });
 
-    it('renders base uri', () => {
-      const node = element.shadowRoot.querySelector('.url-value');
-      assert.dom.equal(node, `<div class="url-value">https://{instance}.domain.com</div>`);
-    });
-  });
+        it('renders base uri', () => {
+          const node = element.shadowRoot.querySelector('.url-value');
+          assert.dom.equal(node, `<div class="url-value">https://{instance}.domain.com</div>`);
+        });
+      });
 
-  describe('Base URI property', () => {
-    let element;
-    let amf;
+      describe('Base URI property', () => {
+        let element;
+        let amf;
 
-    before(async () => {
-      amf = await AmfLoader.load();
-    });
+        before(async () => {
+          amf = await AmfLoader.load(compact);
+        });
 
-    async function setupBaseUri() {
-      element = await baseUriFixture();
-      element.amf = amf;
-      await aTimeout();
-    }
-
-    async function setupBasic() {
-      element = await basicFixture();
-      element.amf = amf;
-      await aTimeout();
-    }
-
-    after(() => {
-      new IronMeta({
-        key: 'ApiBaseUri'
-      }).value = undefined;
-    });
-
-    it('Sets URL from base uri', async () => {
-      await setupBaseUri();
-      const node = element.shadowRoot.querySelector('.url-value');
-      assert.dom.equal(node, `<div class="url-value">https://domain.com</div>`);
-    });
-
-    it('Sets URL from iron-meta', async () => {
-      new IronMeta({
-        key: 'ApiBaseUri'
-      }).value = 'https://meta.com/base';
-      await setupBasic();
-      const node = element.shadowRoot.querySelector('.url-value');
-      assert.dom.equal(node, `<div class="url-value">https://meta.com/base</div>`);
-    });
-
-    it('In case of conflict base uri wins', async () => {
-      new IronMeta({
-        key: 'ApiBaseUri'
-      }).value = 'https://meta.com/base';
-      await setupBaseUri();
-      const node = element.shadowRoot.querySelector('.url-value');
-      assert.dom.equal(node, `<div class="url-value">https://domain.com</div>`);
-    });
-  });
-
-  describe('OAS properties', () => {
-    let amf;
-    let element;
-
-    before(async () => {
-      amf = await AmfLoader.load('loan-microservice.json');
-    });
-
-    beforeEach(async () => {
-      element = await basicFixture();
-      element.amf = amf;
-      await aTimeout();
-    });
-
-    it('provider section is rendered', () => {
-      const node = element.shadowRoot.querySelector('[role="contentinfo"]');
-      assert.ok(node);
-    });
-
-    it('renders provider name', () => {
-      const node = element.shadowRoot.querySelector('[role="contentinfo"] .provider-name');
-      assert.dom.equal(node, `<span class="provider-name">John Becker</span>`);
-    });
-
-    it('renders provider email', () => {
-      const node = element.shadowRoot.querySelector('[role="contentinfo"] .provider-email');
-      assert.dom.equal(
-        node,
-        `<a class="app-link link-padding provider-email" href="mailto:JohnBecker@cognizant.com">
-        JohnBecker@cognizant.com
-      </a>`
-      );
-    });
-
-    it('renders provider url', () => {
-      const node = element.shadowRoot.querySelector('[role="contentinfo"] .provider-url');
-      assert.dom.equal(
-        node,
-        `<a class="app-link provider-url" href="http://domain.com" target="_blank">http://domain.com</a>`
-      );
-    });
-
-    it('renders license region', () => {
-      const node = element.shadowRoot.querySelector('[aria-labelledby="licenseLabel"]');
-      assert.ok(node);
-    });
-
-    it('renders license link', () => {
-      const node = element.shadowRoot.querySelector('[aria-labelledby="licenseLabel"] a');
-      assert.dom.equal(
-        node,
-        `<a class="app-link" href="https://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">
-        Apache 2.0
-      </a>`
-      );
-    });
-
-    it('Renders ToS region', () => {
-      const node = element.shadowRoot.querySelector('[aria-labelledby="tocLabel"]');
-      assert.ok(node);
-    });
-  });
-
-  describe('Endppoints rendering', () => {
-    let element;
-    let amf;
-
-    before(async () => {
-      amf = await AmfLoader.load();
-    });
-
-    beforeEach(async () => {
-      element = await basicFixture();
-      element.amf = amf;
-      await aTimeout();
-    });
-
-    it('adds separator', () => {
-      const node = element.shadowRoot.querySelector('.separator');
-      assert.ok(node);
-    });
-
-    it('renders all endpoints', () => {
-      const nodes = element.shadowRoot.querySelectorAll('.endpoint-item');
-      assert.lengthOf(nodes, 12);
-    });
-
-    it('renders endpoint name', () => {
-      const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.endpoint-path');
-      assert.dom.equal(
-        node,
-        `<a
-          class="endpoint-path"
-          data-shape-type="endpoint"
-          href="#/people"
-          title="Open endpoint documentation"
-          >
-          People
-        </a>`,
-        {
-          ignoreAttributes: ['data-id']
+        async function setupBaseUri() {
+          element = await baseUriFixture();
+          element.amf = amf;
+          await aTimeout();
         }
-      );
-    });
 
-    it('sets data-id on name', () => {
-      const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.endpoint-path');
-      assert.notEmpty(node.getAttribute('data-id'));
-    });
-
-    it('renders endpoint path with name', () => {
-      const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.endpoint-path-name');
-      assert.dom.equal(node, `<p class="endpoint-path-name">/people</p>`, {
-        ignoreAttributes: ['data-id']
-      });
-    });
-
-    it('sets data-id on path', () => {
-      const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.endpoint-path');
-      assert.notEmpty(node.getAttribute('data-id'));
-    });
-
-    it('renders list of operations', () => {
-      const nodes = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelectorAll('.method-label');
-      assert.lengthOf(nodes, 3);
-    });
-
-    it('renders operation method', () => {
-      const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.method-label');
-      assert.dom.equal(
-        node,
-        `<a
-          class="method-label"
-          data-method="get"
-          data-shape-type="method"
-          href="#/people/get"
-          title="Open method documentation"
-          >get</a>`,
-        {
-          ignoreAttributes: ['data-id']
+        async function setupBasic() {
+          element = await basicFixture();
+          element.amf = amf;
+          await aTimeout();
         }
-      );
-    });
 
-    it('Click on an endpoint dispatches navigation event', (done) => {
-      const node = element.shadowRoot.querySelector(`.endpoint-path[data-id]`);
-      element.addEventListener('api-navigation-selection-changed', (e) => {
-        assert.typeOf(e.detail.selected, 'string');
-        assert.equal(e.detail.type, 'endpoint');
-        done();
-      });
-      node.click();
-    });
+        after(() => {
+          new IronMeta({
+            key: 'ApiBaseUri'
+          }).value = undefined;
+        });
 
-    it('Click on an endpoint path dispatches navigation event', (done) => {
-      const node = element.shadowRoot.querySelector(`.endpoint-path[data-id]`);
-      element.addEventListener('api-navigation-selection-changed', (e) => {
-        assert.typeOf(e.detail.selected, 'string');
-        assert.equal(e.detail.type, 'endpoint');
-        done();
-      });
-      node.click();
-    });
+        it('Sets URL from base uri', async () => {
+          await setupBaseUri();
+          const node = element.shadowRoot.querySelector('.url-value');
+          assert.dom.equal(node, `<div class="url-value">https://domain.com</div>`);
+        });
 
-    it('Click on a method dispatches navigation event', (done) => {
-      const node = element.shadowRoot.querySelector(`.method-label[data-id]`);
-      element.addEventListener('api-navigation-selection-changed', (e) => {
-        assert.typeOf(e.detail.selected, 'string');
-        assert.equal(e.detail.type, 'method');
-        done();
+        it('Sets URL from iron-meta', async () => {
+          new IronMeta({
+            key: 'ApiBaseUri'
+          }).value = 'https://meta.com/base';
+          await setupBasic();
+          const node = element.shadowRoot.querySelector('.url-value');
+          assert.dom.equal(node, `<div class="url-value">https://meta.com/base</div>`);
+        });
+
+        it('In case of conflict base uri wins', async () => {
+          new IronMeta({
+            key: 'ApiBaseUri'
+          }).value = 'https://meta.com/base';
+          await setupBaseUri();
+          const node = element.shadowRoot.querySelector('.url-value');
+          assert.dom.equal(node, `<div class="url-value">https://domain.com</div>`);
+        });
       });
-      node.click();
+
+      describe('OAS properties', () => {
+        let amf;
+        let element;
+
+        before(async () => {
+          amf = await AmfLoader.load(compact, 'loan-microservice');
+        });
+
+        beforeEach(async () => {
+          element = await basicFixture();
+          element.amf = amf;
+          await aTimeout();
+        });
+
+        it('provider section is rendered', () => {
+          const node = element.shadowRoot.querySelector('[role="contentinfo"]');
+          assert.ok(node);
+        });
+
+        it('renders provider name', () => {
+          const node = element.shadowRoot.querySelector('[role="contentinfo"] .provider-name');
+          assert.dom.equal(node, `<span class="provider-name">John Becker</span>`);
+        });
+
+        it('renders provider email', () => {
+          const node = element.shadowRoot.querySelector('[role="contentinfo"] .provider-email');
+          assert.dom.equal(
+            node,
+            `<a class="app-link link-padding provider-email" href="mailto:JohnBecker@cognizant.com">
+            JohnBecker@cognizant.com
+          </a>`
+          );
+        });
+
+        it('renders provider url', () => {
+          const node = element.shadowRoot.querySelector('[role="contentinfo"] .provider-url');
+          assert.dom.equal(
+            node,
+            `<a class="app-link provider-url" href="http://domain.com" target="_blank">http://domain.com</a>`
+          );
+        });
+
+        it('renders license region', () => {
+          const node = element.shadowRoot.querySelector('[aria-labelledby="licenseLabel"]');
+          assert.ok(node);
+        });
+
+        it('renders license link', () => {
+          const node = element.shadowRoot.querySelector('[aria-labelledby="licenseLabel"] a');
+          assert.dom.equal(
+            node,
+            `<a class="app-link" href="https://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">
+            Apache 2.0
+          </a>`
+          );
+        });
+
+        it('Renders ToS region', () => {
+          const node = element.shadowRoot.querySelector('[aria-labelledby="tocLabel"]');
+          assert.ok(node);
+        });
+      });
+
+      describe('Endppoints rendering', () => {
+        let element;
+        let amf;
+
+        before(async () => {
+          amf = await AmfLoader.load(compact);
+        });
+
+        beforeEach(async () => {
+          element = await basicFixture();
+          element.amf = amf;
+          await aTimeout();
+        });
+
+        it('adds separator', () => {
+          const node = element.shadowRoot.querySelector('.separator');
+          assert.ok(node);
+        });
+
+        it('renders all endpoints', () => {
+          const nodes = element.shadowRoot.querySelectorAll('.endpoint-item');
+          assert.lengthOf(nodes, 12);
+        });
+
+        it('renders endpoint name', () => {
+          const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.endpoint-path');
+          assert.dom.equal(
+            node,
+            `<a
+              class="endpoint-path"
+              data-shape-type="endpoint"
+              href="#/people"
+              title="Open endpoint documentation"
+              >
+              People
+            </a>`,
+            {
+              ignoreAttributes: ['data-id']
+            }
+          );
+        });
+
+        it('sets data-id on name', () => {
+          const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.endpoint-path');
+          assert.notEmpty(node.getAttribute('data-id'));
+        });
+
+        it('renders endpoint path with name', () => {
+          const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.endpoint-path-name');
+          assert.dom.equal(node, `<p class="endpoint-path-name">/people</p>`, {
+            ignoreAttributes: ['data-id']
+          });
+        });
+
+        it('sets data-id on path', () => {
+          const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.endpoint-path');
+          assert.notEmpty(node.getAttribute('data-id'));
+        });
+
+        it('renders list of operations', () => {
+          const nodes = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelectorAll('.method-label');
+          assert.lengthOf(nodes, 3);
+        });
+
+        it('renders operation method', () => {
+          const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.method-label');
+          assert.dom.equal(
+            node,
+            `<a
+              class="method-label"
+              data-method="get"
+              data-shape-type="method"
+              href="#/people/get"
+              title="Open method documentation"
+              >get</a>`,
+            {
+              ignoreAttributes: ['data-id']
+            }
+          );
+        });
+
+        it('Click on an endpoint dispatches navigation event', (done) => {
+          const node = element.shadowRoot.querySelector(`.endpoint-path[data-id]`);
+          element.addEventListener('api-navigation-selection-changed', (e) => {
+            assert.typeOf(e.detail.selected, 'string');
+            assert.equal(e.detail.type, 'endpoint');
+            done();
+          });
+          node.click();
+        });
+
+        it('Click on an endpoint path dispatches navigation event', (done) => {
+          const node = element.shadowRoot.querySelector(`.endpoint-path[data-id]`);
+          element.addEventListener('api-navigation-selection-changed', (e) => {
+            assert.typeOf(e.detail.selected, 'string');
+            assert.equal(e.detail.type, 'endpoint');
+            done();
+          });
+          node.click();
+        });
+
+        it('Click on a method dispatches navigation event', (done) => {
+          const node = element.shadowRoot.querySelector(`.method-label[data-id]`);
+          element.addEventListener('api-navigation-selection-changed', (e) => {
+            assert.typeOf(e.detail.selected, 'string');
+            assert.equal(e.detail.type, 'method');
+            done();
+          });
+          node.click();
+        });
+      });
     });
   });
+
 
   describe('_computeBaseUri()', () => {
     let element;
@@ -413,7 +433,7 @@ describe('<api-summary>', function() {
     let element;
 
     before(async () => {
-      amf = await AmfLoader.load('loan-microservice.json');
+      amf = await AmfLoader.load(false, 'loan-microservice');
     });
 
     beforeEach(async () => {

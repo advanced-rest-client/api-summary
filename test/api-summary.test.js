@@ -84,9 +84,21 @@ describe('<api-summary>', function() {
         it('renders description', () => {
           const node = element.shadowRoot.querySelector('arc-marked .markdown-body');
           const content = node.innerHTML.trim();
-          assert.include(content, '<p>This is a description of demo API.</p>', 'has description');
-          assert.include(content, '<p>This is <strong>markdown</strong>.</p>', 'description is a markdown');
-          assert.include(content, '<a>asd</a>', 'has sanitized content');
+          assert.ok(content, 'has description');
+          const strong = node.querySelector('strong');
+          assert.dom.equal(
+            strong,
+            '<strong>markdown</strong>',
+            { ignoreAttributes: ['class'] },
+            'description is a markdown'
+          );
+          const anchor = node.querySelector('a');
+          assert.dom.equal(
+            anchor,
+            '<a>asd</a>',
+            { ignoreAttributes: ['class'] },
+            'has sanitized content'
+          );
         });
 
         it('renders base uri', () => {

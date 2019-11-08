@@ -25,10 +25,10 @@
     "email": "arc@mulesoft.com"
   },
   "dependencies": {
-    "@advanced-rest-client/arc-marked": "^1.0.5",
+    "@advanced-rest-client/arc-marked": "^1.0.6",
     "@advanced-rest-client/markdown-styles": "^3.1.0",
     "@api-components/amf-helper-mixin": "^4.0.14",
-    "@api-components/http-method-label": "^3.0.0",
+    "@api-components/http-method-label": "^3.0.2",
     "@api-components/raml-aware": "^3.0.0",
     "@polymer/iron-meta": "^3.0.0",
     "lit-element": "^2.0.1"

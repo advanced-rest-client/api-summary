@@ -203,3 +203,17 @@
 
 
 
+## 4.0.2 (2019-11-08)
+
+
+### Bug Fixes
+
+* fixes [#2](https://github.com/advanced-rest-client/api-summary/issues/2) - adding sanitization to the description ([7d7dd3d](https://github.com/advanced-rest-client/api-summary/commit/7d7dd3d3fc9224bfaebe4517dbd684c6cf9b60b3))
+
+
+### Features
+
+* adding Base URI label ([4fa0a2f](https://github.com/advanced-rest-client/api-summary/commit/4fa0a2f8cbaf46c46216b62f2c6b140ada139c3c))
+
+
+

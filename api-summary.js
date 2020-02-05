@@ -367,7 +367,13 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
   }
 
   _sanitizeHTML(HTML) {
-    return sanitizer.sanitize(HTML, { ADD_ATTR: ['target'] })
+    const result = sanitizer.sanitize(HTML, { ADD_ATTR: ['target'] });
+
+    if (typeof result === 'string') {
+      return result;
+    }
+
+    return result.toString();
   }
 
   render() {

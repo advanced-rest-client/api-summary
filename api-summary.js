@@ -2,6 +2,7 @@ import { LitElement, html, css } from 'lit-element';
 import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
 import markdownStyles from '@advanced-rest-client/markdown-styles/markdown-styles.js';
 import labelStyles from '@api-components/http-method-label/http-method-label-common-styles.js';
+import sanitizer from 'dompurify/dist/purify.es.js';
 import '@api-components/raml-aware/raml-aware.js';
 import '@advanced-rest-client/arc-marked/arc-marked.js';
 import '@polymer/iron-meta/iron-meta.js';
@@ -262,10 +263,12 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
             class="app-link link-padding provider-email"
             href="mailto:${_providerEmail}">${_providerEmail}</a>` : ''}
       </p>
-      ${_providerUrl ? html`
+      ${_providerUrl ? html([`
         <p class="inline-description">
-          <a href="${_providerUrl}" target="_blank" class="app-link provider-url">${_providerUrl}</a>
-        </p>` : ''}
+          ${this._sanitizeHTML(
+            `<a href="${_providerUrl}" target="_blank" class="app-link provider-url">${_providerUrl}</a>`,
+          )}
+        </p>`]) : ''}
     </section>`;
   }
 
@@ -274,13 +277,15 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
     if (!_licenseUrl || !_licenseName) {
       return '';
     }
-    return html`
+    return html([`
     <section role="region" aria-labelledby="licenseLabel" class="docs-section">
       <label class="section" id="licenseLabel">License</label>
       <p class="inline-description">
-        <a href="${_licenseUrl}" target="_blank" class="app-link">${_licenseName}</a>
+        ${this._sanitizeHTML(
+          `<a href="${_licenseUrl}" target="_blank" class="app-link">${_licenseName}</a>`,
+        )}
       </p>
-    </section>`;
+    </section>`]);
   }
 
   _termsOfServiceTemplate() {
@@ -359,6 +364,10 @@ class ApiSummary extends AmfHelperMixin(LitElement) {
         data-shape-type="method"
         title="Open method documentation">${item.method}</a>
     `;
+  }
+
+  _sanitizeHTML(HTML) {
+    return sanitizer.sanitize(HTML, { ADD_ATTR: ['target'] })
   }
 
   render() {

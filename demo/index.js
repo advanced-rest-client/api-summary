@@ -18,6 +18,7 @@ class ApiDemo extends ApiDemoPageBase {
       ['appian-api', 'Applian API'],
       ['nexmo-sms-api', 'Nexmo SMS API'],
       ['loan-microservice', 'Loan microservice (OAS)'],
+      ['prevent-xss', 'Prevent XSS'],
       ['mocking-service', 'Lots of methods'],
       ['no-endpoints', 'No endpoints!'],
       ['no-server', 'No server!']

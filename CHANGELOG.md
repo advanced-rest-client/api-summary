@@ -296,3 +296,21 @@
  [3fc5a30](https://github.com/advanced-rest-client/api-summary/commit/3fc5a3048b55a7d28093515275726b418375fc0e) by Pawel Psztyc
 
 
+<a name="4.1.0"></a>
+## [4.1.0](https://github.com/advanced-rest-client/api-summary/compare/4.0.2...4.1.0) (2020-03-26)
+
+### Update
+
+* [ci skip] automated merge master->stage. syncing main branches [b628067](https://github.com/advanced-rest-client/api-summary/commit/b628067313b7dbf742b11002d5420369eb6d94d0) by Ci agent
+
+
+### Features
+
+* adding support for OAS 3 (servers) [c9ffe88](https://github.com/advanced-rest-client/api-summary/commit/c9ffe8897ea069ac9a86309e84fed2fbfcfbf2d0) by Pawel
+
+
+### Bug Fixes
+
+* add sanitizer in license url and provider url [bump-version] [4fd74fb](https://github.com/advanced-rest-client/api-summary/commit/4fd74fba6028406df83ad7378210901c10bfc2b8) by Nicolas Walter Araya
+
+

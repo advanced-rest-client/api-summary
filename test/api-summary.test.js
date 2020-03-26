@@ -1,12 +1,8 @@
-import { fixture, assert, aTimeout } from '@open-wc/testing';
-import * as sinon from 'sinon/pkg/sinon-esm.js';
+import { fixture, assert, aTimeout, html } from '@open-wc/testing';
+import * as sinon from 'sinon';
 import '../api-summary.js';
 import { AmfLoader } from './amf-loader.js';
 import { IronMeta } from '@polymer/iron-meta/iron-meta.js';
-// import { chai } from '@bundled-es-modules/chai';
-// import { chaiDomDiff } from '@open-wc/semantic-dom-diff';
-//
-// chai.use(chaiDomDiff);
 
 describe('<api-summary>', function() {
   async function basicFixture() {
@@ -24,6 +20,12 @@ describe('<api-summary>', function() {
         <raml-aware scope="test-model"></raml-aware>
       </div>
     `);
+  }
+
+  async function modelFixture(amf) {
+    const element = await fixture(html`<api-summary .amf="${amf}"></api-summary>`);
+    await aTimeout();
+    return element;
   }
 
   [
@@ -394,6 +396,52 @@ describe('<api-summary>', function() {
             done();
           });
           node.click();
+        });
+      });
+
+      describe('Server rendering', () => {
+        let ramlSingleServerAmf;
+        let oasMultipleServersAmf;
+        let noServersAmf;
+        before(async () => {
+          ramlSingleServerAmf = await AmfLoader.load(compact);
+          oasMultipleServersAmf = await AmfLoader.load(compact, 'multiple-servers');
+          noServersAmf = await AmfLoader.load(compact, 'no-server');
+        });
+
+        it('renders URL area with a single server', async () => {
+          const element = await modelFixture(ramlSingleServerAmf);
+          const node = element.shadowRoot.querySelector('.url-area');
+          assert.ok(node);
+        });
+
+        it('renders single server URL', async () => {
+          const element = await modelFixture(ramlSingleServerAmf);
+          const node = element.shadowRoot.querySelector('.url-area .url-value');
+          assert.equal(node.textContent.trim(), 'https://{instance}.domain.com');
+        });
+
+        it('renders multiple servers', async () => {
+          const element = await modelFixture(oasMultipleServersAmf);
+          const node = element.shadowRoot.querySelector('.servers');
+          assert.ok(node);
+        });
+
+        it('renders multiple URLs', async () => {
+          const element = await modelFixture(oasMultipleServersAmf);
+          const nodes = element.shadowRoot.querySelectorAll('.server-lists li');
+          assert.lengthOf(nodes, 3, 'has 3 servers');
+          assert.equal(nodes[0].textContent.trim(), 'http://petstore.swagger.io/v1');
+          assert.equal(nodes[1].textContent.trim(), 'http://dev.petstore.swagger.io/v1');
+          assert.equal(nodes[2].textContent.trim(), 'https://{environment}.example.com/v2');
+        });
+
+        it('does not render URL area when no servers', async () => {
+          const element = await modelFixture(noServersAmf);
+          const urlNode = element.shadowRoot.querySelector('.url-area');
+          assert.notOk(urlNode);
+          const serversNode = element.shadowRoot.querySelector('.servers');
+          assert.notOk(serversNode);
         });
       });
     });

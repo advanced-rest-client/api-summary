@@ -58,6 +58,10 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
        * @default 2
        */
       titleLevel: { type: String },
+      /**
+       * Enables automatic rearranging of endpoints after being  computed
+       */
+      rearrangeendpoints: { type: Boolean },
 
       _providerName: { type: String },
       _providerEmail: { type: String },
@@ -247,9 +251,12 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
       return;
     }
     const key = this._getAmfKey(this.ns.aml.vocabularies.apiContract.endpoint);
-    const endpoints = this._ensureArray(webApi[key]);
+    let endpoints = this._ensureArray(webApi[key]);
     if (!endpoints || !endpoints.length) {
       return;
+    }
+    if (this.rearrangeendpoints) {
+      endpoints = this._rearrangeEndpoints(endpoints);
     }
     return endpoints.map((item) => {
       const result = {
@@ -545,5 +552,83 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     }
 
     return result.toString();
+  }
+
+    /**
+   * Re-arrange the endpoints in relative order to each other, keeping
+   * the first endpoints to appear first, and the last endpoints to appear
+   * last
+   * @param {Array} endpoints
+   * @return {Array}
+   */
+  _rearrangeEndpoints(endpoints) {
+    if (!endpoints) {
+      return null;
+    }
+
+    const merge = (left, right) => {
+      const resultArray = [];
+      let leftIndex = 0;
+      let rightIndex = 0;
+
+      while (leftIndex < left.length && rightIndex < right.length) {
+        const leftPath = this._getValue(left[leftIndex], this.ns.raml.vocabularies.apiContract.path)
+        const rightPath = this._getValue(right[rightIndex], this.ns.raml.vocabularies.apiContract.path)
+        if (leftPath < rightPath) {
+          resultArray.push(left[leftIndex]);
+          leftIndex++;
+        } else {
+          resultArray.push(right[rightIndex]);
+          rightIndex++;
+        }
+      }
+
+      return resultArray.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
+    }
+
+    const mergeSort = (unsortedArray) => {
+      if (unsortedArray.length <= 1) {
+        return unsortedArray;
+      }
+      const middle = Math.floor(unsortedArray.length / 2);
+
+      const left = unsortedArray.slice(0, middle);
+      const right = unsortedArray.slice(middle);
+
+      return merge(mergeSort(left), mergeSort(right));
+    }
+
+    const listMap = this._createListMap(endpoints);
+
+    return Object.keys(listMap)
+      .map((key) => mergeSort(listMap[key]))
+      .reduce((acc, value) => acc.concat(value), []);
+  }
+    /**
+   * Transforms a list of endpoints into a map that goes from
+   * string -> Object[], representing the first part of the endpoint
+   * path, and the list of endpoints that match it. The idea is
+   * to have a map for this, respecting the order each
+   * endpoint is first found at, so that re-arranging the
+   * endpoints keeps them in the same relative order to each
+   * other
+   *
+   * @param {Array} endpoints
+   * @return {Array}
+   */
+  _createListMap(endpoints) {
+    const map = {};
+    const getPathInit = (endpoint) => {
+      return this._getValue(endpoint, this.ns.raml.vocabularies.apiContract.path).split('/')[1];
+    };
+    endpoints.forEach((endpoint) => {
+      const pathInit = getPathInit(endpoint);
+      if (map[pathInit]) {
+        map[pathInit].push(endpoint);
+      } else {
+        map[pathInit] = [endpoint];
+      }
+    });
+    return map;
   }
 }

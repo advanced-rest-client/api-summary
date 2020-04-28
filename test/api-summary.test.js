@@ -13,6 +13,10 @@ describe('<api-summary>', function() {
     return await fixture(`<api-summary baseuri="https://domain.com"></api-summary>`);
   }
 
+  async function arrangedFixture() {
+    return (await fixture(`<api-summary rearrangeendpoints></api-navigation>`));
+  }
+
   async function awareFixture() {
     return await fixture(`
       <div>
@@ -442,6 +446,47 @@ describe('<api-summary>', function() {
           assert.notOk(urlNode);
           const serversNode = element.shadowRoot.querySelector('.servers');
           assert.notOk(serversNode);
+        });
+      });
+
+      describe('Rearranging endpoint', () => {
+        let element;
+        let amf;
+
+        const pathKey = 'http://a.ml/vocabularies/apiContract#path'
+
+        const dataSet = [
+          { [pathKey]: '/transactions/:txId' },
+          { [pathKey]: '/billing' },
+          { [pathKey]: '/accounts/:accountId' },
+          { [pathKey]: '/accounts' },
+          { [pathKey]: '/transactions' },
+        ];
+
+        const expected = [
+          { [pathKey]: '/transactions' },
+          { [pathKey]: '/transactions/:txId' },
+          { [pathKey]: '/billing' },
+          { [pathKey]: '/accounts' },
+          { [pathKey]: '/accounts/:accountId' }
+        ];
+
+        beforeEach(async () => {
+          element = await arrangedFixture();
+          amf = await AmfLoader.load(compact, 'rearrange-api');
+          await aTimeout();
+        });
+
+        it('should rearrange endpoints', () => {
+          const rearranged = element._rearrangeEndpoints(dataSet);
+          assert.sameDeepOrderedMembers(rearranged, expected);
+        });
+
+        it('should have endpoints rearranged', async () => {
+          element.amf = amf;
+          await aTimeout();
+
+          element._endpoints.forEach((endpoint, i) => assert.equal(endpoint.path, expected[i][pathKey]));
         });
       });
     });

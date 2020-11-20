@@ -314,3 +314,33 @@
 * add sanitizer in license url and provider url [bump-version] [4fd74fb](https://github.com/advanced-rest-client/api-summary/commit/4fd74fba6028406df83ad7378210901c10bfc2b8) by Nicolas Walter Araya
 
 
+<a name="4.2.0"></a>
+## [4.2.0](https://github.com/advanced-rest-client/api-summary/compare/4.0.3...4.2.0) (2020-11-20)
+
+### Build
+
+* change tests to web runner [e85019a](https://github.com/advanced-rest-client/api-summary/commit/e85019a0f76f95f8d2e6c09f77811d181943134d) by Francisco Di Giandomenico
+
+
+### Update
+
+* [ci skip] automated merge master->stage. syncing main branches [2b33c30](https://github.com/advanced-rest-client/api-summary/commit/2b33c300f23ec00f4e4de264a87881b823a73def) by Ci agent
+* [ci skip] automated merge master->stage. syncing main branches [b628067](https://github.com/advanced-rest-client/api-summary/commit/b628067313b7dbf742b11002d5420369eb6d94d0) by Ci agent
+
+
+### Features
+
+* adding support for OAS 3 (servers) [c9ffe88](https://github.com/advanced-rest-client/api-summary/commit/c9ffe8897ea069ac9a86309e84fed2fbfcfbf2d0) by Pawel
+
+
+### Bug Fixes
+
+* replace _computeWebApi with _computeApi [3034049](https://github.com/advanced-rest-client/api-summary/commit/3034049f9de1a0bb044d64e8eb45db05c8e6cc69) by Francisco Di Giandomenico
+
+
+### Refactor
+
+* remove karma sl config [bf6355c](https://github.com/advanced-rest-client/api-summary/commit/bf6355cd806b61ed43bc361b64385d5c185d7b70) by Francisco Di Giandomenico
+* remove travis.yml [7f45924](https://github.com/advanced-rest-client/api-summary/commit/7f459241600319507f047f4cb661fab14235b6db) by Francisco Di Giandomenico
+
+

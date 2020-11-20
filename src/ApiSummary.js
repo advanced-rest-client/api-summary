@@ -124,7 +124,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     }
 
     this.servers = this._getServers({});
-    const webApi = this.webApi = this._computeWebApi(amf);
+    const webApi = this.webApi = this._computeApi(amf);
     this._protocols = this._computeProtocols(amf);
 
     this._webApiChanged(webApi);

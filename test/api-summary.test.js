@@ -2,15 +2,10 @@ import { fixture, assert, aTimeout, html } from '@open-wc/testing';
 import * as sinon from 'sinon';
 import '../api-summary.js';
 import { AmfLoader } from './amf-loader.js';
-import { IronMeta } from '@polymer/iron-meta/iron-meta.js';
 
 describe('<api-summary>', function() {
   async function basicFixture() {
     return await fixture(`<api-summary aware="test"></api-summary>`);
-  }
-
-  async function baseUriFixture() {
-    return await fixture(`<api-summary baseuri="https://domain.com"></api-summary>`);
   }
 
   async function awareFixture() {
@@ -106,57 +101,6 @@ describe('<api-summary>', function() {
         it('renders base uri', () => {
           const node = element.shadowRoot.querySelector('.url-value');
           assert.dom.equal(node, `<div class="url-value">https://{instance}.domain.com</div>`);
-        });
-      });
-
-      describe('Base URI property', () => {
-        let element;
-        let amf;
-
-        before(async () => {
-          amf = await AmfLoader.load(compact);
-        });
-
-        async function setupBaseUri() {
-          element = await baseUriFixture();
-          element.amf = amf;
-          await aTimeout();
-        }
-
-        async function setupBasic() {
-          element = await basicFixture();
-          element.amf = amf;
-          await aTimeout();
-        }
-
-        after(() => {
-          new IronMeta({
-            key: 'ApiBaseUri'
-          }).value = undefined;
-        });
-
-        it('Sets URL from base uri', async () => {
-          await setupBaseUri();
-          const node = element.shadowRoot.querySelector('.url-value');
-          assert.dom.equal(node, `<div class="url-value">https://domain.com</div>`);
-        });
-
-        it('Sets URL from iron-meta', async () => {
-          new IronMeta({
-            key: 'ApiBaseUri'
-          }).value = 'https://meta.com/base';
-          await setupBasic();
-          const node = element.shadowRoot.querySelector('.url-value');
-          assert.dom.equal(node, `<div class="url-value">https://meta.com/base</div>`);
-        });
-
-        it('In case of conflict base uri wins', async () => {
-          new IronMeta({
-            key: 'ApiBaseUri'
-          }).value = 'https://meta.com/base';
-          await setupBaseUri();
-          const node = element.shadowRoot.querySelector('.url-value');
-          assert.dom.equal(node, `<div class="url-value">https://domain.com</div>`);
         });
       });
 

@@ -344,3 +344,28 @@
 * remove travis.yml [7f45924](https://github.com/advanced-rest-client/api-summary/commit/7f459241600319507f047f4cb661fab14235b6db) by Francisco Di Giandomenico
 
 
+<a name="4.2.1"></a>
+## [4.2.1](https://github.com/advanced-rest-client/api-summary/compare/4.1.0...4.2.1) (2020-11-27)
+
+### Build
+
+* change tests to web runner [e85019a](https://github.com/advanced-rest-client/api-summary/commit/e85019a0f76f95f8d2e6c09f77811d181943134d) by Francisco Di Giandomenico
+
+
+### Update
+
+* [ci skip] automated merge master->stage. syncing main branches [a15872c](https://github.com/advanced-rest-client/api-summary/commit/a15872cae18761c1eda3132df720c28b3b507103) by Ci agent
+* [ci skip] automated merge master->stage. syncing main branches [2b33c30](https://github.com/advanced-rest-client/api-summary/commit/2b33c300f23ec00f4e4de264a87881b823a73def) by Ci agent
+
+
+### Bug Fixes
+
+* replace _computeWebApi with _computeApi [3034049](https://github.com/advanced-rest-client/api-summary/commit/3034049f9de1a0bb044d64e8eb45db05c8e6cc69) by Francisco Di Giandomenico
+
+
+### Refactor
+
+* remove karma sl config [bf6355c](https://github.com/advanced-rest-client/api-summary/commit/bf6355cd806b61ed43bc361b64385d5c185d7b70) by Francisco Di Giandomenico
+* remove travis.yml [7f45924](https://github.com/advanced-rest-client/api-summary/commit/7f459241600319507f047f4cb661fab14235b6db) by Francisco Di Giandomenico
+
+

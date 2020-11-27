@@ -24,6 +24,7 @@ class ApiDemo extends ApiDemoPage {
       ['no-endpoints', 'No endpoints!'],
       ['no-server', 'No server!'],
       ['multiple-servers', 'Multiple servers'],
+      ['async-api', 'AsyncAPI'],
     ].map(
       ([file, label]) => html`
         <anypoint-item data-src="${file}-compact.json">${label}</anypoint-item>

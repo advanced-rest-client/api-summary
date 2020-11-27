@@ -99,8 +99,8 @@ describe('<api-summary>', function() {
         });
 
         it('renders base uri', () => {
-          const node = element.shadowRoot.querySelector('.url-value');
-          assert.dom.equal(node, `<div class="url-value">https://{instance}.domain.com</div>`);
+          const node = element.shadowRoot.querySelector('api-url');
+          assert.equal(node.url, `https://{instance}.domain.com`);
         });
       });
 
@@ -355,14 +355,14 @@ describe('<api-summary>', function() {
 
         it('renders URL area with a single server', async () => {
           const element = await modelFixture(ramlSingleServerAmf);
-          const node = element.shadowRoot.querySelector('.url-area');
+          const node = element.shadowRoot.querySelector('api-url');
           assert.ok(node);
         });
 
         it('renders single server URL', async () => {
           const element = await modelFixture(ramlSingleServerAmf);
-          const node = element.shadowRoot.querySelector('.url-area .url-value');
-          assert.equal(node.textContent.trim(), 'https://{instance}.domain.com');
+          const node = element.shadowRoot.querySelector('api-url');
+          assert.equal(node.url, 'https://{instance}.domain.com');
         });
 
         it('renders multiple servers', async () => {
@@ -386,6 +386,24 @@ describe('<api-summary>', function() {
           assert.notOk(urlNode);
           const serversNode = element.shadowRoot.querySelector('.servers');
           assert.notOk(serversNode);
+        });
+      });
+
+      describe('AsyncAPI', () => {
+        const asyncApi = 'async-api';
+        let asyncAmf;
+        let element;
+
+        before(async () => {
+          asyncAmf = await AmfLoader.load(compact, asyncApi);
+        });
+
+        beforeEach(async () => {
+          element = await modelFixture(asyncAmf);
+        });
+
+        it('should render server uri for API', () => {
+          assert.equal(element.shadowRoot.querySelector('api-url').url, 'amqp://broker.mycompany.com');
         });
       });
     });

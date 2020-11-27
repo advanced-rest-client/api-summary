@@ -6,6 +6,7 @@ import sanitizer from 'dompurify/dist/purify.es.js';
 import '@api-components/raml-aware/raml-aware.js';
 import '@advanced-rest-client/arc-marked/arc-marked.js';
 import '@polymer/iron-meta/iron-meta.js';
+import '@api-components/api-method-documentation';
 import styles from './Styles.js';
 /**
  * `api-summary`
@@ -177,6 +178,12 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
    * @return {String} Endpoint's URI
    */
   _computeBaseUri(server, baseUri, protocols) {
+    if (!protocols) {
+      const protocol = this._getValue(server, this._getAmfKey(this.ns.aml.vocabularies.apiContract.protocol));
+      if (protocol) {
+        protocols = [protocol]  
+      }
+    }
     let base = this._getBaseUri(baseUri, server, protocols);
     if (base && base[base.length - 1] === '/') {
       base = base.substr(0, base.length - 1);
@@ -402,10 +409,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     const { baseUri, protocols } = this;
     const uri = this._computeBaseUri(server, baseUri, protocols);
     return html`
-    <div class="url-area">
-      <span class="url-label">API base URI</span>
-      <div class="url-value">${uri}</div>
-    </div>`;
+    <api-url .baseUri="${uri}"></api-url>`;
   }
 
   _protocolsTemplate() {

@@ -9,6 +9,7 @@
   "prevent-xss/prevent-xss.json": "OAS 2.0",
   "no-endpoints/no-endpoints.raml": "RAML 1.0",
   "google-drive-api/google-drive-api.raml": "RAML 1.0",
+  "async-api/async-api.yaml": "ASYNC 2.0",
   "exchange-experience-api/exchange-experience-api.raml": "RAML 0.8",
   "multiple-servers/multiple-servers.yaml": { "type": "OAS 3.0", "mime": "application/yaml" }
 }

@@ -388,6 +388,24 @@ describe('<api-summary>', function() {
           assert.notOk(serversNode);
         });
       });
+
+      describe('AsyncAPI', () => {
+        const asyncApi = 'async-api';
+        let asyncAmf;
+        let element;
+
+        before(async () => {
+          asyncAmf = await AmfLoader.load(compact, asyncApi);
+        });
+
+        beforeEach(async () => {
+          element = await modelFixture(asyncAmf);
+        });
+
+        it('should render server uri for API', () => {
+          assert.equal(element.shadowRoot.querySelector('api-url').url, 'amqp://broker.mycompany.com');
+        });
+      });
     });
   });
 

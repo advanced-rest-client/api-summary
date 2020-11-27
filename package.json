@@ -26,6 +26,7 @@
     "@advanced-rest-client/arc-marked": "^1.0.6",
     "@advanced-rest-client/markdown-styles": "^3.1.2",
     "@api-components/amf-helper-mixin": "^4.0.24",
+    "@api-components/api-method-documentation": "^5.0.6",
     "@api-components/http-method-label": "^3.0.2",
     "@api-components/raml-aware": "^3.0.0",
     "@polymer/iron-meta": "^3.0.0",

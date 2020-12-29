@@ -406,10 +406,10 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
    * @return {TemplateResult} A template for a single server in the main API definition
    */
   _baseUriTemplate(server) {
-    const { baseUri, protocols } = this;
+    const { baseUri, protocols, amf } = this;
     const uri = this._computeBaseUri(server, baseUri, protocols);
     return html`
-    <api-url .baseUri="${uri}"></api-url>`;
+    <api-url .amf="${amf}" .baseUri="${uri}" .server="${server}"></api-url>`;
   }
 
   _protocolsTemplate() {

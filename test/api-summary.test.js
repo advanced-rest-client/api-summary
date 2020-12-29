@@ -405,6 +405,10 @@ describe('<api-summary>', function() {
         it('should render server uri for API', () => {
           assert.equal(element.shadowRoot.querySelector('api-url').url, 'amqp://broker.mycompany.com');
         });
+
+        it('should render "API channels" message', () => {
+          assert.equal(element.shadowRoot.querySelector('.section.endpoints-title').textContent, 'API channels');
+        });
       });
     });
   });

@@ -483,10 +483,11 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
       return;
     }
     const result = _endpoints.map((item) => this._endpointTemplate(item));
+    const pathLabel = this._isAsyncAPI(this.amf) ? 'channels' : 'endpoints';
     return html`
     <div class="separator"></div>
     <div class="toc">
-      <label class="section endpoints-title">API endpoints</label>
+      <label class="section endpoints-title">API ${pathLabel}</label>
       ${result}
     </div>
     `;

@@ -369,3 +369,12 @@
 * remove travis.yml [7f45924](https://github.com/advanced-rest-client/api-summary/commit/7f459241600319507f047f4cb661fab14235b6db) by Francisco Di Giandomenico
 
 
+<a name="4.2.2"></a>
+## [4.2.2](https://github.com/advanced-rest-client/api-summary/compare/4.2.0...4.2.2) (2020-12-30)
+
+### Update
+
+* [ci skip] automated merge master->stage. syncing main branches [908f427](https://github.com/advanced-rest-client/api-summary/commit/908f42791fa1a481f8ac48ebded0b9acdb7ca36f) by Ci agent
+* [ci skip] automated merge master->stage. syncing main branches [a15872c](https://github.com/advanced-rest-client/api-summary/commit/a15872cae18761c1eda3132df720c28b3b507103) by Ci agent
+
+

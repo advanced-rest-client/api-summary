@@ -1,25 +1,26 @@
-import { fixture, assert, aTimeout, html } from '@open-wc/testing';
-import * as sinon from 'sinon';
+/* eslint-disable prefer-object-spread */
+import { fixture, assert, aTimeout, html, nextFrame } from '@open-wc/testing';
+import sinon from 'sinon';
 import '../api-summary.js';
 import { AmfLoader } from './amf-loader.js';
 
-describe('<api-summary>', function() {
+/** @typedef {import('..').ApiSummary} ApiSummary */
+
+describe('ApiSummary', () => {
+  /**
+   * @returns {Promise<ApiSummary>}
+   */
   async function basicFixture() {
-    return await fixture(`<api-summary aware="test"></api-summary>`);
+    return fixture(html`<api-summary></api-summary>`);
   }
 
-  async function awareFixture() {
-    return await fixture(`
-      <div>
-        <api-summary aware="test-model"></api-summary>
-        <raml-aware scope="test-model"></raml-aware>
-      </div>
-    `);
-  }
-
+  /**
+   * @param {any} amf
+   * @returns {Promise<ApiSummary>}
+   */
   async function modelFixture(amf) {
-    const element = await fixture(html`<api-summary .amf="${amf}"></api-summary>`);
-    await aTimeout();
+    const element = /** @type ApiSummary */ (await fixture(html`<api-summary .amf="${amf}"></api-summary>`));
+    await aTimeout(0);
     return element;
   }
 
@@ -27,9 +28,9 @@ describe('<api-summary>', function() {
     ['Full AMF model', false],
     ['Compact AMF model', true]
   ].forEach(([label, compact]) => {
-    describe(label, () => {
+    describe(String(label), () => {
       describe('Basic', () => {
-        let element;
+        let element = /** @type ApiSummary */ (null);
         let amf;
         before(async () => {
           amf = await AmfLoader.load(compact);
@@ -38,12 +39,7 @@ describe('<api-summary>', function() {
         beforeEach(async () => {
           element = await basicFixture();
           element.amf = amf;
-          await aTimeout();
-        });
-
-        it('raml-aware is in the DOM', () => {
-          const node = element.shadowRoot.querySelector('raml-aware');
-          assert.ok(node);
+          await aTimeout(0);
         });
 
         it('renders api title', () => {
@@ -87,14 +83,12 @@ describe('<api-summary>', function() {
             strong,
             '<strong>markdown</strong>',
             { ignoreAttributes: ['class'] },
-            'description is a markdown'
           );
           const anchor = node.querySelector('a');
           assert.dom.equal(
             anchor,
             '<a>asd</a>',
             { ignoreAttributes: ['class'] },
-            'has sanitized content'
           );
         });
 
@@ -106,7 +100,7 @@ describe('<api-summary>', function() {
 
       describe('OAS properties', () => {
         let amf;
-        let element;
+        let element = /** @type ApiSummary */ (null);
 
         before(async () => {
           amf = await AmfLoader.load(compact, 'loan-microservice');
@@ -115,7 +109,8 @@ describe('<api-summary>', function() {
         beforeEach(async () => {
           element = await basicFixture();
           element.amf = amf;
-          await aTimeout();
+          await aTimeout(0);
+          await nextFrame();
         });
 
         it('provider section is rendered', () => {
@@ -169,7 +164,7 @@ describe('<api-summary>', function() {
 
       describe('Prevent XSS attacks', () => {
         let amf;
-        let element;
+        let element = /** @type ApiSummary */ (null);
 
         before(async () => {
           amf = await AmfLoader.load(compact, 'prevent-xss');
@@ -178,7 +173,7 @@ describe('<api-summary>', function() {
         beforeEach(async () => {
           element = await basicFixture();
           element.amf = amf;
-          await aTimeout();
+          await aTimeout(0);
         });
 
         it('provider section is rendered', () => {
@@ -231,8 +226,8 @@ describe('<api-summary>', function() {
         });
       });
 
-      describe('Endppoints rendering', () => {
-        let element;
+      describe('Endpoints rendering', () => {
+        let element = /** @type ApiSummary */ (null);
         let amf;
 
         before(async () => {
@@ -242,7 +237,7 @@ describe('<api-summary>', function() {
         beforeEach(async () => {
           element = await basicFixture();
           element.amf = amf;
-          await aTimeout();
+          await aTimeout(0);
         });
 
         it('adds separator', () => {
@@ -275,7 +270,7 @@ describe('<api-summary>', function() {
 
         it('sets data-id on name', () => {
           const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.endpoint-path');
-          assert.notEmpty(node.getAttribute('data-id'));
+          assert.ok(node.getAttribute('data-id'));
         });
 
         it('renders endpoint path with name', () => {
@@ -287,7 +282,7 @@ describe('<api-summary>', function() {
 
         it('sets data-id on path', () => {
           const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.endpoint-path');
-          assert.notEmpty(node.getAttribute('data-id'));
+          assert.ok(node.getAttribute('data-id'));
         });
 
         it('renders list of operations', () => {
@@ -315,31 +310,37 @@ describe('<api-summary>', function() {
         it('Click on an endpoint dispatches navigation event', (done) => {
           const node = element.shadowRoot.querySelector(`.endpoint-path[data-id]`);
           element.addEventListener('api-navigation-selection-changed', (e) => {
-            assert.typeOf(e.detail.selected, 'string');
-            assert.equal(e.detail.type, 'endpoint');
+            // @ts-ignore
+            const {detail} = e;
+            assert.typeOf(detail.selected, 'string');
+            assert.equal(detail.type, 'endpoint');
             done();
           });
-          node.click();
+          /** @type HTMLElement */ (node).click();
         });
 
         it('Click on an endpoint path dispatches navigation event', (done) => {
           const node = element.shadowRoot.querySelector(`.endpoint-path[data-id]`);
           element.addEventListener('api-navigation-selection-changed', (e) => {
-            assert.typeOf(e.detail.selected, 'string');
-            assert.equal(e.detail.type, 'endpoint');
+            // @ts-ignore
+            const {detail} = e;
+            assert.typeOf(detail.selected, 'string');
+            assert.equal(detail.type, 'endpoint');
             done();
           });
-          node.click();
+          /** @type HTMLElement */ (node).click();
         });
 
         it('Click on a method dispatches navigation event', (done) => {
           const node = element.shadowRoot.querySelector(`.method-label[data-id]`);
           element.addEventListener('api-navigation-selection-changed', (e) => {
-            assert.typeOf(e.detail.selected, 'string');
-            assert.equal(e.detail.type, 'method');
+            // @ts-ignore
+            const {detail} = e;
+            assert.typeOf(detail.selected, 'string');
+            assert.equal(detail.type, 'method');
             done();
           });
-          node.click();
+          /** @type HTMLElement */ (node).click();
         });
       });
 
@@ -392,7 +393,7 @@ describe('<api-summary>', function() {
       describe('AsyncAPI', () => {
         const asyncApi = 'async-api';
         let asyncAmf;
-        let element;
+        let element = /** @type ApiSummary */ (null);
 
         before(async () => {
           asyncAmf = await AmfLoader.load(compact, asyncApi);
@@ -415,7 +416,7 @@ describe('<api-summary>', function() {
 
 
   describe('_computeBaseUri()', () => {
-    let element;
+    let element = /** @type ApiSummary */ (null);
     beforeEach(async () => {
       element = await basicFixture();
     });
@@ -444,7 +445,7 @@ describe('<api-summary>', function() {
 
   describe('_computeProvider()', () => {
     let model;
-    let element;
+    let element = /** @type ApiSummary */ (null);
 
     beforeEach(async () => {
       element = await basicFixture();
@@ -486,29 +487,9 @@ describe('<api-summary>', function() {
     });
   });
 
-  describe('raml-aware model', () => {
-    let element;
-    let amf;
-    before(async () => {
-      amf = await AmfLoader.load();
-    });
-
-    beforeEach(async () => {
-      const region = await awareFixture();
-      element = region.querySelector('api-summary');
-      const aware = region.querySelector('raml-aware');
-      aware.api = amf;
-      await aTimeout();
-    });
-
-    it('passes the amf value', () => {
-      assert.typeOf(element.amf, 'array');
-    });
-  });
-
   describe('a11y', () => {
     let amf;
-    let element;
+    let element = /** @type ApiSummary */ (null);
 
     before(async () => {
       amf = await AmfLoader.load(false, 'loan-microservice');
@@ -517,7 +498,7 @@ describe('<api-summary>', function() {
     beforeEach(async () => {
       element = await basicFixture();
       element.amf = amf;
-      await aTimeout();
+      await aTimeout(0);
     });
 
     it('passes accessibility test', async () => {

@@ -1,34 +1,22 @@
+/* eslint-disable lit-a11y/click-events-have-key-events */
+/* eslint-disable no-param-reassign */
+/* eslint-disable class-methods-use-this */
 import { LitElement, html } from 'lit-element';
-import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
+import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
+import { AmfHelperMixin } from '@api-components/amf-helper-mixin';
 import markdownStyles from '@advanced-rest-client/markdown-styles/markdown-styles.js';
 import labelStyles from '@api-components/http-method-label/http-method-label-common-styles.js';
-import sanitizer from 'dompurify/dist/purify.es.js';
-import '@api-components/raml-aware/raml-aware.js';
+import sanitizer from 'dompurify';
 import '@advanced-rest-client/arc-marked/arc-marked.js';
-import '@polymer/iron-meta/iron-meta.js';
-import '@api-components/api-method-documentation';
+import '@api-components/api-method-documentation/api-url.js';
 import styles from './Styles.js';
+
+/** @typedef {import('lit-element').TemplateResult} TemplateResult */
+
 /**
  * `api-summary`
  *
  * A summary view for an API base on AMF data model
- *
- * ## Styling
- *
- * `<api-summary>` provides the following custom properties and mixins for styling:
- *
- * Custom property | Description | Default
- * ----------------|-------------|----------
- * `--api-summary` | Mixin applied to this elment | `{}`
- * `--api-summary-color` | Color of text labels | ``
- * `--api-summary-url-font-size` | Font size of endpoin URL | `16px`
- * `--api-summary-url-background-color` | Background color of the URL section | `#424242`
- * `--api-summary-url-font-color` | Font color of the URL area | `#fff`
- * `--api-summary-separator-color` | Color of section separator | `rgba(0, 0, 0, 0.12)`
- *
- * @customElement
- * @demo demo/index.html
- * @appliesMixin AmfHelperMixin
  */
 export class ApiSummary extends AmfHelperMixin(LitElement) {
   get styles() {
@@ -42,14 +30,10 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
   static get properties() {
     return {
       /**
-       * `raml-aware` scope property to use.
-       */
-      aware: { type: String },
-      /**
        * A property to set to override AMF's model base URI information.
        * When this property is set, the `endpointUri` property is recalculated.
        */
-      baseUri: { type: String, value: '' },
+      baseUri: { type: String },
       /**
        * API title header level in value range from 1 to 6.
        * This is made for accessibility. It the component is used in a context
@@ -107,6 +91,14 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
   constructor() {
     super();
     this.titleLevel = 2;
+    /**
+     * @type {string}
+     */
+    this.baseUri = undefined;
+    /**
+     * @type {string[]}
+     */
+    this.protocols = undefined;
   }
 
   __amfChanged() {
@@ -125,7 +117,8 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     }
 
     this.servers = this._getServers({});
-    const webApi = this.webApi = this._computeApi(amf);
+    const webApi = this._computeApi(amf);
+    this.webApi = webApi;
     this._protocols = this._computeProtocols(amf);
 
     this._webApiChanged(webApi);
@@ -155,33 +148,35 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
   /**
    * Computes value of `apiTitle` property.
    *
-   * @param {Object} shape Shape of AMF model.
-   * @return {String|undefined} Description if defined.
+   * @param {any} shape Shape of AMF model.
+   * @return {string|undefined} Description if defined.
    */
   _computeApiTitle(shape) {
-    return this._getValue(shape, this.ns.aml.vocabularies.core.name);
+    return /** @type string */ (this._getValue(shape, this.ns.aml.vocabularies.core.name));
   }
+
   /**
    * Computes value for `version` property
-   * @param {Object} webApi AMF's WebApi shape
-   * @return {String|undefined}
+   * @param {any} webApi AMF's WebApi shape
+   * @return {string|undefined}
    */
   _computeVersion(webApi) {
-    return this._getValue(webApi, this.ns.aml.vocabularies.core.version);
+    return /** @type string */ (this._getValue(webApi, this.ns.aml.vocabularies.core.version));
   }
+
   /**
    * Computes API's URI based on `amf` and `baseUri` property.
    *
-   * @param {Object} server Server model of AMF API.
-   * @param {?String} baseUri Current value of `baseUri` property
-   * @param {?Array<String>} protocols List of supported protocols
-   * @return {String} Endpoint's URI
+   * @param {any} server Server model of AMF API.
+   * @param {string=} baseUri Current value of `baseUri` property
+   * @param {string[]=} protocols List of supported protocols
+   * @return {string} Endpoint's URI
    */
   _computeBaseUri(server, baseUri, protocols) {
     if (!protocols) {
-      const protocol = this._getValue(server, this._getAmfKey(this.ns.aml.vocabularies.apiContract.protocol));
+      const protocol = /** @type string */ (this._getValue(server, this._getAmfKey(this.ns.aml.vocabularies.apiContract.protocol)));
       if (protocol) {
-        protocols = [protocol]  
+        protocols = [protocol];
       }
     }
     let base = this._getBaseUri(baseUri, server, protocols);
@@ -190,24 +185,25 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     }
     return base;
   }
+
   /**
    * Computes information about provider of the API.
    *
-   * @param {Object} webApi WebApi shape
-   * @return {Object|undefined}
+   * @param {any} webApi WebApi shape
+   * @return {any|undefined}
    */
   _computeProvider(webApi) {
     if (!webApi) {
-      return;
+      return undefined;
     }
     const key = this._getAmfKey(this.ns.aml.vocabularies.core.provider);
     let data = this._ensureArray(webApi[key]);
     if (!data) {
-      return;
+      return undefined;
     }
-    data = data[0];
-    if (data instanceof Array) {
-      data = data[0];
+    [data] = data;
+    if (Array.isArray(data)) {
+      [data] = data;
     }
     return data;
   }
@@ -232,31 +228,40 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     return value;
   }
 
+  /**
+   * @param {any} webApi 
+   * @returns {string|undefined}
+   */
   _computeToS(webApi) {
-    return this._getValue(webApi, this.ns.aml.vocabularies.core.termsOfService);
+    return /** @type string */ (this._getValue(webApi, this.ns.aml.vocabularies.core.termsOfService));
   }
 
+  /**
+   * @param {any} webApi 
+   * @returns {any}
+   */
   _computeLicense(webApi) {
     const key = this._getAmfKey(this.ns.aml.vocabularies.core.license);
     const data = webApi && webApi[key];
     if (!data) {
-      return;
+      return undefined;
     }
     return data instanceof Array ? data[0] : data;
   }
+
   /**
    * Computes view model for endpoints list.
-   * @param {Object} webApi Web API model
-   * @return {Array<Object>|undefined}
+   * @param {any} webApi Web API model
+   * @return {any[]|undefined}
    */
   _computeEndpoints(webApi) {
     if (!webApi) {
-      return;
+      return undefined;
     }
     const key = this._getAmfKey(this.ns.aml.vocabularies.apiContract.endpoint);
     const endpoints = this._ensureArray(webApi[key]);
     if (!endpoints || !endpoints.length) {
-      return;
+      return undefined;
     }
     return endpoints.map((item) => {
       const result = {
@@ -268,23 +273,22 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
       return result;
     });
   }
+
   /**
    * Computes a view model for supported operations for an endpoint.
-   * @param {Object} endpoint Endpoint model.
-   * @return {Array<Object>|unbdefined}
+   * @param {any} endpoint Endpoint model.
+   * @return {any[]|undefined}
    */
   _endpointOperations(endpoint) {
     const key = this._getAmfKey(this.ns.aml.vocabularies.apiContract.supportedOperation);
     const so = this._ensureArray(endpoint[key]);
     if (!so || !so.length) {
-      return;
+      return undefined;
     }
-    return so.map((item) => {
-      return {
+    return so.map((item) => ({
         id: item['@id'],
         method: this._getValue(item, this.ns.aml.vocabularies.apiContract.method)
-      };
-    });
+      }));
   }
 
   _navigateItem(e) {
@@ -304,17 +308,8 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     this.dispatchEvent(ev);
   }
 
-  _apiHandler(e) {
-    this.amf = e.target.api;
-  }
-
   render() {
-    const { aware } = this;
     return html`<style>${this.styles}</style>
-      ${aware ?
-        html`<raml-aware @api-changed="${this._apiHandler}" .scope="${aware}"></raml-aware>` :
-        ''}
-
       <div>
         ${this._titleTemplate()}
         ${this._versionTemplate()}
@@ -368,7 +363,6 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
   }
 
   /**
-   * @param {Object} server Server definition
    * @return {TemplateResult|String} A template for a server, servers, or no servers
    * whether it's defined in the main API definition or not.
    */
@@ -391,7 +385,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
   }
 
   /**
-   * @param {Object} server Server definition
+   * @param {any} server Server definition
    * @return {TemplateResult} Template for a server list items when there is more
    * than one server.
    */
@@ -402,7 +396,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
   }
 
   /**
-   * @param {Object} server Server definition
+   * @param {any} server Server definition
    * @return {TemplateResult} A template for a single server in the main API definition
    */
   _baseUriTemplate(server) {
@@ -429,6 +423,9 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     if (!_providerName) {
       return '';
     }
+    const link = _providerUrl ? this._sanitizeHTML(
+      `<a href="${_providerUrl}" target="_blank" class="app-link provider-url">${_providerUrl}</a>`,
+    ): undefined;
     return html`
     <section role="contentinfo" class="docs-section">
       <label class="section">Contact information</label>
@@ -438,12 +435,10 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
             class="app-link link-padding provider-email"
             href="mailto:${_providerEmail}">${_providerEmail}</a>` : ''}
       </p>
-      ${_providerUrl ? html([`
+      ${_providerUrl ? html`
         <p class="inline-description">
-          ${this._sanitizeHTML(
-            `<a href="${_providerUrl}" target="_blank" class="app-link provider-url">${_providerUrl}</a>`,
-          )}
-        </p>`]) : ''}
+          ${unsafeHTML(link)}
+        </p>` : ''}
     </section>`;
   }
 
@@ -452,15 +447,16 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     if (!_licenseUrl || !_licenseName) {
       return '';
     }
-    return html([`
-    <section role="region" aria-labelledby="licenseLabel" class="docs-section">
+    const link = this._sanitizeHTML(
+      `<a href="${_licenseUrl}" target="_blank" class="app-link">${_licenseName}</a>`,
+    );
+    return html`
+    <section aria-labelledby="licenseLabel" class="docs-section">
       <label class="section" id="licenseLabel">License</label>
       <p class="inline-description">
-        ${this._sanitizeHTML(
-          `<a href="${_licenseUrl}" target="_blank" class="app-link">${_licenseName}</a>`,
-        )}
+        ${unsafeHTML(link)}
       </p>
-    </section>`]);
+    </section>`;
   }
 
   _termsOfServiceTemplate() {
@@ -469,7 +465,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
       return '';
     }
     return html`
-    <section role="region" aria-labelledby="tocLabel" class="docs-section">
+    <section aria-labelledby="tocLabel" class="docs-section">
       <label class="section" id="tocLabel">Terms of service</label>
       <arc-marked .markdown="${_termsOfService}" sanitize>
         <div slot="markdown-html" class="markdown-body"></div>
@@ -480,7 +476,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
   _endpointsTemplate() {
     const { _endpoints } = this;
     if (!_endpoints || !_endpoints.length) {
-      return;
+      return '';
     }
     const result = _endpoints.map((item) => this._endpointTemplate(item));
     const pathLabel = this._isAsyncAPI(this.amf) ? 'channels' : 'endpoints';
@@ -533,7 +529,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
   _methodTemplate(item, endpoint) {
     return html`
       <a
-        href="#${endpoint.path + '/' + item.method}"
+        href="#${`${endpoint.path  }/${  item.method}`}"
         class="method-label"
         data-method="${item.method}"
         data-id="${item.id}"
@@ -542,13 +538,22 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     `;
   }
 
+  /**
+   * @param {string} HTML 
+   * @returns {string}
+   */
   _sanitizeHTML(HTML) {
-    const result = sanitizer.sanitize(HTML, { ADD_ATTR: ['target'] });
+    const result = sanitizer.sanitize(HTML, { 
+      ADD_ATTR: ['target', 'href'],
+      ALLOWED_TAGS: ['a'],
+      USE_PROFILES: {html: true},
+    });
 
     if (typeof result === 'string') {
       return result;
     }
 
+    // @ts-ignore
     return result.toString();
   }
 }

@@ -125,7 +125,7 @@ a:hover {
   cursor: pointer;
   margin-bottom: 4px;
   display: inline-block;
-  font-weight: 500;
+  font-weight: var(--api-summary-endpoint-path-font-weight, 500);
   color: var(--link-color, #0277BD);
   margin: 4px 0;
   word-break: break-all;
@@ -142,7 +142,7 @@ a:hover {
 }
 
 .section.endpoints-title {
-  font-weight: 500;
+  font-weight: var(--arc-font-title-font-weight, 500);
 }
 
 .endpoint-path-name {

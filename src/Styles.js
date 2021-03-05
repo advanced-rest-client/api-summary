@@ -56,6 +56,7 @@ arc-marked {
 }
 
 label.section {
+  color: var(--arc-font-subhead-color); 
   font-weight: var(--arc-font-subhead-font-weight);
   line-height: var(--arc-font-subhead-line-height);
   /* font-size: 18px; */

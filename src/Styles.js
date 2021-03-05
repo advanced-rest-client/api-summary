@@ -143,6 +143,10 @@ a:hover {
 
 .section.endpoints-title {
   font-weight: var(--arc-font-title-font-weight, 500);
+  color: var(--arc-font-title-color); 
+  font-weight: var(--arc-font-title-font-weight);
+  line-height: var(--arc-font-title-line-height);
+  font-size: var(--arc-font-title-font-size);
 }
 
 .endpoint-path-name {

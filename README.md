@@ -4,7 +4,7 @@
 
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/@api-components/api-summary)
 
-# api-summary
+# &lt;api-summary&gt;
 
 A component that renders basic information about an API.
 It uses AMF model to render the view.
@@ -17,7 +17,8 @@ For compatibility with previous model version use `3.x.x` version of the compone
 ## Usage
 
 ### Installation
-```
+
+```sh
 npm install --save @api-components/api-summary
 ```
 
@@ -86,7 +87,7 @@ class SampleElement extends PolymerElement {
 customElements.define('sample-element', SampleElement);
 ```
 
-### Installation
+## Development
 
 ```sh
 git clone https://github.com/advanced-rest-client/api-summary

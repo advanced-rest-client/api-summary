@@ -332,7 +332,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     }
     return html`
     <div class="api-title" role="heading" aria-level="${titleLevel}" part="api-title">
-    <label>API title:</label>
+    <label part="api-title-label">API title:</label>
     <span>${_apiTitle}</span>
     </div>`;
   }
@@ -481,8 +481,8 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     const result = _endpoints.map((item) => this._endpointTemplate(item));
     const pathLabel = this._isAsyncAPI(this.amf) ? 'channels' : 'endpoints';
     return html`
-    <div class="separator"></div>
-    <div class="toc">
+    <div class="separator" part="separator"></div>
+    <div class="toc" part="toc">
       <label class="section endpoints-title">API ${pathLabel}</label>
       ${result}
     </div>

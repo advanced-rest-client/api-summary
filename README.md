@@ -1,4 +1,10 @@
-# api-summary
+[![Published on NPM](https://img.shields.io/npm/v/@api-components/api-summary.svg)](https://www.npmjs.com/package/@api-components/api-summary)
+
+[![Build Status](https://travis-ci.org/advanced-rest-client/api-summary.svg?branch=stage)](https://travis-ci.org/advanced-rest-client/api-summary)
+
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/@api-components/api-summary)
+
+# &lt;api-summary&gt;
 
 A component that renders basic information about an API.
 It uses AMF model to render the view.

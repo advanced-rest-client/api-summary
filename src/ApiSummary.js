@@ -43,6 +43,10 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
        * @default 2
        */
       titleLevel: { type: String },
+      /**
+       * A property to hide the table of contents list of endpoints.
+       */
+      hideToc: { type: Boolean },
 
       _providerName: { type: String },
       _providerEmail: { type: String },
@@ -99,6 +103,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
      * @type {string[]}
      */
     this.protocols = undefined;
+    this.hideToc = false;
   }
 
   __amfChanged() {
@@ -321,7 +326,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
         ${this._termsOfServiceTemplate()}
       </div>
 
-      ${this._endpointsTemplate()}
+      ${this.hideToc ? '' : this._endpointsTemplate()}
     `;
   }
 

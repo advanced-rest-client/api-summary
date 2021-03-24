@@ -1,10 +1,4 @@
-[![Published on NPM](https://img.shields.io/npm/v/@api-components/api-summary.svg)](https://www.npmjs.com/package/@api-components/api-summary)
-
-[![Build Status](https://travis-ci.org/advanced-rest-client/api-summary.svg?branch=stage)](https://travis-ci.org/advanced-rest-client/api-summary)
-
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/@api-components/api-summary)
-
-# &lt;api-summary&gt;
+# api-summary
 
 A component that renders basic information about an API.
 It uses AMF model to render the view.
@@ -48,6 +42,35 @@ npm install --save @api-components/api-summary
   </body>
 </html>
 ```
+
+### Styling using CSS Shadow Parts
+
+```html
+<html>
+  <head>
+    <script type="module">
+      import '@api-components/api-summary/api-summary.js';
+    </script>
+    <style type="text/css">
+      api-summary::part(api-title) {
+        font-size: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <api-summary exportparts="api-title"></api-summary>
+    <script>
+    const amf = await getAmfModel();
+    document.body.querySelector('api-summary').api = amf;
+    window.addEventListener('api-navigation-selection-changed', (e) => {
+      console.log(e.detail.selected);
+      console.log(e.detail.type);
+    });
+    </script>
+  </body>
+</html>
+```
+For a complete list of parts, check out this [doc](./Styling.md).
 
 ### In a LitElement template
 

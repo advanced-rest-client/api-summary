@@ -1,3 +1,5 @@
+JUST TESTING THE CLA
+
 # api-summary
 
 A component that renders basic information about an API.
@@ -26,18 +28,18 @@ npm install --save @api-components/api-summary
 <html>
   <head>
     <script type="module">
-      import '@api-components/api-summary/api-summary.js';
+      import "@api-components/api-summary/api-summary.js";
     </script>
   </head>
   <body>
     <api-summary></api-summary>
     <script>
-    const amf = await getAmfModel();
-    document.body.querySelector('api-summary').api = amf;
-    window.addEventListener('api-navigation-selection-changed', (e) => {
-      console.log(e.detail.selected);
-      console.log(e.detail.type);
-    });
+      const amf = await getAmfModel();
+      document.body.querySelector("api-summary").api = amf;
+      window.addEventListener("api-navigation-selection-changed", (e) => {
+        console.log(e.detail.selected);
+        console.log(e.detail.type);
+      });
     </script>
   </body>
 </html>
@@ -46,13 +48,16 @@ npm install --save @api-components/api-summary
 ### In a LitElement template
 
 ```js
-import { LitElement, html } from 'lit-element';
-import '@api-components/api-summary/api-summary.js';
+import { LitElement, html } from "lit-element";
+import "@api-components/api-summary/api-summary.js";
 
 class SampleElement extends LitElement {
   render() {
     return html`
-    <api-summary .api="${this._amfModel}" @api-navigation-selection-changed="${this._navHandler}"></api-summary>
+      <api-summary
+        .api="${this._amfModel}"
+        @api-navigation-selection-changed="${this._navHandler}"
+      ></api-summary>
     `;
   }
 
@@ -61,19 +66,22 @@ class SampleElement extends LitElement {
     console.log(e.detail.type);
   }
 }
-customElements.define('sample-element', SampleElement);
+customElements.define("sample-element", SampleElement);
 ```
 
 ### In a Polymer 3 element
 
 ```js
-import {PolymerElement, html} from '@polymer/polymer';
-import '@api-components/api-summary/api-summary.js';
+import { PolymerElement, html } from "@polymer/polymer";
+import "@api-components/api-summary/api-summary.js";
 
 class SampleElement extends PolymerElement {
   static get template() {
     return html`
-    <api-summary api="[[amfModel]]" on-api-navigation-selection-changed="_navHandler"></api-summary>
+      <api-summary
+        api="[[amfModel]]"
+        on-api-navigation-selection-changed="_navHandler"
+      ></api-summary>
     `;
   }
 
@@ -82,7 +90,7 @@ class SampleElement extends PolymerElement {
     console.log(e.detail.type);
   }
 }
-customElements.define('sample-element', SampleElement);
+customElements.define("sample-element", SampleElement);
 ```
 
 ## Development

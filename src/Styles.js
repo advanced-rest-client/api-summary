@@ -8,6 +8,7 @@ export default css`
 
 .api-title {
   margin: 12px 0;
+  font-size: var(--api-summary-title-font-size, 16px);
 }
 
 arc-marked {

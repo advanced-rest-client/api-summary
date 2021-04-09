@@ -143,6 +143,10 @@ a:hover {
   margin-bottom: 24px;
 }
 
+.section {
+  font-size: var(--api-summary-section-title-font-size);
+}
+
 .section.endpoints-title {
   font-weight: var(--arc-font-title-font-weight, 500);
   color: var(--arc-font-title-color); 

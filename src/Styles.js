@@ -8,6 +8,7 @@ export default css`
 
 .api-title {
   margin: 12px 0;
+  font-size: var(--api-summary-title-font-size, 16px);
 }
 
 arc-marked {
@@ -140,6 +141,10 @@ a:hover {
 
 .toc .section {
   margin-bottom: 24px;
+}
+
+.section {
+  font-size: var(--api-summary-section-title-font-size);
 }
 
 .section.endpoints-title {

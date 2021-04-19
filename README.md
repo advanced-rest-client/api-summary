@@ -43,6 +43,35 @@ npm install --save @api-components/api-summary
 </html>
 ```
 
+### Styling using CSS Shadow Parts
+
+```html
+<html>
+  <head>
+    <script type="module">
+      import '@api-components/api-summary/api-summary.js';
+    </script>
+    <style type="text/css">
+      api-summary::part(api-title) {
+        font-size: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <api-summary exportparts="api-title"></api-summary>
+    <script>
+    const amf = await getAmfModel();
+    document.body.querySelector('api-summary').api = amf;
+    window.addEventListener('api-navigation-selection-changed', (e) => {
+      console.log(e.detail.selected);
+      console.log(e.detail.type);
+    });
+    </script>
+  </body>
+</html>
+```
+For a complete list of parts, check out this [doc](./Styling.md).
+
 ### In a LitElement template
 
 ```js

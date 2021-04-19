@@ -24,6 +24,10 @@ export declare class ApiSummary extends AmfHelperMixin(LitElement) {
    * @attribute
    */
   titleLevel: string;
+  /**
+   * A property to hide the table of contents list of endpoints.
+   */
+  hideToc: boolean;
 
   _providerName: string;
   _providerEmail: string;

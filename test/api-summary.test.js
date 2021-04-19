@@ -44,8 +44,8 @@ describe('ApiSummary', () => {
 
         it('renders api title', () => {
           const node = element.shadowRoot.querySelector('[role="heading"]');
-          assert.dom.equal(node, `<div aria-level="2" class="api-title" role="heading">
-            <label>
+          assert.dom.equal(node, `<div aria-level="2" class="api-title" role="heading" part="api-title">
+            <label part="api-title-label">
               API title:
             </label>
             <span>
@@ -95,6 +95,11 @@ describe('ApiSummary', () => {
         it('renders base uri', () => {
           const node = element.shadowRoot.querySelector('api-url');
           assert.equal(node.url, `https://{instance}.domain.com`);
+        });
+
+        it('renders endpoints template', () => {
+          const node = element.shadowRoot.querySelector('.endpoints-title');
+          assert.dom.equal(node, `<label class="endpoints-title section">API endpoints</label>`);
         });
       });
 
@@ -409,6 +414,24 @@ describe('ApiSummary', () => {
 
         it('should render "API channels" message', () => {
           assert.equal(element.shadowRoot.querySelector('.section.endpoints-title').textContent, 'API channels');
+        });
+      });
+
+      describe('hideToc', () => {
+        let element = /** @type ApiSummary */ (null);
+        let amf;
+        before(async () => {
+          amf = await AmfLoader.load(compact);
+        });
+        beforeEach(async () => {
+          element = await basicFixture();
+          element.setAttribute('hideToc', 'true');
+          await aTimeout(0);
+        });
+
+        it('does not render endpoints template', () => {
+          const node = element.shadowRoot.querySelector('.toc');
+          assert.isNull(node);
         });
       });
     });

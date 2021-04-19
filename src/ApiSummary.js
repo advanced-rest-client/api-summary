@@ -43,6 +43,10 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
        * @default 2
        */
       titleLevel: { type: String },
+      /**
+       * A property to hide the table of contents list of endpoints.
+       */
+      hideToc: { type: Boolean },
 
       _providerName: { type: String },
       _providerEmail: { type: String },
@@ -99,6 +103,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
      * @type {string[]}
      */
     this.protocols = undefined;
+    this.hideToc = false;
   }
 
   __amfChanged() {
@@ -321,7 +326,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
         ${this._termsOfServiceTemplate()}
       </div>
 
-      ${this._endpointsTemplate()}
+      ${this.hideToc ? '' : this._endpointsTemplate()}
     `;
   }
 
@@ -331,8 +336,8 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
       return '';
     }
     return html`
-    <div class="api-title" role="heading" aria-level="${titleLevel}">
-    <label>API title:</label>
+    <div class="api-title" role="heading" aria-level="${titleLevel}" part="api-title">
+    <label part="api-title-label">API title:</label>
     <span>${_apiTitle}</span>
     </div>`;
   }
@@ -343,7 +348,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
       return '';
     }
     return html`
-    <p class="inline-description version">
+    <p class="inline-description version" part="api-version">
       <label>Version:</label>
       <span>${_version}</span>
     </p>`;
@@ -355,7 +360,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
       return '';
     }
     return html`
-    <div role="region" class="marked-description">
+    <div role="region" class="marked-description" part="marked-description">
       <arc-marked .markdown="${_description}" sanitize>
         <div slot="markdown-html" class="markdown-body"></div>
       </arc-marked>
@@ -427,16 +432,16 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
       `<a href="${_providerUrl}" target="_blank" class="app-link provider-url">${_providerUrl}</a>`,
     ): undefined;
     return html`
-    <section role="contentinfo" class="docs-section">
+    <section role="contentinfo" class="docs-section" part="info-section">
       <label class="section">Contact information</label>
-      <p class="inline-description">
+      <p class="inline-description" part="info-inline-desc">
         <span class="provider-name">${_providerName}</span>
         ${_providerEmail ? html`<a
             class="app-link link-padding provider-email"
             href="mailto:${_providerEmail}">${_providerEmail}</a>` : ''}
       </p>
       ${_providerUrl ? html`
-        <p class="inline-description">
+        <p class="inline-description" part="info-inline-desc">
           ${unsafeHTML(link)}
         </p>` : ''}
     </section>`;
@@ -451,7 +456,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
       `<a href="${_licenseUrl}" target="_blank" class="app-link">${_licenseName}</a>`,
     );
     return html`
-    <section aria-labelledby="licenseLabel" class="docs-section">
+    <section aria-labelledby="licenseLabel" class="docs-section" part="license-section">
       <label class="section" id="licenseLabel">License</label>
       <p class="inline-description">
         ${unsafeHTML(link)}
@@ -481,8 +486,8 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     const result = _endpoints.map((item) => this._endpointTemplate(item));
     const pathLabel = this._isAsyncAPI(this.amf) ? 'channels' : 'endpoints';
     return html`
-    <div class="separator"></div>
-    <div class="toc">
+    <div class="separator" part="separator"></div>
+    <div class="toc" part="toc">
       <label class="section endpoints-title">API ${pathLabel}</label>
       ${result}
     </div>

@@ -103,7 +103,7 @@ a:hover {
 .separator {
   background-color: var(--api-summary-separator-color, rgba(0, 0, 0, 0.12));
   height: 1px;
-  margin: 40px 0;
+  margin: var(--api-summary-separator-margin, 40px 0);
 }
 
 .endpoint-item {

@@ -1,0 +1,959 @@
+# cSpell:ignore openapi recordkeeping
+openapi: '3.0.2'
+info:
+  title: 'profiles'
+  description: >
+    Provides `profiles` domain services of the **Client Data Platform**.
+  version: '2.0.1'
+  contact:
+    name: Client Data Platform Platform & Support
+    email: CDP_Services_Support@capgroup.com
+    url: https://cg-itg.slack.com/archives/C018M7FCSMS/p1602588312007200
+servers:
+  - url: https://api.aws-west-prd.capgroup.com/cdp-proxy/profiles
+    description: MuleSoft PROD
+  - url: https://api.aws-west-snp.capgroup.com/cdp-proxy-e2e/profiles
+    description: MuleSoft UAT (for enterprise consumers)
+  - url: https://api.aws-west-oz.capgroup.com/cdp-proxy-ite2/profiles
+    description: MuleSoft QA (for enterprise consumers)
+  - url: https://api.aws-west-oz.capgroup.com/cdp-proxy-dev2/profiles
+    description: MuleSoft DEV (for enterprise consumers)
+  - url: https://api.aws-west-snp.capgroup.com/cdp-proxy-perf/profiles
+    description: MuleSoft PERF (CDP team internal)
+  - url: https://api.aws-west-oz.capgroup.com/cdp-proxy-ite1/profiles
+    description: MuleSoft QA-INT (CDP team internal)
+  - url: https://api.aws-west-oz.capgroup.com/cdp-proxy-dev1/profiles
+    description: MuleSoft DEV-INT (CDP team internal)
+  - url: https://api.capitalgroup.com/cdp-proxy/profiles
+    description: Akamai PROD
+  - url: https://api.qa.capitalgroup.com/cdp-proxy-e2e/profiles
+    description: Akamai UAT (for enterprise consumers)
+  - url: https://api.dev.capitalgroup.com/cdp-proxy-ite2/profiles
+    description: Akamai QA (for enterprise consumers)
+  - url: https://api.dev.capitalgroup.com/cdp-proxy-dev2/profiles
+    description: Akamai DEV (for enterprise consumers)
+  - url: https://api.qa.capitalgroup.com/cdp-proxy-perf/profiles
+    description: Akamai PERF (CDP team internal)
+  - url: https://api.dev.capitalgroup.com/cdp-proxy-ite1/profiles
+    description: Akamai QA-INT (CDP team internal)
+  - url: https://api.dev.capitalgroup.com/cdp-proxy-dev1/profiles
+    description: Akamai DEV-INT (CDP team internal)
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+tags:
+  - name: Profiles
+    description: "Profiles Domain Reference Data"
+  - name: Compensation Schedules
+    description: >
+      Resources associated with Compensation Schedules that provide financial offerings. Includes 
+      `compensation-schedule-assignment-assignments` configured for each dealer subscribing to the RecordKeeper Custom
+      Compensation Schedule offering.
+security:
+  - bearerAuth: []
+paths:
+  /parties/v1/{partyId}:
+    summary: Represents a client of Capital Group
+    description: >
+      Provides details about Capital Group clients including name, address and other information
+    get:
+      operationId: getPartyById
+      summary: Gets the specific parties in the system.
+      parameters:
+      - in: path
+        name: partyId
+        required: true
+        description: "The Party ID in the system"
+        schema:
+          type: string
+          description: "The Party ID in the system" 
+          pattern: '^[0-9]*$'
+      - in: header
+        name: conversationId
+        required: false
+        description: >
+          The ConversationId uniquely identifies the message sent from the sender to the receiver. 
+        schema:
+          type: string
+          format: uuid
+          example: '242ab55c-de2b-4822-a411-945e85882b60'
+          description: >
+            The ConversationId uniquely identifies the message sent from the sender to the receiver.
+      - in: header
+        name: traceparent
+        required: true
+        description: >
+          The traceparent HTTP header field identifies the incoming request in a tracing system
+        schema:
+          type: string
+          example: '00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01'
+          description: >
+              The traceparent HTTP header field identifies the incoming request in a tracing system
+      description: >
+        Gets the parties by id.
+      tags: [ 'Parties' ]
+      responses:
+        '200':
+          description: >
+            **OK**
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-parties-api.schema.json#/definitions/record.CG.CD.P.Contracts.Parties.GetPartyById.GetPartyByIdResponseMessageV1Contract'
+          headers:
+           Preference-Applied:
+            required: false
+            schema:
+             type: string
+            description: >
+             The Preference-Applied response header is an indication as to which Prefer tokens were honored by the server and applied to the processing of a request. 
+        '400':
+          description: >
+            **BAD REQUEST**
+             The following Applications messages may be returned if request body properties are invalid:
+            <table border=1>
+            <tr><td>`Property`</td><td>`Condition`</td><td>`Message Id`</td><td>`Message Code`</td></tr>
+            </table>
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-parties-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+        '401':
+          description: >
+            **UNAUTHORIZED**
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-parties-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+        '403':
+          description: >
+            **FORBIDDEN**
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-parties-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+        '404':
+          description: >
+            **NOT FOUND**
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-parties-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+        '500':
+          description: >
+            **INTERNAL SERVER ERROR**
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-parties-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+        '503':
+          description: >
+            **SERVICE UNAVAILABLE**
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-parties-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+  /parties/v1/query:
+     post:
+      operationId: GetPartiesByCriteria
+      summary: Get Parties by criteria
+      description: >
+        Retrieves Parties by given criteria.
+      tags: [ 'Parties' ]
+      parameters:
+        - in: header
+          name: conversationId
+          required: false
+          description: >
+            The ConversationId uniquely identifies the message sent from the sender to the receiver. 
+          schema:
+            type: string
+            format: uuid
+            example: '242ab55c-de2b-4822-a411-945e85882b60'
+            description: >
+              The ConversationId uniquely identifies the message sent from the sender to the receiver.
+        - in: header
+          name: traceparent
+          required: true
+          description: >
+            The traceparent HTTP header field identifies the incoming request in a tracing system
+          schema:
+            type: string
+            example: '00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01'
+            description: >
+              The traceparent HTTP header field identifies the incoming request in a tracing system
+        - in: header
+          name: MessageId
+          required: false
+          description: >
+            Uniquely identifies the message sent from the sender to the receiver
+          schema:
+            type: string
+            format: uuid
+            example: '242ab55c-de2b-4822-a411-945e85882b60'
+            description: >
+              Uniquely identifies the message sent from the sender to the receiver
+        - in: header
+          name: MessageInstanceId
+          required: false
+          description: >
+            A different message instance id is created each time a message is resent if not received or acknowledged.
+          schema:
+            type: string
+            format: uuid
+            example: '242ab55c-de2b-4822-a411-945e85882b60'
+            description: >
+              A different message instance id is created each time a message is resent if not received or acknowledged.
+        - in: header
+          name: Prefer
+          required: false
+          description: >
+            The Prefer request header field is used to indicate that particular server behaviors are preferred by the client but are not required for successful completion of the request.
+          schema:
+            type: string
+            example: return=minimal; foo="someparameter"        
+            description: >
+              The Prefer request header field is used to indicate that particular server behaviors are preferred by the client but are not required for successful completion of the request.
+        - in: header
+          name: tracestate
+          required: false
+          description: >
+            The tracestate HTTP header is to provide additional vendor-specific trace identification information across different distributed tracing systems and is a companion header for the traceparent field. 
+          schema:
+            type: string
+            example: '00f067aa0ba902b7'
+            description: >
+              The tracestate HTTP header is to provide additional vendor-specific trace identification information across different distributed tracing systems and is a companion header for the traceparent field. 
+      requestBody:
+        description: >
+          A GetPartiesByCriteriaRequestV1Contract object. Represents filter object.
+        required: true
+        content:
+          application/json:
+           schema: 
+               $ref: './schemas/json/profiles-parties-api.schema.json#/definitions/record.CG.CD.P.Contracts.Parties.GetPartiesByCriteria.GetPartiesByCriteriaRequestV1Contract'          
+      responses:
+        '200':
+          description: >
+            **OK** 
+            A GetPartiesByCriteriaResponseMessageV1Contract object. Represents a list of filtered Log Entries. 
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-parties-api.schema.json#/definitions/record.CG.CD.P.Contracts.Parties.GetPartiesByCriteria.GetPartiesByCriteriaResponseMessageV1Contract'
+          headers:
+           Preference-Applied:
+            required: false
+            schema:
+             type: string
+            description: >
+             The Preference-Applied response header is an indication as to which Prefer tokens were honored by the server and applied to the processing of a request. 
+        '400':
+          description: >
+            **BAD REQUEST** 
+            The following Applications messages may be returned if request body properties are invalid:
+            <table border=1>
+            <tr><td>`Property`</td><td>`Condition`</td><td>`Message Id`</td><td>`Message Code`</td></tr>
+            <tr><td>AccountNumber</td><td>Empty</td><td>1000000001EE0101</td><td>`CGCloudCommonRuleMessages.Errors.RequiredValue`</td></tr>
+            <tr><td>RangeFromTimestampUtc</td><td>Empty</td><td>1000000001EE0101</td><td>`CGCloudCommonRuleMessages.Errors.RequiredValue`</td></tr>
+            <tr><td>RangeToTimestampUtc</td><td>Empty</td><td>1000000001EE0101</td><td>`CGCloudCommonRuleMessages.Errors.RequiredValue`</td></tr>
+            </table>
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-parties-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+        '401':
+          description: >
+            **UNAUTHORIZED**
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-parties-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'   
+        '403':
+          description: >
+            **FORBIDDEN**
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-parties-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'   
+        '404':
+          description: >
+            **NOT FOUND**
+            Application Message with code 1000030000EE0100 is returned if the requested Rule is not found.
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-parties-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+        '500':
+          description: >
+            **INTERNAL SERVER ERROR**
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-parties-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+        '503':
+          description: >
+            **SERVICE UNAVAILABLE**
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-parties-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'      
+  /financial-intermediaries/v1{vendorCriteria}/compensation-schedule-assignments:
+    summary: 'Compensation Schedule Assignments'
+    description: >
+      Operations on the Compensation Schedule Assignments configured for a **FinancialIntermediary**. Compensation
+      Schedules can be assigned to  a __Financial Intermediary__ by agreement with Capital Group if they have subscribe to the offering
+      we provide. A Compensation Schedule assigned by selecting a __Social Code__ and assigning an Effective date.
+    get:
+      operationId: 'getCompensationScheduleAssignmentsByCriteria'
+      summary: 'Gets the specific compensation schedule assignments in the system by VendorFinancialIntermediaryId.'
+      description: >
+        Gets the compensation schedule assignments by `VendorFinancialIntermediaryKey`. Assignments are by __ShareClass__
+        so compensation schedules for each assigned __ShareClass__ will be included. To set up a new assignment you need
+        to set the `ShareClassCode` and `EffectiveDate` and add a new assignment. See operation
+        `newCompensationScheduleAssignment` for more details.
+      tags: [ 'Compensation Schedules' ]
+      parameters:
+        - in: path
+          name: vendorCriteria
+          required: true
+          description: >
+            Specifies the vendor providing vendor identifiers. Here, use `SscTa2000`.
+          schema:
+            type: object
+            properties:
+              vendorCode:
+                type: string
+                example: "SscTa2000"
+              vendorFinancialIntermediaryId:
+                type: string
+                example: "12345"
+            required:
+              - vendorCode
+              - vendorFinancialIntermediaryId
+          # Serialize this object as ;prop1=value2;prop2=value2 etc
+          style: matrix
+          explode: true
+        - in: header
+          name: traceparent
+          required: true
+          description: >
+            The traceparent HTTP header field identifies the incoming request in a tracing system
+          schema:
+            type: string
+            example: '00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01'
+            description: >
+              The traceparent HTTP header field identifies the incoming request in a tracing system
+        - in: header
+          name: tracestate
+          required: false
+          description: >
+            The tracestate HTTP header is to provide additional vendor-specific trace identification information across
+            different distributed tracing systems and is a companion header for the traceparent field. 
+          schema:
+            type: string
+            example: '00f067aa0ba902b7'
+            description: >
+              The tracestate HTTP header is to provide additional vendor-specific trace identification information
+              across different distributed tracing systems and is a companion header for the traceparent field. 
+        - in: header
+          name: conversationId
+          required: false
+          description: >
+            The ConversationId uniquely identifies the message sent from the sender to the receiver. 
+          schema:
+            type: string
+            format: uuid
+            example: '242ab55c-de2b-4822-a411-945e85882b60'
+            description: >
+              The ConversationId uniquely identifies the message sent from the sender to the receiver. 
+        - in: header
+          name: MessageId
+          required: false
+          description: >
+            Uniquely identifies the message sent from the sender to the receiver
+          schema:
+            type: string
+            format: uuid
+            example: '242ab55c-de2b-4822-a411-945e85882b60'
+            description: >
+              Uniquely identifies the message sent from the sender to the receiver
+        - in: header
+          name: MessageInstanceId
+          required: false
+          description: >
+            A different message instance id is created each time a message is resent if not received or acknowledged.
+          schema:
+            type: string
+            format: uuid
+            example: '242ab55c-de2b-4822-a411-945e85882b60'
+            description: >
+              A different message instance id is created each time a message is resent if not received or acknowledged.
+      responses:
+        '200':
+          description: >
+            **OK** Includes all Compensation Schedule Assignments already made for the provided
+            `VendorFinancialIntermediaryId`. If assignments are missing, then the __Financial Intermediary__ has enrolled in the Custom
+            Compensation Schedule Assignment offering but has no assignments yet.
+            
+
+            If the __Financial Intermediary__ has not enrolled, you will receive the __FinancialIntermediaryNotEnrolledForCustomCompensationSchedules__
+            warning message.
+            <table border=1>
+            <tr><th>Message Code</th><th>Message Type</th><th>Args</th><th>Description</th></tr>
+            <tr>
+              <td>`1000030005DD0101`</td>
+              <td>FinancialIntermediaryNotEnrolledForCustomCompensationSchedules</td>
+              <td>valuesNames[`vendorFinancialIntermediaryId`]</td>
+              <td>Financial Intermediary is not enrolled for Custom Fees</td>
+            </tr>
+            </table>
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-financial-intermediaries-api.schema.json#/definitions/record.CG.CD.Profiles.Contracts.FinancialIntermediaries.Messages.GetCompensationScheduleAssignmentsByCriteriaRspMsgV1Contract'
+        '400':
+          description: >
+            **BAD REQUEST**
+            The following Applications messages may be returned if request body properties are invalid:
+            <table border=1>
+            <tr>
+              <td>`1000000001EE0104`</td>
+              <td>InvalidEnumValue</td>
+              <td>
+                args.vendorCode: the vendorCode parameter<br/>
+                valueNames[`vendorCode`]
+              </td>
+              <td>The vendor code is not `SscTa2000`</td>
+            </tr>
+            <tr>
+              <td>`1000000001EE0101`</td>
+              <td>BadValueType</td>
+              <td>valuesNames[`vendorFinancialIntermediaryId`]</td>
+              <td>The string contains characters other than numerals</td>
+            </tr>
+            </table>
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-financial-intermediaries-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+        '401':
+          description: >
+            **UNAUTHORIZED**
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-financial-intermediaries-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+        '403':
+          description: >
+            **FORBIDDEN**
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-financial-intermediaries-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+        '404':
+          description: >
+            **NOT FOUND**
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-financial-intermediaries-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+        '500':
+          description: >
+            **INTERNAL SERVER ERROR**
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-financial-intermediaries-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+        '503':
+          description: >
+            **SERVICE UNAVAILABLE**
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-financial-intermediaries-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+    post:
+      operationId: 'newCompensationScheduleAssignment'
+      summary: 'Adds a new compensation schedule assignment for a Financial Intermediary to the system.'
+      description: >
+        Creates a new compensation schedule assignment. Assignments are by __ShareClass__ so compensation schedules for
+        each assigned __ShareClass__ will be included. To set up a new assignment you need to set the `ShareClassCode`
+        and `EffectiveDate with format of YYYY-MM-DD` and add a new assignment.
+      tags: [ 'Compensation Schedules' ]
+      parameters:
+        - in: path
+          name: vendorCriteria
+          required: true
+          description: >
+            Specifies the vendor providing vendor identifiers. Here, use `SscTa2000`.
+          schema:
+            type: object
+            properties:
+              vendorCode:
+                type: string
+                example: "SscTa2000"
+              vendorFinancialIntermediaryId:
+                type: string
+                example: "12345"
+            required:
+              - vendorCode
+              - vendorFinancialIntermediaryId
+          # Serialize this object as ;prop1=value2;prop2=value2 etc
+          style: matrix
+          explode: true
+        - in: header
+          name: traceparent
+          required: true
+          description: >
+            The traceparent HTTP header field identifies the incoming request in a tracing system
+          schema:
+            type: string
+            example: '00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01'
+            description: >
+              The traceparent HTTP header field identifies the incoming request in a tracing system
+        - in: header
+          name: tracestate
+          required: false
+          description: >
+            The tracestate HTTP header is to provide additional vendor-specific trace identification information across
+            different distributed tracing systems and is a companion header for the traceparent field. 
+          schema:
+            type: string
+            example: '00f067aa0ba902b7'
+            description: >
+              The tracestate HTTP header is to provide additional vendor-specific trace identification information
+              across different distributed tracing systems and is a companion header for the traceparent field. 
+        - in: header
+          name: conversationId
+          required: false
+          description: >
+            The ConversationId uniquely identifies the message sent from the sender to the receiver. 
+          schema:
+            type: string
+            format: uuid
+            example: '242ab55c-de2b-4822-a411-945e85882b60'
+            description: >
+              The ConversationId uniquely identifies the message sent from the sender to the receiver. 
+        - in: header
+          name: MessageId
+          required: false
+          description: >
+            Uniquely identifies the message sent from the sender to the receiver
+          schema:
+            type: string
+            format: uuid
+            example: '242ab55c-de2b-4822-a411-945e85882b60'
+            description: >
+              Uniquely identifies the message sent from the sender to the receiver
+        - in: header
+          name: MessageInstanceId
+          required: false
+          description: >
+            A different message instance id is created each time a message is resent if not received or acknowledged.
+          schema:
+            type: string
+            format: uuid
+            example: '242ab55c-de2b-4822-a411-945e85882b60'
+            description: >
+              A different message instance id is created each time a message is resent if not received or acknowledged.
+      requestBody:
+        description: >
+          The request includes the new assignment. In addition to the `scheduleId` and `shareClassCode`, be sure to
+          include the `compensationFeeTypeCode`, `compensationPayeeTypeCode`. Do not forget the EffectiveDate, as well.
+        required: true
+        content:
+          application/json:
+           schema: 
+               $ref: './schemas/json/profiles-financial-intermediaries-api.schema.json#/definitions/record.CG.CD.Profiles.Contracts.FinancialIntermediaries.Messages.NewCompensationScheduleAssignmentReqV1Contract'
+      responses:
+        '201':
+          description: >
+            **CREATED** Indicates that the assignment was created and the assignment made at the effective date. Returns
+            the identity of the assignment created. The `Location` header provides the path to the list of assignments
+            to the Financial Intermediary. Use the `compensationScheduleId` and `shareClassCode` body properties to find the assignment.
+          headers:
+            Location:
+              description: >
+                Provides the path to the list of assignments to the Financial Intermediary. Use the `compensationScheduleId` and
+                `shareClassCode` body properties to find the assignment.
+              required: true
+              schema:
+                type: string
+                format: url
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-financial-intermediaries-api.schema.json#/definitions/record.CG.CD.Profiles.Contracts.FinancialIntermediaries.Messages.NewCompensationScheduleAssignmentRspMsgV1Contract'
+        '400':
+          description: >
+            **BAD REQUEST**
+            The following Applications messages may be returned if request body properties are invalid:
+            <table border=1>
+            <tr><th>Message Code</th><th>Message Type</th><th>Args</th><th>Description</th></tr>
+            <tr>
+              <td>`1000030005EE0101`</td>
+              <td>FinancialIntermediaryNotEnrolledForCustomCompensationSchedules</td>
+              <td>valuesNames[`vendorFinancialIntermediaryId`]</td>
+              <td>Financial Intermediary is not enrolled for Custom Fees</td>
+            </tr>
+            <tr>
+              <td>`1000000001EE0104`</td>
+              <td>InvalidEnumValue</td>
+              <td>
+                args.expectedType: `ProfileVendorCodeV1Contract`<br/>
+                args.expectedValues: `SscTa2000`<br/>
+                valueNames[`vendorCode`]
+              </td>
+              <td>The vendor code is not `SscTa2000`</td>
+            </tr>
+            <tr>
+              <td>`1000000001EE0104`</td>
+              <td>InvalidEnumValue</td>
+              <td>
+                args.expectedType: `CompensationScheduleTypeV1Contract`<br/>
+                args.expectedValues: [`TBD`]<br/>
+                valueNames[`scheduleType`]
+              </td>
+              <td>The vendor code is not `SscTa2000`</td>
+            </tr>
+            <tr>
+              <td>`1000000001EE0104`</td>
+              <td>InvalidEnumValue</td>
+              <td>
+                args.expectedType: `CompensationScheduleTypeV1Contract`<br/>
+                args.expectedValues: [`TBD`]<br/>
+                valueNames[`shareClassCode`]
+              </td>
+              <td>shareClassCode not known.</td>
+            </tr>
+            <tr>
+              <td>`1000000001EE0104`</td>
+              <td>InvalidEnumValue</td>
+              <td>
+                args.expectedType: `CompensationTypeV1Contract`<br/>
+                args.expectedValues: [`TBD`]<br/>
+                valueNames[`CompensationTypeCode`]
+              </td>
+              <td>CompensationTypeCode is not valid.</td>
+            </tr>
+            <tr>
+              <td>`1000000001EE0104`</td>
+              <td>InvalidEnumValue</td>
+              <td>
+                args.expectedType: `CompensationProcessTypeV1Contract`<br/>
+                args.expectedValues: [`TBD`]<br/>
+                valueNames[`CompensationProcessTypeCode`]
+              </td>
+              <td>CompensationProcessTypeCode is not valid.</td>
+            </tr>
+            <tr>
+              <td>`1000000001EE0104`</td>
+              <td>InvalidEnumValue</td>
+              <td>
+                args.expectedType: `CompensationFeeTypeV1Contract`<br/>
+                args.expectedValues: [`TBD`]<br/>
+                valueNames[`CompensationFeeTypeCode`]
+              </td>
+              <td>CompensationFeeTypeCode is not valid.</td>
+            </tr>
+            <tr>
+              <td>`1000000001EE0104`</td>
+              <td>InvalidEnumValue</td>
+              <td>
+                args.expectedType: `CompensationPayeeTypeV1Contract`<br/>
+                args.expectedValues: [`TBD`]<br/>
+                valueNames[`CompensationPayeeTypeCode`]
+              </td>
+              <td>CompensationPayeeTypeCode is not valid.</td>
+            </tr>
+            <!-- We need to add more codes ->
+            <!-- We need to handle missing identifiers like ScheduleId -->
+            <tr>
+              <td>`1000000001EE0101`</td>
+              <td>BadValueType</td>
+              <td>valuesNames[`vendorFinancialIntermediaryId`]</td>
+              <td>The string contains characters other than numerals</td>
+            </tr>
+            </table>
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-financial-intermediaries-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+        '401':
+          description: >
+            **UNAUTHORIZED**
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-financial-intermediaries-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+        '403':
+          description: >
+            **FORBIDDEN**
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-financial-intermediaries-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+        '404':
+          description: >
+            **NOT FOUND**
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-financial-intermediaries-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+        '500':
+          description: >
+            **INTERNAL SERVER ERROR**
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-financial-intermediaries-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+        '503':
+          description: >
+            **SERVICE UNAVAILABLE**
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-financial-intermediaries-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+    put:
+      operationId: 'setCompensationScheduleAssignment'
+      summary: 'Updates an existing compensation schedule assignment for a Financial Intermediary to the system.'
+      description: >
+        Updates an existing compensation schedule assignment. Assignments are by __ShareClass__ so compensation schedules for
+        each assigned __ShareClass__ will be included. You are able to set the __IsActive__ if an assignment is active.
+      tags: [ 'Compensation Schedules' ]
+      parameters:
+        - in: path
+          name: vendorCriteria
+          required: true
+          description: >
+            Specifies the vendor providing vendor identifiers. Here, use `SscTa2000`.
+          schema:
+            type: object
+            properties:
+              vendorCode:
+                type: string
+                example: "SscTa2000"
+              vendorFinancialIntermediaryId:
+                type: string
+                example: "12345"
+            required:
+              - vendorCode
+              - vendorFinancialIntermediaryId
+          # Serialize this object as ;prop1=value2;prop2=value2 etc
+          style: matrix
+          explode: true
+        - in: header
+          name: traceparent
+          required: true
+          description: >
+            The traceparent HTTP header field identifies the incoming request in a tracing system
+          schema:
+            type: string
+            example: '00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01'
+            description: >
+              The traceparent HTTP header field identifies the incoming request in a tracing system
+        - in: header
+          name: tracestate
+          required: false
+          description: >
+            The tracestate HTTP header is to provide additional vendor-specific trace identification information across
+            different distributed tracing systems and is a companion header for the traceparent field. 
+          schema:
+            type: string
+            example: '00f067aa0ba902b7'
+            description: >
+              The tracestate HTTP header is to provide additional vendor-specific trace identification information
+              across different distributed tracing systems and is a companion header for the traceparent field. 
+        - in: header
+          name: conversationId
+          required: false
+          description: >
+            The ConversationId uniquely identifies the message sent from the sender to the receiver. 
+          schema:
+            type: string
+            format: uuid
+            example: '242ab55c-de2b-4822-a411-945e85882b60'
+            description: >
+              The ConversationId uniquely identifies the message sent from the sender to the receiver. 
+        - in: header
+          name: MessageId
+          required: false
+          description: >
+            Uniquely identifies the message sent from the sender to the receiver
+          schema:
+            type: string
+            format: uuid
+            example: '242ab55c-de2b-4822-a411-945e85882b60'
+            description: >
+              Uniquely identifies the message sent from the sender to the receiver
+        - in: header
+          name: MessageInstanceId
+          required: false
+          description: >
+            A different message instance id is created each time a message is resent if not received or acknowledged.
+          schema:
+            type: string
+            format: uuid
+            example: '242ab55c-de2b-4822-a411-945e85882b60'
+            description: >
+              A different message instance id is created each time a message is resent if not received or acknowledged.
+      requestBody:
+        description: >
+          The request includes the desire to activate or inactivate an existing compensation schedule. The `scheduleId` 
+          and `shareClassCode` are required to identify which schedule to update.
+        required: true
+        content:
+          application/json:
+            schema: 
+               $ref: './schemas/json/profiles-financial-intermediaries-api.schema.json#/definitions/record.CG.CD.Profiles.Contracts.FinancialIntermediaries.Messages.SetCompensationScheduleAssignmentReqV1Contract'
+      responses:
+        '200':
+          description: >
+            **UPDATED** Indicates that the assignment was updated successfully.  Use the `compensationScheduleId` and 
+            `shareClassCode` body properties to find the assignment.
+          headers:
+            Location:
+              description: >
+                Provides the path to the list of assignments to the Financial Intermediary. Use the `compensationScheduleId` and
+                `shareClassCode` body properties to find the assignment.
+              required: true
+              schema:
+                type: string
+                format: url
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-financial-intermediaries-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+        '400':
+          description: >
+            **BAD REQUEST**
+            The following Applications messages may be returned if request body properties are invalid:
+            <table border=1>
+            <tr><th>Message Code</th><th>Message Type</th><th>Args</th><th>Description</th></tr>
+            <tr>
+              <td>`1000030005EE0101`</td>
+              <td>FinancialIntermediaryNotEnrolledForCustomCompensationSchedules</td>
+              <td>valuesNames[`vendorFinancialIntermediaryId`]</td>
+              <td>Financial Intermediary is not enrolled for Custom Fees</td>
+            </tr>
+            <tr>
+              <td>`1000000001EE0104`</td>
+              <td>InvalidEnumValue</td>
+              <td>
+                args.expectedType: `ProfileVendorCodeV1Contract`<br/>
+                args.expectedValues: `SscTa2000`<br/>
+                valueNames[`vendorCode`]
+              </td>
+              <td>The vendor code is not `SscTa2000`</td>
+            </tr>
+            <tr>
+              <td>`1000000001EE0104`</td>
+              <td>InvalidEnumValue</td>
+              <td>
+                args.expectedType: `CompensationScheduleTypeV1Contract`<br/>
+                args.expectedValues: [`TBD`]<br/>
+                valueNames[`scheduleType`]
+              </td>
+              <td>The vendor code is not `SscTa2000`</td>
+            </tr>
+            <tr>
+              <td>`1000000001EE0104`</td>
+              <td>InvalidEnumValue</td>
+              <td>
+                args.expectedType: `CompensationScheduleTypeV1Contract`<br/>
+                args.expectedValues: [`TBD`]<br/>
+                valueNames[`shareClassCode`]
+              </td>
+              <td>shareClassCode not known.</td>
+            </tr>
+            <tr>
+              <td>`1000000001EE0104`</td>
+              <td>InvalidEnumValue</td>
+              <td>
+                args.expectedType: `CompensationTypeV1Contract`<br/>
+                args.expectedValues: [`TBD`]<br/>
+                valueNames[`CompensationTypeCode`]
+              </td>
+              <td>CompensationTypeCode is not valid.</td>
+            </tr>
+            <tr>
+              <td>`1000000001EE0104`</td>
+              <td>InvalidEnumValue</td>
+              <td>
+                args.expectedType: `CompensationProcessTypeV1Contract`<br/>
+                args.expectedValues: [`TBD`]<br/>
+                valueNames[`CompensationProcessTypeCode`]
+              </td>
+              <td>CompensationProcessTypeCode is not valid.</td>
+            </tr>
+            <tr>
+              <td>`1000000001EE0104`</td>
+              <td>InvalidEnumValue</td>
+              <td>
+                args.expectedType: `CompensationFeeTypeV1Contract`<br/>
+                args.expectedValues: [`TBD`]<br/>
+                valueNames[`CompensationFeeTypeCode`]
+              </td>
+              <td>CompensationFeeTypeCode is not valid.</td>
+            </tr>
+            <tr>
+              <td>`1000000001EE0104`</td>
+              <td>InvalidEnumValue</td>
+              <td>
+                args.expectedType: `CompensationPayeeTypeV1Contract`<br/>
+                args.expectedValues: [`TBD`]<br/>
+                valueNames[`CompensationPayeeTypeCode`]
+              </td>
+              <td>CompensationPayeeTypeCode is not valid.</td>
+            </tr>
+            <!-- We need to add more codes ->
+            <!-- We need to handle missing identifiers like ScheduleId -->
+            <tr>
+              <td>`1000000001EE0101`</td>
+              <td>BadValueType</td>
+              <td>valuesNames[`vendorFinancialIntermediaryId`]</td>
+              <td>The string contains characters other than numerals</td>
+            </tr>
+            </table>
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-financial-intermediaries-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+        '401':
+          description: >
+            **UNAUTHORIZED**
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-financial-intermediaries-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+        '403':
+          description: >
+            **FORBIDDEN**
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-financial-intermediaries-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+        '404':
+          description: >
+            **NOT FOUND**
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-financial-intermediaries-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+        '500':
+          description: >
+            **INTERNAL SERVER ERROR**
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-financial-intermediaries-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'
+        '503':
+          description: >
+            **SERVICE UNAVAILABLE**
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/json/profiles-financial-intermediaries-api.schema.json#/definitions/record.CapitalGroup.Cloud.Common.Contracts.EmptyServiceMessageV1Contract'

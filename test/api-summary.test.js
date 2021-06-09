@@ -400,10 +400,14 @@ describe('ApiSummary', () => {
           const element = await modelFixture(oasMultipleServersWithDescriptionAmf);
           const nodes = element.shadowRoot.querySelectorAll('.server-lists li');
           assert.lengthOf(nodes, 4, 'has 4 servers');
-          assert.equal(nodes[0].textContent.trim(), 'https://api.aws-west-prd.capgroup.com/cdp-proxy/profiles\n      MuleSoft PROD');
-          assert.equal(nodes[1].textContent.trim(), 'https://api.aws-west-snp.capgroup.com/cdp-proxy-e2e/profiles\n      MuleSoft UAT (for enterprise consumers)');
-          assert.equal(nodes[2].textContent.trim(), 'https://api.aws-west-oz.capgroup.com/cdp-proxy-ite2/profiles\n      MuleSoft QA (for enterprise consumers)');
+          assert.equal(nodes[0].textContent.trim(), 'https://api.aws-west-prd.capgroup.com/cdp-proxy/profiles');
+          assert.equal(nodes[0].querySelector('arc-marked').markdown, 'MuleSoft PROD');
+          assert.equal(nodes[1].textContent.trim(), 'https://api.aws-west-snp.capgroup.com/cdp-proxy-e2e/profiles');
+          assert.equal(nodes[1].querySelector('arc-marked').markdown, 'MuleSoft UAT (for enterprise consumers)');
+          assert.equal(nodes[2].textContent.trim(), 'https://api.aws-west-oz.capgroup.com/cdp-proxy-ite2/profiles');
+          assert.equal(nodes[2].querySelector('arc-marked').markdown, 'MuleSoft QA (for enterprise consumers)');
           assert.equal(nodes[3].textContent.trim(), 'https://api.aws-west-oz.capgroup.com/cdp-proxy-dev2/profiles');
+          assert.isUndefined(nodes[3].querySelector('arc-marked').markdown);
         });
       });
 

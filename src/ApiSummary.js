@@ -397,7 +397,11 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
   _serverListTemplate(server) {
     const { baseUri, protocols } = this;
     const uri = this._computeBaseUri(server, baseUri, protocols);
-    return html`<li>${uri}</li>`;
+    const description = this._computeDescription(server);
+    return html`<li>
+      ${uri}
+      <arc-marked .markdown=${description} class="server-description"></arc-marked>
+    </li>`;
   }
 
   /**

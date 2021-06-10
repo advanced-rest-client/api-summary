@@ -165,4 +165,10 @@ a:hover {
   font-weight: 700;
   margin: 0.8em 0 0.2em 0;
 }
+
+.server-description {
+  display: block;
+  font-size: var(--api-summary-server-description-font-size, 12px);
+  font-weight: var(--api-summary-server-description-font-weight, 600);
+}
 `;

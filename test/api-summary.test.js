@@ -352,10 +352,12 @@ describe('ApiSummary', () => {
       describe('Server rendering', () => {
         let ramlSingleServerAmf;
         let oasMultipleServersAmf;
+        let oasMultipleServersWithDescriptionAmf;
         let noServersAmf;
         before(async () => {
           ramlSingleServerAmf = await AmfLoader.load(compact);
           oasMultipleServersAmf = await AmfLoader.load(compact, 'multiple-servers');
+          oasMultipleServersWithDescriptionAmf = await AmfLoader.load(compact, 'APIC-641');
           noServersAmf = await AmfLoader.load(compact, 'no-server');
         });
 
@@ -393,6 +395,20 @@ describe('ApiSummary', () => {
           const serversNode = element.shadowRoot.querySelector('.servers');
           assert.notOk(serversNode);
         });
+
+        it('renders multiple URLs with descriptions', async () => {
+          const element = await modelFixture(oasMultipleServersWithDescriptionAmf);
+          const nodes = element.shadowRoot.querySelectorAll('.server-lists li');
+          assert.lengthOf(nodes, 4, 'has 4 servers');
+          assert.equal(nodes[0].textContent.trim(), 'https://api.aws-west-prd.capgroup.com/cdp-proxy/profiles');
+          assert.equal(nodes[0].querySelector('arc-marked').markdown, 'MuleSoft PROD');
+          assert.equal(nodes[1].textContent.trim(), 'https://api.aws-west-snp.capgroup.com/cdp-proxy-e2e/profiles');
+          assert.equal(nodes[1].querySelector('arc-marked').markdown, 'MuleSoft UAT (for enterprise consumers)');
+          assert.equal(nodes[2].textContent.trim(), 'https://api.aws-west-oz.capgroup.com/cdp-proxy-ite2/profiles');
+          assert.equal(nodes[2].querySelector('arc-marked').markdown, 'MuleSoft QA (for enterprise consumers)');
+          assert.equal(nodes[3].textContent.trim(), 'https://api.aws-west-oz.capgroup.com/cdp-proxy-dev2/profiles');
+          assert.isUndefined(nodes[3].querySelector('arc-marked').markdown);
+        });
       });
 
       describe('AsyncAPI', () => {
@@ -419,10 +435,6 @@ describe('ApiSummary', () => {
 
       describe('hideToc', () => {
         let element = /** @type ApiSummary */ (null);
-        let amf;
-        before(async () => {
-          amf = await AmfLoader.load(compact);
-        });
         beforeEach(async () => {
           element = await basicFixture();
           element.setAttribute('hideToc', 'true');

@@ -446,6 +446,33 @@ describe('ApiSummary', () => {
           assert.isNull(node);
         });
       });
+
+      describe('Rendering for library', () => {
+        let element = /** @type ApiSummary */ (null);
+        let libraryAmf;
+
+        before(async () => {
+          libraryAmf = await AmfLoader.load(compact, 'APIC-711');
+        });
+
+        beforeEach(async () => {
+          element = await basicFixture();
+          await nextFrame();
+        });
+
+        it('should clear everything when changing to amf for RAML library', async () => {
+          const demoAmf = await AmfLoader.load(compact);
+          element.amf = demoAmf;
+          await nextFrame();
+          element.amf = libraryAmf;
+          await nextFrame();
+          assert.isUndefined(element._apiTitle);
+          assert.isUndefined(element._description);
+          assert.isUndefined(element._version);
+          assert.isUndefined(element._termsOfService);
+          assert.isUndefined(element._endpoints);
+        });
+      });
     });
   });
 

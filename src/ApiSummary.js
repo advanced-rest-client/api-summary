@@ -131,6 +131,18 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
 
   _webApiChanged(webApi) {
     if (!webApi) {
+      this._apiTitle = undefined
+      this._description = undefined
+      this._version = undefined
+      this._termsOfService = undefined
+      this._endpoints = undefined
+
+      this._providerName = undefined
+      this._providerEmail = undefined
+      this._providerUrl = undefined
+
+      this._licenseName = undefined
+      this._licenseUrl = undefined
       return;
     }
 

@@ -27,7 +27,7 @@
   "dependencies": {
     "@advanced-rest-client/arc-marked": "^1.1.2",
     "@advanced-rest-client/markdown-styles": "^3.1.5",
-    "@api-components/amf-helper-mixin": "^4.5.12",
+    "@api-components/amf-helper-mixin": "^4.5.14",
     "@api-components/api-method-documentation": "^5.2.5",
     "@api-components/http-method-label": "^3.1.4",
     "@api-components/raml-aware": "^3.0.0",

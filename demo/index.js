@@ -26,6 +26,7 @@ class ApiDemo extends ApiDemoPage {
       ['multiple-servers', 'Multiple servers'],
       ['async-api', 'AsyncAPI'],
       ['APIC-641', 'APIC-641'],
+      ['W-10881270', 'W-10881270'],
     ].map(
       ([file, label]) => html`
         <anypoint-item data-src="${file}-compact.json">${label}</anypoint-item>

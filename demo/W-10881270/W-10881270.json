@@ -1,0 +1,22 @@
+{
+  "asyncapi": "2.0.0",
+  "info": {
+    "title": "asyncapijson",
+    "version": "1.0.1",
+    "description": "some description"
+  },
+  "servers": {
+    "server1": {
+      "url": "https://server1.com/",
+      "protocol": "https",
+      "protocolVersion": "1"
+    },
+    "server2": {
+      "url": "https://server2.com",
+      "protocol": "https",
+      "protocolVersion": "1",
+      "description":"XSS_IS_HERE<img src=x onerror=alert(document.domain)>"
+    }
+  },
+  "channels": {}
+}

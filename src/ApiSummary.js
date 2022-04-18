@@ -412,7 +412,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     const description = this._computeDescription(server);
     return html`<li>
       ${uri}
-      <arc-marked .markdown=${description} class="server-description"></arc-marked>
+      <arc-marked .markdown=${description} class="server-description" sanitize></arc-marked>
     </li>`;
   }
 

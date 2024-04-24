@@ -20,11 +20,7 @@ import styles from './Styles.js';
  */
 export class ApiSummary extends AmfHelperMixin(LitElement) {
   get styles() {
-    return [
-      markdownStyles,
-      labelStyles,
-      styles,
-    ];
+    return [markdownStyles, labelStyles, styles];
   }
 
   static get properties() {
@@ -58,7 +54,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
       _version: { type: String },
       _apiTitle: { type: String },
       _description: { type: String },
-      _protocols: { type: Array }
+      _protocols: { type: Array },
     };
   }
 
@@ -131,18 +127,18 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
 
   _webApiChanged(webApi) {
     if (!webApi) {
-      this._apiTitle = undefined
-      this._description = undefined
-      this._version = undefined
-      this._termsOfService = undefined
-      this._endpoints = undefined
+      this._apiTitle = undefined;
+      this._description = undefined;
+      this._version = undefined;
+      this._termsOfService = undefined;
+      this._endpoints = undefined;
 
-      this._providerName = undefined
-      this._providerEmail = undefined
-      this._providerUrl = undefined
+      this._providerName = undefined;
+      this._providerEmail = undefined;
+      this._providerUrl = undefined;
 
-      this._licenseName = undefined
-      this._licenseUrl = undefined
+      this._licenseName = undefined;
+      this._licenseUrl = undefined;
       return;
     }
 
@@ -169,7 +165,9 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
    * @return {string|undefined} Description if defined.
    */
   _computeApiTitle(shape) {
-    return /** @type string */ (this._getValue(shape, this.ns.aml.vocabularies.core.name));
+    return /** @type string */ (
+      this._getValue(shape, this.ns.aml.vocabularies.core.name)
+    );
   }
 
   /**
@@ -178,7 +176,9 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
    * @return {string|undefined}
    */
   _computeVersion(webApi) {
-    return /** @type string */ (this._getValue(webApi, this.ns.aml.vocabularies.core.version));
+    return /** @type string */ (
+      this._getValue(webApi, this.ns.aml.vocabularies.core.version)
+    );
   }
 
   /**
@@ -191,13 +191,18 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
    */
   _computeBaseUri(server, baseUri, protocols) {
     if (!protocols) {
-      const protocol = /** @type string */ (this._getValue(server, this._getAmfKey(this.ns.aml.vocabularies.apiContract.protocol)));
+      const protocol = /** @type string */ (
+        this._getValue(
+          server,
+          this._getAmfKey(this.ns.aml.vocabularies.apiContract.protocol)
+        )
+      );
       if (protocol) {
         protocols = [protocol];
       }
     }
     let base = this._getBaseUri(baseUri, server, protocols);
-    if (base && base[base.length - 1] === '/') {
+    if (base && base[base.length - 1] === "/") {
       base = base.substr(0, base.length - 1);
     }
     return base;
@@ -239,22 +244,24 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
       const key = this._getAmfKey(this.ns.aml.vocabularies.core.url);
       const data = provider[key];
       if (data) {
-        value = data instanceof Array ? data[0]['@id'] : data['@id'];
+        value = data instanceof Array ? data[0]["@id"] : data["@id"];
       }
     }
     return value;
   }
 
   /**
-   * @param {any} webApi 
+   * @param {any} webApi
    * @returns {string|undefined}
    */
   _computeToS(webApi) {
-    return /** @type string */ (this._getValue(webApi, this.ns.aml.vocabularies.core.termsOfService));
+    return /** @type string */ (
+      this._getValue(webApi, this.ns.aml.vocabularies.core.termsOfService)
+    );
   }
 
   /**
-   * @param {any} webApi 
+   * @param {any} webApi
    * @returns {any}
    */
   _computeLicense(webApi) {
@@ -284,8 +291,8 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
       const result = {
         name: this._getValue(item, this.ns.aml.vocabularies.core.name),
         path: this._getValue(item, this.ns.aml.vocabularies.apiContract.path),
-        id: item['@id'],
-        ops: this._endpointOperations(item)
+        id: item["@id"],
+        ops: this._endpointOperations(item),
       };
       return result;
     });
@@ -297,15 +304,17 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
    * @return {any[]|undefined}
    */
   _endpointOperations(endpoint) {
-    const key = this._getAmfKey(this.ns.aml.vocabularies.apiContract.supportedOperation);
+    const key = this._getAmfKey(
+      this.ns.aml.vocabularies.apiContract.supportedOperation
+    );
     const so = this._ensureArray(endpoint[key]);
     if (!so || !so.length) {
       return undefined;
     }
     return so.map((item) => ({
-        id: item['@id'],
-        method: this._getValue(item, this.ns.aml.vocabularies.apiContract.method)
-      }));
+      id: item["@id"],
+      method: this._getValue(item, this.ns.aml.vocabularies.apiContract.method),
+    }));
   }
 
   _navigateItem(e) {
@@ -314,53 +323,53 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     if (!data.id || !data.shapeType) {
       return;
     }
-    const ev = new CustomEvent('api-navigation-selection-changed', {
+    const ev = new CustomEvent("api-navigation-selection-changed", {
       bubbles: true,
       composed: true,
       detail: {
         selected: data.id,
-        type: data.shapeType
-      }
+        type: data.shapeType,
+      },
     });
     this.dispatchEvent(ev);
   }
 
   render() {
-    return html`<style>${this.styles}</style>
+    return html`<style>
+        ${this.styles}
+      </style>
       <div>
-        ${this._titleTemplate()}
-        ${this._versionTemplate()}
-        ${this._descriptionTemplate()}
-        ${this._serversTemplate()}
-        ${this._protocolsTemplate()}
-        ${this._contactInfoTemplate()}
-        ${this._licenseTemplate()}
-        ${this._termsOfServiceTemplate()}
+        ${this._titleTemplate()} ${this._versionTemplate()}
+        ${this._descriptionTemplate()} ${this._serversTemplate()}
+        ${this._protocolsTemplate()} ${this._contactInfoTemplate()}
+        ${this._licenseTemplate()} ${this._termsOfServiceTemplate()}
       </div>
 
-      ${this.hideToc ? '' : this._endpointsTemplate()}
-    `;
+      ${this.hideToc ? "" : this._endpointsTemplate()} `;
   }
 
   _titleTemplate() {
     const { _apiTitle, titleLevel } = this;
     if (!_apiTitle) {
-      return '';
+      return "";
     }
-    return html`
-    <div class="api-title" role="heading" aria-level="${titleLevel}" part="api-title">
-    <label part="api-title-label">API title:</label>
-    <span>${_apiTitle}</span>
+    return html` <div
+      class="api-title"
+      role="heading"
+      aria-level="${titleLevel}"
+      part="api-title"
+    >
+      <label part="api-title-label">API title:</label>
+      <span>${_apiTitle}</span>
     </div>`;
   }
 
   _versionTemplate() {
     const { _version } = this;
     if (!_version) {
-      return '';
+      return "";
     }
-    return html`
-    <p class="inline-description version" part="api-version">
+    return html` <p class="inline-description version" part="api-version">
       <label>Version:</label>
       <span>${_version}</span>
     </p>`;
@@ -369,10 +378,13 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
   _descriptionTemplate() {
     const { _description } = this;
     if (!_description) {
-      return '';
+      return "";
     }
-    return html`
-    <div role="region" class="marked-description" part="marked-description">
+    return html` <div
+      role="region"
+      class="marked-description"
+      part="marked-description"
+    >
       <arc-marked .markdown="${_description}" sanitize>
         <div slot="markdown-html" class="markdown-body"></div>
       </arc-marked>
@@ -386,17 +398,16 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
   _serversTemplate() {
     const { servers } = this;
     if (!servers || !servers.length) {
-      return '';
+      return "";
     }
     if (servers.length === 1) {
       return this._baseUriTemplate(servers[0]);
     }
 
-    return html`
-    <div class="servers" slot="markdown-html">
+    return html` <div class="servers" slot="markdown-html">
       <p class="servers-label">API servers</p>
       <ul class="server-lists">
-      ${servers.map((server) => this._serverListTemplate(server))}
+        ${servers.map((server) => this._serverListTemplate(server))}
       </ul>
     </div>`;
   }
@@ -410,10 +421,26 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     const { baseUri, protocols } = this;
     const uri = this._computeBaseUri(server, baseUri, protocols);
     const description = this._computeDescription(server);
+    const serverTagsTemplate = this._serverTagsTemplate(server);
+    console.log("server: ", server);
     return html`<li>
-      ${uri}
-      <arc-marked .markdown=${description} class="server-description" sanitize></arc-marked>
+      ${uri} ${serverTagsTemplate}
+      <arc-marked
+        .markdown=${description}
+        class="server-description"
+        sanitize
+      ></arc-marked>
     </li>`;
+  }
+
+  /**
+   * @param {any} server Server definition
+   * @return {TemplateResult} Template for server tags
+   */
+  _serverTagsTemplate(server) {
+    const tags = server["apiContract:tags"];
+    const tagsNames = tags?.map((t) => `#${t["core:name"][0]["@value"]} `);
+    return tagsNames?.map((t) => html`<p class="server-tag">${t}</p>`);
   }
 
   /**
@@ -423,70 +450,84 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
   _baseUriTemplate(server) {
     const { baseUri, protocols, amf } = this;
     const uri = this._computeBaseUri(server, baseUri, protocols);
-    return html`
-    <api-url .amf="${amf}" .baseUri="${uri}" .server="${server}"></api-url>`;
+    return html` <api-url
+      .amf="${amf}"
+      .baseUri="${uri}"
+      .server="${server}"
+    ></api-url>`;
   }
 
   _protocolsTemplate() {
     const { _protocols } = this;
     if (!_protocols || !_protocols.length) {
-      return '';
+      return "";
     }
-    const result = _protocols.map((item) => html`<span class="chip">${item}</span>`);
+    const result = _protocols.map(
+      (item) => html`<span class="chip">${item}</span>`
+    );
 
-    return html`
-    <label class="section">Supported protocols</label>
-    <div class="protocol-chips">${result}</div>`;
+    return html` <label class="section">Supported protocols</label>
+      <div class="protocol-chips">${result}</div>`;
   }
 
   _contactInfoTemplate() {
     const { _providerName, _providerEmail, _providerUrl } = this;
     if (!_providerName) {
-      return '';
+      return "";
     }
-    const link = _providerUrl ? this._sanitizeHTML(
-      `<a href="${_providerUrl}" target="_blank" class="app-link provider-url">${_providerUrl}</a>`,
-    ): undefined;
-    return html`
-    <section role="contentinfo" class="docs-section" part="info-section">
+    const link = _providerUrl
+      ? this._sanitizeHTML(
+          `<a href="${_providerUrl}" target="_blank" class="app-link provider-url">${_providerUrl}</a>`
+        )
+      : undefined;
+    return html` <section
+      role="contentinfo"
+      class="docs-section"
+      part="info-section"
+    >
       <label class="section">Contact information</label>
       <p class="inline-description" part="info-inline-desc">
         <span class="provider-name">${_providerName}</span>
-        ${_providerEmail ? html`<a
-            class="app-link link-padding provider-email"
-            href="mailto:${_providerEmail}">${_providerEmail}</a>` : ''}
+        ${_providerEmail
+          ? html`<a
+              class="app-link link-padding provider-email"
+              href="mailto:${_providerEmail}"
+              >${_providerEmail}</a
+            >`
+          : ""}
       </p>
-      ${_providerUrl ? html`
-        <p class="inline-description" part="info-inline-desc">
-          ${unsafeHTML(link)}
-        </p>` : ''}
+      ${_providerUrl
+        ? html` <p class="inline-description" part="info-inline-desc">
+            ${unsafeHTML(link)}
+          </p>`
+        : ""}
     </section>`;
   }
 
   _licenseTemplate() {
     const { _licenseUrl, _licenseName } = this;
     if (!_licenseUrl || !_licenseName) {
-      return '';
+      return "";
     }
     const link = this._sanitizeHTML(
-      `<a href="${_licenseUrl}" target="_blank" class="app-link">${_licenseName}</a>`,
+      `<a href="${_licenseUrl}" target="_blank" class="app-link">${_licenseName}</a>`
     );
-    return html`
-    <section aria-labelledby="licenseLabel" class="docs-section" part="license-section">
+    return html` <section
+      aria-labelledby="licenseLabel"
+      class="docs-section"
+      part="license-section"
+    >
       <label class="section" id="licenseLabel">License</label>
-      <p class="inline-description">
-        ${unsafeHTML(link)}
-      </p>
+      <p class="inline-description">${unsafeHTML(link)}</p>
     </section>`;
   }
 
   _termsOfServiceTemplate() {
     const { _termsOfService } = this;
     if (!_termsOfService || !_termsOfService.length) {
-      return '';
+      return "";
     }
-    return html`
-    <section aria-labelledby="tocLabel" class="docs-section">
+    return html` <section aria-labelledby="tocLabel" class="docs-section">
       <label class="section" id="tocLabel">Terms of service</label>
       <arc-marked .markdown="${_termsOfService}" sanitize>
         <div slot="markdown-html" class="markdown-body"></div>
@@ -497,80 +538,88 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
   _endpointsTemplate() {
     const { _endpoints } = this;
     if (!_endpoints || !_endpoints.length) {
-      return '';
+      return "";
     }
     const result = _endpoints.map((item) => this._endpointTemplate(item));
-    const pathLabel = this._isAsyncAPI(this.amf) ? 'channels' : 'endpoints';
+    const pathLabel = this._isAsyncAPI(this.amf) ? "channels" : "endpoints";
     return html`
-    <div class="separator" part="separator"></div>
-    <div class="toc" part="toc">
-      <label class="section endpoints-title">API ${pathLabel}</label>
-      ${result}
-    </div>
+      <div class="separator" part="separator"></div>
+      <div class="toc" part="toc">
+        <label class="section endpoints-title">API ${pathLabel}</label>
+        ${result}
+      </div>
     `;
   }
 
   _endpointTemplate(item) {
-    const ops = item.ops && item.ops.length ? item.ops.map((op) => this._methodTemplate(op, item)) : '';
-    return html`
-    <div class="endpoint-item" @click="${this._navigateItem}">
-      ${item.name ? this._endpointNameTemplate(item) : this._endpointPathTemplate(item)}
-      <div class="endpoint-header">
-        ${ops}
-      </div>
+    const ops =
+      item.ops && item.ops.length
+        ? item.ops.map((op) => this._methodTemplate(op, item))
+        : "";
+    return html` <div class="endpoint-item" @click="${this._navigateItem}">
+      ${item.name
+        ? this._endpointNameTemplate(item)
+        : this._endpointPathTemplate(item)}
+      <div class="endpoint-header">${ops}</div>
     </div>`;
   }
 
   _endpointPathTemplate(item) {
     return html`
-    <a
-      class="endpoint-path"
-      href="#${item.path}"
-      data-id="${item.id}"
-      data-shape-type="endpoint"
-      title="Open endpoint documentation">${item.path}</a>
+      <a
+        class="endpoint-path"
+        href="#${item.path}"
+        data-id="${item.id}"
+        data-shape-type="endpoint"
+        title="Open endpoint documentation"
+        >${item.path}</a
+      >
     `;
   }
 
   _endpointNameTemplate(item) {
     if (!item.name) {
-      return '';
+      return "";
     }
     return html`
-    <a
-      class="endpoint-path"
-      href="#${item.path}"
-      data-id="${item.id}"
-      data-shape-type="endpoint"
-      title="Open endpoint documentation">${item.name}</a>
-    <p class="endpoint-path-name">${item.path}</p>
+      <a
+        class="endpoint-path"
+        href="#${item.path}"
+        data-id="${item.id}"
+        data-shape-type="endpoint"
+        title="Open endpoint documentation"
+        >${item.name}</a
+      >
+      <p class="endpoint-path-name">${item.path}</p>
     `;
   }
 
   _methodTemplate(item, endpoint) {
     return html`
       <a
-        href="#${`${endpoint.path  }/${  item.method}`}"
+        href="#${`${endpoint.path}/${item.method}`}"
         class="method-label"
         data-method="${item.method}"
         data-id="${item.id}"
         data-shape-type="method"
-        title="Open method documentation">${item.method}</a>
+        title="Open method documentation"
+        >${item.method}</a
+      >
     `;
   }
 
   /**
-   * @param {string} HTML 
+   * @param {string} HTML
    * @returns {string}
    */
   _sanitizeHTML(HTML) {
-    const result = sanitizer.sanitize(HTML, { 
-      ADD_ATTR: ['target', 'href'],
-      ALLOWED_TAGS: ['a'],
-      USE_PROFILES: {html: true},
+    const result = sanitizer.sanitize(HTML, {
+      ADD_ATTR: ["target", "href"],
+      ALLOWED_TAGS: ["a"],
+      USE_PROFILES: { html: true },
     });
 
-    if (typeof result === 'string') {
+    if (typeof result === "string") {
       return result;
     }
 

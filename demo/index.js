@@ -13,20 +13,21 @@ class ApiDemo extends ApiDemoPage {
 
   _apiListTemplate() {
     return [
-      ['google-drive-api', 'Google Drive'],
-      ['exchange-experience-api', 'Exchange xAPI'],
-      ['demo-api', 'Demo API'],
-      ['appian-api', 'Applian API'],
-      ['nexmo-sms-api', 'Nexmo SMS API'],
-      ['loan-microservice', 'Loan microservice (OAS)'],
-      ['prevent-xss', 'Prevent XSS'],
-      ['mocking-service', 'Lots of methods'],
-      ['no-endpoints', 'No endpoints!'],
-      ['no-server', 'No server!'],
-      ['multiple-servers', 'Multiple servers'],
-      ['async-api', 'AsyncAPI'],
-      ['APIC-641', 'APIC-641'],
-      ['W-10881270', 'W-10881270'],
+      ["google-drive-api", "Google Drive"],
+      ["exchange-experience-api", "Exchange xAPI"],
+      ["demo-api", "Demo API"],
+      ["appian-api", "Applian API"],
+      ["nexmo-sms-api", "Nexmo SMS API"],
+      ["loan-microservice", "Loan microservice (OAS)"],
+      ["prevent-xss", "Prevent XSS"],
+      ["mocking-service", "Lots of methods"],
+      ["no-endpoints", "No endpoints!"],
+      ["no-server", "No server!"],
+      ["multiple-servers", "Multiple servers"],
+      ["async-api", "AsyncAPI"],
+      ["APIC-641", "APIC-641"],
+      ["W-10881270", "W-10881270"],
+      ["async-api26", "AsyncAPI26"],
     ].map(
       ([file, label]) => html`
         <anypoint-item data-src="${file}-compact.json">${label}</anypoint-item>

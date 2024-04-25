@@ -422,7 +422,6 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     const uri = this._computeBaseUri(server, baseUri, protocols);
     const description = this._computeDescription(server);
     const serverTagsTemplate = this._serverTagsTemplate(server);
-    console.log("server: ", server);
     return html`<li>
       ${uri} ${serverTagsTemplate}
       <arc-marked
@@ -438,8 +437,16 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
    * @return {TemplateResult} Template for server tags
    */
   _serverTagsTemplate(server) {
-    const tags = server["apiContract:tags"];
-    const tagsNames = tags?.map((t) => `#${t["core:name"][0]["@value"]} `);
+    const isAsyncApi = this._isAsyncAPI(this.amf);
+    if (!isAsyncApi) {
+      return html``;
+    }
+    const tagsKey = this._getAmfKey(this.ns.aml.vocabularies.apiContract.tags);
+    const tags = server[tagsKey];
+    const tagsNames = tags?.map(
+      (tagName) =>
+        `#${this._getValue(tagName, this.ns.aml.vocabularies.core.name)} `
+    );
     return tagsNames?.map((t) => html`<p class="server-tag">${t}</p>`);
   }
 

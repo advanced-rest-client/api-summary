@@ -424,7 +424,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     const serverNameTemplate = this._serverNameTemplate(server);
     const serverTagsTemplate = this._serverTagsTemplate(server);
     const listItemClass = description ? "" : "without-description";
-    return html`<li class=${listItemClass}>
+    return html`<li class="server-item ${listItemClass}">
       ${serverNameTemplate} ${uri} ${serverTagsTemplate}
       <arc-marked
         .markdown=${description}

@@ -424,8 +424,11 @@ describe('ApiSummary', () => {
           element = await modelFixture(asyncAmf);
         });
 
-        it('should render server uri for API', () => {
-          assert.equal(element.shadowRoot.querySelector('api-url').url, 'amqp://broker.mycompany.com');
+        it("should render server uri for API", () => {
+          assert.equal(
+            element.shadowRoot.querySelector(".server-name").textContent,
+            "production"
+          );
         });
 
         it('should render "API channels" message', () => {

@@ -421,9 +421,10 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     const { baseUri, protocols } = this;
     const uri = this._computeBaseUri(server, baseUri, protocols);
     const description = this._computeDescription(server);
+    const serverNameTemplate = this._serverNameTemplate(server);
     const serverTagsTemplate = this._serverTagsTemplate(server);
     return html`<li>
-      ${uri} ${serverTagsTemplate}
+      ${serverNameTemplate} ${uri} ${serverTagsTemplate}
       <arc-marked
         .markdown=${description}
         class="server-description"
@@ -447,7 +448,26 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
       (tagName) =>
         `#${this._getValue(tagName, this.ns.aml.vocabularies.core.name)} `
     );
-    return tagsNames?.map((t) => html`<p class="server-tag">${t}</p>`);
+    return tagsNames?.map(
+      (tagName) => html`<p class="server-tag">${tagName}</p>`
+    );
+  }
+
+  /**
+   * @param {any} server Server definition
+   * @return {TemplateResult} Template for server name
+   */
+  _serverNameTemplate(server) {
+    const isAsyncApi = this._isAsyncAPI(this.amf);
+    if (!isAsyncApi) {
+      return html``;
+    }
+    const serverName = this._getValue(
+      server,
+      this._getAmfKey(this.ns.aml.vocabularies.core.name)
+    );
+
+    return html`<span class="server-name">${serverName}</span>`
   }
 
   /**

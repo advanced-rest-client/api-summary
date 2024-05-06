@@ -166,6 +166,30 @@ export default css`
     margin: 0.8em 0 0.2em 0;
   }
 
+  .server-name {
+    color: var(--api-method-documentation-async-server-names-color, #ffffff);
+    background-color: var(
+      --api-method-documentation-async-server-names-bg-color,
+      #506773
+    );
+    text-align: center;
+    font-family: var(
+      --api-method-documentation-async-server-names-font,
+      Avenir
+    );
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border-radius: 4px;
+    border: 1px solid
+      var(--api-method-documentation-async-server-names-border-color, #506773);
+    padding: 1px 8px 1px 8px;
+    margin-right: 10px;
+    word-break: auto-phrase;
+    max-width: fit-content;
+  }
+
   .server-tag {
     display: inline-block;
     border: 1px solid var(--anypoint-color-coreBlue2);

@@ -396,11 +396,11 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
    * whether it's defined in the main API definition or not.
    */
   _serversTemplate() {
-    const { servers } = this;
+    const { servers, amf } = this;
     if (!servers || !servers.length) {
       return "";
     }
-    if (servers.length === 1) {
+    if (servers.length === 1 && !this._isAsyncAPI(amf)) {
       return this._baseUriTemplate(servers[0]);
     }
 
@@ -423,7 +423,8 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     const description = this._computeDescription(server);
     const serverNameTemplate = this._serverNameTemplate(server);
     const serverTagsTemplate = this._serverTagsTemplate(server);
-    return html`<li>
+    const listItemClass = description ? "" : "without-description";
+    return html`<li class=${listItemClass}>
       ${serverNameTemplate} ${uri} ${serverTagsTemplate}
       <arc-marked
         .markdown=${description}

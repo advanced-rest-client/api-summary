@@ -190,6 +190,10 @@ export default css`
     max-width: fit-content;
   }
 
+  .without-description {
+    margin-bottom: 14px;
+  }
+
   .server-tag {
     display: inline-block;
     border: 1px solid var(--anypoint-color-coreBlue2);

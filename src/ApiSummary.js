@@ -1,15 +1,15 @@
 /* eslint-disable lit-a11y/click-events-have-key-events */
 /* eslint-disable no-param-reassign */
 /* eslint-disable class-methods-use-this */
-import { LitElement, html } from 'lit-element';
-import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
-import { AmfHelperMixin } from '@api-components/amf-helper-mixin';
-import markdownStyles from '@advanced-rest-client/markdown-styles/markdown-styles.js';
-import labelStyles from '@api-components/http-method-label/http-method-label-common-styles.js';
-import sanitizer from 'dompurify';
-import '@advanced-rest-client/arc-marked/arc-marked.js';
-import '@api-components/api-method-documentation/api-url.js';
-import styles from './Styles.js';
+import { LitElement, html } from "lit-element";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
+import { AmfHelperMixin } from "@api-components/amf-helper-mixin";
+import markdownStyles from "@advanced-rest-client/markdown-styles/markdown-styles.js";
+import labelStyles from "@api-components/http-method-label/http-method-label-common-styles.js";
+import sanitizer from "dompurify";
+import "@advanced-rest-client/arc-marked/arc-marked.js";
+import "@api-components/api-method-documentation/api-url.js";
+import styles from "./Styles.js";
 
 /** @typedef {import('lit-element').TemplateResult} TemplateResult */
 
@@ -468,7 +468,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
       this._getAmfKey(this.ns.aml.vocabularies.core.name)
     );
 
-    return html`<span class="server-name">${serverName}</span>`
+    return html`<span class="server-name">${serverName}</span>`;
   }
 
   /**

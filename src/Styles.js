@@ -161,7 +161,7 @@ export default css`
   }
 
   .servers .servers-label {
-    font-size: 0.75rem;
+    font-size: 14px;
     font-weight: 700;
     margin: 0.8em 0 0.2em 0;
   }
@@ -184,7 +184,7 @@ export default css`
     border-radius: 4px;
     border: 1px solid
       var(--api-method-documentation-async-server-names-border-color, #506773);
-    padding: 1px 8px 1px 8px;
+    padding: 4px;
     margin-right: 10px;
     word-break: auto-phrase;
     max-width: fit-content;
@@ -194,13 +194,14 @@ export default css`
     margin-bottom: 14px;
   }
 
-  .server-tag {
+  .servers .server-tag {
     display: inline-block;
     border: 1px solid var(--anypoint-color-coreBlue2);
     margin-left: 8px;
     color: var(--anypoint-color-coreBlue2);
     padding: 4px;
     border-radius: var(--api-type-document-trait-border-radius, 3px);
+    font-size: var(--api-summary-async-api-server-tag-font-size, 14px);
   }
 
   .server-description {

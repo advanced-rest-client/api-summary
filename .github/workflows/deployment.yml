@@ -25,16 +25,16 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
-      - name: Install dependencies
+      - name: Clean install
         run: |
+          rm -rf node_modules package-lock.json
           npm install -g npm@10.8.2
           npm ci
-      - name: Install test dependencies
+      - name: Install Playwright browsers
         run: |
-          npm install -D playwright@1.40.1 @playwright/test@1.40.1 @web/test-runner@0.18.0 @web/test-runner-playwright@0.11.0
           npx playwright install --with-deps chromium firefox webkit
       - name: Run tests
-        run: npx web-test-runner --config web-test-runner.config.cjs
+        run: npm test
   test_win:
     name: "Windows"
     runs-on: windows-latest
@@ -44,16 +44,16 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
-      - name: Install dependencies
+      - name: Clean install
         run: |
+          rm -rf node_modules package-lock.json
           npm install -g npm@10.8.2
           npm ci
-      - name: Install test dependencies
+      - name: Install Playwright browsers
         run: |
-          npm install -D playwright@1.40.1 @playwright/test@1.40.1 @web/test-runner@0.18.0 @web/test-runner-playwright@0.11.0
           npx playwright install --with-deps chromium firefox webkit
       - name: Run tests
-        run: npx web-test-runner --config web-test-runner.config.cjs
+        run: npm test
   tag:
     name: "Publishing release"
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'

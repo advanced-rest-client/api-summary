@@ -31,10 +31,10 @@ jobs:
           npm ci
       - name: Install test dependencies
         run: |
-          npm install -D @playwright/test @web/test-runner-playwright
+          npm install -D @playwright/test @web/test-runner-playwright @web/test-runner@0.18.0
           npx playwright install --with-deps chromium firefox webkit
       - name: Run tests
-        run: npx web-test-runner --config web-test-runner.config.mjs
+        run: npx web-test-runner --config web-test-runner.config.cjs
   test_win:
     name: "Windows"
     runs-on: windows-latest
@@ -50,10 +50,10 @@ jobs:
           npm ci
       - name: Install test dependencies
         run: |
-          npm install -D @playwright/test @web/test-runner-playwright
+          npm install -D @playwright/test @web/test-runner-playwright @web/test-runner@0.18.0
           npx playwright install --with-deps chromium firefox webkit
       - name: Run tests
-        run: npx web-test-runner --config web-test-runner.config.mjs
+        run: npx web-test-runner --config web-test-runner.config.cjs
   tag:
     name: "Publishing release"
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'

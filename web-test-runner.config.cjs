@@ -1,6 +1,6 @@
-import { playwrightLauncher } from '@web/test-runner-playwright';
+const { playwrightLauncher } = require('@web/test-runner-playwright');
 
-export default {
+module.exports = {
   files: 'test/**/*.test.js',
   nodeResolve: true,
   coverage: true,
@@ -27,4 +27,4 @@ export default {
       lines: 80
     }
   }
-};
+}; 

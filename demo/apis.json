@@ -17,5 +17,6 @@
     "mime": "application/yaml"
   },
   "APIC-641/APIC-641.yaml": { "type": "OAS 3.0", "mime": "application/yaml" },
-  "APIC-711/APIC-711.raml": "RAML 1.0"
+  "APIC-711/APIC-711.raml": "RAML 1.0",
+  "agents-api/agents-api.yaml": { "type": "OAS 3.0", "mime": "application/yaml" }
 }

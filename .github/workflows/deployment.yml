@@ -31,7 +31,7 @@ jobs:
           npm ci
       - name: Install test dependencies
         run: |
-          npm install -D @playwright/test @web/test-runner-playwright @web/test-runner@0.18.0
+          npm install -D playwright@1.40.1 @playwright/test@1.40.1 @web/test-runner@0.18.0 @web/test-runner-playwright@0.11.0
           npx playwright install --with-deps chromium firefox webkit
       - name: Run tests
         run: npx web-test-runner --config web-test-runner.config.cjs
@@ -50,7 +50,7 @@ jobs:
           npm ci
       - name: Install test dependencies
         run: |
-          npm install -D @playwright/test @web/test-runner-playwright @web/test-runner@0.18.0
+          npm install -D playwright@1.40.1 @playwright/test@1.40.1 @web/test-runner@0.18.0 @web/test-runner-playwright@0.11.0
           npx playwright install --with-deps chromium firefox webkit
       - name: Run tests
         run: npx web-test-runner --config web-test-runner.config.cjs

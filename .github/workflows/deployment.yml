@@ -34,7 +34,7 @@ jobs:
           npm install -D @playwright/test @web/test-runner-playwright
           npx playwright install --with-deps chromium firefox webkit
       - name: Run tests
-        run: npm test
+        run: npx web-test-runner --config web-test-runner.config.mjs
   test_win:
     name: "Windows"
     runs-on: windows-latest
@@ -53,7 +53,7 @@ jobs:
           npm install -D @playwright/test @web/test-runner-playwright
           npx playwright install --with-deps chromium firefox webkit
       - name: Run tests
-        run: npm test
+        run: npx web-test-runner --config web-test-runner.config.mjs
   tag:
     name: "Publishing release"
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'

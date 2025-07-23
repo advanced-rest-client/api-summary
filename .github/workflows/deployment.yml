@@ -20,38 +20,34 @@ jobs:
         os: [ubuntu-22.04]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
         with:
           node-version: 18
+          cache: 'npm'
       - uses: microsoft/playwright-github-action@v1
-      - uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install -g npm@10.8.2
+          npm install
+          npm install -g @web/test-runner
       - name: Run tests
         run: npm test
   test_win:
     name: "Windows"
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
         with:
           node-version: 18
+          cache: 'npm'
       - uses: microsoft/playwright-github-action@v1
-      - uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install -g npm@10.8.2
+          npm install
+          npm install -g @web/test-runner
       - name: Run tests
         run: npm test
   tag:
@@ -63,19 +59,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: '18'
           registry-url: 'https://registry.npmjs.org'
-      - uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          cache: 'npm'
       - run: npm install
       - name: Read version from package.json
         uses: culshaw/read-package-node-version-actions@v1

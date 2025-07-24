@@ -43,7 +43,7 @@ jobs:
           node node_modules/playwright/install.js
       - name: Run tests
         run: |
-          node ./node_modules/@web/test-runner/dist/test-runner.js test/*.test.js --coverage --node-resolve
+          node ./node_modules/@web/test-runner/dist/cli.js test/*.test.js --coverage --node-resolve
   test_win:
     name: "Windows"
     runs-on: windows-latest

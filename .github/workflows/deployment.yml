@@ -24,7 +24,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 18
-      - uses: microsoft/playwright-github-action@v1
       - uses: actions/cache@v3
         with:
           path: ~/.npm
@@ -35,8 +34,10 @@ jobs:
         run: |
           npm install
           npm install -g @web/test-runner @web/test-runner-playwright
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps
+      - name: Install Playwright
+        run: |
+          npx playwright install
+          npx playwright install-deps
       - name: Run tests
         run: npm run test
   test_win:
@@ -47,7 +48,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 18
-      - uses: microsoft/playwright-github-action@v1
       - uses: actions/cache@v3
         with:
           path: ~/.npm
@@ -58,8 +58,10 @@ jobs:
         run: |
           npm install
           npm install -g @web/test-runner @web/test-runner-playwright
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps
+      - name: Install Playwright
+        run: |
+          npx playwright install
+          npx playwright install-deps
       - name: Run tests
         run: npm run test
   tag:

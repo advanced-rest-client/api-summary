@@ -36,9 +36,7 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
       - name: Run tests
-        run: |
-          ./node_modules/.bin/web-test-runner test/*.test.js --coverage --node-resolve --playwright --browsers chromium firefox webkit
-          ./node_modules/.bin/web-test-runner test/visual/*.test.js --coverage --node-resolve --playwright --browsers chromium firefox webkit
+        run: npm run test
   test_win:
     name: "Windows"
     runs-on: windows-latest
@@ -59,9 +57,7 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
       - name: Run tests
-        run: |
-          ./node_modules/.bin/web-test-runner test/*.test.js --coverage --node-resolve --playwright --browsers chromium firefox webkit
-          ./node_modules/.bin/web-test-runner test/visual/*.test.js --coverage --node-resolve --playwright --browsers chromium firefox webkit
+        run: npm run test
   tag:
     name: "Publishing release"
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'

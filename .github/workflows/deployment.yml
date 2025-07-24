@@ -33,7 +33,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
-          npm install -g @web/test-runner @web/test-runner-playwright
+          npm install -g @web/test-runner @web/test-runner-playwright @web/dev-server-esbuild @open-wc/testing
       - name: Install Playwright
         run: |
           npx playwright install
@@ -57,7 +57,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
-          npm install -g @web/test-runner @web/test-runner-playwright
+          npm install -g @web/test-runner @web/test-runner-playwright @web/dev-server-esbuild @open-wc/testing
       - name: Install Playwright
         run: |
           npx playwright install

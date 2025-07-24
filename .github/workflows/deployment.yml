@@ -33,8 +33,10 @@ jobs:
             ${{ runner.os }}-node-
       - name: Install dependencies
         run: npm ci
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
       - name: Run tests
-        run: npm exec -- @web/test-runner test/*.test.js --coverage --node-resolve --playwright --browsers chromium firefox webkit && npm exec -- @web/test-runner test/visual/*.test.js --coverage --node-resolve --playwright --browsers chromium firefox webkit
+        run: node ./node_modules/@web/test-runner/dist/test-runner.js test/*.test.js --coverage --node-resolve --playwright --browsers chromium firefox webkit && node ./node_modules/@web/test-runner/dist/test-runner.js test/visual/*.test.js --coverage --node-resolve --playwright --browsers chromium firefox webkit
   test_win:
     name: "Windows"
     runs-on: windows-latest
@@ -52,8 +54,10 @@ jobs:
             ${{ runner.os }}-node-
       - name: Install dependencies
         run: npm ci
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
       - name: Run tests
-        run: npm exec -- @web/test-runner test/*.test.js --coverage --node-resolve --playwright --browsers chromium firefox webkit && npm exec -- @web/test-runner test/visual/*.test.js --coverage --node-resolve --playwright --browsers chromium firefox webkit
+        run: node ./node_modules/@web/test-runner/dist/test-runner.js test/*.test.js --coverage --node-resolve --playwright --browsers chromium firefox webkit && node ./node_modules/@web/test-runner/dist/test-runner.js test/visual/*.test.js --coverage --node-resolve --playwright --browsers chromium firefox webkit
   tag:
     name: "Publishing release"
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'

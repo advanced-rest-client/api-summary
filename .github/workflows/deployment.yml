@@ -38,7 +38,11 @@ jobs:
         run: npm test
   test_win:
     name: "Windows"
-    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -52,14 +56,11 @@ jobs:
             ${{ runner.os }}-node-
       - name: Install dependencies
         run: |
+          if (Test-Path package-lock.json) { del package-lock.json }
           npm install
-          npm install --save-dev @web/test-runner @web/test-runner-playwright @web/dev-server-esbuild @open-wc/testing
-      - name: Install Playwright
-        run: |
-          npx playwright install
-          npx playwright install-deps
+        shell: pwsh
       - name: Run tests
-        run: npx web-test-runner test/*.test.js --coverage --node-resolve --playwright --browsers chromium firefox webkit && npx web-test-runner test/visual/*.test.js --coverage --node-resolve --playwright --browsers chromium firefox webkit
+        run: npm test
   tag:
     name: "Publishing release"
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'

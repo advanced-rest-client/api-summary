@@ -3,16 +3,22 @@ import { playwrightLauncher } from '@web/test-runner-playwright';
 export default {
   nodeResolve: true,
   browsers: [
-    playwrightLauncher({ product: 'firefox' })
-    // Temporarily disabled due to stability issues
-    // playwrightLauncher({ 
-    //   product: 'webkit',
-    //   launchOptions: {
-    //     headless: true,
-    //     args: ['--no-sandbox'],
-    //     timeout: 20000
-    //   }
-    // })
+    playwrightLauncher({
+      product: 'chromium',
+      launchOptions: {
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        timeout: 20000
+      }
+    }),
+    playwrightLauncher({ product: 'firefox' }),
+    playwrightLauncher({ 
+      product: 'webkit',
+      launchOptions: {
+        headless: true,
+        args: ['--no-sandbox'],
+        timeout: 20000
+      }
+    })
   ],
   testFramework: {
     config: {

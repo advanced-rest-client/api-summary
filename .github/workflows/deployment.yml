@@ -25,11 +25,14 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
-      - name: Clean install
+      - name: Install dependencies
         run: |
-          rm -rf node_modules package-lock.json
           npm install -g npm@10.8.2
-          npm ci
+          if [ ! -f "package-lock.json" ]; then
+            npm install
+          else
+            npm ci
+          fi
       - name: Generate AMF models
         run: npm run prepare
       - name: Install Playwright browsers
@@ -46,11 +49,14 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
-      - name: Clean install
+      - name: Install dependencies
         run: |
-          rm -rf node_modules package-lock.json
           npm install -g npm@10.8.2
-          npm ci
+          if (!(Test-Path "package-lock.json")) {
+            npm install
+          } else {
+            npm ci
+          }
       - name: Generate AMF models
         run: npm run prepare
       - name: Install Playwright browsers
@@ -76,7 +82,13 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           cache: 'npm'
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm install -g npm@10.8.2
+          if [ ! -f "package-lock.json" ]; then
+            npm install
+          else
+            npm ci
+          fi
       - name: Read version from package.json
         uses: culshaw/read-package-node-version-actions@v1
         id: package-node-version

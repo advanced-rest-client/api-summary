@@ -40,11 +40,7 @@ jobs:
         run: |
           npm install
           npm install --save-dev @web/test-runner@0.13.15 @web/test-runner-playwright@0.11.0 playwright@1.25.2
-      # Install browsers after playwright is installed
-      - name: Install Playwright browsers
-        run: |
-          npx playwright install
-          npx playwright install-deps
+          node node_modules/playwright/install.js
       - name: Run tests
         run: |
           npx web-test-runner test/*.test.js --coverage --node-resolve

@@ -26,5 +26,25 @@ module.exports = {
       functions: 80,
       lines: 80
     }
-  }
+  },
+  middleware: [
+    function rewriteBase(context, next) {
+      if (context.url.startsWith('/base/')) {
+        context.url = context.url.replace('/base/', '/');
+      }
+      return next();
+    }
+  ],
+  testRunnerHtml: testFramework => `
+    <html>
+      <head>
+        <script>
+          window.process = { env: { NODE_ENV: "development" } };
+        </script>
+      </head>
+      <body>
+        <script type="module" src="${testFramework}"></script>
+      </body>
+    </html>
+  `
 }; 

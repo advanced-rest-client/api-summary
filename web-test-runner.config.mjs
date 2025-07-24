@@ -3,16 +3,16 @@ import { playwrightLauncher } from '@web/test-runner-playwright';
 export default {
   nodeResolve: true,
   browsers: [
+    playwrightLauncher({ product: 'firefox' })
     // Temporarily disabled due to stability issues
-    // playwrightLauncher({
-    //   product: 'chromium',
+    // playwrightLauncher({ 
+    //   product: 'webkit',
     //   launchOptions: {
-    //     args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    //     headless: true,
+    //     args: ['--no-sandbox'],
     //     timeout: 20000
     //   }
-    // }),
-    playwrightLauncher({ product: 'firefox' }),
-    playwrightLauncher({ product: 'webkit' }),
+    // })
   ],
   testFramework: {
     config: {
@@ -46,4 +46,6 @@ export default {
   browserStartTimeout: 60000,
   testsStartTimeout: 60000,
   testsFinishTimeout: 60000,
+  concurrentBrowsers: 1,
+  concurrency: 1
 };

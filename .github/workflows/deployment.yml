@@ -34,8 +34,6 @@ jobs:
         run: |
           rm -f package-lock.json
           npm install
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
       - name: Run tests
         run: npm test
   test_win:
@@ -59,12 +57,8 @@ jobs:
       - name: Install dependencies
         run: |
           if (Test-Path package-lock.json) { del package-lock.json }
-          npm ci
+          npm install
         shell: pwsh
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
-      - name: Generate API models
-        run: npm run prepare
       - name: Run tests
         run: npm test
   tag:

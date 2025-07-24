@@ -11,14 +11,6 @@ export default {
       }
     }),
     playwrightLauncher({ product: 'firefox' }),
-    playwrightLauncher({ 
-      product: 'webkit',
-      launchOptions: {
-        headless: true,
-        args: ['--no-sandbox'],
-        timeout: 20000
-      }
-    })
   ],
   testFramework: {
     config: {

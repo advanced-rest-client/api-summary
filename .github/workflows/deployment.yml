@@ -33,13 +33,13 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
-          npm install -g @web/test-runner @web/test-runner-playwright @web/dev-server-esbuild @open-wc/testing
+          npm install --save-dev @web/test-runner @web/test-runner-playwright @web/dev-server-esbuild @open-wc/testing
       - name: Install Playwright
         run: |
           npx playwright install
           npx playwright install-deps
       - name: Run tests
-        run: npm run test
+        run: npx web-test-runner test/*.test.js --coverage --node-resolve --playwright --browsers chromium firefox webkit && npx web-test-runner test/visual/*.test.js --coverage --node-resolve --playwright --browsers chromium firefox webkit
   test_win:
     name: "Windows"
     runs-on: windows-latest
@@ -57,13 +57,13 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
-          npm install -g @web/test-runner @web/test-runner-playwright @web/dev-server-esbuild @open-wc/testing
+          npm install --save-dev @web/test-runner @web/test-runner-playwright @web/dev-server-esbuild @open-wc/testing
       - name: Install Playwright
         run: |
           npx playwright install
           npx playwright install-deps
       - name: Run tests
-        run: npm run test
+        run: npx web-test-runner test/*.test.js --coverage --node-resolve --playwright --browsers chromium firefox webkit && npx web-test-runner test/visual/*.test.js --coverage --node-resolve --playwright --browsers chromium firefox webkit
   tag:
     name: "Publishing release"
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'

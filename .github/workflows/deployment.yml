@@ -17,51 +17,41 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-22.04]
+        os: [ubuntu-20.04]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
         with:
           node-version: 18
-          cache: 'npm'
+      - uses: microsoft/playwright-github-action@v1
+      - uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - name: Install dependencies
-        run: |
-          npm install -g npm@10.8.2
-          if [ ! -f "package-lock.json" ]; then
-            npm install
-          else
-            npm ci
-          fi
-      - name: Generate AMF models
-        run: npm run prepare
-      - name: Install Playwright browsers
-        run: |
-          npx playwright install --with-deps chromium firefox webkit
+        run: npm ci
       - name: Run tests
         run: npm test
   test_win:
     name: "Windows"
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
         with:
           node-version: 18
-          cache: 'npm'
+      - uses: microsoft/playwright-github-action@v1
+      - uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - name: Install dependencies
-        run: |
-          npm install -g npm@10.8.2
-          if (!(Test-Path "package-lock.json")) {
-            npm install
-          } else {
-            npm ci
-          }
-      - name: Generate AMF models
-        run: npm run prepare
-      - name: Install Playwright browsers
-        run: |
-          npx playwright install --with-deps chromium firefox webkit
+        run: npm ci
       - name: Run tests
         run: npm test
   tag:
@@ -73,22 +63,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v2
         with:
-          node-version: '18'
+          node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
-          cache: 'npm'
-      - name: Install dependencies
-        run: |
-          npm install -g npm@10.8.2
-          if [ ! -f "package-lock.json" ]; then
-            npm install
-          else
-            npm ci
-          fi
+      - uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - run: npm install
       - name: Read version from package.json
         uses: culshaw/read-package-node-version-actions@v1
         id: package-node-version

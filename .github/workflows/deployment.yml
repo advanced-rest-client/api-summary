@@ -30,16 +30,23 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
+      # Clear npm cache and remove node_modules to ensure clean install
+      - name: Clean npm cache
+        run: |
+          npm cache clean --force
+          rm -rf node_modules
+      # Install dependencies with a clean slate
       - name: Install dependencies
         run: |
           npm install
-          npm install --save-dev @web/test-runner @web/test-runner-playwright @web/dev-server-esbuild @open-wc/testing
-      - name: Install Playwright
+          npm install -g playwright
+      # Install browsers after playwright is installed globally
+      - name: Install Playwright browsers
         run: |
-          npx playwright install
-          npx playwright install-deps
+          playwright install
+          playwright install-deps
       - name: Run tests
-        run: npx web-test-runner test/*.test.js --coverage --node-resolve --playwright --browsers chromium firefox webkit && npx web-test-runner test/visual/*.test.js --coverage --node-resolve --playwright --browsers chromium firefox webkit
+        run: npm test
   test_win:
     name: "Windows"
     runs-on: windows-latest

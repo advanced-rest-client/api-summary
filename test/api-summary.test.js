@@ -349,6 +349,119 @@ describe('ApiSummary', () => {
         });
       });
 
+      describe('Endpoints rendering with agents', () => {
+        let element = /** @type ApiSummary */ (null);
+        let amf;
+
+        before(async () => {
+          amf = await AmfLoader.load(compact,'agents-api');
+        });
+
+        beforeEach(async () => {
+          element = await basicFixture();
+          element.amf = amf;
+          await aTimeout(0);
+        });
+
+        it('adds separator', () => {
+          const node = element.shadowRoot.querySelector('.separator');
+          assert.ok(node);
+        });
+
+        it('renders all endpoints', () => {
+          const nodes = element.shadowRoot.querySelectorAll('.endpoint-item');
+          assert.lengthOf(nodes, 2);
+        });
+
+        it('renders endpoint name', () => {
+          const node = element.shadowRoot.querySelectorAll('.endpoint-item')[1].querySelector('.endpoint-path');
+          assert.dom.equal(
+            node,
+            `<a
+              class="endpoint-path"
+              data-shape-type="endpoint"
+              href="#/reservations/reservationlookup"
+              title="Open endpoint documentation"
+              >
+              /reservations/reservationlookup
+            </a>`,
+            {
+              ignoreAttributes: ['data-id']
+            }
+          );
+        });
+
+        it('sets data-id on name', () => {
+          const node = element.shadowRoot.querySelectorAll('.endpoint-item')[1].querySelector('.endpoint-path');
+          assert.ok(node.getAttribute('data-id'));
+        });
+
+        it('sets data-id on path', () => {
+          const node = element.shadowRoot.querySelectorAll('.endpoint-item')[1].querySelector('.endpoint-path');
+          assert.ok(node.getAttribute('data-id'));
+        });
+
+        it('renders list of operations', () => {
+          const nodes = element.shadowRoot.querySelectorAll('.endpoint-item')[1].querySelectorAll('.method-label');
+          assert.lengthOf(nodes, 1);
+        });
+
+        it('renders operation method', () => {
+          const node = element.shadowRoot.querySelectorAll('.endpoint-item')[1].querySelector('.method-label');
+          assert.dom.equal(
+            node,
+            `<a
+              class="method-label method-label-with-icon"
+              data-method="get"
+              data-shape-type="method"
+              href="#/reservations/reservationlookup/get"
+              title="Open method documentation"
+              >get
+              <arc-icon class="method-icon" icon="codegenie"></arc-icon>
+              </a>`,
+            {
+              ignoreAttributes: ['data-id']
+            }
+          );
+        });
+
+        it('Click on an endpoint dispatches navigation event', (done) => {
+          const node = element.shadowRoot.querySelector(`.endpoint-path[data-id]`);
+          element.addEventListener('api-navigation-selection-changed', (e) => {
+            // @ts-ignore
+            const {detail} = e;
+            assert.typeOf(detail.selected, 'string');
+            assert.equal(detail.type, 'endpoint');
+            done();
+          });
+          /** @type HTMLElement */ (node).click();
+        });
+
+        it('Click on an endpoint path dispatches navigation event', (done) => {
+          const node = element.shadowRoot.querySelector(`.endpoint-path[data-id]`);
+          element.addEventListener('api-navigation-selection-changed', (e) => {
+            // @ts-ignore
+            const {detail} = e;
+            assert.typeOf(detail.selected, 'string');
+            assert.equal(detail.type, 'endpoint');
+            done();
+          });
+          /** @type HTMLElement */ (node).click();
+        });
+
+        it('Click on a method dispatches navigation event', (done) => {
+          const node = element.shadowRoot.querySelector(`.method-label[data-id]`);
+          element.addEventListener('api-navigation-selection-changed', (e) => {
+            // @ts-ignore
+            const {detail} = e;
+            assert.typeOf(detail.selected, 'string');
+            assert.equal(detail.type, 'method');
+            done();
+          });
+          /** @type HTMLElement */ (node).click();
+        });
+      });
+
       describe('Server rendering', () => {
         let ramlSingleServerAmf;
         let oasMultipleServersAmf;

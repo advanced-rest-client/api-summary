@@ -9,6 +9,7 @@ import labelStyles from "@api-components/http-method-label/http-method-label-com
 import sanitizer from "dompurify";
 import "@advanced-rest-client/arc-marked/arc-marked.js";
 import "@api-components/api-method-documentation/api-url.js";
+import '@advanced-rest-client/icons/arc-icon.js';
 import styles from "./Styles.js";
 
 /** @typedef {import('lit-element').TemplateResult} TemplateResult */
@@ -314,6 +315,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     return so.map((item) => ({
       id: item["@id"],
       method: this._getValue(item, this.ns.aml.vocabularies.apiContract.method),
+      hasAgent: !!this._computeAgents(item),
     }));
   }
 
@@ -626,13 +628,18 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     return html`
       <a
         href="#${`${endpoint.path}/${item.method}`}"
-        class="method-label"
+        class="method-label ${item.hasAgent ? "method-label-with-icon" : ""}"
         data-method="${item.method}"
         data-id="${item.id}"
         data-shape-type="method"
         title="Open method documentation"
-        >${item.method}</a
-      >
+        >${item.method}
+        ${
+          item.hasAgent 
+          ? html`<arc-icon icon="codegenie" class='method-icon'></arc-icon>` 
+          : ""
+        }
+      </a>
     `;
   }
 

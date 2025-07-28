@@ -628,18 +628,22 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     return html`
       <a
         href="#${`${endpoint.path}/${item.method}`}"
-        class="method-label ${item.hasAgent ? "method-label-with-icon" : ""}"
+        class="method-label"
         data-method="${item.method}"
         data-id="${item.id}"
         data-shape-type="method"
         title="Open method documentation"
-        >${item.method}
-        ${
-          item.hasAgent 
-          ? html`<arc-icon icon="codegenie" class='method-icon'></arc-icon>` 
-          : ""
-        }
-      </a>
+        >${item.method}</a
+      >
+
+       ${item.hasAgent
+        ? html`
+            <span class="agent-pill" title="Enabled for Agent">
+              Enabled for Agent
+              <arc-icon icon="infoOutline" class="info-icon"></arc-icon>
+            </span>
+          `
+        : ''}
     `;
   }
 

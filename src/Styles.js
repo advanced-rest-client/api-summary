@@ -116,25 +116,11 @@ export default css`
     text-decoration: none;
   }
 
-  .method-label-with-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
   .method-label:hover,
   .method-label:focus {
     text-decoration: underline;
   }
 
-  .method-icon {
-    display: inline-flex;
-    width: 14px;
-    height: 14px;
-    padding-left: 3px;
-    padding-bottom: 2px;
-    padding-left: 7px;
-  }
 
   .endpoint-path {
     display: block;
@@ -223,5 +209,29 @@ export default css`
     display: block;
     font-size: var(--api-summary-server-description-font-size, 12px);
     font-weight: var(--api-summary-server-description-font-weight, 600);
+  }
+
+  .endpoint-header {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .agent-pill {
+    display: flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 16px;
+    background-color: var(--agent-pill-background-color, #e0e0e0);
+    color: var(--agent-pill-color, #455a64);
+    font-size: 12px;
+    margin-left: 8px;
+    font-weight: 500;
+  }
+
+  .info-icon {
+    color: var(--agent-pill-info-icon-color, #757575);
+    width: 16px;
+    height: 16px;
+    margin-left: 8px;
   }
 `;

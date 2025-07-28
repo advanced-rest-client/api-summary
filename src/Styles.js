@@ -116,25 +116,11 @@ export default css`
     text-decoration: none;
   }
 
-  .method-label-with-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
   .method-label:hover,
   .method-label:focus {
     text-decoration: underline;
   }
 
-  .method-icon {
-    display: inline-flex;
-    width: 14px;
-    height: 14px;
-    padding-left: 3px;
-    padding-bottom: 2px;
-    padding-left: 7px;
-  }
 
   .endpoint-path {
     display: block;

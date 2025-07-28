@@ -239,6 +239,7 @@ export default css`
     color: var(--agent-pill-color, #455a64);
     font-size: 12px;
     margin-left: 8px;
+    font-weight: 500;
   }
 
   .info-icon {

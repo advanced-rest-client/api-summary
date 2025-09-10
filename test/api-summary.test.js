@@ -371,7 +371,7 @@ describe('ApiSummary', () => {
         });
 
         it('renders the agent pill', async () => {
-          const node = element.shadowRoot.querySelector('.agent-pill');
+          const node = element.shadowRoot.querySelector('.method-icon');
           assert.ok(node);
         });
       });

@@ -56,6 +56,14 @@ export default css`
     white-space: nowrap;
   }
 
+  .method-icon {
+    display: inline-flex;
+    width: 13px;
+    height: 13px;
+    padding-left: 7px;
+    fill: var(--http-method-label-post-color, #fff);
+  }
+
   label.section {
     color: var(--arc-font-subhead-color);
     font-weight: var(--arc-font-subhead-font-weight);

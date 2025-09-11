@@ -9,7 +9,8 @@ import labelStyles from "@api-components/http-method-label/http-method-label-com
 import sanitizer from "dompurify";
 import "@advanced-rest-client/arc-marked/arc-marked.js";
 import "@api-components/api-method-documentation/api-url.js";
-import '@advanced-rest-client/icons/arc-icon.js';
+import { codegenie } from '@advanced-rest-client/icons/ArcIcons.js';
+
 import styles from "./Styles.js";
 
 /** @typedef {import('lit-element').TemplateResult} TemplateResult */
@@ -633,17 +634,13 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
         data-id="${item.id}"
         data-shape-type="method"
         title="Open method documentation"
-        >${item.method}</a
-      >
-
-       ${item.hasAgent
-        ? html`
-            <span class="agent-pill" title="Enabled for Agent">
-              Enabled for Agent
-              <arc-icon icon="infoOutline" class="info-icon"></arc-icon>
-            </span>
-          `
-        : ''}
+        >${item.method}
+        ${
+          item.hasAgent 
+          ? html`<span class="method-icon">${codegenie}</span>` 
+          : ""
+        }
+      </a>
     `;
   }
 

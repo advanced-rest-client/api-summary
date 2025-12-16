@@ -264,38 +264,31 @@ describe('ApiSummary', () => {
         });
 
         it('renders endpoint name', () => {
-          const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.endpoint-path');
+          const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.endpoint-name');
           assert.dom.equal(
             node,
-            `<a
-              class="endpoint-path"
-              data-shape-type="endpoint"
-              href="#/people"
-              title="Open endpoint documentation"
-              >
-              People
-            </a>`,
+            `<span class="endpoint-name">People</span>`,
             {
-              ignoreAttributes: ['data-id']
+              ignoreAttributes: []
             }
           );
-        });
-
-        it('sets data-id on name', () => {
-          const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.endpoint-path');
-          assert.ok(node.getAttribute('data-id'));
-        });
-
-        it('renders endpoint path with name', () => {
-          const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.endpoint-path-name');
-          assert.dom.equal(node, `<p class="endpoint-path-name">/people</p>`, {
-            ignoreAttributes: ['data-id']
-          });
         });
 
         it('sets data-id on path', () => {
           const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.endpoint-path');
           assert.ok(node.getAttribute('data-id'));
+        });
+
+        it('renders endpoint path with name', () => {
+          const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.endpoint-path');
+          assert.dom.equal(node, `<a
+            class="endpoint-path"
+            data-shape-type="endpoint"
+            href="#/people"
+            title="Open endpoint documentation"
+            >/people</a>`, {
+            ignoreAttributes: ['data-id']
+          });
         });
 
         it('renders list of operations', () => {
@@ -576,6 +569,91 @@ describe('ApiSummary', () => {
       model['http://a.ml/vocabularies/core#provider'][0] = p;
       const result = element._computeProvider(model);
       assert.typeOf(result, 'object');
+    });
+  });
+
+  describe('Tags-based endpoint grouping', () => {
+    [
+      ['Full AMF model', false],
+      ['Compact AMF model', true]
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
+        let element = /** @type ApiSummary */ (null);
+        let amf;
+
+        before(async () => {
+          amf = await AmfLoader.load(compact, 'tags-flights');
+        });
+
+        beforeEach(async () => {
+          element = await basicFixture();
+          element.amf = amf;
+          await aTimeout(0);
+        });
+
+        it('renders all endpoints grouped by tags', () => {
+          const nodes = element.shadowRoot.querySelectorAll('.endpoint-item');
+          assert.lengthOf(nodes, 2, 'Should have 2 endpoint groups');
+        });
+
+        it('renders first endpoint with tag name "AllFlights"', () => {
+          const node = element.shadowRoot.querySelectorAll('.endpoint-item')[0].querySelector('.endpoint-name');
+          assert.ok(node, 'Should have endpoint name element');
+          assert.equal(node.textContent.trim(), 'AllFlights');
+        });
+
+        it('renders first endpoint description', () => {
+          const node = element.shadowRoot.querySelectorAll('.endpoint-item')[0].querySelector('.endpoint-description');
+          assert.ok(node, 'Should have endpoint description element');
+          assert.equal(node.textContent.trim(), 'Operations related to all flights');
+        });
+
+        it('renders first endpoint path', () => {
+          const node = element.shadowRoot.querySelectorAll('.endpoint-item')[0].querySelector('.endpoint-path');
+          assert.ok(node, 'Should have endpoint path element');
+          assert.equal(node.textContent.trim(), '/flights');
+        });
+
+        it('renders two operations for first endpoint', () => {
+          const nodes = element.shadowRoot.querySelectorAll('.endpoint-item')[0].querySelectorAll('.method-label');
+          assert.lengthOf(nodes, 2, 'Should have 2 operations (GET, POST)');
+        });
+
+        it('renders GET and POST methods for first endpoint', () => {
+          const nodes = element.shadowRoot.querySelectorAll('.endpoint-item')[0].querySelectorAll('.method-label');
+          const methods = Array.from(nodes).map(n => n.textContent.trim());
+          assert.include(methods, 'get');
+          assert.include(methods, 'post');
+        });
+
+        it('renders second endpoint with tag name "OneFlight"', () => {
+          const node = element.shadowRoot.querySelectorAll('.endpoint-item')[1].querySelector('.endpoint-name');
+          assert.ok(node, 'Should have endpoint name element');
+          assert.equal(node.textContent.trim(), 'OneFlight');
+        });
+
+        it('renders second endpoint description', () => {
+          const node = element.shadowRoot.querySelectorAll('.endpoint-item')[1].querySelector('.endpoint-description');
+          assert.ok(node, 'Should have endpoint description element');
+          assert.equal(node.textContent.trim(), 'Operations related to a single flight');
+        });
+
+        it('renders second endpoint path', () => {
+          const node = element.shadowRoot.querySelectorAll('.endpoint-item')[1].querySelector('.endpoint-path');
+          assert.ok(node, 'Should have endpoint path element');
+          assert.equal(node.textContent.trim(), '/flights/{ID}');
+        });
+
+        it('renders one operation for second endpoint', () => {
+          const nodes = element.shadowRoot.querySelectorAll('.endpoint-item')[1].querySelectorAll('.method-label');
+          assert.lengthOf(nodes, 1, 'Should have 1 operation (GET)');
+        });
+
+        it('renders GET method for second endpoint', () => {
+          const node = element.shadowRoot.querySelectorAll('.endpoint-item')[1].querySelector('.method-label');
+          assert.equal(node.textContent.trim(), 'get');
+        });
+      });
     });
   });
 

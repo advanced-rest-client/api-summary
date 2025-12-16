@@ -164,6 +164,21 @@ export default css`
     font-size: var(--arc-font-title-font-size);
   }
 
+  .endpoint-name-description {
+    margin: 4px 0;
+    font-size: var(--api-summary-endpoint-description-font-size, 0.9em);
+  }
+
+  .endpoint-name {
+    font-weight: var(--api-summary-endpoint-name-font-weight, 600);
+    color: var(--arc-font-title-color, var(--api-summary-endpoint-name-color, #333));
+  }
+
+  .endpoint-description {
+    font-style: italic;
+    color: var(--api-summary-endpoint-description-color, #666);
+  }
+
   .endpoint-path-name {
     word-break: break-all;
     margin: 8px 0;

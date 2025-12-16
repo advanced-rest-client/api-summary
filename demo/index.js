@@ -13,6 +13,7 @@ class ApiDemo extends ApiDemoPage {
 
   _apiListTemplate() {
     return [
+      ["tags-flights", "Tags Flights"],
       ["agents-api", "Agents API"],
       ["google-drive-api", "Google Drive"],
       ["exchange-experience-api", "Exchange xAPI"],

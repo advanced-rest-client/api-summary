@@ -9,7 +9,7 @@ import labelStyles from "@api-components/http-method-label/http-method-label-com
 import sanitizer from "dompurify";
 import "@advanced-rest-client/arc-marked/arc-marked.js";
 import "@api-components/api-method-documentation/api-url.js";
-import { codegenie } from '@advanced-rest-client/icons/ArcIcons.js';
+import { codegenie } from "@advanced-rest-client/icons/ArcIcons.js";
 
 import styles from "./Styles.js";
 
@@ -290,14 +290,174 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
       return undefined;
     }
     return endpoints.map((item) => {
+      const path = this._getValue(
+        item,
+        this.ns.aml.vocabularies.apiContract.path
+      );
+      const pathStr = typeof path === "string" ? path : String(path || "");
+      const supportedOperations = this._endpointOperations(item);
+      const endpointDisplayInfo = this._computeEndpointName(
+        item,
+        webApi,
+        supportedOperations
+      );
       const result = {
-        name: this._getValue(item, this.ns.aml.vocabularies.core.name),
-        path: this._getValue(item, this.ns.aml.vocabularies.apiContract.path),
-        id: item["@id"],
-        ops: this._endpointOperations(item),
+         name: endpointDisplayInfo?.name,
+         description: endpointDisplayInfo?.description,
+         path: pathStr,
+         id: item["@id"],
+         ops: supportedOperations,
       };
       return result;
     });
+  }
+
+  /**
+   * Computes a descriptive name for an endpoint based on its operations and tags.
+   * @param {any} endpoint Endpoint model
+   * @param {any} webApi Web API model
+   * @param {any[]} ops Operations for this endpoint
+   * @return {Object|undefined} Object with name and description, or undefined
+   */
+  _computeEndpointName(endpoint, webApi, ops) {
+    // First try to get explicit name from endpoint
+    const explicitName = this._getValue(
+      endpoint,
+      this.ns.aml.vocabularies.core.name
+    );
+    if (explicitName && typeof explicitName === "string") {
+      return { name: explicitName, description: undefined };
+    }
+
+    // Try to get name from the most common tag
+    if (ops && ops.length > 0) {
+      const tagInfo = this._getEndpointTagInfo(endpoint, webApi);
+      if (tagInfo) {
+        return tagInfo;
+      }
+
+      // Try to get name from operation summaries
+      const operationName = this._getEndpointOperationName(endpoint);
+      if (operationName) {
+        return { name: operationName, description: undefined };
+      }
+    }
+
+    // Fallback: return undefined so path is used
+    return undefined;
+  }
+
+  /**
+   * Gets the tag info (name and description) for an endpoint based on its operations.
+   * @param {any} endpoint Endpoint model
+   * @param {any} webApi Web API model
+   * @return {Object|undefined} Object with name and description
+   */
+  _getEndpointTagInfo(endpoint, webApi) {
+    const operationsKey = this._getAmfKey(
+      this.ns.aml.vocabularies.apiContract.supportedOperation
+    );
+    const operations = this._ensureArray(endpoint[operationsKey]);
+
+    if (!operations || !operations.length) {
+      return undefined;
+    }
+
+    // Collect all tags from all operations
+    const tagKey = this._getAmfKey(this.ns.aml.vocabularies.apiContract.tag);
+    const allTags = [];
+
+    operations.forEach((operation) => {
+      const operationTags = this._ensureArray(operation[tagKey]);
+      if (operationTags && operationTags.length) {
+        operationTags.forEach((tag) => {
+          const tagName = this._getValue(
+            tag,
+            this.ns.aml.vocabularies.core.name
+          );
+          if (tagName && typeof tagName === "string") {
+            allTags.push(tagName);
+          }
+        });
+      }
+    });
+
+    if (!allTags.length) {
+      return undefined;
+    }
+
+    // Find the most common tag (or just use the first one if all are unique)
+    const tagCounts = {};
+    allTags.forEach((tagName) => {
+      tagCounts[tagName] = (tagCounts[tagName] || 0) + 1;
+    });
+
+    // Get the tag with the highest count (most common)
+    const tagNames = Object.keys(tagCounts);
+    const mostCommonTag = tagNames.reduce(
+      (a, b) => (tagCounts[a] > tagCounts[b] ? a : b),
+      tagNames[0]
+    );
+
+    // Find the tag definition in the webApi to get its description
+    const webApiTagsKey = this._getAmfKey(
+      this.ns.aml.vocabularies.apiContract.tag
+    );
+    const webApiTags = this._ensureArray(webApi[webApiTagsKey]);
+
+    if (webApiTags) {
+      const matchingTag = webApiTags.find((tag) => {
+        const name = this._getValue(tag, this.ns.aml.vocabularies.core.name);
+        return name === mostCommonTag;
+      });
+
+      if (matchingTag) {
+        const description = this._getValue(
+          matchingTag,
+          this.ns.aml.vocabularies.core.description
+        );
+        return {
+          name: mostCommonTag,
+          description:
+            description && typeof description === "string"
+              ? description
+              : undefined,
+        };
+      }
+    }
+
+    return { name: mostCommonTag, description: undefined };
+  }
+
+  /**
+   * Gets a descriptive name from operation summaries.
+   * @param {any} endpoint Endpoint model
+   * @return {string|undefined}
+   */
+  _getEndpointOperationName(endpoint) {
+    const operationsKey = this._getAmfKey(
+      this.ns.aml.vocabularies.apiContract.supportedOperation
+    );
+    const operations = this._ensureArray(endpoint[operationsKey]);
+
+    if (!operations || !operations.length) {
+      return undefined;
+    }
+
+    // Only use the summary if there's exactly one operation
+    if (operations.length === 1) {
+      const firstOp = operations[0];
+      const summary = this._getValue(
+        firstOp,
+        this.ns.aml.vocabularies.apiContract.guiSummary
+      );
+
+      if (summary && typeof summary === "string") {
+        return summary;
+      }
+    }
+
+    return undefined;
   }
 
   /**
@@ -571,6 +731,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     if (!_endpoints || !_endpoints.length) {
       return "";
     }
+    debugger;
     const result = _endpoints.map((item) => this._endpointTemplate(item));
     const pathLabel = this._isAsyncAPI(this.amf) ? "channels" : "endpoints";
     return html`
@@ -613,15 +774,20 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
       return "";
     }
     return html`
+      <p class="endpoint-name-description">
+        <span class="endpoint-name">${item.name}</span>${item.description
+          ? html` -
+              <span class="endpoint-description">${item.description}</span>`
+          : ""}
+      </p>
       <a
         class="endpoint-path"
         href="#${item.path}"
         data-id="${item.id}"
         data-shape-type="endpoint"
         title="Open endpoint documentation"
-        >${item.name}</a
+        >${item.path}</a
       >
-      <p class="endpoint-path-name">${item.path}</p>
     `;
   }
 
@@ -635,11 +801,9 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
         data-shape-type="method"
         title="Open method documentation"
         >${item.method}
-        ${
-          item.hasAgent 
-          ? html`<span class="method-icon">${codegenie}</span>` 
-          : ""
-        }
+        ${item.hasAgent
+          ? html`<span class="method-icon">${codegenie}</span>`
+          : ""}
       </a>
     `;
   }

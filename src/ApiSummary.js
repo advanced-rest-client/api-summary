@@ -744,7 +744,6 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
   }
 
   _endpointTemplate(item) {
-    debugger;
     const ops =
       item.ops && item.ops.length
         ? item.ops.map((op) => this._methodTemplate(op, item))

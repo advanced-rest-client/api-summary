@@ -264,38 +264,31 @@ describe('ApiSummary', () => {
         });
 
         it('renders endpoint name', () => {
-          const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.endpoint-path');
+          const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.endpoint-name');
           assert.dom.equal(
             node,
-            `<a
-              class="endpoint-path"
-              data-shape-type="endpoint"
-              href="#/people"
-              title="Open endpoint documentation"
-              >
-              People
-            </a>`,
+            `<span class="endpoint-name">People</span>`,
             {
-              ignoreAttributes: ['data-id']
+              ignoreAttributes: []
             }
           );
-        });
-
-        it('sets data-id on name', () => {
-          const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.endpoint-path');
-          assert.ok(node.getAttribute('data-id'));
-        });
-
-        it('renders endpoint path with name', () => {
-          const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.endpoint-path-name');
-          assert.dom.equal(node, `<p class="endpoint-path-name">/people</p>`, {
-            ignoreAttributes: ['data-id']
-          });
         });
 
         it('sets data-id on path', () => {
           const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.endpoint-path');
           assert.ok(node.getAttribute('data-id'));
+        });
+
+        it('renders endpoint path with name', () => {
+          const node = element.shadowRoot.querySelectorAll('.endpoint-item')[2].querySelector('.endpoint-path');
+          assert.dom.equal(node, `<a
+            class="endpoint-path"
+            data-shape-type="endpoint"
+            href="#/people"
+            title="Open endpoint documentation"
+            >/people</a>`, {
+            ignoreAttributes: ['data-id']
+          });
         });
 
         it('renders list of operations', () => {

@@ -294,7 +294,13 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
         item,
         this.ns.aml.vocabularies.apiContract.path
       );
-      const pathStr = typeof path === "string" ? path : String(path || "");
+      const name = this._getValue(
+        item,
+        this.ns.aml.vocabularies.core.name
+      );
+      
+      // For gRPC services without path, use the service name
+      const pathStr = typeof path === "string" ? path : (name ? `/${name}` : String(path || "/"));
       const supportedOperations = this._endpointOperations(item);
       const endpointDisplayInfo = this._computeEndpointName(
         item,
@@ -473,11 +479,124 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     if (!so || !so.length) {
       return undefined;
     }
-    return so.map((item) => ({
-      id: item["@id"],
-      method: this._getValue(item, this.ns.aml.vocabularies.apiContract.method),
-      hasAgent: !!this._computeAgents(item),
-    }));
+    
+    // Detect if it's gRPC
+    const isGrpc = this._isGrpcService(endpoint);
+    
+    return so.map((item) => {
+      const method = this._getValue(item, this.ns.aml.vocabularies.apiContract.method);
+      const operationData = {
+        id: item["@id"],
+        method: method || 'post', // Default to 'post' if no method defined
+        hasAgent: !!this._computeAgents(item),
+        isGrpc
+      };
+      
+      // If it's gRPC, add stream type information
+      if (isGrpc) {
+        operationData.grpcStreamType = this._getGrpcStreamType(item);
+        operationData.grpcStreamTypeDisplay = this._getGrpcStreamTypeDisplayName(operationData.grpcStreamType);
+        
+        // Map stream type to HTTP method for consistent colors
+        // patch = morado, publish = verde, subscribe = azul, options = gris
+        const colorMethodMap = {
+          'unary': 'patch',              // Morado: rgb(156, 39, 176)
+          'client_streaming': 'publish',  // Verde: #1f9d55
+          'server_streaming': 'subscribe', // Azul: #3490dc
+          'bidi_streaming': 'options'     // Gris (color por defecto/neutral)
+        };
+        operationData.methodForColor = colorMethodMap[operationData.grpcStreamType] || 'patch';
+      }
+      
+      return operationData;
+    });
+  }
+
+  /**
+   * Checks if the given endpoint or operation is a gRPC service
+   * @param {any} endpoint Endpoint or operation model
+   * @return {boolean}
+   */
+  _isGrpcService(endpoint) {
+    if (!endpoint) {
+      return false;
+    }
+    
+    // Check for gRPC media type in operations
+    const operationsKey = this._getAmfKey(
+      this.ns.aml.vocabularies.apiContract.supportedOperation
+    );
+    const operations = this._ensureArray(endpoint[operationsKey]);
+    
+    if (operations && operations.length > 0) {
+      return operations.some(op => {
+        const expects = this._computeExpects(op);
+        if (!expects) {
+          return false;
+        }
+        
+        const payload = this._computePayload(expects);
+        if (!payload || !payload.length) {
+          return false;
+        }
+        
+        return payload.some(p => {
+          const mediaType = this._getValue(p, this.ns.aml.vocabularies.core.mediaType);
+          return mediaType && (mediaType === 'application/grpc' || mediaType === 'application/grpc+proto');
+        });
+      });
+    }
+    
+    return false;
+  }
+
+  /**
+   * Gets the gRPC stream type for an operation
+   * @param {any} operation Operation model
+   * @return {string} Stream type: 'unary', 'client_streaming', 'server_streaming', or 'bidi_streaming'
+   */
+  _getGrpcStreamType(operation) {
+    if (!operation) {
+      return 'unary';
+    }
+    
+    // For gRPC, AMF encodes the stream type in the HTTP method field
+    const method = this._getValue(operation, this.ns.aml.vocabularies.apiContract.method);
+    
+    if (!method || typeof method !== 'string') {
+      return 'unary';
+    }
+    
+    // Map HTTP-like methods to gRPC stream types
+    const methodLower = method.toLowerCase();
+    switch (methodLower) {
+      case 'publish':
+        return 'client_streaming';
+      case 'subscribe':
+        return 'server_streaming';
+      case 'pubsub':
+        return 'bidi_streaming';
+      case 'post':
+      case 'get':
+      default:
+        return 'unary';
+    }
+  }
+
+  /**
+   * Gets the display name for a gRPC stream type
+   * @param {string} streamType Stream type
+   * @return {string} Display name
+   */
+  _getGrpcStreamTypeDisplayName(streamType) {
+    const displayNames = {
+      'unary': 'Unary',
+      'client_streaming': 'Client',
+      'server_streaming': 'Server',
+      'bidi_streaming': 'Bidirectional'
+    };
+    
+    return displayNames[streamType] || streamType;
   }
 
   _navigateItem(e) {
@@ -733,7 +852,15 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     }
     debugger;
     const result = _endpoints.map((item) => this._endpointTemplate(item));
-    const pathLabel = this._isAsyncAPI(this.amf) ? "channels" : "endpoints";
+    
+    // Determine label based on API type
+    let pathLabel = "endpoints";
+    if (this._isAsyncAPI(this.amf)) {
+      pathLabel = "channels";
+    } else if (_endpoints.length > 0 && _endpoints[0].ops && _endpoints[0].ops.length > 0 && _endpoints[0].ops[0].isGrpc) {
+      pathLabel = "methods";
+    }
+    
     return html`
       <div class="separator" part="separator"></div>
       <div class="toc" part="toc">
@@ -792,15 +919,19 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
   }
 
   _methodTemplate(item, endpoint) {
+    // For gRPC services, show stream type instead of HTTP method
+    const displayMethod = item.isGrpc ? item.grpcStreamTypeDisplay : item.method;
+    const methodForColor = item.methodForColor || item.method;
+    
     return html`
       <a
         href="#${`${endpoint.path}/${item.method}`}"
         class="method-label"
-        data-method="${item.method}"
+        data-method="${methodForColor}"
         data-id="${item.id}"
         data-shape-type="method"
         title="Open method documentation"
-        >${item.method}
+        >${displayMethod}
         ${item.hasAgent
           ? html`<span class="method-icon">${codegenie}</span>`
           : ""}

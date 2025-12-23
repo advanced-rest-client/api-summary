@@ -60,3 +60,6 @@ coverage
 # AMF models
 /demo/*.json
 !demo/apis.json
+
+# GRPC models
+!demo/grpc-test.json

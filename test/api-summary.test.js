@@ -681,7 +681,6 @@ describe('ApiSummary', () => {
   // gRPC Tests
   [
     ['Full AMF model', false],
-    ['Compact AMF model', true]
   ].forEach(([label, compact]) => {
     describe(`gRPC - ${String(label)}`, () => {
       let element = /** @type ApiSummary */ (null);

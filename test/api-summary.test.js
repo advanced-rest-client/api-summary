@@ -677,4 +677,76 @@ describe('ApiSummary', () => {
       });
     });
   });
+
+  // gRPC Tests
+  [
+    ['Full AMF model', false],
+  ].forEach(([label, compact]) => {
+    describe(`gRPC - ${String(label)}`, () => {
+      let element = /** @type ApiSummary */ (null);
+      let amf;
+
+      before(async () => {
+        amf = await AmfLoader.load(compact, 'grpc-test');
+      });
+
+      beforeEach(async () => {
+        element = await basicFixture();
+        element.amf = amf;
+        await aTimeout(0);
+      });
+
+      it('renders api title for gRPC', () => {
+        const node = element.shadowRoot.querySelector('[role="heading"]');
+        assert.ok(node, 'Should have title element');
+        const span = node.querySelector('span');
+        assert.equal(span.textContent.trim(), 'helloworld');
+      });
+
+      it('renders gRPC endpoint', () => {
+        const nodes = element.shadowRoot.querySelectorAll('.endpoint-item');
+        assert.isAtLeast(nodes.length, 1, 'Should have at least 1 endpoint');
+      });
+
+      it('detects gRPC operations', () => {
+        const endpoint = element._endpoints?.[0];
+        assert.ok(endpoint, 'Should have endpoint data');
+        const ops = endpoint.ops;
+        assert.ok(ops, 'Should have operations');
+        assert.isAtLeast(ops.length, 1, 'Should have at least 1 operation');
+      });
+
+      it('gRPC operations have correct properties', () => {
+        const endpoint = element._endpoints?.[0];
+        const ops = endpoint?.ops;
+        if (ops && ops.length > 0) {
+          const firstOp = ops[0];
+          assert.property(firstOp, 'isGrpc', 'Should have isGrpc property');
+          assert.property(firstOp, 'grpcStreamType', 'Should have grpcStreamType property');
+          assert.property(firstOp, 'grpcStreamTypeDisplay', 'Should have grpcStreamTypeDisplay property');
+        }
+      });
+
+      it('gRPC stream type defaults to unary', () => {
+        const endpoint = element._endpoints?.[0];
+        const ops = endpoint?.ops;
+        if (ops && ops.length > 0) {
+          const firstOp = ops[0];
+          // For now, all should be unary since we don't have streaming detection
+          assert.equal(firstOp.grpcStreamType, 'unary', 'Should default to unary');
+          assert.equal(firstOp.grpcStreamTypeDisplay, 'Unary', 'Should show Unary as display name');
+        }
+      });
+
+      it('renders gRPC operation with correct display method', () => {
+        const methodLabels = element.shadowRoot.querySelectorAll('.method-label');
+        if (methodLabels.length > 0) {
+          const firstLabel = methodLabels[0];
+          const text = firstLabel.textContent.trim();
+          // Should show stream type display instead of HTTP method
+          assert.ok(text, 'Should have method label text');
+        }
+      });
+    });
+  });
 });

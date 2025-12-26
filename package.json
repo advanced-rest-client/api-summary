@@ -1,7 +1,7 @@
 {
   "name": "@api-components/api-summary",
   "description": "A summary view for an API base on AMF data model",
-  "version": "4.6.13",
+  "version": "4.6.14",
   "license": "Apache-2.0",
   "main": "index.js",
   "module": "index.js",
@@ -28,7 +28,7 @@
     "@advanced-rest-client/arc-marked": "^1.1.2",
     "@advanced-rest-client/icons": "^4.0.2",
     "@advanced-rest-client/markdown-styles": "^3.1.5",
-    "@api-components/amf-helper-mixin": "4.5.30",
+    "@api-components/amf-helper-mixin": "4.5.34",
     "@api-components/api-method-documentation": "^5.2.5",
     "@api-components/api-model-generator": "^0.2.14",
     "@api-components/http-method-label": "^3.1.4",

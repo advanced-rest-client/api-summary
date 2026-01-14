@@ -850,7 +850,6 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     if (!_endpoints || !_endpoints.length) {
       return "";
     }
-    debugger;
     const result = _endpoints.map((item) => this._endpointTemplate(item));
     
     // Determine label based on API type

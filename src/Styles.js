@@ -129,6 +129,32 @@ export default css`
     text-decoration: underline;
   }
 
+  .method-label.grpc-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .grpc-stream-type {
+    display: inline-block;
+    min-width: auto;
+  }
+
+  .method-with-name {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin-bottom: 12px;
+  }
+
+  .grpc-method-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--api-summary-color, inherit);
+    white-space: nowrap;
+  }
+
 
   .endpoint-path {
     display: block;
@@ -237,6 +263,15 @@ export default css`
   .endpoint-header {
     display: flex;
     align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .endpoint-header--grpc {
+    flex-direction: column;
+  }
+
+  .endpoint-header--grpc .method-with-name:last-child {
+    margin-bottom: 0;
   }
 
   .agent-pill {

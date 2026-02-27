@@ -13,9 +13,9 @@ class ApiDemo extends ApiDemoPage {
 
   _apiListTemplate() {
     return [
+      ["agents-api", "Agents API"],
       ["grpc-test", "GRPC Test"],
       ["tags-flights", "Tags Flights"],
-      ["agents-api", "Agents API"],
       ["google-drive-api", "Google Drive"],
       ["exchange-experience-api", "Exchange xAPI"],
       ["demo-api", "Demo API"],

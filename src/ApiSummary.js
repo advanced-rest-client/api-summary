@@ -496,7 +496,10 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
       if (isGrpc) {
         operationData.grpcStreamType = this._getGrpcStreamType(item);
         operationData.grpcStreamTypeDisplay = this._getGrpcStreamTypeDisplayName(operationData.grpcStreamType);
-        
+
+        // Extract gRPC method name using existing helper
+        operationData.methodName = this._computeGrpcMethodName(item);
+
         // Map stream type to HTTP method for consistent colors
         // patch = morado, publish = verde, subscribe = azul, options = gris
         const colorMethodMap = {
@@ -874,11 +877,12 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
       item.ops && item.ops.length
         ? item.ops.map((op) => this._methodTemplate(op, item))
         : "";
+    const isGrpc = item.ops?.some((o) => o.isGrpc);
     return html` <div class="endpoint-item" @click="${this._navigateItem}">
       ${item.name
         ? this._endpointNameTemplate(item)
         : this._endpointPathTemplate(item)}
-      <div class="endpoint-header">${ops}</div>
+      <div class="endpoint-header ${isGrpc ? 'endpoint-header--grpc' : ''}">${ops}</div>
     </div>`;
   }
 
@@ -918,10 +922,31 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
   }
 
   _methodTemplate(item, endpoint) {
-    // For gRPC services, show stream type instead of HTTP method
-    const displayMethod = item.isGrpc ? item.grpcStreamTypeDisplay : item.method;
     const methodForColor = item.methodForColor || item.method;
-    
+
+    if (item.isGrpc) {
+      return html`
+        <span class="method-with-name">
+          ${item.methodName
+            ? html`<span class="grpc-method-name">${item.methodName}</span>`
+            : ""}
+          <a
+            href="#${`${endpoint.path}/${item.method}`}"
+            class="method-label grpc-container"
+            data-method="${methodForColor}"
+            data-id="${item.id}"
+            data-shape-type="method"
+            title="Open method documentation"
+          >
+            <span class="grpc-stream-type">${item.grpcStreamTypeDisplay}</span>
+            ${item.hasAgent
+              ? html`<span class="method-icon">${codegenie}</span>`
+              : ""}
+          </a>
+        </span>
+      `;
+    }
+
     return html`
       <a
         href="#${`${endpoint.path}/${item.method}`}"
@@ -930,7 +955,8 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
         data-id="${item.id}"
         data-shape-type="method"
         title="Open method documentation"
-        >${displayMethod}
+      >
+        ${item.method}
         ${item.hasAgent
           ? html`<span class="method-icon">${codegenie}</span>`
           : ""}

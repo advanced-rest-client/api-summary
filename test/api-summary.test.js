@@ -747,6 +747,56 @@ describe('ApiSummary', () => {
           assert.ok(text, 'Should have method label text');
         }
       });
+
+      it('extracts gRPC method name from AMF', () => {
+        const endpoint = element._endpoints?.[0];
+        const ops = endpoint?.ops;
+        if (ops && ops.length > 0) {
+          const firstOp = ops[0];
+          assert.property(firstOp, 'methodName', 'Should have methodName property');
+          assert.isString(firstOp.methodName, 'methodName should be a string');
+          assert.isNotEmpty(firstOp.methodName, 'methodName should not be empty');
+          assert.notEqual(firstOp.methodName, 'Unary', 'methodName should be actual method name, not stream type');
+        }
+      });
+
+      it('displays stream type in pill and method name outside pill for gRPC', () => {
+        const methodName = element.shadowRoot.querySelector('.grpc-method-name');
+        const badge = element.shadowRoot.querySelector('.grpc-stream-type');
+        const methodLabel = element.shadowRoot.querySelector('.method-label');
+        assert.exists(badge, 'Should render stream type inside pill');
+        if (methodName) {
+          assert.exists(methodName, 'Should render method name');
+          assert.isNotEmpty(methodName.textContent.trim(), 'Method name should have content');
+          assert.isNull(methodName.closest('a'), 'Method name should be outside the pill (not inside .method-label)');
+        }
+        const wrapper = element.shadowRoot.querySelector('.method-with-name');
+        if (wrapper && methodLabel) {
+          assert.equal(wrapper.querySelector('.method-label'), methodLabel, 'Pill should be inside wrapper');
+          if (methodName) {
+            assert.isTrue(wrapper.contains(methodName), 'Method name should be in same wrapper as pill');
+          }
+        }
+      });
+
+      it('displays stream type badge for gRPC', () => {
+        const badge = element.shadowRoot.querySelector('.grpc-stream-type');
+        if (badge) {
+          assert.exists(badge, 'Should render stream type badge');
+          const badgeText = badge.textContent.trim();
+          assert.match(badgeText, /^(Unary|Client Streaming|Server Streaming|Bidirectional)$/, 'Badge should contain stream type (no brackets)');
+        }
+      });
+
+      it('gRPC stream type badges are inside method-label', () => {
+        const badges = element.shadowRoot.querySelectorAll('.grpc-stream-type');
+        if (badges.length > 0) {
+          badges.forEach((badge) => {
+            const methodLabel = badge.closest('.method-label');
+            assert.exists(methodLabel, 'Each stream type badge should be inside a method-label');
+          });
+        }
+      });
     });
   });
 });

@@ -797,6 +797,40 @@ describe('ApiSummary', () => {
           });
         }
       });
+
+      it('fires api-navigation-selection-changed when clicking gRPC span badge', async () => {
+        const span = element.shadowRoot.querySelector('.method-label.grpc-container .grpc-stream-type');
+        assert.exists(span, 'Should have a grpc-stream-type span inside grpc-container anchor');
+
+        let firedEvent = null;
+        element.addEventListener('api-navigation-selection-changed', (ev) => {
+          firedEvent = ev;
+        });
+
+        span.click();
+        await nextFrame();
+
+        assert.ok(firedEvent, 'api-navigation-selection-changed should have been fired');
+        assert.ok(firedEvent.detail.selected, 'Event detail should contain selected id');
+        assert.equal(firedEvent.detail.type, 'method', 'Event detail type should be "method"');
+      });
+
+      it('fires api-navigation-selection-changed when clicking gRPC anchor directly', async () => {
+        const anchor = element.shadowRoot.querySelector('.method-label.grpc-container');
+        assert.exists(anchor, 'Should have a grpc-container anchor');
+
+        let firedEvent = null;
+        element.addEventListener('api-navigation-selection-changed', (ev) => {
+          firedEvent = ev;
+        });
+
+        anchor.click();
+        await nextFrame();
+
+        assert.ok(firedEvent, 'api-navigation-selection-changed should have been fired');
+        assert.ok(firedEvent.detail.selected, 'Event detail should contain selected id');
+        assert.equal(firedEvent.detail.type, 'method', 'Event detail type should be "method"');
+      });
     });
   });
 });

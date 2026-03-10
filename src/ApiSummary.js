@@ -604,8 +604,15 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
 
   _navigateItem(e) {
     e.preventDefault();
-    const data = e.composedPath()[0].dataset;
-    if (!data.id || !data.shapeType) {
+    const path = e.composedPath();
+    let data;
+    for (const el of path) {
+      if (el.dataset && el.dataset.id && el.dataset.shapeType) {
+        data = el.dataset;
+        break;
+      }
+    }
+    if (!data) {
       return;
     }
     const ev = new CustomEvent("api-navigation-selection-changed", {

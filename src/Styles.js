@@ -220,6 +220,12 @@ export default css`
     margin: 4px 0;
   }
 
+  .api-tags li ul {
+    margin: 4px 0 4px 16px;
+    padding: 0;
+    list-style: none;
+  }
+
   .tag-name {
     display: inline-block;
     margin-right: 8px;

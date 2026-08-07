@@ -856,5 +856,17 @@ describe('ApiSummary', () => {
       assert.include(text, 'authentication');
       assert.include(text, 'All authentication-related operations');
     });
+
+    it('nests a child tag under its parent', () => {
+      const section = element.shadowRoot.querySelector('[data-type="api-tags"]');
+      // The "data" tag's <li> must contain a nested <ul> holding "authentication".
+      const items = Array.from(section.querySelectorAll(':scope > ul > li'));
+      const dataItem = items.find((li) => li.querySelector('.tag-name')?.textContent.trim() === 'data');
+      assert.ok(dataItem, 'top-level "data" tag present');
+      const nestedUl = dataItem.querySelector('ul');
+      const nested = nestedUl ? nestedUl.querySelector('.tag-name') : null;
+      assert.ok(nested, 'nested list under data');
+      assert.equal(nested.textContent.trim(), 'authentication');
+    });
   });
 });

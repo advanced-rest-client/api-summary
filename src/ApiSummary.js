@@ -509,6 +509,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
       const operationData = {
         id: item["@id"],
         method: method || 'post', // Default to 'post' if no method defined
+        kind: this._computeOperationKind(item),
         hasAgent: !!this._computeAgents(item),
         isGrpc
       };
@@ -960,17 +961,48 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     `;
   }
 
+  /**
+   * Splits an endpoint's ops into ordered groups by operationKind.
+   * @param {any[]} ops operation view-models with a `kind` field
+   * @return {Array<{label:string, ops:any[]}>} non-empty groups in fixed order
+   */
+  _groupOpsByKind(ops) {
+    const buckets = { standard: [], query: [], additionalOperation: [] };
+    (ops || []).forEach((op) => {
+      const k = buckets[op.kind] ? op.kind : 'standard';
+      buckets[k].push(op);
+    });
+    const order = [
+      { key: 'standard', label: 'Operations' },
+      { key: 'query', label: 'Query' },
+      { key: 'additionalOperation', label: 'Additional operations' },
+    ];
+    return order
+      .filter((g) => buckets[g.key].length)
+      .map((g) => ({ label: g.label, ops: buckets[g.key] }));
+  }
+
   _endpointTemplate(item) {
-    const ops =
-      item.ops && item.ops.length
-        ? item.ops.map((op) => this._methodTemplate(op, item))
-        : "";
     const isGrpc = item.ops?.some((o) => o.isGrpc);
+    const groups = item.ops && item.ops.length ? this._groupOpsByKind(item.ops) : [];
+    const hasNonStandard = groups.some((g) => g.label !== 'Operations');
+    const body = hasNonStandard
+      ? groups.map(
+          (g) => html`<div class="op-group">
+            <span class="op-group-label">${g.label}</span>
+            <div class="endpoint-header ${isGrpc ? 'endpoint-header--grpc' : ''}">
+              ${g.ops.map((op) => this._methodTemplate(op, item))}
+            </div>
+          </div>`
+        )
+      : html`<div class="endpoint-header ${isGrpc ? 'endpoint-header--grpc' : ''}">
+          ${(item.ops || []).map((op) => this._methodTemplate(op, item))}
+        </div>`;
     return html` <div class="endpoint-item" @click="${this._navigateItem}">
       ${item.name
         ? this._endpointNameTemplate(item)
         : this._endpointPathTemplate(item)}
-      <div class="endpoint-header ${isGrpc ? 'endpoint-header--grpc' : ''}">${ops}</div>
+      ${body}
     </div>`;
   }
 

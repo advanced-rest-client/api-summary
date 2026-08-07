@@ -436,6 +436,26 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
   }
 
   /**
+   * Reads the API-level tags (WebAPI.apiContract:tag) as {name, summary} objects.
+   * @return {Array<{name: string, summary: string|undefined}>}
+   */
+  _computeApiTags() {
+    const webApi = this.webApi;
+    if (!webApi) {
+      return [];
+    }
+    const tagKey = this._getAmfKey(this.ns.aml.vocabularies.apiContract.tag);
+    const tags = this._ensureArray(webApi[tagKey]);
+    if (!tags) {
+      return [];
+    }
+    return tags.map((tag) => ({
+      name: /** @type string */ (this._getValue(tag, this.ns.aml.vocabularies.core.name)),
+      summary: /** @type string */ (this._getValue(tag, this.ns.aml.vocabularies.core.summary)),
+    })).filter((t) => !!t.name);
+  }
+
+  /**
    * Gets a descriptive name from operation summaries.
    * @param {any} endpoint Endpoint model
    * @return {string|undefined}
@@ -632,7 +652,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
       </style>
       <div>
         ${this._titleTemplate()} ${this._versionTemplate()}
-        ${this._descriptionTemplate()} ${this._serversTemplate()}
+        ${this._descriptionTemplate()} ${this._tagsTemplate()} ${this._serversTemplate()}
         ${this._protocolsTemplate()} ${this._contactInfoTemplate()}
         ${this._licenseTemplate()} ${this._termsOfServiceTemplate()}
       </div>
@@ -680,6 +700,22 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
       <arc-marked .markdown="${_description}" sanitize>
         <div slot="markdown-html" class="markdown-body"></div>
       </arc-marked>
+    </div>`;
+  }
+
+  _tagsTemplate() {
+    const tags = this._computeApiTags();
+    if (!tags.length) {
+      return '';
+    }
+    return html`<div data-type="api-tags" class="api-tags">
+      <label class="section">Tags</label>
+      <ul>
+        ${tags.map((t) => html`<li>
+          <span class="tag-name">${t.name}</span>
+          ${t.summary ? html`<span class="tag-summary">${t.summary}</span>` : ''}
+        </li>`)}
+      </ul>
     </div>`;
   }
 

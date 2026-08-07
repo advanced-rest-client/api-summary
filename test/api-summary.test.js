@@ -833,4 +833,28 @@ describe('ApiSummary', () => {
       });
     });
   });
+
+  describe('OAS 3.2 API tags', () => {
+    let element = /** @type ApiSummary */ (null);
+
+    before(async () => {
+      const amf = await AmfLoader.load(true, 'oas32'); // compact
+      element = /** @type ApiSummary */ (await fixture(html`<api-summary .amf="${amf}"></api-summary>`));
+      await aTimeout(0);
+    });
+
+    it('renders the API tags section', () => {
+      const node = element.shadowRoot.querySelector('[data-type="api-tags"]');
+      assert.ok(node);
+    });
+
+    it('renders each tag name and summary', () => {
+      const section = element.shadowRoot.querySelector('[data-type="api-tags"]');
+      const text = section.textContent;
+      assert.include(text, 'data');
+      assert.include(text, 'Data operations');
+      assert.include(text, 'authentication');
+      assert.include(text, 'All authentication-related operations');
+    });
+  });
 });

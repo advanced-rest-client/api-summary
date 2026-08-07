@@ -708,11 +708,12 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
    * Builds a parent/child tree from the flat tag list. Tags whose parentName
    * names no known tag, or that form a cycle, render at top level. No tag is dropped.
    * @param {Array<{name:string, summary:string|undefined, parentName:string|undefined}>} tags
-   * @return {Array<Object>} roots, each node = {name, summary, children: []}
+   * @return {Array<{name: string, summary: string|undefined, children: Array}>} roots, each node = {name, summary, children: []}
    */
   _buildTagTree(tags) {
     const byName = new Map();
     tags.forEach((t) => byName.set(t.name, { name: t.name, summary: t.summary, children: [] }));
+    const parentByName = new Map(tags.map((t) => [t.name, t.parentName]));
     const roots = [];
     const isAncestor = (candidate, node) => {
       // walk candidate's parent chain; if we reach node, adding node under candidate makes a cycle
@@ -721,7 +722,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
       while (p && !seen.has(p.name)) {
         if (p.name === node.name) return true;
         seen.add(p.name);
-        const parentName = (tags.find((t) => t.name === p.name) || {}).parentName;
+        const parentName = parentByName.get(p.name);
         p = parentName ? byName.get(parentName) : undefined;
       }
       return false;

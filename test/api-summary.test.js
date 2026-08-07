@@ -868,5 +868,37 @@ describe('ApiSummary', () => {
       assert.ok(nested, 'nested list under data');
       assert.equal(nested.textContent.trim(), 'authentication');
     });
+
+    it('renders tag at top level when parentTag references unknown tag', () => {
+      const testElement = /** @type ApiSummary */ (new element.constructor());
+      const input = [
+        { name: 'orphan', summary: 'Tag with unknown parent', parentName: 'nonexistent' },
+        { name: 'normal', summary: 'Normal tag' },
+      ];
+      const tree = testElement._buildTagTree(input);
+      // Both should be roots since 'nonexistent' doesn't exist
+      assert.equal(tree.length, 2, 'two root tags');
+      const names = tree.map((n) => n.name).sort();
+      assert.deepEqual(names, ['normal', 'orphan'], 'both tags at top level');
+      // Each tag appears exactly once
+      assert.equal(tree[0].children.length, 0);
+      assert.equal(tree[1].children.length, 0);
+    });
+
+    it('renders both tags at top level when cycle detected (A parent B, B parent A)', () => {
+      const testElement = /** @type ApiSummary */ (new element.constructor());
+      const input = [
+        { name: 'tagA', summary: 'First tag', parentName: 'tagB' },
+        { name: 'tagB', summary: 'Second tag', parentName: 'tagA' },
+      ];
+      const tree = testElement._buildTagTree(input);
+      // Both should be roots due to cycle
+      assert.equal(tree.length, 2, 'two root tags');
+      const names = tree.map((n) => n.name).sort();
+      assert.deepEqual(names, ['tagA', 'tagB'], 'both cyclic tags at top level');
+      // Each tag appears exactly once, no infinite recursion
+      assert.equal(tree[0].children.length, 0);
+      assert.equal(tree[1].children.length, 0);
+    });
   });
 });

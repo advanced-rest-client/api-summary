@@ -969,7 +969,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
   _groupOpsByKind(ops) {
     const buckets = { standard: [], query: [], additionalOperation: [] };
     (ops || []).forEach((op) => {
-      const k = buckets[op.kind] ? op.kind : 'standard';
+      const k = Object.prototype.hasOwnProperty.call(buckets, op.kind) ? op.kind : 'standard';
       buckets[k].push(op);
     });
     const order = [
@@ -979,13 +979,13 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     ];
     return order
       .filter((g) => buckets[g.key].length)
-      .map((g) => ({ label: g.label, ops: buckets[g.key] }));
+      .map((g) => ({ key: g.key, label: g.label, ops: buckets[g.key] }));
   }
 
   _endpointTemplate(item) {
     const isGrpc = item.ops?.some((o) => o.isGrpc);
     const groups = item.ops && item.ops.length ? this._groupOpsByKind(item.ops) : [];
-    const hasNonStandard = groups.some((g) => g.label !== 'Operations');
+    const hasNonStandard = groups.some((g) => g.key !== 'standard');
     const body = hasNonStandard
       ? groups.map(
           (g) => html`<div class="op-group">

@@ -505,10 +505,11 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     const isGrpc = this._isGrpcService(endpoint);
     
     return so.map((item) => {
-      const method = this._getValue(item, this.ns.aml.vocabularies.apiContract.method);
+      const method = this._computeOperationMethod(item);
       const operationData = {
         id: item["@id"],
-        method: method || 'post', // Default to 'post' if no method defined
+        method,
+        methodForColor: this._operationColorMethod(method),
         kind: this._computeOperationKind(item),
         hasAgent: !!this._computeAgents(item),
         isGrpc

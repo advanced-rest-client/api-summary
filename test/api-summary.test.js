@@ -833,4 +833,97 @@ describe('ApiSummary', () => {
       });
     });
   });
+
+  describe('OAS 3.2 API tags', () => {
+    let element = /** @type ApiSummary */ (null);
+
+    before(async () => {
+      const amf = await AmfLoader.load(true, 'oas32'); // compact
+      element = /** @type ApiSummary */ (await fixture(html`<api-summary .amf="${amf}"></api-summary>`));
+      await aTimeout(0);
+    });
+
+    it('renders the API tags section', () => {
+      const node = element.shadowRoot.querySelector('[data-type="api-tags"]');
+      assert.ok(node);
+    });
+
+    it('renders each tag name and summary', () => {
+      const section = element.shadowRoot.querySelector('[data-type="api-tags"]');
+      const text = section.textContent;
+      assert.include(text, 'data');
+      assert.include(text, 'Data operations');
+      assert.include(text, 'authentication');
+      assert.include(text, 'All authentication-related operations');
+    });
+
+    it('nests a child tag under its parent', () => {
+      const section = element.shadowRoot.querySelector('[data-type="api-tags"]');
+      // The "data" tag's <li> must contain a nested <ul> holding "authentication".
+      const items = Array.from(section.querySelectorAll(':scope > ul > li'));
+      const dataItem = items.find((li) => li.querySelector('.tag-name')?.textContent.trim() === 'data');
+      assert.ok(dataItem, 'top-level "data" tag present');
+      const nestedUl = dataItem.querySelector('ul');
+      const nested = nestedUl ? nestedUl.querySelector('.tag-name') : null;
+      assert.ok(nested, 'nested list under data');
+      assert.equal(nested.textContent.trim(), 'authentication');
+    });
+
+    it('renders tag at top level when parentTag references unknown tag', () => {
+      const testElement = /** @type ApiSummary */ (new element.constructor());
+      const input = [
+        { name: 'orphan', summary: 'Tag with unknown parent', parentName: 'nonexistent' },
+        { name: 'normal', summary: 'Normal tag' },
+      ];
+      const tree = testElement._buildTagTree(input);
+      // Both should be roots since 'nonexistent' doesn't exist
+      assert.equal(tree.length, 2, 'two root tags');
+      const names = tree.map((n) => n.name).sort();
+      assert.deepEqual(names, ['normal', 'orphan'], 'both tags at top level');
+      // Each tag appears exactly once
+      assert.equal(tree[0].children.length, 0);
+      assert.equal(tree[1].children.length, 0);
+    });
+
+    it('renders both tags at top level when cycle detected (A parent B, B parent A)', () => {
+      const testElement = /** @type ApiSummary */ (new element.constructor());
+      const input = [
+        { name: 'tagA', summary: 'First tag', parentName: 'tagB' },
+        { name: 'tagB', summary: 'Second tag', parentName: 'tagA' },
+      ];
+      const tree = testElement._buildTagTree(input);
+      // Both should be roots due to cycle
+      assert.equal(tree.length, 2, 'two root tags');
+      const names = tree.map((n) => n.name).sort();
+      assert.deepEqual(names, ['tagA', 'tagB'], 'both cyclic tags at top level');
+      // Each tag appears exactly once, no infinite recursion
+      assert.equal(tree[0].children.length, 0);
+      assert.equal(tree[1].children.length, 0);
+    });
+  });
+
+  describe('OAS 3.2 operation grouping', () => {
+    let element;
+    before(async () => {
+      const amf = await AmfLoader.load(true, 'oas32');
+      element = await fixture(html`<api-summary .amf="${amf}"></api-summary>`);
+      await aTimeout(0);
+    });
+
+    it('groups query and additional operations under labeled subsections', () => {
+      // Find the /resources/{id} endpoint item.
+      const items = Array.from(element.shadowRoot.querySelectorAll('.endpoint-item'));
+      const target = items.find((el) => el.textContent.includes('/resources'));
+      assert.ok(target, '/resources endpoint present');
+      const labels = Array.from(target.querySelectorAll('.op-group-label')).map((n) => n.textContent.trim());
+      assert.deepEqual(labels, ['Operations', 'Query', 'Additional operations']);
+    });
+
+    it('renders the standard-only endpoint without group headers', () => {
+      const items = Array.from(element.shadowRoot.querySelectorAll('.endpoint-item'));
+      const authItem = items.find((el) => el.textContent.includes('/auth'));
+      assert.ok(authItem, '/auth endpoint present');
+      assert.equal(authItem.querySelectorAll('.op-group-label').length, 0);
+    });
+  });
 });

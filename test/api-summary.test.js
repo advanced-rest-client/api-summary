@@ -901,4 +901,29 @@ describe('ApiSummary', () => {
       assert.equal(tree[1].children.length, 0);
     });
   });
+
+  describe('OAS 3.2 operation grouping', () => {
+    let element;
+    before(async () => {
+      const amf = await AmfLoader.load(true, 'oas32');
+      element = await fixture(html`<api-summary .amf="${amf}"></api-summary>`);
+      await aTimeout(0);
+    });
+
+    it('groups query and additional operations under labeled subsections', () => {
+      // Find the /resources/{id} endpoint item.
+      const items = Array.from(element.shadowRoot.querySelectorAll('.endpoint-item'));
+      const target = items.find((el) => el.textContent.includes('/resources'));
+      assert.ok(target, '/resources endpoint present');
+      const labels = Array.from(target.querySelectorAll('.op-group-label')).map((n) => n.textContent.trim());
+      assert.deepEqual(labels, ['Operations', 'Query', 'Additional operations']);
+    });
+
+    it('renders the standard-only endpoint without group headers', () => {
+      const items = Array.from(element.shadowRoot.querySelectorAll('.endpoint-item'));
+      const authItem = items.find((el) => el.textContent.includes('/auth'));
+      assert.ok(authItem, '/auth endpoint present');
+      assert.equal(authItem.querySelectorAll('.op-group-label').length, 0);
+    });
+  });
 });

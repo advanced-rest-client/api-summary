@@ -118,6 +118,18 @@ export default css`
     margin-bottom: 32px;
   }
 
+  .op-group {
+    margin-bottom: 8px;
+  }
+
+  .op-group-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--api-summary-color, inherit);
+    margin: 4px 0;
+  }
+
   .method-label {
     margin-right: 8px;
     margin-bottom: 8px;

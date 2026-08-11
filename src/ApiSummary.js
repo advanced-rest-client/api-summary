@@ -436,6 +436,27 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
   }
 
   /**
+   * Reads the API-level tags (WebAPI.apiContract:tag) as {name, summary} objects.
+   * @return {Array<{name: string, summary: string|undefined}>}
+   */
+  _computeApiTags() {
+    const webApi = this.webApi;
+    if (!webApi) {
+      return [];
+    }
+    const tagKey = this._getAmfKey(this.ns.aml.vocabularies.apiContract.tag);
+    const tags = this._ensureArray(webApi[tagKey]);
+    if (!tags) {
+      return [];
+    }
+    return tags.map((tag) => ({
+      name: /** @type string */ (this._getValue(tag, this.ns.aml.vocabularies.core.name)),
+      summary: /** @type string */ (this._getValue(tag, this.ns.aml.vocabularies.core.summary)),
+      parentName: /** @type string */ (this._getValue(tag, this.ns.aml.vocabularies.apiContract.parentTag)),
+    })).filter((t) => !!t.name);
+  }
+
+  /**
    * Gets a descriptive name from operation summaries.
    * @param {any} endpoint Endpoint model
    * @return {string|undefined}
@@ -632,7 +653,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
       </style>
       <div>
         ${this._titleTemplate()} ${this._versionTemplate()}
-        ${this._descriptionTemplate()} ${this._serversTemplate()}
+        ${this._descriptionTemplate()} ${this._tagsTemplate()} ${this._serversTemplate()}
         ${this._protocolsTemplate()} ${this._contactInfoTemplate()}
         ${this._licenseTemplate()} ${this._termsOfServiceTemplate()}
       </div>
@@ -681,6 +702,66 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
         <div slot="markdown-html" class="markdown-body"></div>
       </arc-marked>
     </div>`;
+  }
+
+  /**
+   * Builds a parent/child tree from the flat tag list. Tags whose parentName
+   * names no known tag, or that form a cycle, render at top level. No tag is dropped.
+   * @param {Array<{name:string, summary:string|undefined, parentName:string|undefined}>} tags
+   * @return {Array<{name: string, summary: string|undefined, children: Array}>} roots, each node = {name, summary, children: []}
+   */
+  _buildTagTree(tags) {
+    const byName = new Map();
+    tags.forEach((t) => byName.set(t.name, { name: t.name, summary: t.summary, children: [] }));
+    const parentByName = new Map(tags.map((t) => [t.name, t.parentName]));
+    const roots = [];
+    const isAncestor = (candidate, node) => {
+      // walk candidate's parent chain; if we reach node, adding node under candidate makes a cycle
+      let p = candidate;
+      const seen = new Set();
+      while (p && !seen.has(p.name)) {
+        if (p.name === node.name) return true;
+        seen.add(p.name);
+        const parentName = parentByName.get(p.name);
+        p = parentName ? byName.get(parentName) : undefined;
+      }
+      return false;
+    };
+    tags.forEach((t) => {
+      const node = byName.get(t.name);
+      const parent = t.parentName ? byName.get(t.parentName) : undefined;
+      if (parent && parent !== node && !isAncestor(parent, node)) {
+        parent.children.push(node);
+      } else {
+        roots.push(node);
+      }
+    });
+    return roots;
+  }
+
+  _tagsTemplate() {
+    const tags = this._computeApiTags();
+    if (!tags.length) {
+      return '';
+    }
+    const roots = this._buildTagTree(tags);
+    return html`<div data-type="api-tags" class="api-tags">
+      <label class="section">Tags</label>
+      ${this._tagListTemplate(roots)}
+    </div>`;
+  }
+
+  _tagListTemplate(nodes) {
+    if (!nodes || !nodes.length) {
+      return '';
+    }
+    return html`<ul>
+      ${nodes.map((t) => html`<li>
+        <span class="tag-name">${t.name}</span>
+        ${t.summary ? html`<span class="tag-summary">${t.summary}</span>` : ''}
+        ${t.children && t.children.length ? this._tagListTemplate(t.children) : ''}
+      </li>`)}
+    </ul>`;
   }
 
   /**

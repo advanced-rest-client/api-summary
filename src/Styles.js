@@ -210,6 +210,34 @@ export default css`
     margin: 8px 0;
   }
 
+  .api-tags ul {
+    list-style: none;
+    margin: 4px 0;
+    padding: 0;
+  }
+
+  .api-tags li {
+    margin: 4px 0;
+  }
+
+  .api-tags li ul {
+    margin: 4px 0 4px 16px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .tag-name {
+    display: inline-block;
+    margin-right: 8px;
+    font-weight: var(--api-summary-endpoint-name-font-weight, 600);
+    color: var(--arc-font-title-color, var(--api-summary-endpoint-name-color, #333));
+  }
+
+  .tag-summary {
+    font-style: italic;
+    color: var(--api-summary-endpoint-description-color, #666);
+  }
+
   .servers .servers-label {
     font-size: 14px;
     font-weight: 700;

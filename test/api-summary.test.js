@@ -834,11 +834,12 @@ describe('ApiSummary', () => {
     });
   });
 
-  describe('QUERY method (OAS 3.2)', () => {
-    // OAS 3.2 adds the QUERY HTTP method. The summary renders `data-method`
-    // straight from the raw AMF value ("QUERY", upper case) for HTTP operations,
-    // so the color override keys on both casings. This inline expanded model
-    // (no `@context`) keeps the test independent of the model generator.
+  describe('OAS 3.2 methods (QUERY, COPY, MOVE)', () => {
+    // OAS 3.2 adds the QUERY, COPY and MOVE HTTP methods. The summary renders
+    // `data-method` straight from the raw AMF value ("QUERY", upper case) for
+    // HTTP operations, so the color override keys on both casings. This inline
+    // expanded model (no `@context`) keeps the test independent of the model
+    // generator.
     const DOC = 'http://a.ml/vocabularies/document#Document';
     const ENCODES = 'http://a.ml/vocabularies/document#encodes';
     const WEBAPI = 'http://a.ml/vocabularies/apiContract#WebAPI';
@@ -867,6 +868,14 @@ describe('ApiSummary', () => {
               '@id': 'amf://id#12',
               '@type': [OPERATION_T],
               [METHOD]: [{ '@value': 'QUERY' }],
+            }, {
+              '@id': 'amf://id#13',
+              '@type': [OPERATION_T],
+              [METHOD]: [{ '@value': 'COPY' }],
+            }, {
+              '@id': 'amf://id#14',
+              '@type': [OPERATION_T],
+              [METHOD]: [{ '@value': 'MOVE' }],
             }],
           }],
         }],
@@ -895,6 +904,14 @@ describe('ApiSummary', () => {
         element.shadowRoot.querySelectorAll('.method-label')
       ).map((node) => node.getAttribute('data-method'));
       assert.notInclude(methods, 'query', 'QUERY is not silently lower-cased');
+    });
+
+    it('renders COPY and MOVE method-labels with their raw data-method', () => {
+      const methods = Array.from(
+        element.shadowRoot.querySelectorAll('.method-label')
+      ).map((node) => node.getAttribute('data-method'));
+      assert.include(methods, 'COPY', 'a method-label carries the raw COPY value');
+      assert.include(methods, 'MOVE', 'a method-label carries the raw MOVE value');
     });
   });
 });

@@ -135,6 +135,15 @@ export default css`
     gap: 8px;
   }
 
+  .method-label[data-method='query'],
+  .method-label[data-method='QUERY'] {
+    background-color: var(
+      --http-method-label-query-background-color,
+      rgba(15, 157, 157, 0.12)
+    );
+    color: var(--http-method-label-query-color, #0f9d9d);
+  }
+
   .grpc-stream-type {
     display: inline-block;
     min-width: auto;

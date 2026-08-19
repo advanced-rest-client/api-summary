@@ -833,4 +833,68 @@ describe('ApiSummary', () => {
       });
     });
   });
+
+  describe('QUERY method (OAS 3.2)', () => {
+    // OAS 3.2 adds the QUERY HTTP method. The summary renders `data-method`
+    // straight from the raw AMF value ("QUERY", upper case) for HTTP operations,
+    // so the color override keys on both casings. This inline expanded model
+    // (no `@context`) keeps the test independent of the model generator.
+    const DOC = 'http://a.ml/vocabularies/document#Document';
+    const ENCODES = 'http://a.ml/vocabularies/document#encodes';
+    const WEBAPI = 'http://a.ml/vocabularies/apiContract#WebAPI';
+    const ENDPOINT = 'http://a.ml/vocabularies/apiContract#endpoint';
+    const ENDPOINT_T = 'http://a.ml/vocabularies/apiContract#EndPoint';
+    const OPERATION_T = 'http://a.ml/vocabularies/apiContract#Operation';
+    const SUPPORTED_OP = 'http://a.ml/vocabularies/apiContract#supportedOperation';
+    const PATH = 'http://a.ml/vocabularies/apiContract#path';
+    const METHOD = 'http://a.ml/vocabularies/apiContract#method';
+
+    function buildQueryModel() {
+      return {
+        '@type': [DOC],
+        [ENCODES]: [{
+          '@id': 'amf://id#1',
+          '@type': [WEBAPI],
+          [ENDPOINT]: [{
+            '@id': 'amf://id#10',
+            '@type': [ENDPOINT_T],
+            [PATH]: [{ '@value': '/pets' }],
+            [SUPPORTED_OP]: [{
+              '@id': 'amf://id#11',
+              '@type': [OPERATION_T],
+              [METHOD]: [{ '@value': 'get' }],
+            }, {
+              '@id': 'amf://id#12',
+              '@type': [OPERATION_T],
+              [METHOD]: [{ '@value': 'QUERY' }],
+            }],
+          }],
+        }],
+      };
+    }
+
+    let element;
+
+    beforeEach(async () => {
+      element = await basicFixture();
+      element.amf = buildQueryModel();
+      // `__amfChanged` defers processing through a setTimeout debouncer.
+      await aTimeout(0);
+      await nextFrame();
+    });
+
+    it('renders a QUERY method-label with data-method="QUERY"', () => {
+      const methods = Array.from(
+        element.shadowRoot.querySelectorAll('.method-label')
+      ).map((node) => node.getAttribute('data-method'));
+      assert.include(methods, 'QUERY', 'a method-label carries the raw QUERY value');
+    });
+
+    it('keeps the raw AMF casing (does not lower-case QUERY)', () => {
+      const methods = Array.from(
+        element.shadowRoot.querySelectorAll('.method-label')
+      ).map((node) => node.getAttribute('data-method'));
+      assert.notInclude(methods, 'query', 'QUERY is not silently lower-cased');
+    });
+  });
 });

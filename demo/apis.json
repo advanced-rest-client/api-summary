@@ -20,5 +20,6 @@
   "APIC-711/APIC-711.raml": "RAML 1.0",
   "agents-api/agents-api.yaml": { "type": "OAS 3.0", "mime": "application/yaml" },
   "tags-flights/tags-flights.yml": { "type": "OAS 3.0", "mime": "application/yaml" },
+  "oas32-query/oas32-query.yaml": { "type": "OAS 3.2", "mime": "application/yaml" },
   "grpc-test.json": { "type": "gRPC", "mime": "application/json" }
 }

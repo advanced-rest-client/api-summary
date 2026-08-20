@@ -1,0 +1,57 @@
+openapi: 3.2.0
+info:
+  title: OAS 3.2 QUERY method
+  version: 1.0.0
+paths:
+  /pets:
+    # `query` is a Path Item Object fixed field in OAS 3.2 (sibling to get/post).
+    # amf-client-js 5.11 parses it as a real operation whose method is "QUERY"
+    # (upper case). `get` is included for contrast (method "get", lower case).
+    # COPY and MOVE are NOT included: amf-client-js 5.11 rejects them in an
+    # OAS 3.2 pathItem, so they can only be exercised via an inline AMF model
+    # (see the COPY/MOVE test).
+    get:
+      operationId: listPets
+      summary: List pets
+      responses:
+        "200":
+          description: A list of pets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+    query:
+      operationId: queryPets
+      summary: Search pets using a structured filter body
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                kind:
+                  type: string
+                maxAge:
+                  type: integer
+      responses:
+        "200":
+          description: Matching pets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string

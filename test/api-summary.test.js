@@ -836,82 +836,103 @@ describe('ApiSummary', () => {
 
   describe('OAS 3.2 methods (QUERY, COPY, MOVE)', () => {
     // OAS 3.2 adds the QUERY, COPY and MOVE HTTP methods. The summary renders
-    // `data-method` straight from the raw AMF value ("QUERY", upper case) for
-    // HTTP operations, so the color override keys on both casings. This inline
-    // expanded model (no `@context`) keeps the test independent of the model
-    // generator.
-    const DOC = 'http://a.ml/vocabularies/document#Document';
-    const ENCODES = 'http://a.ml/vocabularies/document#encodes';
-    const WEBAPI = 'http://a.ml/vocabularies/apiContract#WebAPI';
-    const ENDPOINT = 'http://a.ml/vocabularies/apiContract#endpoint';
-    const ENDPOINT_T = 'http://a.ml/vocabularies/apiContract#EndPoint';
-    const OPERATION_T = 'http://a.ml/vocabularies/apiContract#Operation';
-    const SUPPORTED_OP = 'http://a.ml/vocabularies/apiContract#supportedOperation';
-    const PATH = 'http://a.ml/vocabularies/apiContract#path';
-    const METHOD = 'http://a.ml/vocabularies/apiContract#method';
+    // `data-method` straight from the raw AMF value for HTTP operations, so the
+    // color override in Styles.js keys on both casings (e.g. QUERY teal #0F9D9D
+    // matches both `[data-method='QUERY']` and `[data-method='query']`; COPY
+    // indigo #5c6bc0; MOVE amber #b8860b).
 
-    function buildQueryModel() {
-      return {
-        '@type': [DOC],
-        [ENCODES]: [{
-          '@id': 'amf://id#1',
-          '@type': [WEBAPI],
-          [ENDPOINT]: [{
-            '@id': 'amf://id#10',
-            '@type': [ENDPOINT_T],
-            [PATH]: [{ '@value': '/pets' }],
-            [SUPPORTED_OP]: [{
-              '@id': 'amf://id#11',
-              '@type': [OPERATION_T],
-              [METHOD]: [{ '@value': 'get' }],
-            }, {
-              '@id': 'amf://id#12',
-              '@type': [OPERATION_T],
-              [METHOD]: [{ '@value': 'QUERY' }],
-            }, {
-              '@id': 'amf://id#13',
-              '@type': [OPERATION_T],
-              [METHOD]: [{ '@value': 'COPY' }],
-            }, {
-              '@id': 'amf://id#14',
-              '@type': [OPERATION_T],
-              [METHOD]: [{ '@value': 'MOVE' }],
+    describe('QUERY (from a real generated OAS 3.2 model)', () => {
+      // amf-client-js 5.11 PARSES `query:` from an OAS 3.2 pathItem and emits
+      // its method as "QUERY" (upper case), so the QUERY label is driven from a
+      // real generated model — demo/oas32-query/oas32-query.yaml.
+      let amf;
+      let element = /** @type ApiSummary */ (null);
+
+      before(async () => {
+        amf = await AmfLoader.load(false, 'oas32-query');
+      });
+
+      beforeEach(async () => {
+        element = await basicFixture();
+        element.amf = amf;
+        // `__amfChanged` defers processing through a setTimeout debouncer.
+        await aTimeout(0);
+        await nextFrame();
+      });
+
+      it('renders a QUERY method-label with data-method="QUERY"', () => {
+        const methods = Array.from(
+          element.shadowRoot.querySelectorAll('.method-label')
+        ).map((node) => node.getAttribute('data-method'));
+        assert.include(methods, 'QUERY', 'a method-label carries the raw QUERY value');
+      });
+
+      it('keeps the raw AMF casing (does not lower-case QUERY)', () => {
+        const methods = Array.from(
+          element.shadowRoot.querySelectorAll('.method-label')
+        ).map((node) => node.getAttribute('data-method'));
+        assert.notInclude(methods, 'query', 'QUERY is not silently lower-cased');
+      });
+    });
+
+    describe('COPY / MOVE (inline AMF fragment — not generatable)', () => {
+      // amf-client-js 5.11 REJECTS `copy:`/`move:` in an OAS 3.2 pathItem
+      // ("Property 'copy'/'move' not supported in a OAS 3.2 pathItem node") and
+      // never emits them into the generated model. An inline AMF fragment is the
+      // ONLY way to exercise the COPY/MOVE label color until AMF adds support;
+      // do NOT attempt to generate these verbs. This inline expanded model (no
+      // `@context`) keeps the test independent of the model generator.
+      const DOC = 'http://a.ml/vocabularies/document#Document';
+      const ENCODES = 'http://a.ml/vocabularies/document#encodes';
+      const WEBAPI = 'http://a.ml/vocabularies/apiContract#WebAPI';
+      const ENDPOINT = 'http://a.ml/vocabularies/apiContract#endpoint';
+      const ENDPOINT_T = 'http://a.ml/vocabularies/apiContract#EndPoint';
+      const OPERATION_T = 'http://a.ml/vocabularies/apiContract#Operation';
+      const SUPPORTED_OP = 'http://a.ml/vocabularies/apiContract#supportedOperation';
+      const PATH = 'http://a.ml/vocabularies/apiContract#path';
+      const METHOD = 'http://a.ml/vocabularies/apiContract#method';
+
+      function buildCopyMoveModel() {
+        return {
+          '@type': [DOC],
+          [ENCODES]: [{
+            '@id': 'amf://id#1',
+            '@type': [WEBAPI],
+            [ENDPOINT]: [{
+              '@id': 'amf://id#10',
+              '@type': [ENDPOINT_T],
+              [PATH]: [{ '@value': '/pets' }],
+              [SUPPORTED_OP]: [{
+                '@id': 'amf://id#13',
+                '@type': [OPERATION_T],
+                [METHOD]: [{ '@value': 'COPY' }],
+              }, {
+                '@id': 'amf://id#14',
+                '@type': [OPERATION_T],
+                [METHOD]: [{ '@value': 'MOVE' }],
+              }],
             }],
           }],
-        }],
-      };
-    }
+        };
+      }
 
-    let element;
+      let element;
 
-    beforeEach(async () => {
-      element = await basicFixture();
-      element.amf = buildQueryModel();
-      // `__amfChanged` defers processing through a setTimeout debouncer.
-      await aTimeout(0);
-      await nextFrame();
-    });
+      beforeEach(async () => {
+        element = await basicFixture();
+        element.amf = buildCopyMoveModel();
+        // `__amfChanged` defers processing through a setTimeout debouncer.
+        await aTimeout(0);
+        await nextFrame();
+      });
 
-    it('renders a QUERY method-label with data-method="QUERY"', () => {
-      const methods = Array.from(
-        element.shadowRoot.querySelectorAll('.method-label')
-      ).map((node) => node.getAttribute('data-method'));
-      assert.include(methods, 'QUERY', 'a method-label carries the raw QUERY value');
-    });
-
-    it('keeps the raw AMF casing (does not lower-case QUERY)', () => {
-      const methods = Array.from(
-        element.shadowRoot.querySelectorAll('.method-label')
-      ).map((node) => node.getAttribute('data-method'));
-      assert.notInclude(methods, 'query', 'QUERY is not silently lower-cased');
-    });
-
-    it('renders COPY and MOVE method-labels with their raw data-method', () => {
-      const methods = Array.from(
-        element.shadowRoot.querySelectorAll('.method-label')
-      ).map((node) => node.getAttribute('data-method'));
-      assert.include(methods, 'COPY', 'a method-label carries the raw COPY value');
-      assert.include(methods, 'MOVE', 'a method-label carries the raw MOVE value');
+      it('renders COPY and MOVE method-labels with their raw data-method', () => {
+        const methods = Array.from(
+          element.shadowRoot.querySelectorAll('.method-label')
+        ).map((node) => node.getAttribute('data-method'));
+        assert.include(methods, 'COPY', 'a method-label carries the raw COPY value');
+        assert.include(methods, 'MOVE', 'a method-label carries the raw MOVE value');
+      });
     });
   });
 });

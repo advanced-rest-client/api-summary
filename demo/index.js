@@ -30,8 +30,7 @@ class ApiDemo extends ApiDemoPage {
       ["async-api", "AsyncAPI"],
       ["APIC-641", "APIC-641"],
       ["W-10881270", "W-10881270"],
-      ["async-api26", "AsyncAPI26"],
-      ["asyncApi-2.62", "AsyncAPI26-2"],
+      ["oas32-query", "OAS 3.2 (QUERY)"],
     ].map(
       ([file, label]) => html`
         <anypoint-item data-src="${file}-compact.json">${label}</anypoint-item>

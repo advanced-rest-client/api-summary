@@ -52,6 +52,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
       _licenseName: { type: String },
       _licenseUrl: { type: String },
       _endpoints: { type: Array },
+      _webhooks: { type: Array },
       _termsOfService: { type: String },
       _version: { type: String },
       _apiTitle: { type: String },
@@ -134,6 +135,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
       this._version = undefined;
       this._termsOfService = undefined;
       this._endpoints = undefined;
+      this._webhooks = undefined;
 
       this._providerName = undefined;
       this._providerEmail = undefined;
@@ -149,6 +151,7 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
     this._version = this._computeVersion(webApi);
     this._termsOfService = this._computeToS(webApi);
     this._endpoints = this._computeEndpoints(webApi);
+    this._webhooks = this._computeWebhooks(webApi);
 
     const provider = this._computeProvider(webApi);
     this._providerName = this._computeName(provider);
@@ -315,6 +318,45 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
          ops: supportedOperations,
       };
       return result;
+    });
+  }
+
+  /**
+   * Computes view model for the webhooks list (OAS 3.1/3.2 top-level webhooks).
+   * Webhooks are `apiContract#EndPoint` nodes — the same shape as endpoints — so
+   * they reuse the endpoint item view model and `_endpointTemplate` for rendering.
+   * @param {any} webApi Web API model
+   * @return {any[]|undefined}
+   */
+  _computeWebhooks(webApi) {
+    if (!webApi) {
+      return undefined;
+    }
+    const key = this._getAmfKey(this.ns.aml.vocabularies.apiContract.webhooks);
+    const webhooks = this._ensureArray(webApi[key]);
+    if (!webhooks || !webhooks.length) {
+      return undefined;
+    }
+    return webhooks.map((item) => {
+      const path = this._getValue(
+        item,
+        this.ns.aml.vocabularies.apiContract.path
+      );
+      const name = this._getValue(item, this.ns.aml.vocabularies.core.name);
+      const pathStr = typeof path === "string" ? path : `/${name || ""}`;
+      const supportedOperations = this._endpointOperations(item);
+      const webhookDisplayInfo = this._computeEndpointName(
+        item,
+        webApi,
+        supportedOperations
+      );
+      return {
+        name: webhookDisplayInfo?.name,
+        description: webhookDisplayInfo?.description,
+        path: pathStr,
+        id: item["@id"],
+        ops: supportedOperations,
+      };
     });
   }
 
@@ -637,7 +679,8 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
         ${this._licenseTemplate()} ${this._termsOfServiceTemplate()}
       </div>
 
-      ${this.hideToc ? "" : this._endpointsTemplate()} `;
+      ${this.hideToc ? "" : this._endpointsTemplate()}
+      ${this.hideToc ? "" : this._webhooksTemplate()} `;
   }
 
   _titleTemplate() {
@@ -874,6 +917,26 @@ export class ApiSummary extends AmfHelperMixin(LitElement) {
       <div class="separator" part="separator"></div>
       <div class="toc" part="toc">
         <label class="section endpoints-title">API ${pathLabel}</label>
+        ${result}
+      </div>
+    `;
+  }
+
+  /**
+   * @return {TemplateResult|string} A template for the top-level webhooks list
+   * (OAS 3.1/3.2). Webhooks share the endpoint item shape, so each renders with
+   * the same `_endpointTemplate`.
+   */
+  _webhooksTemplate() {
+    const { _webhooks } = this;
+    if (!_webhooks || !_webhooks.length) {
+      return "";
+    }
+    const result = _webhooks.map((item) => this._endpointTemplate(item));
+    return html`
+      <div class="separator" part="separator"></div>
+      <div class="toc" part="toc">
+        <label class="section webhooks-title">Webhooks</label>
         ${result}
       </div>
     `;

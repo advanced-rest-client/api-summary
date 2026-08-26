@@ -35,6 +35,7 @@ export declare class ApiSummary extends AmfHelperMixin(LitElement) {
   _licenseName: string;
   _licenseUrl: string;
   _endpoints: any[];
+  _webhooks: any[];
   _termsOfService: string;
   _version: string;
   _apiTitle: string;
@@ -97,6 +98,12 @@ export declare class ApiSummary extends AmfHelperMixin(LitElement) {
   _computeEndpoints(webApi: any): any[]|undefined;
 
   /**
+   * Computes view model for the webhooks list (OAS 3.1/3.2 top-level webhooks).
+   * @param webApi Web API model
+   */
+  _computeWebhooks(webApi: any): any[]|undefined;
+
+  /**
    * Computes a view model for supported operations for an endpoint.
    * @param {any} endpoint Endpoint model.
    * @return {any[]|undefined}
@@ -141,6 +148,8 @@ export declare class ApiSummary extends AmfHelperMixin(LitElement) {
   _termsOfServiceTemplate(): TemplateResult|string;
 
   _endpointsTemplate(): TemplateResult|string;
+
+  _webhooksTemplate(): TemplateResult|string;
 
   _endpointTemplate(item): TemplateResult|string;
 

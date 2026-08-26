@@ -369,6 +369,64 @@ describe('ApiSummary', () => {
         });
       });
 
+      describe('Webhooks rendering (OAS 3.1)', () => {
+        let element = /** @type ApiSummary */ (null);
+        let amf;
+
+        before(async () => {
+          amf = await AmfLoader.load(compact, 'oas31-webhooks');
+        });
+
+        beforeEach(async () => {
+          element = await basicFixture();
+          element.amf = amf;
+          await aTimeout(0);
+        });
+
+        function webhooksToc() {
+          const titleNode = element.shadowRoot.querySelector('.webhooks-title');
+          return titleNode ? titleNode.closest('.toc') : null;
+        }
+
+        it('computes the webhooks view model', () => {
+          assert.typeOf(element._webhooks, 'array');
+          assert.lengthOf(element._webhooks, 1);
+        });
+
+        it('renders a Webhooks section title', () => {
+          const node = element.shadowRoot.querySelector('.webhooks-title');
+          assert.dom.equal(node, `<label class="webhooks-title section">Webhooks</label>`);
+        });
+
+        it('renders the webhook as an endpoint item', () => {
+          const nodes = webhooksToc().querySelectorAll('.endpoint-item');
+          assert.lengthOf(nodes, 1);
+        });
+
+        it('renders the webhook operation method', () => {
+          const node = webhooksToc().querySelector('.method-label');
+          assert.equal(node.getAttribute('data-method'), 'post');
+          assert.equal(node.getAttribute('data-shape-type'), 'method');
+        });
+
+        it('keeps endpoints and webhooks as separate sections', () => {
+          assert.ok(element.shadowRoot.querySelector('.endpoints-title'), 'has endpoints section');
+          assert.ok(element.shadowRoot.querySelector('.webhooks-title'), 'has webhooks section');
+        });
+
+        it('dispatches a navigation event when a webhook method is clicked', (done) => {
+          const node = webhooksToc().querySelector('.method-label[data-id]');
+          element.addEventListener('api-navigation-selection-changed', (e) => {
+            // @ts-ignore
+            const { detail } = e;
+            assert.typeOf(detail.selected, 'string');
+            assert.equal(detail.type, 'method');
+            done();
+          });
+          /** @type HTMLElement */ (node).click();
+        });
+      });
+
       describe('Server rendering', () => {
         let ramlSingleServerAmf;
         let oasMultipleServersAmf;
@@ -494,6 +552,7 @@ describe('ApiSummary', () => {
           assert.isUndefined(element._version);
           assert.isUndefined(element._termsOfService);
           assert.isUndefined(element._endpoints);
+          assert.isUndefined(element._webhooks);
         });
       });
     });

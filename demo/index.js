@@ -31,6 +31,7 @@ class ApiDemo extends ApiDemoPage {
       ["APIC-641", "APIC-641"],
       ["W-10881270", "W-10881270"],
       ["oas32-query", "OAS 3.2 (QUERY)"],
+      ["oas31-webhooks", "OAS 3.1 (Webhooks)"],
     ].map(
       ([file, label]) => html`
         <anypoint-item data-src="${file}-compact.json">${label}</anypoint-item>

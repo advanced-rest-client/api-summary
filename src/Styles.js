@@ -209,7 +209,8 @@ export default css`
     font-size: var(--api-summary-section-title-font-size);
   }
 
-  .section.endpoints-title {
+  .section.endpoints-title,
+  .section.webhooks-title {
     font-weight: var(--arc-font-title-font-weight, 500);
     color: var(--arc-font-title-color);
     font-weight: var(--arc-font-title-font-weight);
